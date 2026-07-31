@@ -1,6 +1,7 @@
 package Servlets;
 
 import Dao.UserDao;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.User;
+import utils.MailConfig;
 import utils.PasswordUtil;
 
 import java.io.IOException;
@@ -28,6 +30,11 @@ public class AddEmployee extends HttpServlet {
             boolean iscreated = UserDao.addEmployee(name,email,department,hashpassword);
             PrintWriter out = resp.getWriter();
             if(iscreated){
+                String to = email;
+                String subject = "register successfully";
+                String message = "hey "+name+" you have register successfully\n and your default password is ="+hashpassword+"\nkindly change the password after first login";
+                MailConfig.sendMail(to,subject,message);
+                resp.getWriter().println("mail sent successfully");
 //                out.println(
 //                        "<html>" +
 //                                "<body style='background-color:#f8f9fa;'>" +
@@ -48,6 +55,9 @@ public class AddEmployee extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (MessagingException e) {
+            resp.getWriter().println("failed to send mail");
             throw new RuntimeException(e);
         }
 
