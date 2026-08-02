@@ -32,7 +32,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="Leave.jsp">Leave</a>
+                    <a class="nav-link" href="leave">Leave</a>
                 </li>
 
                 <li class="nav-item">
