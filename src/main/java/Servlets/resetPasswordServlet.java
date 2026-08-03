@@ -22,13 +22,14 @@ public class resetPasswordServlet extends HttpServlet {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         String currentPass = req.getParameter("currentPassword");
+        String currentHashPassword= PasswordUtil.hash(currentPass);
         String newPass = req.getParameter("newPassword");
         String confirmPass = req.getParameter("confirmPassword");
 
         String hashedPass = PasswordUtil.hash(newPass);
 
         if (user != null) {
-         if (currentPass.equals(user.password())) {
+            if ((currentPass.equals(user.password())) || (currentHashPassword.equals(user.password())) ) {
                 if (newPass.equals(confirmPass)) {
                     try {
                         User updatedUser = UserDao.resetPassword(user.getEmail(), hashedPass);

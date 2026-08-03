@@ -42,8 +42,10 @@ public class UserDao {
                 User user = new User(
                         rs.getString("name"),
                         rs.getString("email"),
+                        rs.getString("password"),
                         rs.getString("department_name"),
-                        rs.getString("role")
+                        rs.getString("role"),
+                        rs.getBoolean("isupdate")
                 );
                 employee.add(user);
             }
@@ -53,7 +55,6 @@ public class UserDao {
 
     public static User findbyEmailAndPassword(String email, String pass) throws SQLException, ClassNotFoundException {
         String sql="select * from users where email=? and password=?";
-
         try(Connection connection = DatabaseConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)
         ){
@@ -67,16 +68,11 @@ public class UserDao {
     }
 
     public static User findByEmail(String email) throws SQLException, ClassNotFoundException {
-
         String sql = "select * from users where email = ?";
-
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-
             statement.setString(1, email);
-
             try (ResultSet resultSet = statement.executeQuery()) {
-
                 return resultSet.next() ? map(resultSet) : null;
             }
         }
@@ -86,9 +82,10 @@ public class UserDao {
         return new User(
                 resultSet.getString("name"),
                 resultSet.getString("email"),
+                resultSet.getString("password"),
                 resultSet.getString("department_name"),
-
-                resultSet.getString("role")
+                resultSet.getString("role"),
+                resultSet.getBoolean("isupdate")
 
         );
     }
