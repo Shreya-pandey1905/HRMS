@@ -12,8 +12,8 @@ import java.util.Properties;
 public class MailConfig {
     public static void sendMail(String to,String subject,String message) throws MessagingException {
 
-        final String from = "palankushn@gmail.com";
-        final String password = "cnyn zhfi vdnr yosr";
+        final String from = "projectemail040@gmail.com";
+        final String password = "yhmi pfbh mblu njku";
 
         Properties props = new Properties();
         //Set SMTP server properties.

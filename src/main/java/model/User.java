@@ -5,6 +5,22 @@ public class User {
     private String email;
     private String department;
     private String role;
+    private boolean isupdate;
+
+    public String password() {
+        return password;
+    }
+
+    private String  password;
+
+
+    public boolean isupdate() {
+        return isupdate;
+    }
+    public void setIsupdate(boolean isupdate) {
+        this.isupdate = isupdate;
+    }
+
 
     public User(String name, String email, String department, String role) {
         this.name = name;

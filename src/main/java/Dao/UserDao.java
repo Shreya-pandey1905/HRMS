@@ -50,4 +50,67 @@ public class UserDao {
         }
         return employee;
     }
+
+    public static User findbyEmailAndPassword(String email, String pass) throws SQLException, ClassNotFoundException {
+        String sql="select * from users where email=? and password=?";
+
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)
+        ){
+            statement.setString(1,email);
+            statement.setString(2,pass);
+            try(ResultSet resultSet = statement.executeQuery()) {
+                return resultSet.next()? map(resultSet): null;
+            }
+        }
+
+    }
+
+    public static User findByEmail(String email) throws SQLException, ClassNotFoundException {
+
+        String sql = "select * from users where email = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, email);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+
+                return resultSet.next() ? map(resultSet) : null;
+            }
+        }
+    }
+
+    public  static  User map(ResultSet resultSet) throws SQLException {
+        return new User(
+                resultSet.getString("name"),
+                resultSet.getString("email"),
+                resultSet.getString("department_name"),
+
+                resultSet.getString("role")
+
+        );
+    }
+    public static User resetPassword(String email, String pass) throws SQLException{
+
+        String sql = "update users set password = ?, isupdate = true where email = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, pass);
+            statement.setString(2, email);
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                return UserDao.findByEmail(email);
+            }
+            return null;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+
 }
