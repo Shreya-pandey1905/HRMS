@@ -22,11 +22,13 @@ public class User {
     }
 
 
-    public User(String name, String email, String department, String role) {
+    public User(String name, String email,String  password, String department, String role,boolean isupdate) {
         this.name = name;
         this.email = email;
+        this.password=password;
         this.department = department;
         this.role = role;
+        this.isupdate = isupdate;
     }
     public String getName() {
         return name;
