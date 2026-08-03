@@ -52,7 +52,7 @@ public class resetPasswordServlet extends HttpServlet {
             }
 
         } else {
-            RequestDispatcher rd =req.getRequestDispatcher("signin.jsp");
+            RequestDispatcher rd =req.getRequestDispatcher("index.jsp");
             rd.forward(req, resp);
         }
     }
