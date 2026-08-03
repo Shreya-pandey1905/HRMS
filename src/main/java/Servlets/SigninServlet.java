@@ -26,7 +26,7 @@ public class SigninServlet extends HttpServlet {
             user = UserDao.findByEmail(email);
             if (user == null) {
                 req.setAttribute("error", "Invalid email or password");
-                RequestDispatcher rd = req.getRequestDispatcher("signin.jsp");
+                RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
                 rd.forward(req, resp);
                 return;
             }
@@ -57,16 +57,21 @@ public class SigninServlet extends HttpServlet {
 
            if (user == null) {
                 req.setAttribute("error", "Invalid email or password");
-                RequestDispatcher rd = req.getRequestDispatcher("signin.jsp");
+                RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
                 rd.forward(req, resp);
             } else {
-                HttpSession session = req.getSession();
-                session.setAttribute("user", user);
-                session.setAttribute("name_key", user.getName());
-                RequestDispatcher rd = req.getRequestDispatcher("profile.jsp");
-                rd.include(req,resp);
-                System.out.println("You are successfully logged in: " + user.getName());
-            }
+               HttpSession session = req.getSession();
+               session.setAttribute("user", user);
+               session.setAttribute("name_key", user.getName());
+               System.out.println("You are successfully logged in: " + user.getName());
+               if (user.getRole().equalsIgnoreCase("admin")) {
+                   RequestDispatcher rd = req.getRequestDispatcher("adminProfile.jsp");
+                   rd.forward(req, resp);
+               } else {
+                   RequestDispatcher rd = req.getRequestDispatcher("employeeProfile.jsp");
+                   rd.forward(req, resp);
+               }
+           }
         }
 
     }

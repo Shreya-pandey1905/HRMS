@@ -32,7 +32,7 @@ public class UserDao {
     }
 
     public static List<User> getAllUser() throws SQLException, ClassNotFoundException {
-        String sql = "select name,email,department_name,role from users order by id desc";
+        String sql = "select name,email,password,department_name,role,isupdate from users where role='employee' order by id desc";
         List<User> employee = new ArrayList<>();
         try(Connection connection = DatabaseConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql))
