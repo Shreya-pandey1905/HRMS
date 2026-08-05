@@ -31,11 +31,7 @@ public class DownloadDocumentServlet extends HttpServlet {
             }
 
             resp.setContentType(document.getContentType());
-            resp.setHeader(
-                    "Content-Disposition",
-                    "attachment; filename=\"" +
-                            document.getFileName() + "\""
-            );
+            resp.setHeader("Content-Disposition","attachment; filename=" + document.getFileName());
             resp.setContentLengthLong(document.getFileSize());
             resp.getOutputStream().write(document.getFileData());
 

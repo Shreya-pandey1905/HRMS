@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.User;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -14,8 +16,12 @@ import java.sql.SQLException;
 public class ApplyLeave extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int user_id = 1;
-        String user_name = "ankush";
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        System.out.println("Logged in User ID = " + user.getId());
+        System.out.println("Logged in User Name = " + user.getName());
+        int user_id= user.getId();
+        String user_name = user.getName();
         String type = req.getParameter("type");
         Date startDate = Date.valueOf(req.getParameter("startDate"));
         Date endDate = Date.valueOf(req.getParameter("endDate"));
@@ -33,4 +39,5 @@ public class ApplyLeave extends HttpServlet {
 
 
     }
+
 }

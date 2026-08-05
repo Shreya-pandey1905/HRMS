@@ -32,7 +32,7 @@ public class UserDao {
     }
 
     public static List<User> getAllUser() throws SQLException, ClassNotFoundException {
-        String sql = "select name,email,password,department_name,role,isupdate from users where role='employee' order by id desc";
+        String sql = "select * from users where role='employee'";
         List<User> employee = new ArrayList<>();
         try(Connection connection = DatabaseConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql))
@@ -40,6 +40,7 @@ public class UserDao {
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
                 User user = new User(
+                        rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("email"),
                         rs.getString("password"),
@@ -80,6 +81,7 @@ public class UserDao {
 
     public  static  User map(ResultSet resultSet) throws SQLException {
         return new User(
+                resultSet.getInt("id"),
                 resultSet.getString("name"),
                 resultSet.getString("email"),
                 resultSet.getString("password"),

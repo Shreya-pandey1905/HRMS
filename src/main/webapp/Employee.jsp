@@ -29,9 +29,9 @@ List<User> employees = (List<User>)request.getAttribute("employees");
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="Dashboard.jsp">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="adminDashboard">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link" href="leave">Leave</a></li>
-                <li class="nav-item"><a class="nav-link" href="Document.jsp">Documents</a></li>
+                <li class="nav-item"><a class="nav-link" href="documents.jsp">Documents</a></li>
                 <li class="nav-item"><a class="nav-link active" href="employee">Employee</a></li>
                 <li class="nav-item"><a class="nav-link text-warning" href="SignOut">Sign Out</a></li>
             </ul>
