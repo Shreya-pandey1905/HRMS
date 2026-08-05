@@ -71,4 +71,32 @@ public class LeaveDao {
             }
         }
     }
+
+    public static List<Leave> getLeavesByUserId(int userId) throws SQLException, ClassNotFoundException {
+
+        String sql = "select * from leaves where user_id = ? order by id desc";
+
+        List<Leave> leaves = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, userId);
+            try (ResultSet rs = statement.executeQuery()) {
+               while (rs.next()) {
+                    Leave leave = new Leave(
+                            rs.getInt("id"),
+                            rs.getInt("user_id"),
+                            rs.getString("user_name"),
+                            rs.getString("type"),
+                            rs.getDate("start_date"),
+                            rs.getDate("end_date"),
+                            rs.getString("reason"),
+                            rs.getString("status")
+                    );
+                   leaves.add(leave);
+                }
+            }
+        }
+        return leaves;
+    }
 }

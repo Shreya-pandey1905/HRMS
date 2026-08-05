@@ -7,35 +7,31 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import model.Leave;
-import model.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/leave")
-public class LeaveServlet extends HttpServlet {
+@WebServlet("/adminDashboard")
+public class AdminDashboardServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Leave> leaves = null;
         try {
-            HttpSession session = req.getSession();
-            User user = (User) session.getAttribute("user");
-            String role = user.getRole();
-            List<Leave> leaves;
-            if (role.equals("employee")) {
-                leaves = LeaveDao.getLeavesByUserId(user.getId());
-            } else {
-               leaves = LeaveDao.getAllLeave();
-            }
+            leaves = LeaveDao.getAllLeave();
             req.setAttribute("leaves", leaves);
-            RequestDispatcher rd = req.getRequestDispatcher("Leave.jsp");
-            rd.forward(req,resp);
+
+            RequestDispatcher dispatcher =req.getRequestDispatcher("adminDashboard.jsp");
+
+            dispatcher.forward(req, resp);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+
+
     }
 }

@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HRMS - Human Resource Management System</title>
-
+<title>HRMS - Employee Dashboard</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -27,11 +26,25 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
 
-                              <li class="nav-item"><a class="nav-link" href="adminDashboard">Dashboard</a></li>
-                              <li class="nav-item"><a class="nav-link" href="leave">Leave</a></li>
-                              <li class="nav-item"><a class="nav-link" href="documents.jsp">Documents</a></li>
-                              <li class="nav-item"><a class="nav-link active" href="employee">Employee</a></li>
-                              <li class="nav-item"><a class="nav-link text-warning" href="SignOut">Sign Out</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="employeeDashboard.jsp">Dashboard</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="leave">Leave</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="documents.jsp">Documents</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.jsp">Profile</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-warning" href="SignOut">Sign Out</a>
+                </li>
             </ul>
         </div>
     </div>
