@@ -214,15 +214,17 @@
 
              <div class="nav-links">
 
-                 <a href="employeeDashboard.jsp">Dashboard</a>
 
-                 <a href="leave">Leave</a>
+                    <a class="nav-link" href="leave">Leave</a>
 
-                 <a href="Document.jsp">Documents</a>
 
-                 <a href="profile.jsp">Profile</a>
+                    <a class="nav-link" href="documents">Documents</a>
 
-                 <a href="SignOut">Sign Out</a>
+
+                    <a class="nav-link" href="profile.jsp">Profile</a>
+
+                    <a class="nav-link text-warning" href="SignOut">Sign Out</a>
+
 
              </div>
 

@@ -24,18 +24,15 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+    <ul class="navbar-nav ms-auto">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="employeeDashboard.jsp">Dashboard</a>
-                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="leave">Leave</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="documents.jsp">Documents</a>
+                    <a class="nav-link" href="documents">Documents</a>
                 </li>
 
                 <li class="nav-item">
