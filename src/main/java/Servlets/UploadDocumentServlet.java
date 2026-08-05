@@ -30,12 +30,6 @@ public class UploadDocumentServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
-
-        if (user == null) {
-            resp.sendRedirect("index.jsp");
-            return;
-        }
-
         Part filePart = req.getPart("document");
 
         if (filePart == null || filePart.getSize() == 0) {
