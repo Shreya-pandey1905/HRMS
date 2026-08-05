@@ -15,9 +15,7 @@ public class Document {
     public Document() {
     }
 
-    public Document(int id, int userId, String fileName,
-                    String contentType, long fileSize,
-                    byte[] fileData, Timestamp uploadedAt) {
+    public Document(int id, int userId, String fileName, String contentType, long fileSize, byte[] fileData, Timestamp uploadedAt) {
 
         this.id = id;
         this.userId = userId;

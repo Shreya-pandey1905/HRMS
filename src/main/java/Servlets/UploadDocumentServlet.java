@@ -39,7 +39,6 @@ public class UploadDocumentServlet extends HttpServlet {
         Part filePart = req.getPart("document");
 
         if (filePart == null || filePart.getSize() == 0) {
-
             req.setAttribute("error","Please select a document.");
             RequestDispatcher rd = req.getRequestDispatcher("documents.jsp");
             rd.forward(req, resp);
@@ -60,20 +59,14 @@ public class UploadDocumentServlet extends HttpServlet {
 
         try {
             InputStream inputStream = filePart.getInputStream();
-
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
             byte[] buffer = new byte[4096];
-
             int bytesRead;
-
             while ((bytesRead = inputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, bytesRead);
             }
-
             byte[] fileData = outputStream.toByteArray();
             int userId = DocumentDao.getUserIdByEmail(user.getEmail());
-
             Document document = new Document();
             document.setUserId(userId);
             document.setFileName(fileName);
@@ -82,7 +75,6 @@ public class UploadDocumentServlet extends HttpServlet {
             document.setFileData(fileData);
 
             boolean result =DocumentDao.addDocument(document);
-
             if (result) {
                 resp.sendRedirect("documents");
             } else {

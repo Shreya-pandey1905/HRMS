@@ -27,9 +27,12 @@
 
             if (user != null) {
                 try {
-                    int userId = DocumentDao.getUserIdByEmail(user.getEmail());
-
-                    List<Document> documents =  DocumentDao.findByuserId(userId);
+                    List<Document> documents;
+                    if ("employee".equalsIgnoreCase(user.getRole())) {
+                        documents = DocumentDao.findByuserId(user.getId());
+                    } else {
+                        documents = DocumentDao.getAllDocuments();
+                    }
                     req.setAttribute("documents", documents);
                     RequestDispatcher rd = req.getRequestDispatcher("documents.jsp");
                     rd.forward(req, resp);

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DocumentDao {
 
-      public static boolean addDocument(Document document) throws SQLException, ClassNotFoundException {
+   public static boolean addDocument(Document document) throws SQLException, ClassNotFoundException {
         String sql = "insert into documents(user_id,file_name,content_type,file_size,file_data) values (?,?,?,?,?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
@@ -25,8 +25,6 @@ public class DocumentDao {
             return true;
        }
     }
-
-
 
     public static List<Document> findByuserId(int user_id) throws SQLException, ClassNotFoundException {
         List<Document> documents = new ArrayList<>();
@@ -44,7 +42,6 @@ public class DocumentDao {
         return documents;
     }
 
-
     public static Document findById(int id) throws SQLException, ClassNotFoundException {
 
         String sql="select * from documents where id=?";
@@ -57,7 +54,6 @@ public class DocumentDao {
         }
 
     }
-
 
     private static Document map(ResultSet resultSet) throws SQLException {
 
@@ -86,5 +82,23 @@ public class DocumentDao {
                 return 0;
             }
         }
+    }
+
+    public static List<Document> getAllDocuments() throws SQLException, ClassNotFoundException {
+
+        String sql = "select * from documents";
+
+        List<Document> documents = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet rs = statement.executeQuery()) {
+
+            while (rs.next()) {
+                documents.add(map(rs));
+            }
+        }
+
+        return documents;
     }
 }
