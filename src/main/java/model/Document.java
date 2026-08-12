@@ -11,13 +11,13 @@ public class Document {
     private long fileSize;
     private byte[] fileData;
     private String category;
+
     private Timestamp uploadedAt;
 
     public Document() {
     }
 
     public Document(int id, int userId, String fileName, String contentType, long fileSize, byte[] fileData,String category, Timestamp uploadedAt) {
-
         this.id = id;
         this.userId = userId;
         this.fileName = fileName;
@@ -93,4 +93,6 @@ public class Document {
         this.category = category;
     }
 }
+
+
 

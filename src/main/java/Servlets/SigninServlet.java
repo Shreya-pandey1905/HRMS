@@ -10,13 +10,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.User;
 import utils.PasswordUtil;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet("/signin")
 public class SigninServlet extends HttpServlet {
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
@@ -60,3 +58,6 @@ public class SigninServlet extends HttpServlet {
         rd.forward(req, resp);
     }
 }
+
+
+

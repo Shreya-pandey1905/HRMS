@@ -20,8 +20,8 @@ public class DocumentDao {
             statement.setString(3, document.getContentType());
             statement.setLong(4, document.getFileSize());
             statement.setBytes(5, document.getFileData());
-            statement.setString(6, document.getCategory());
 
+            statement.setString(6, document.getCategory());
              statement.executeUpdate();
             return true;
        }

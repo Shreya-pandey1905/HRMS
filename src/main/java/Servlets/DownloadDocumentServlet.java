@@ -21,6 +21,14 @@ public class DownloadDocumentServlet extends HttpServlet {
         try {
 
             Document document =DocumentDao.findById(id);
+            if (document == null) {
+                resp.sendError(
+                        HttpServletResponse.SC_NOT_FOUND,
+                        "Document not found"
+                );
+                return;
+            }
+
             resp.setContentType(document.getContentType());
             resp.setHeader("Content-Disposition","attachment; filename=" + document.getFileName());
             resp.setContentLengthLong(document.getFileSize());

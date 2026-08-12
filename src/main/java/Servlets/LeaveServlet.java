@@ -17,28 +17,40 @@ import java.util.List;
 
 @WebServlet("/leave")
 public class LeaveServlet extends HttpServlet {
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
         try {
             HttpSession session = req.getSession();
             User user = (User) session.getAttribute("user");
+
             String role = user.getRole();
             List<Leave> leaves;
+
             if (role.equals("employee")) {
+
                 leaves = LeaveDao.getLeavesByUserId(user.getId());
+
                 req.setAttribute("leaves", leaves);
+
                 RequestDispatcher rd = req.getRequestDispatcher("/Employeejsp/employeeLeave.jsp");
-                rd.forward(req,resp);
+
+                rd.forward(req, resp);
+
             } else {
-               leaves = LeaveDao.getAllLeave();
+
+                leaves = LeaveDao.getAllLeave();
+
                 req.setAttribute("leaves", leaves);
+
                 RequestDispatcher rd = req.getRequestDispatcher("/Adminjsp/adminLeave.jsp");
-                rd.forward(req,resp);
+
+                rd.forward(req, resp);
             }
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

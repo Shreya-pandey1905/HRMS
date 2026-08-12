@@ -42,7 +42,6 @@
                         rd.forward(req, resp);
                     }
 
-
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 } catch (ClassNotFoundException e) {

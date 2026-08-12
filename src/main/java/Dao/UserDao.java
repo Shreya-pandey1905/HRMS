@@ -91,6 +91,7 @@ public class UserDao {
 
         );
     }
+
     public boolean saveResetToken(String email, String token) {
 
         String sql = "update users set reset_token=? where email=?";
@@ -121,7 +122,6 @@ public class UserDao {
             throw new RuntimeException(e);
         }
     }
-
     public String getEmailByResetToken(String token) {
         String sql = "select email from users where reset_token= ?";
         try (Connection con = DatabaseConnection.getConnection();
@@ -150,9 +150,6 @@ public class UserDao {
         }
         return false;
     }
-
-
-
 
 
 }
