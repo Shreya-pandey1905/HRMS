@@ -22,32 +22,92 @@
 
     <title>Training Type</title>
 
+    <!-- Bootstrap -->
     <link rel="stylesheet"
           href="<%= request.getContextPath() %>/assets/css/bootstrap.min.css">
 
+    <!-- Feather -->
     <link rel="stylesheet"
-          href="<%= request.getContextPath() %>/assets/css/feather.css">
+          href="<%= request.getContextPath() %>/assets/plugins/icons/feather/feather.css">
+
+    <!-- Tabler -->
+    <link rel="stylesheet"
+          href="<%= request.getContextPath() %>/assets/plugins/tabler-icons/tabler-icons.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="<%= request.getContextPath() %>/assets/plugins/fontawesome/css/fontawesome.min.css">
 
     <link rel="stylesheet"
-          href="<%= request.getContextPath() %>/assets/css/tabler-icons.min.css">
+          href="<%= request.getContextPath() %>/assets/plugins/fontawesome/css/all.min.css">
 
+    <!-- DataTables -->
     <link rel="stylesheet"
           href="<%= request.getContextPath() %>/assets/css/dataTables.bootstrap5.min.css">
 
+    <!-- Main CSS -->
     <link rel="stylesheet"
           href="<%= request.getContextPath() %>/assets/css/style.css">
 
+    <!-- Sidebar Scroll -->
+    <style>
+
+        .sidebar {
+            height: 100vh !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+        }
+
+        .sidebar-menu {
+            height: auto !important;
+            overflow: visible !important;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 10px;
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
 <div class="main-wrapper">
 
+
+    <!-- ===================================================== -->
+    <!-- HEADER -->
+    <!-- ===================================================== -->
+
+    <%@ include file="adminHeader.jsp" %>
+
+
+    <!-- ===================================================== -->
+    <!-- SIDEBAR -->
+    <!-- ===================================================== -->
+
+    <%@ include file="adminSidebar.jsp" %>
+
+
+    <!-- ===================================================== -->
+    <!-- PAGE WRAPPER -->
+    <!-- ===================================================== -->
+
     <div class="page-wrapper">
 
         <div class="content">
 
-            <!-- ================= BREADCRUMB ================= -->
+
+            <!-- ================================================= -->
+            <!-- BREADCRUMB -->
+            <!-- ================================================= -->
 
             <div class="d-md-flex d-block align-items-center
                         justify-content-between page-breadcrumb mb-3">
@@ -64,14 +124,16 @@
 
                             <li class="breadcrumb-item">
 
-                                <a href="javascript:void(0);">
+                                <a href="<%= request.getContextPath() %>/admin/dashboard">
+
                                     <i class="ti ti-smart-home"></i>
+
                                 </a>
 
                             </li>
 
                             <li class="breadcrumb-item">
-                                Performance
+                                Training
                             </li>
 
                             <li class="breadcrumb-item active"
@@ -88,7 +150,9 @@
                 </div>
 
 
-                <!-- ================= ADD BUTTON ================= -->
+                <!-- ================================================= -->
+                <!-- ADD BUTTON -->
+                <!-- ================================================= -->
 
                 <div class="d-flex my-xl-auto right-content
                             align-items-center flex-wrap">
@@ -100,7 +164,7 @@
 
                             <i class="ti ti-circle-plus me-2"></i>
 
-                            Add Training type
+                            Add Training Type
 
                         </a>
 
@@ -111,12 +175,16 @@
             </div>
 
 
-            <!-- ================= TRAINING TYPE CARD ================= -->
+            <!-- ================================================= -->
+            <!-- TRAINING TYPE CARD -->
+            <!-- ================================================= -->
 
             <div class="card">
 
 
-                <!-- ================= CARD HEADER ================= -->
+                <!-- ================================================= -->
+                <!-- CARD HEADER -->
+                <!-- ================================================= -->
 
                 <div class="card-header d-flex align-items-center
                             justify-content-between flex-wrap row-gap-3">
@@ -126,8 +194,7 @@
                     </h5>
 
 
-                    <!-- ================= SORT ================= -->
-
+                    <!-- SORT -->
                     <div class="d-flex my-xl-auto right-content
                                 align-items-center flex-wrap row-gap-3">
 
@@ -139,25 +206,12 @@
                                            d-inline-flex align-items-center"
                                     data-bs-toggle="dropdown">
 
-                                Sort By : Recently Added
+                                Sort By
 
                             </button>
 
 
                             <ul class="dropdown-menu dropdown-menu-end p-3">
-
-                                <li>
-
-                                    <a href="javascript:void(0);"
-                                       class="dropdown-item rounded-1"
-                                       id="sortRecent">
-
-                                        Recently Added
-
-                                    </a>
-
-                                </li>
-
 
                                 <li>
 
@@ -193,7 +247,9 @@
                 </div>
 
 
-                <!-- ================= TABLE ================= -->
+                <!-- ================================================= -->
+                <!-- TABLE -->
+                <!-- ================================================= -->
 
                 <div class="card-body p-0">
 
@@ -204,21 +260,6 @@
                             <thead class="thead-light">
 
                             <tr>
-
-                                <!-- CHECKBOX -->
-
-                                <th class="no-sort">
-
-                                    <div class="form-check form-check-md">
-
-                                        <input class="form-check-input"
-                                               type="checkbox"
-                                               id="select-all">
-
-                                    </div>
-
-                                </th>
-
 
                                 <!-- ID -->
 
@@ -262,28 +303,16 @@
                             <tbody>
 
                             <%
+
                                 if (trainingTypes != null &&
                                         !trainingTypes.isEmpty()) {
 
                                     for (models.Trainers.TrainingType trainingType
                                             : trainingTypes) {
+
                             %>
 
                             <tr>
-
-                                <!-- CHECKBOX -->
-
-                                <td>
-
-                                    <div class="form-check form-check-md">
-
-                                        <input class="form-check-input"
-                                               type="checkbox">
-
-                                    </div>
-
-                                </td>
-
 
                                 <!-- ID -->
 
@@ -317,8 +346,10 @@
                                 <td>
 
                                     <%
+
                                         if ("Active".equalsIgnoreCase(
                                                 trainingType.getStatus())) {
+
                                     %>
 
                                     <span class="badge badge-success
@@ -332,7 +363,9 @@
                                     </span>
 
                                     <%
+
                                     } else {
+
                                     %>
 
                                     <span class="badge badge-danger
@@ -346,19 +379,21 @@
                                     </span>
 
                                     <%
+
                                         }
+
                                     %>
 
                                 </td>
 
 
-                                <!-- ================= ACTION ================= -->
+                                <!-- ACTION -->
 
                                 <td>
 
                                     <div class="d-flex align-items-center">
 
-                                        <!-- EDIT BUTTON -->
+                                        <!-- EDIT -->
 
                                         <a href="javascript:void(0);"
                                            class="btn btn-sm btn-primary me-2"
@@ -370,7 +405,7 @@
                                         </a>
 
 
-                                        <!-- DELETE BUTTON -->
+                                        <!-- DELETE -->
 
                                         <a href="javascript:void(0);"
                                            class="btn btn-sm btn-danger"
@@ -389,14 +424,16 @@
 
 
                             <%
+
                                 }
 
                             } else {
+
                             %>
 
                             <tr>
 
-                                <td colspan="6"
+                                <td colspan="5"
                                     class="text-center">
 
                                     No Training Types Found
@@ -406,7 +443,9 @@
                             </tr>
 
                             <%
+
                                 }
+
                             %>
 
                             </tbody>
@@ -422,26 +461,19 @@
         </div>
 
 
-        <!-- ================= FOOTER ================= -->
+        <!-- ================================================= -->
+        <!-- FOOTER -->
+        <!-- ================================================= -->
 
         <div class="footer d-sm-flex align-items-center
                     justify-content-between border-top bg-white p-3">
 
             <p class="mb-0">
-                2014 - 2025 &copy; SmartHR.
+                HRMS
             </p>
 
-            <p>
-
-                Designed &amp; Developed By
-
-                <a href="javascript:void(0);"
-                   class="text-primary">
-
-                    Dreams
-
-                </a>
-
+            <p class="mb-0">
+                Human Resource Management System
             </p>
 
         </div>
@@ -456,10 +488,12 @@
 <!-- ========================================================= -->
 
 <%
+
     if (trainingTypes != null) {
 
         for (models.Trainers.TrainingType trainingType
                 : trainingTypes) {
+
 %>
 
 <div class="modal fade"
@@ -470,6 +504,7 @@
     <div class="modal-dialog modal-dialog-centered modal-md">
 
         <div class="modal-content">
+
 
             <div class="modal-header">
 
@@ -504,6 +539,7 @@
                 <div class="modal-body pb-0">
 
                     <div class="row">
+
 
                         <!-- TYPE -->
 
@@ -564,14 +600,18 @@
                                             <%= "Active".equalsIgnoreCase(
                                                     trainingType.getStatus())
                                                     ? "selected" : "" %>>
+
                                         Active
+
                                     </option>
 
                                     <option value="Inactive"
                                             <%= "Inactive".equalsIgnoreCase(
                                                     trainingType.getStatus())
                                                     ? "selected" : "" %>>
+
                                         Inactive
+
                                     </option>
 
                                 </select>
@@ -595,7 +635,6 @@
 
                     </button>
 
-
                     <button type="submit"
                             class="btn btn-primary">
 
@@ -615,8 +654,11 @@
 
 
 <%
+
         }
+
     }
+
 %>
 
 
@@ -625,10 +667,12 @@
 <!-- ========================================================= -->
 
 <%
+
     if (trainingTypes != null) {
 
         for (models.Trainers.TrainingType trainingType
                 : trainingTypes) {
+
 %>
 
 <div class="modal fade"
@@ -641,6 +685,7 @@
         <div class="modal-content">
 
             <div class="modal-body text-center">
+
 
                 <span class="avatar avatar-xl
                              bg-transparent-danger
@@ -699,8 +744,11 @@
 
 
 <%
+
         }
+
     }
+
 %>
 
 
@@ -727,21 +775,15 @@
 
     $(document).ready(function () {
 
-        /*
-         * script.js already initializes the DataTable.
-         * We only GET the existing DataTable here.
-         */
         var table = $('.datatable').DataTable();
 
 
-        // ================= ROWS PER PAGE =================
+        // =====================================================
+        // ROWS PER PAGE = 5
+        // =====================================================
 
         var lengthSelect = $('.dataTables_length select');
 
-        /*
-         * Add 5 to the Row Per Page dropdown
-         * if it is not already present.
-         */
         if (lengthSelect.find('option[value="5"]').length === 0) {
 
             lengthSelect.prepend(
@@ -750,30 +792,19 @@
 
         }
 
-        // Make 5 the default
         lengthSelect.val('5');
 
         table.page.len(5).draw();
 
 
-        // ================= RECENTLY ADDED =================
-
-        $('#sortRecent').on('click', function () {
-
-            table.order([1, 'desc']).draw();
-
-            $('#sortDropdown').text(
-                'Sort By : Recently Added'
-            );
-
-        });
-
-
-        // ================= ASCENDING =================
+        // =====================================================
+        // ASCENDING
+        // Sort by Training Type Name
+        // =====================================================
 
         $('#sortAscending').on('click', function () {
 
-            table.order([2, 'asc']).draw();
+            table.order([1, 'asc']).draw();
 
             $('#sortDropdown').text(
                 'Sort By : Ascending'
@@ -782,25 +813,18 @@
         });
 
 
-        // ================= DESCENDING =================
+        // =====================================================
+        // DESCENDING
+        // Sort by Training Type Name
+        // =====================================================
 
         $('#sortDescending').on('click', function () {
 
-            table.order([2, 'desc']).draw();
+            table.order([1, 'desc']).draw();
 
             $('#sortDropdown').text(
                 'Sort By : Descending'
             );
-
-        });
-
-
-        // ================= SELECT ALL =================
-
-        $('#select-all').on('change', function () {
-
-            $('.datatable tbody input[type="checkbox"]')
-                .prop('checked', this.checked);
 
         });
 

@@ -21,7 +21,7 @@ public class TrainingTypeServlet extends HttpServlet {
         trainingTypeDao = new TrainingTypeDao();
     }
 
-    // ================= GET =================
+
 
     @Override
     protected void doGet(HttpServletRequest request,
@@ -32,7 +32,7 @@ public class TrainingTypeServlet extends HttpServlet {
 
         try {
 
-            // ================= OPEN ADD PAGE =================
+
 
             if ("/training-type/add".equals(path)) {
 
@@ -45,7 +45,7 @@ public class TrainingTypeServlet extends HttpServlet {
 
             String action = request.getParameter("action");
 
-            // ================= DELETE =================
+
 
             if ("delete".equalsIgnoreCase(action)) {
 
@@ -68,7 +68,7 @@ public class TrainingTypeServlet extends HttpServlet {
                 return;
             }
 
-            // ================= GET ALL =================
+
 
             List<TrainingType> trainingTypes =
                     trainingTypeDao.getAllTrainingTypes();
@@ -78,7 +78,6 @@ public class TrainingTypeServlet extends HttpServlet {
                     trainingTypes
             );
 
-            // ================= OPEN LIST JSP =================
 
             request.getRequestDispatcher(
                     "/WEB-INF/views/Admin/trainingType.jsp"
@@ -93,7 +92,7 @@ public class TrainingTypeServlet extends HttpServlet {
         }
     }
 
-    // ================= POST =================
+
 
     @Override
     protected void doPost(HttpServletRequest request,
@@ -105,7 +104,7 @@ public class TrainingTypeServlet extends HttpServlet {
 
         try {
 
-            // ================= FORM VALUES =================
+
 
             String trainingTypeName =
                     request.getParameter("trainingTypeName");
@@ -116,7 +115,7 @@ public class TrainingTypeServlet extends HttpServlet {
             String status =
                     request.getParameter("status");
 
-            // ================= CREATE OBJECT =================
+
 
             TrainingType trainingType =
                     new TrainingType();
@@ -133,7 +132,7 @@ public class TrainingTypeServlet extends HttpServlet {
                     status
             );
 
-            // ================= UPDATE =================
+
 
             if ("update".equalsIgnoreCase(action)) {
 
@@ -152,7 +151,7 @@ public class TrainingTypeServlet extends HttpServlet {
                 );
             }
 
-            // ================= ADD =================
+
 
             else {
 
@@ -161,7 +160,7 @@ public class TrainingTypeServlet extends HttpServlet {
                 );
             }
 
-            // ================= REDIRECT =================
+
 
             response.sendRedirect(
                     request.getContextPath()
