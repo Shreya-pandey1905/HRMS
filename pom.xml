@@ -7,6 +7,11 @@
   <version>1.0-SNAPSHOT</version>
   <name>HRMS Maven Webapp</name>
   <url>http://maven.apache.org</url>
+
+  <properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -42,6 +47,12 @@
         <artifactId>jakarta.servlet.jsp.jstl</artifactId>
         <version>3.0.1</version>
       </dependency>
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.13.2</version>
+    </dependency>
 
 
   </dependencies>
