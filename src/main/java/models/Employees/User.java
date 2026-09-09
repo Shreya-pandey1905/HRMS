@@ -1,13 +1,14 @@
 package models.Employees;
 
+
 import java.time.LocalDateTime;
 
-public class User
-{
+public class User {
 
     private int userId;
     private String firstName;
     private String lastName;
+
     private String email;
     private String passwordHash;
     private String phoneNumber;
@@ -20,7 +21,6 @@ public class User
     private String address;
     private String aboutEmployee;
     private String profilePicture;
-    private Integer roleId1;
     private String reportingManager;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -29,10 +29,7 @@ public class User
     private String status;
 
 
-    public User() {
-    }
-
-
+    
     public int getUserId() {
         return userId;
     }
@@ -58,6 +55,7 @@ public class User
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
 
 
     public String getEmail() {
@@ -168,13 +166,7 @@ public class User
     }
 
 
-    public Integer getRoleId1() {
-        return roleId1;
-    }
 
-    public void setRoleId1(Integer roleId1) {
-        this.roleId1 = roleId1;
-    }
 
 
     public String getReportingManager() {
@@ -229,4 +221,5 @@ public class User
     public void setStatus(String status) {
         this.status = status;
     }
+
 }

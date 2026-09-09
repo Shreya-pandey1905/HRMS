@@ -370,45 +370,43 @@
                 </li>
 
                 <!-- TRAINING -->
+
+
                 <li class="submenu">
 
                     <a href="javascript:void(0);">
+
                         <i class="ti ti-school"></i>
+
                         <span>Training</span>
+
                         <span class="menu-arrow"></span>
+
                     </a>
 
                     <ul>
 
                         <li>
-                            <a href="javascript:void(0);">
-                                <span>Trainer List</span>
+                            <a href="${pageContext.request.contextPath}/trainers">
+                                <span>Trainers</span>
                             </a>
                         </li>
 
-                        <li class="submenu">
-
-                            <a href="javascript:void(0);">
-                                <span>Trainers</span>
-                                <span class="menu-arrow"></span>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/trainings">
+                                <span>Training</span>
                             </a>
+                        </li>
 
-                            <ul>
-
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        <span>Trainer Type</span>
-                                    </a>
-                                </li>
-
-                            </ul>
-
+                        <li>
+                            <a href="${pageContext.request.contextPath}/training-type">
+                                <span>Training Type</span>
+                            </a>
                         </li>
 
                     </ul>
 
                 </li>
-
                 <!-- DOCUMENTS -->
                 <li class="submenu">
 
