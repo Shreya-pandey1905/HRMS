@@ -516,7 +516,7 @@
 
             <li>
 
-                <a href="javascript:void(0);">
+                <a href="${pageContext.request.contextPath}/resignation">
 
                     <i class="ti ti-logout-2"></i>
 
@@ -531,7 +531,8 @@
 
             <li>
 
-                <a href="javascript:void(0);">
+                <a href="${pageContext.request.contextPath}/termination">
+
 
                     <i class="ti ti-user-x"></i>
 
