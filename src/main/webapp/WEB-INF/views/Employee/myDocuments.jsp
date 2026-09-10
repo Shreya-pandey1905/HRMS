@@ -12,10 +12,10 @@
           content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <meta name="description"
-          content="HRMS Dashboard">
+          content="HRMS My Documents">
 
     <meta name="keywords"
-          content="HRMS, Human Resource Management System, Dashboard">
+          content="HRMS, Documents, Employee Documents">
 
     <meta name="author"
           content="HRMS Team">
@@ -23,7 +23,7 @@
     <meta name="robots"
           content="noindex, nofollow">
 
-    <title>HRMS Dashboard</title>
+    <title>My Documents - HRMS</title>
 
 
     <link rel="shortcut icon"
@@ -59,30 +59,12 @@
 
 
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/assets/css/bootstrap-datetimepicker.min.css">
-
-
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/assets/plugins/daterangepicker/daterangepicker.css">
-
-
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/assets/plugins/flatpickr/flatpickr.min.css">
-
-
-    <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/css/style.css">
 
 </head>
 
 
 <body>
-
-
-<c:set var="totalEmployees" value="0"/>
-<c:set var="presentToday" value="0"/>
-<c:set var="onLeave" value="0"/>
-<c:set var="pendingLeaves" value="0"/>
 
 
 <div id="global-loader">
@@ -207,6 +189,7 @@
 
                 <div class="dropdown-menu dropdown-menu-end">
 
+
                     <a class="dropdown-item"
                        href="javascript:void(0);">
 
@@ -230,6 +213,7 @@
 
                     </a>
 
+
                 </div>
 
             </div>
@@ -241,7 +225,8 @@
 
     <!-- ================= SIDEBAR ================= -->
 
-    <div class="sidebar" id="sidebar">
+    <div class="sidebar"
+         id="sidebar">
 
 
         <div class="sidebar-logo">
@@ -291,12 +276,16 @@
 
 
                 <h6 class="fs-12 fw-normal mb-1">
-                    Admin
+
+                    Employee
+
                 </h6>
 
 
                 <p class="fs-10 mb-0">
-                    Administrator
+
+                    Employee
+
                 </p>
 
             </div>
@@ -320,7 +309,7 @@
 
                 <!-- DASHBOARD -->
 
-                <li class="active">
+                <li>
 
                     <a href="${pageContext.request.contextPath}/admin/dashboard">
 
@@ -520,7 +509,6 @@
 
 
                 <!-- ================= DOCUMENTS ================= -->
-                <!-- ================= DOCUMENTS ================= -->
 
                 <li class="submenu active">
 
@@ -534,7 +522,9 @@
 
                     </a>
 
+
                     <ul>
+
 
                         <!-- COMPANY LETTERS -->
 
@@ -551,7 +541,7 @@
 
                         <!-- MY DOCUMENTS -->
 
-                        <li>
+                        <li class="active">
 
                             <a href="${pageContext.request.contextPath}/file-uploads?action=list">
 
@@ -573,6 +563,7 @@
                             </a>
 
                         </li>
+
 
                     </ul>
 
@@ -638,21 +629,23 @@
         <div class="content">
 
 
-            <!-- BREADCRUMB -->
+            <!-- ================= PAGE HEADER ================= -->
 
-            <div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
+            <div class="page-header">
 
-
-                <div class="my-auto mb-2">
-
-                    <h2 class="mb-1">
-                        Employee Dashboard
-                    </h2>
+                <div class="row align-items-center">
 
 
-                    <nav>
+                    <div class="col">
 
-                        <ol class="breadcrumb mb-0">
+                        <h3 class="page-title">
+
+                            My Documents
+
+                        </h3>
+
+
+                        <ul class="breadcrumb">
 
 
                             <li class="breadcrumb-item">
@@ -666,51 +659,21 @@
                             </li>
 
 
-                            <li class="breadcrumb-item active"
-                                aria-current="page">
+                            <li class="breadcrumb-item">
 
-                                Dashboard
+                                Documents
 
                             </li>
 
 
-                        </ol>
+                            <li class="breadcrumb-item active">
 
-                    </nav>
+                                My Documents
 
-                </div>
-
-
-                <div class="d-flex my-xl-auto right-content align-items-center flex-wrap">
+                            </li>
 
 
-                    <div class="input-icon mb-2 position-relative">
-
-                        <span class="input-icon-addon">
-
-                            <i class="ti ti-calendar text-gray-9"></i>
-
-                        </span>
-
-
-                        <input type="text"
-                               class="form-control date-range bookingrange"
-                               placeholder="dd/mm/yyyy - dd/mm/yyyy">
-
-                    </div>
-
-
-                    <div class="ms-2 head-icons">
-
-                        <a href="javascript:void(0);"
-                           data-bs-toggle="tooltip"
-                           data-bs-placement="top"
-                           title="Collapse"
-                           id="collapse-header">
-
-                            <i class="ti ti-chevrons-up"></i>
-
-                        </a>
+                        </ul>
 
                     </div>
 
@@ -719,341 +682,161 @@
             </div>
 
 
-            <!-- WELCOME -->
+            <!-- ================= DOCUMENT LIST ================= -->
 
-            <div class="welcome-wrap mb-4">
-
-
-                <div class="d-flex align-items-center justify-content-between flex-wrap">
+            <div class="card">
 
 
-                    <div class="mb-3">
+                <div class="card-header">
 
-                        <h2 class="mb-1 text-white">
-                            Welcome to HRMS
-                        </h2>
+                    <h5 class="card-title mb-0">
 
+                        My Uploaded Documents
 
-                        <p class="text-light mb-0">
-                            Human Resource Management System
-                        </p>
-
-                    </div>
+                    </h5>
 
                 </div>
 
 
-                <div class="welcome-bg">
+                <div class="card-body">
 
 
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-02.svg"
-                         alt=""
-                         class="welcome-bg-01">
+                    <div class="table-responsive">
 
 
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-03.svg"
-                         alt=""
-                         class="welcome-bg-02">
+                        <table class="table table-striped table-hover"
+                               id="myDocumentsTable">
 
 
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-01.svg"
-                         alt=""
-                         class="welcome-bg-03">
+                            <thead>
 
-                </div>
+                            <tr>
 
-            </div>
+                                <th>
+                                    #
+                                </th>
 
+                                <th>
+                                    File Name
+                                </th>
 
-            <!-- HRMS SUMMARY CARDS -->
+                                <th>
+                                    Document ID
+                                </th>
 
-            <div class="row">
+                                <th>
+                                    Action
+                                </th>
 
+                            </tr>
 
-                <div class="col-xl-3 col-sm-6 d-flex">
+                            </thead>
 
-                    <div class="card flex-fill">
 
-                        <div class="card-body">
+                            <tbody>
 
-                            <span class="avatar avatar-md bg-dark mb-3">
 
-                                <i class="ti ti-users fs-16"></i>
+                            <c:forEach var="file"
+                                       items="${files}"
+                                       varStatus="status">
 
-                            </span>
 
+                                <tr>
 
-                            <h2 class="mb-1">
-                                ${totalEmployees}
-                            </h2>
 
+                                    <td>
 
-                            <p class="fs-13 mb-0">
-                                Total Employees
-                            </p>
+                                            ${status.count}
 
-                        </div>
+                                    </td>
 
-                    </div>
 
-                </div>
+                                    <td>
 
+                                        <div class="d-flex align-items-center">
 
-                <div class="col-xl-3 col-sm-6 d-flex">
 
-                    <div class="card flex-fill">
+                                            <span class="avatar avatar-sm bg-primary-transparent me-2">
 
-                        <div class="card-body">
+                                                <i class="ti ti-file"></i>
 
-                            <span class="avatar avatar-md bg-dark mb-3">
+                                            </span>
 
-                                <i class="ti ti-user-check fs-16"></i>
 
-                            </span>
+                                            <span>
 
+                                                    ${file.fileName}
 
-                            <h2 class="mb-1">
-                                ${presentToday}
-                            </h2>
+                                            </span>
 
 
-                            <p class="fs-13 mb-0">
-                                Present Today
-                            </p>
+                                        </div>
 
-                        </div>
+                                    </td>
 
-                    </div>
 
-                </div>
+                                    <td>
 
+                                            ${file.documentId}
 
-                <div class="col-xl-3 col-sm-6 d-flex">
+                                    </td>
 
-                    <div class="card flex-fill">
 
-                        <div class="card-body">
+                                    <td>
 
-                            <span class="avatar avatar-md bg-dark mb-3">
+                                        <div class="d-flex align-items-center">
 
-                                <i class="ti ti-calendar-off fs-16"></i>
 
-                            </span>
+                                            <!-- VIEW -->
 
+                                            <a href="${pageContext.request.contextPath}${file.filePath}"
+                                               target="_blank"
+                                               class="btn btn-sm btn-light me-2"
+                                               title="View">
 
-                            <h2 class="mb-1">
-                                ${onLeave}
-                            </h2>
+                                                <i class="ti ti-eye"></i>
 
+                                            </a>
 
-                            <p class="fs-13 mb-0">
-                                On Leave
-                            </p>
 
-                        </div>
+                                            <!-- DOWNLOAD -->
 
-                    </div>
+                                            <a href="${pageContext.request.contextPath}${file.filePath}"
+                                               download
+                                               class="btn btn-sm btn-light me-2"
+                                               title="Download">
 
-                </div>
+                                                <i class="ti ti-download"></i>
 
+                                            </a>
 
-                <div class="col-xl-3 col-sm-6 d-flex">
 
-                    <div class="card flex-fill">
+                                            <!-- DELETE -->
 
-                        <div class="card-body">
+                                            <a href="${pageContext.request.contextPath}/file-uploads?action=delete&id=${file.id}"
+                                               class="btn btn-sm btn-light text-danger"
+                                               onclick="return confirm('Are you sure you want to delete this document?');"
+                                               title="Delete">
 
-                            <span class="avatar avatar-md bg-dark mb-3">
+                                                <i class="ti ti-trash"></i>
 
-                                <i class="ti ti-clock-hour-4 fs-16"></i>
+                                            </a>
 
-                            </span>
 
+                                        </div>
 
-                            <h2 class="mb-1">
-                                ${pendingLeaves}
-                            </h2>
+                                    </td>
 
 
-                            <p class="fs-13 mb-0">
-                                Pending Leave Requests
-                            </p>
+                                </tr>
 
-                        </div>
 
-                    </div>
+                            </c:forEach>
 
-                </div>
 
-            </div>
+                            </tbody>
 
-
-            <!-- DASHBOARD WIDGETS -->
-
-            <div class="row">
-
-
-                <div class="col-xxl-8 col-xl-7 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2 d-flex align-items-center justify-content-between">
-
-                            <h5 class="mb-0">
-                                Attendance Overview
-                            </h5>
-
-
-                            <button type="button"
-                                    class="btn btn-white border btn-sm"
-                                    disabled>
-
-                                Overview
-
-                            </button>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div id="attendance-overview-chart"
-                                 style="min-height:280px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-xxl-4 col-xl-5 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Employee Overview
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div id="employee-overview-chart"
-                                 style="min-height:280px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="row">
-
-
-                <div class="col-xl-6 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Leave Overview
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div id="leave-overview-chart"
-                                 style="min-height:250px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-xl-6 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Recent Activity
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div class="text-center py-5 text-muted">
-
-                                <i class="ti ti-activity fs-32 mb-2 d-block"></i>
-
-
-                                <p class="mb-0">
-                                    No activity available
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- HRMS INFORMATION -->
-
-            <div class="row">
-
-
-                <div class="col-12 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                HRMS Information
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div class="text-center py-4 text-muted">
-
-                                <p class="mb-0">
-                                    Information will appear here as HRMS modules are implemented.
-                                </p>
-
-                            </div>
-
-                        </div>
+                        </table>
 
                     </div>
 
@@ -1065,18 +848,24 @@
         </div>
 
 
-        <!-- FOOTER -->
+        <!-- ================= FOOTER ================= -->
 
         <div class="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
 
+
             <p class="mb-0">
+
                 HRMS
+
             </p>
 
 
             <p class="mb-0">
+
                 Human Resource Management System
+
             </p>
+
 
         </div>
 
@@ -1085,7 +874,7 @@
 </div>
 
 
-<!-- SCRIPTS -->
+<!-- ================= SCRIPTS ================= -->
 
 <script src="${pageContext.request.contextPath}/assets/js/jquery-3.7.1.min.js"></script>
 
@@ -1094,18 +883,6 @@
 <script src="${pageContext.request.contextPath}/assets/js/feather.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/js/jquery.slimscroll.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/plugins/apexchart/apexcharts.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/js/moment.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/js/bootstrap-datetimepicker.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/plugins/daterangepicker/daterangepicker.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/plugins/select2/js/select2.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/js/theme-colorpicker.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 
