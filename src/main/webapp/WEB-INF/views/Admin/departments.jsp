@@ -2,19 +2,19 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <meta name="description" content="HRMS Admin Dashboard">
-    <meta name="keywords" content="HRMS, Human Resource Management System, Admin Dashboard">
-    <meta name="author" content="HRMS Team">
-    <meta name="robots" content="noindex, nofollow">
 
-    <title>HRMS Admin Dashboard</title>
+<meta charset="utf-8">
 
-    <link rel="shortcut icon"
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+<title>Departments | HRMS</title>
+
+<link rel="shortcut icon"
           type="image/x-icon"
           href="${pageContext.request.contextPath}/assets/img/favicon.png">
 
@@ -185,6 +185,7 @@
         </div>
     </div>
 
+
     <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar">
 
@@ -285,15 +286,16 @@
                        </a>
                    </li>
 
-                 <li>    <a href="${pageContext.request.contextPath}/admin/employees?action=grid">
-                                                         Employee Grid
-                                                    </a>
-                                           </li>
-<li>
-    <a href="${pageContext.request.contextPath}/employee/details">
-        Employee Details
-    </a>
-</li>
+                   <li>    <a href="${pageContext.request.contextPath}/admin/employees?action=grid">
+                                                           Employee Grid
+                                                      </a>
+                                             </li>
+
+                   <li>
+                       <a href="${pageContext.request.contextPath}/admin/employees/details">
+                           Employee Details
+                       </a>
+                   </li>
 
                </ul>
 
@@ -670,360 +672,730 @@
 
     </div>
 
-    <!-- PAGE WRAPPER -->
-    <div class="page-wrapper">
 
-        <div class="content">
+<!-- Page Content -->
 
-            <!-- BREADCRUMB -->
-            <div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
+<div class="page-wrapper">
 
-                <div class="my-auto mb-2">
+    <div class="content">
 
-                    <h2 class="mb-1">
-                       Admin Dashboard
-                    </h2>
+        <!-- Page Header -->
 
-                    <nav>
-                        <ol class="breadcrumb mb-0">
+        <div class="d-md-flex d-block align-items-center justify-content-between mb-3">
 
-                            <li class="breadcrumb-item">
-                                <a href="${pageContext.request.contextPath}/admin/dashboard">
-                                    <i class="ti ti-smart-home"></i>
-                                </a>
-                            </li>
+            <div>
 
-                            <li class="breadcrumb-item active"
-                                aria-current="page">
-                                Dashboard
-                            </li>
+                <h2 class="mb-1">Departments</h2>
 
-                        </ol>
-                    </nav>
-
-                </div>
-
-                <div class="d-flex my-xl-auto right-content align-items-center flex-wrap">
-
-                    <div class="input-icon mb-2 position-relative">
-
-                        <span class="input-icon-addon">
-                            <i class="ti ti-calendar text-gray-9"></i>
-                        </span>
-
-                        <input type="text"
-                               class="form-control date-range bookingrange"
-                               placeholder="dd/mm/yyyy - dd/mm/yyyy">
-
-                    </div>
-
-                    <div class="ms-2 head-icons">
-
-                        <a href="javascript:void(0);"
-                           data-bs-toggle="tooltip"
-                           data-bs-placement="top"
-                           title="Collapse"
-                           id="collapse-header">
-
-                            <i class="ti ti-chevrons-up"></i>
-
-                        </a>
-
-                    </div>
-
-                </div>
+                <p class="department-count mb-0">
+                    Manage employee departments
+                </p>
 
             </div>
 
-            <!-- WELCOME -->
-            <div class="welcome-wrap mb-4">
+            <div class="mt-3 mt-md-0">
 
-                <div class="d-flex align-items-center justify-content-between flex-wrap">
+                <button type="button"
+                        class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#add_department">
 
-                    <div class="mb-3">
+                    <i class="ti ti-plus me-1"></i>
 
-                        <h2 class="mb-1 text-white">
-                            Welcome to HRMS
-                        </h2>
+                    Add Department
 
-                        <p class="text-light mb-0">
-                            Human Resource Management System - Admin Panel
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="welcome-bg">
-
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-02.svg"
-                         alt=""
-                         class="welcome-bg-01">
-
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-03.svg"
-                         alt=""
-                         class="welcome-bg-02">
-
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-01.svg"
-                         alt=""
-                         class="welcome-bg-03">
-
-                </div>
-
-            </div>
-
-            <!-- SUMMARY CARDS -->
-            <div class="row">
-
-                <div class="col-xl-3 col-sm-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-                                <i class="ti ti-users fs-16"></i>
-                            </span>
-
-                            <h2 class="mb-1">
-                                ${totalEmployees}
-                            </h2>
-
-                            <p class="fs-13 mb-0">
-                                Total Employees
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-sm-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-                                <i class="ti ti-user-check fs-16"></i>
-                            </span>
-
-                            <h2 class="mb-1">
-                                ${presentToday}
-                            </h2>
-
-                            <p class="fs-13 mb-0">
-                                Present Today
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-sm-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-                                <i class="ti ti-calendar-off fs-16"></i>
-                            </span>
-
-                            <h2 class="mb-1">
-                                ${onLeave}
-                            </h2>
-
-                            <p class="fs-13 mb-0">
-                                On Leave
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-sm-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-                                <i class="ti ti-clock-hour-4 fs-16"></i>
-                            </span>
-
-                            <h2 class="mb-1">
-                                ${pendingLeaves}
-                            </h2>
-
-                            <p class="fs-13 mb-0">
-                                Pending Leave Requests
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- ATTENDANCE + EMPLOYEE OVERVIEW -->
-            <div class="row">
-
-                <div class="col-xxl-8 col-xl-7 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-header pb-2 d-flex align-items-center justify-content-between">
-
-                            <h5 class="mb-0">
-                                Attendance Overview
-                            </h5>
-
-                            <button type="button"
-                                    class="btn btn-white border btn-sm"
-                                    disabled>
-                                Overview
-                            </button>
-
-                        </div>
-
-                        <div class="card-body">
-
-                            <div id="attendance-overview-chart"
-                                 style="min-height:280px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-xxl-4 col-xl-5 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Employee Overview
-                            </h5>
-
-                        </div>
-
-                        <div class="card-body">
-
-                            <div id="employee-overview-chart"
-                                 style="min-height:280px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- LEAVE + RECENT ACTIVITY -->
-            <div class="row">
-
-                <div class="col-xl-6 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-header pb-2">
-                            <h5 class="mb-0">
-                                Leave Overview
-                            </h5>
-                        </div>
-
-                        <div class="card-body">
-
-                            <div id="leave-overview-chart"
-                                 style="min-height:250px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-xl-6 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Recent Activity
-                            </h5>
-
-                        </div>
-
-                        <div class="card-body">
-
-                            <div class="text-center py-5 text-muted">
-
-                                <i class="ti ti-activity fs-32 mb-2 d-block"></i>
-
-                                <p class="mb-0">
-                                    No activity available
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- HRMS INFORMATION -->
-            <div class="row">
-
-                <div class="col-12 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                HRMS Information
-                            </h5>
-
-                        </div>
-
-                        <div class="card-body">
-
-                            <div class="text-center py-4 text-muted">
-
-                                <p class="mb-0">
-                                    Information will appear here as HRMS modules are implemented.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
+                </button>
 
             </div>
 
         </div>
 
-        <!-- FOOTER -->
-        <div class="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
 
-            <p class="mb-0">
-                HRMS
-            </p>
+        <!-- Success Message -->
 
-            <p class="mb-0">
-                Human Resource Management System
-            </p>
+        <c:if test="${not empty success}">
+
+            <div class="alert alert-success alert-dismissible fade show"
+                 role="alert">
+
+                <c:out value="${success}"/>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close">
+                </button>
+
+            </div>
+
+        </c:if>
+
+
+        <!-- Error Message -->
+
+        <c:if test="${not empty error}">
+
+            <div class="alert alert-danger alert-dismissible fade show"
+                 role="alert">
+
+                <c:out value="${error}"/>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close">
+                </button>
+
+            </div>
+
+        </c:if>
+
+
+        <!-- Department Table -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div class="d-flex align-items-center justify-content-between">
+
+                    <h5 class="card-title mb-0">
+                        Department List
+                    </h5>
+
+                    <span class="department-count">
+
+                        Total:
+                        <c:choose>
+
+                            <c:when test="${not empty departments}">
+                                ${departments.size()}
+                            </c:when>
+
+                            <c:otherwise>
+                                0
+                            </c:otherwise>
+
+                        </c:choose>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="card-body p-0">
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover mb-0">
+
+                        <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Department Name</th>
+
+                            <th>No. of Employees</th>
+
+                            <th>Status</th>
+
+                            <th>Created By</th>
+
+                            <th>Created At</th>
+
+                            <th class="text-end">Action</th>
+
+                        </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                        <c:choose>
+
+                            <c:when test="${not empty departments}">
+
+                                <c:forEach var="department"
+                                           items="${departments}"
+                                           varStatus="status">
+
+                                    <tr>
+
+                                        <!-- Serial Number -->
+
+                                        <td>
+                                            ${status.count}
+                                        </td>
+
+
+                                        <!-- Department Name -->
+
+                                        <td>
+
+                                            <strong>
+
+                                                <c:out value="${department.name}"/>
+
+                                            </strong>
+
+                                        </td>
+
+
+                                        <!-- Employee Count -->
+
+                                        <td>
+
+                                            <c:choose>
+
+                                                <c:when test="${department.noOfEmployee != null}">
+
+                                                    ${department.noOfEmployee}
+
+                                                </c:when>
+
+                                                <c:otherwise>
+
+                                                    0
+
+                                                </c:otherwise>
+
+                                            </c:choose>
+
+                                        </td>
+
+
+                                        <!-- Status -->
+
+                                        <td>
+
+                                            <c:choose>
+
+                                                <c:when test="${department.status == 'Active'}">
+
+                                                    <span class="badge bg-success">
+
+                                                        Active
+
+                                                    </span>
+
+                                                </c:when>
+
+                                                <c:otherwise>
+
+                                                    <span class="badge bg-danger">
+
+                                                        Inactive
+
+                                                    </span>
+
+                                                </c:otherwise>
+
+                                            </c:choose>
+
+                                        </td>
+
+
+                                        <!-- Created By -->
+
+                                        <td>
+
+                                            <c:choose>
+
+                                                <c:when test="${not empty department.createdBy}">
+
+                                                    <c:out value="${department.createdBy}"/>
+
+                                                </c:when>
+
+                                                <c:otherwise>
+
+                                                    -
+
+                                                </c:otherwise>
+
+                                            </c:choose>
+
+                                        </td>
+
+
+                                        <!-- Created At -->
+
+                                        <td>
+
+                                            <c:choose>
+
+                                                <c:when test="${department.createdAt != null}">
+
+                                                    ${department.createdAt}
+
+                                                </c:when>
+
+                                                <c:otherwise>
+
+                                                    -
+
+                                                </c:otherwise>
+
+                                            </c:choose>
+
+                                        </td>
+
+
+                                        <!-- Actions -->
+
+                                        <td class="text-end">
+
+                                            <!-- Edit -->
+
+                                            <button type="button"
+                                                    class="btn btn-sm btn-light me-1 edit-department"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#edit_department"
+                                                    data-id="${department.departmentId}"
+                                                    data-name="${department.name}"
+                                                    data-status="${department.status}"
+                                                    title="Edit Department">
+
+                                                <i class="ti ti-edit"></i>
+
+                                            </button>
+
+
+                                            <!-- Delete -->
+
+                                            <button type="button"
+                                                    class="btn btn-sm btn-light delete-department"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#delete_department"
+                                                    data-id="${department.departmentId}"
+                                                    data-name="${department.name}"
+                                                    title="Delete Department">
+
+                                                <i class="ti ti-trash"></i>
+
+                                            </button>
+
+                                        </td>
+
+                                    </tr>
+
+                                </c:forEach>
+
+                            </c:when>
+
+                            <c:otherwise>
+
+                                <tr>
+
+                                    <td colspan="7"
+                                        class="text-center py-5">
+
+                                        <div>
+
+                                            <i class="ti ti-building fs-1 text-muted"></i>
+
+                                            <h5 class="mt-3">
+                                                No departments available
+                                            </h5>
+
+                                            <p class="text-muted mb-0">
+                                                Add a department to get started.
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            </c:otherwise>
+
+                        </c:choose>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
 
+
+    <!-- Footer -->
+
+    <div class="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
+
+        <p class="mb-0">
+            © 2026 HRMS
+        </p>
+
+        <p class="mb-0">
+            Human Resource Management System
+        </p>
+
+    </div>
+
 </div>
+```
+
+</div>
+
+<!-- ========================================================= -->
+
+<!-- Add Department Modal -->
+
+<!-- ========================================================= -->
+
+<div class="modal fade"
+     id="add_department"
+     tabindex="-1"
+     aria-hidden="true">
+
+```
+<div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h5 class="modal-title">
+                Add Department
+            </h5>
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close">
+            </button>
+
+        </div>
+
+
+        <form action="${pageContext.request.contextPath}/admin/departments"
+              method="post">
+
+            <div class="modal-body">
+
+                <!-- Department Name -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Department Name
+
+                        <span class="text-danger">*</span>
+
+                    </label>
+
+                    <input type="text"
+                           name="name"
+                           class="form-control"
+                           placeholder="Enter department name"
+                           required>
+
+                </div>
+
+
+                <!-- Status -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Status
+
+                        <span class="text-danger">*</span>
+
+                    </label>
+
+                    <select name="status"
+                            class="form-select"
+                            required>
+
+                        <option value="">
+                            Select Status
+                        </option>
+
+                        <option value="Active">
+                            Active
+                        </option>
+
+                        <option value="Inactive">
+                            Inactive
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button type="button"
+                        class="btn btn-light"
+                        data-bs-dismiss="modal">
+
+                    Cancel
+
+                </button>
+
+                <button type="submit"
+                        class="btn btn-primary">
+
+                    <i class="ti ti-plus me-1"></i>
+
+                    Add Department
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- ========================================================= -->
+
+<!-- Edit Department Modal -->
+
+<!-- ========================================================= -->
+
+<div class="modal fade"
+     id="edit_department"
+     tabindex="-1"
+     aria-hidden="true">
+
+```
+<div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h5 class="modal-title">
+                Edit Department
+            </h5>
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close">
+            </button>
+
+        </div>
+
+
+        <form action="${pageContext.request.contextPath}/admin/departments"
+              method="post">
+
+            <input type="hidden"
+                   name="action"
+                   value="update">
+
+            <input type="hidden"
+                   name="departmentId"
+                   id="editDepartmentId">
+
+
+            <div class="modal-body">
+
+                <!-- Department Name -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Department Name
+
+                        <span class="text-danger">*</span>
+
+                    </label>
+
+                    <input type="text"
+                           name="name"
+                           id="editDepartmentName"
+                           class="form-control"
+                           placeholder="Enter department name"
+                           required>
+
+                </div>
+
+
+                <!-- Status -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Status
+
+                        <span class="text-danger">*</span>
+
+                    </label>
+
+                    <select name="status"
+                            id="editDepartmentStatus"
+                            class="form-select"
+                            required>
+
+                        <option value="Active">
+                            Active
+                        </option>
+
+                        <option value="Inactive">
+                            Inactive
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button type="button"
+                        class="btn btn-light"
+                        data-bs-dismiss="modal">
+
+                    Cancel
+
+                </button>
+
+                <button type="submit"
+                        class="btn btn-primary">
+
+                    <i class="ti ti-device-floppy me-1"></i>
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- ========================================================= -->
+
+<!-- Delete Department Modal -->
+
+<!-- ========================================================= -->
+
+<div class="modal fade"
+     id="delete_department"
+     tabindex="-1"
+     aria-hidden="true">
+
+```
+<div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h5 class="modal-title">
+                Delete Department
+            </h5>
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close">
+            </button>
+
+        </div>
+
+
+        <form action="${pageContext.request.contextPath}/admin/departments"
+              method="post">
+
+            <input type="hidden"
+                   name="action"
+                   value="delete">
+
+            <input type="hidden"
+                   name="departmentId"
+                   id="deleteDepartmentId">
+
+
+            <div class="modal-body">
+
+                <div class="text-center">
+
+                    <i class="ti ti-trash fs-1 text-danger"></i>
+
+                    <h5 class="mt-3">
+                        Are you sure?
+                    </h5>
+
+                    <p class="text-muted mb-0">
+
+                        Do you want to delete
+
+                        <strong id="deleteDepartmentName"></strong>?
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button type="button"
+                        class="btn btn-light"
+                        data-bs-dismiss="modal">
+
+                    Cancel
+
+                </button>
+
+                <button type="submit"
+                        class="btn btn-danger">
+
+                    <i class="ti ti-trash me-1"></i>
+
+                    Delete
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- ========================================================= -->
+
 
 <!-- JAVASCRIPT -->
 <script src="${pageContext.request.contextPath}/assets/js/jquery-3.7.1.min.js"></script>
@@ -1037,6 +1409,69 @@
 <script src="${pageContext.request.contextPath}/assets/js/theme-colorpicker.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 
-</body>
-</html>
+<!-- Department JavaScript -->
 
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const editButtons =
+            document.querySelectorAll(".edit-department");
+
+        editButtons.forEach(function (button) {
+
+            button.addEventListener("click", function () {
+
+                const departmentId =
+                    button.getAttribute("data-id");
+
+                const departmentName =
+                    button.getAttribute("data-name");
+
+                const departmentStatus =
+                    button.getAttribute("data-status");
+
+                document.getElementById("editDepartmentId").value =
+                    departmentId;
+
+                document.getElementById("editDepartmentName").value =
+                    departmentName;
+
+                document.getElementById("editDepartmentStatus").value =
+                    departmentStatus;
+
+            });
+
+        });
+
+
+        const deleteButtons =
+            document.querySelectorAll(".delete-department");
+
+        deleteButtons.forEach(function (button) {
+
+            button.addEventListener("click", function () {
+
+                const departmentId =
+                    button.getAttribute("data-id");
+
+                const departmentName =
+                    button.getAttribute("data-name");
+
+                document.getElementById("deleteDepartmentId").value =
+                    departmentId;
+
+                document.getElementById("deleteDepartmentName").textContent =
+                    departmentName;
+
+            });
+
+        });
+
+    });
+
+</script>
+
+</body>
+
+</html>
