@@ -576,7 +576,7 @@
 
                 <!-- PROMOTIONS -->
                 <li>
-                    <a href="javascript:void(0);">
+                    <a href="${pageContext.request.contextPath}/promotion">
                         <i class="ti ti-trending-up"></i>
                         <span>Promotions</span>
                     </a>
