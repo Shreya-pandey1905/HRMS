@@ -8,12 +8,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import models.Employees.EmployeeDetails;
 import models.Employees.User;
+import service.Employee.EmployeeDetailsService;
 import service.Employee.EmployeeService;
+import serviceImplementer.Employee.EmployeeDetailsServiceImpl;
 import serviceImplementer.Employee.EmployeeServiceImpl;
 import util.PasswordUtil;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,6 +28,8 @@ import java.util.List;
 public class EmployeeServlet extends HttpServlet {
 
     private final EmployeeService employeeService = new EmployeeServiceImpl();
+    private final EmployeeDetailsService employeeDetailsService =
+            new EmployeeDetailsServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -78,19 +86,23 @@ public class EmployeeServlet extends HttpServlet {
                     );
 
             dispatcher.forward(request, response);
-        }else if (action.equals("view")) {
+        } else if ("view".equals(action)) {
 
-            int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
 
-            User employee = employeeService.getEmployeeById(id);
-            request.setAttribute("employee", employee);
+        EmployeeDetails employeeDetails =
+                employeeDetailsService.getEmployeeDetails(id);
 
-            RequestDispatcher dispatcher =
-                    request.getRequestDispatcher("/WEB-INF/views/Admin/employee-details.jsp");
+        request.setAttribute("employeeDetails", employeeDetails);
 
-            dispatcher.forward(request, response);
+        RequestDispatcher dispatcher =
+                request.getRequestDispatcher(
+                        "/WEB-INF/views/Admin/employee-details.jsp"
+                );
 
-        } else if (action.equals("delete")) {
+        dispatcher.forward(request, response);
+
+    } else if (action.equals("delete")) {
 
             int id = Integer.parseInt(request.getParameter("id"));
 
@@ -247,10 +259,33 @@ public class EmployeeServlet extends HttpServlet {
         Part profilePart = request.getPart("profilePicture");
 
         if (profilePart != null && profilePart.getSize() > 0) {
-            user.setProfilePicture(profilePart.getSubmittedFileName());
+
+            String fileName = profilePart.getSubmittedFileName();
+
+            String uploadPath = getServletContext().getRealPath("/Content/uploads");
+
+            File uploadDir = new File(uploadPath);
+
+            if (!uploadDir.exists()) {
+                uploadDir.mkdirs();
+            }
+
+            File file = new File(uploadDir, fileName);
+
+            try (InputStream inputStream = profilePart.getInputStream()) {
+                Files.copy(
+                        inputStream,
+                        file.toPath(),
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING
+                );
+            }
+
+            user.setProfilePicture("Content/uploads/" + fileName);
+
         } else {
             user.setProfilePicture("");
-        }        user.setReportingManager(request.getParameter("reportingManager"));
+        }
+        user.setReportingManager(request.getParameter("reportingManager"));
 
         return user;
     }

@@ -20,13 +20,19 @@ public class EmployeeDetailsDao {
         EmployeeDetails employeeDetails = new EmployeeDetails();
 
         try (Connection connection = DBConfig.getConnection();
-             CallableStatement cs = connection.prepareCall("{call GetEmployeeCompleteDetails(?)}")) {
+             CallableStatement cs =
+                     connection.prepareCall("{call GetEmployeeCompleteDetails(?)}")) {
 
             cs.setInt(1, userId);
 
             boolean hasResult = cs.execute();
 
-            // Result Set 1 - User
+            System.out.println("START DETAILS: " + userId);
+
+            // =====================================================
+            // RESULT SET 1 - USER DETAILS
+            // =====================================================
+
             if (hasResult) {
 
                 try (ResultSet rs = cs.getResultSet()) {
@@ -40,19 +46,22 @@ public class EmployeeDetailsDao {
                         user.setLastName(rs.getString("LastName"));
                         user.setEmail(rs.getString("Email"));
                         user.setPhoneNumber(rs.getString("PhoneNumber"));
+
                         user.setRoleId(rs.getInt("RoleId"));
                         user.setDepartmentId(rs.getInt("DepartmentId"));
-                        user.setDesignationId(rs.getInt("DesignationtId"));
+                        user.setDesignationId(rs.getInt("DesignationId"));
 
                         if (rs.getTimestamp("DateOfJoining") != null) {
                             user.setDateOfJoining(
-                                    rs.getTimestamp("DateOfJoining").toLocalDateTime()
+                                    rs.getTimestamp("DateOfJoining")
+                                            .toLocalDateTime()
                             );
                         }
 
                         if (rs.getTimestamp("DateOfBirth") != null) {
                             user.setDateOfBirth(
-                                    rs.getTimestamp("DateOfBirth").toLocalDateTime()
+                                    rs.getTimestamp("DateOfBirth")
+                                            .toLocalDateTime()
                             );
                         }
 
@@ -62,20 +71,22 @@ public class EmployeeDetailsDao {
                         user.setProfilePicture(rs.getString("ProfilePicture"));
                         user.setReportingManager(rs.getString("ReportingManager"));
 
-                        user.setCreatedAt(
-                                rs.getTimestamp("CreatedAt") != null
-                                        ? rs.getTimestamp("CreatedAt").toLocalDateTime()
-                                        : null
-                        );
+                        if (rs.getTimestamp("CreatedAt") != null) {
+                            user.setCreatedAt(
+                                    rs.getTimestamp("CreatedAt")
+                                            .toLocalDateTime()
+                            );
+                        }
 
                         user.setCreatedBy(rs.getString("CreatedBy"));
                         user.setModifiedBy(rs.getString("ModifiedBy"));
 
-                        user.setModifiedAt(
-                                rs.getTimestamp("ModifiedAt") != null
-                                        ? rs.getTimestamp("ModifiedAt").toLocalDateTime()
-                                        : null
-                        );
+                        if (rs.getTimestamp("ModifiedAt") != null) {
+                            user.setModifiedAt(
+                                    rs.getTimestamp("ModifiedAt")
+                                            .toLocalDateTime()
+                            );
+                        }
 
                         user.setStatus(rs.getString("Status"));
 
@@ -84,8 +95,15 @@ public class EmployeeDetailsDao {
                 }
             }
 
-            // Result Set 2 - Bank Details
-            if (cs.getMoreResults()) {
+            System.out.println("USER RESULT DONE");
+
+            // =====================================================
+            // RESULT SET 2 - BANK DETAILS
+            // =====================================================
+
+            hasResult = cs.getMoreResults();
+
+            if (hasResult) {
 
                 try (ResultSet rs = cs.getResultSet()) {
 
@@ -123,11 +141,18 @@ public class EmployeeDetailsDao {
                 }
             }
 
-            // Result Set 3 - Family Details
-            if (cs.getMoreResults()) {
+            System.out.println("BANK RESULT DONE");
 
-                List<EmployeeFamilyDetails> familyDetails =
-                        new ArrayList<>();
+            // =====================================================
+            // RESULT SET 3 - FAMILY DETAILS
+            // =====================================================
+
+            hasResult = cs.getMoreResults();
+
+            List<EmployeeFamilyDetails> familyDetails =
+                    new ArrayList<>();
+
+            if (hasResult) {
 
                 try (ResultSet rs = cs.getResultSet()) {
 
@@ -156,7 +181,7 @@ public class EmployeeDetailsDao {
                         }
 
                         family.setPhone(
-                                rs.getString("phone")
+                                rs.getString("Phone")
                         );
 
                         family.setUserId(
@@ -166,15 +191,22 @@ public class EmployeeDetailsDao {
                         familyDetails.add(family);
                     }
                 }
-
-                employeeDetails.setFamilyDetails(familyDetails);
             }
 
-            // Result Set 4 - Education Details
-            if (cs.getMoreResults()) {
+            employeeDetails.setFamilyDetails(familyDetails);
 
-                List<EmployeeEducationDetails> educationDetails =
-                        new ArrayList<>();
+            System.out.println("FAMILY RESULT DONE");
+
+            // =====================================================
+            // RESULT SET 4 - EDUCATION DETAILS
+            // =====================================================
+
+            hasResult = cs.getMoreResults();
+
+            List<EmployeeEducationDetails> educationDetails =
+                    new ArrayList<>();
+
+            if (hasResult) {
 
                 try (ResultSet rs = cs.getResultSet()) {
 
@@ -216,11 +248,19 @@ public class EmployeeDetailsDao {
                         educationDetails.add(education);
                     }
                 }
-
-                employeeDetails.setEducationDetails(educationDetails);
             }
 
+            employeeDetails.setEducationDetails(educationDetails);
+
+            System.out.println("EDUCATION RESULT DONE");
+            System.out.println("END DETAILS: " + userId);
+
         } catch (Exception e) {
+
+            System.out.println(
+                    "ERROR WHILE FETCHING EMPLOYEE DETAILS: " + userId
+            );
+
             e.printStackTrace();
         }
 

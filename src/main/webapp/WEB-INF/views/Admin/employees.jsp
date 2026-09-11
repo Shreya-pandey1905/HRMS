@@ -190,9 +190,9 @@
             <div class="text-center rounded bg-light p-3 mb-4 user-profile">
 
                 <div class="avatar avatar-lg online mb-3">
-                    <img src="${pageContext.request.contextPath}/assets/img/profiles/avatar-02.jpg"
-                         alt="Admin Profile"
-                         class="img-fluid rounded-circle">
+           <img src="${pageContext.request.contextPath}/${employee.profilePicture}"
+                alt="Profile"
+                class="img-fluid rounded-circle">
                 </div>
 
                 <h6 class="fs-12 fw-normal mb-1">
