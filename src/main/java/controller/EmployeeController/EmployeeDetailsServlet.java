@@ -12,7 +12,10 @@ import service.Employee.EmployeeDetailsService;
 import serviceImplementer.Employee.EmployeeDetailsServiceImpl;
 
 import java.io.IOException;
-
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 @WebServlet("/employee/details")
 public class EmployeeDetailsServlet extends HttpServlet {
 

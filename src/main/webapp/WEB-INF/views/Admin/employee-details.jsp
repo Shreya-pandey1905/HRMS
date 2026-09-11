@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -40,35 +41,50 @@
 <div class="main-wrapper">
 
 
+    <!-- ========================================================= -->
     <!-- HEADER -->
+    <!-- ========================================================= -->
+
     <div class="header">
+
         <div class="main-header">
 
             <div class="header-left">
+
                 <a href="${pageContext.request.contextPath}/admin/dashboard"
                    class="logo">
+
                     <img src="${pageContext.request.contextPath}/assets/img/logo.svg"
                          alt="HRMS Logo">
+
                 </a>
 
                 <a href="${pageContext.request.contextPath}/admin/dashboard"
                    class="dark-logo">
+
                     <img src="${pageContext.request.contextPath}/assets/img/logo-white.svg"
                          alt="HRMS Logo">
+
                 </a>
+
             </div>
+
 
             <a id="mobile_btn"
                class="mobile_btn"
                href="#sidebar">
+
                 <span class="bar-icon">
                     <span></span>
                     <span></span>
                     <span></span>
                 </span>
+
             </a>
 
+
             <div class="header-user">
+
                 <div class="nav user-menu nav-list">
 
                     <div class="me-auto d-flex align-items-center"
@@ -77,13 +93,18 @@
                         <a id="toggle_btn"
                            href="javascript:void(0);"
                            class="btn btn-menubar me-1">
+
                             <i class="ti ti-arrow-bar-to-left"></i>
+
                         </a>
+
 
                         <div class="input-group input-group-flat d-inline-flex me-1">
 
                             <span class="input-icon-addon">
+
                                 <i class="ti ti-search"></i>
+
                             </span>
 
                             <input type="text"
@@ -96,15 +117,20 @@
 
                         </div>
 
+
                         <a href="javascript:void(0);"
                            class="btn btn-menubar">
+
                             <i class="ti ti-settings-cog"></i>
+
                         </a>
 
                     </div>
 
                 </div>
+
             </div>
+
 
             <div class="dropdown mobile-user-menu">
 
@@ -112,66 +138,92 @@
                    class="nav-link dropdown-toggle"
                    data-bs-toggle="dropdown"
                    aria-expanded="false">
+
                     <i class="fa fa-ellipsis-v"></i>
+
                 </a>
+
 
                 <div class="dropdown-menu dropdown-menu-end">
 
                     <a class="dropdown-item"
                        href="javascript:void(0);">
+
                         Profile
+
                     </a>
 
                     <a class="dropdown-item"
                        href="javascript:void(0);">
+
                         Settings
+
                     </a>
 
                     <a class="dropdown-item"
                        href="javascript:void(0);">
+
                         Logout
+
                     </a>
 
                 </div>
+
             </div>
 
         </div>
+
     </div>
 
+
+    <!-- ========================================================= -->
     <!-- SIDEBAR -->
+    <!-- ========================================================= -->
+
     <div class="sidebar" id="sidebar">
 
         <div class="sidebar-logo">
 
             <a href="${pageContext.request.contextPath}/admin/dashboard"
                class="logo logo-normal">
+
                 <img src="${pageContext.request.contextPath}/assets/img/logo.svg"
                      alt="HRMS Logo">
+
             </a>
+
 
             <a href="${pageContext.request.contextPath}/admin/dashboard"
                class="logo-small">
+
                 <img src="${pageContext.request.contextPath}/assets/img/logo-small.svg"
                      alt="HRMS Logo">
+
             </a>
+
 
             <a href="${pageContext.request.contextPath}/admin/dashboard"
                class="dark-logo">
+
                 <img src="${pageContext.request.contextPath}/assets/img/logo-white.svg"
                      alt="HRMS Logo">
+
             </a>
 
         </div>
 
+
         <!-- ADMIN PROFILE -->
+
         <div class="modern-profile p-3 pb-0">
 
             <div class="text-center rounded bg-light p-3 mb-4 user-profile">
 
                 <div class="avatar avatar-lg online mb-3">
-                    <img src="${pageContext.request.contextPath}/assets/img/profiles/avatar-02.jpg"
-                         alt="Admin Profile"
-                         class="img-fluid rounded-circle">
+<img src="${pageContext.request.contextPath}/${employee.profilePicture}"
+     alt="Profile"
+     class="img-fluid rounded-circle">
+
                 </div>
 
                 <h6 class="fs-12 fw-normal mb-1">
@@ -186,7 +238,9 @@
 
         </div>
 
+
         <!-- SIDEBAR MENU -->
+
         <div class="sidebar-menu">
 
             <ul>
@@ -195,204 +249,287 @@
                     <span>MAIN MENU</span>
                 </li>
 
+
                 <!-- DASHBOARD -->
-                <li class="active">
+
+                <li>
+
                     <a href="${pageContext.request.contextPath}/admin/dashboard">
+
                         <i class="ti ti-smart-home"></i>
+
                         <span>Dashboard</span>
+
                     </a>
+
                 </li>
 
-           <!-- EMPLOYEES -->
-           <li class="submenu">
 
-               <a href="javascript:void(0);">
-                   <i class="ti ti-users"></i>
-                   <span>Employees</span>
-                   <span class="menu-arrow"></span>
-               </a>
+                <!-- EMPLOYEES -->
 
-               <ul>
-
-                   <li>
-                       <a href="${pageContext.request.contextPath}/admin/departments">
-                           Add Department
-                       </a>
-                   </li>
-
-                   <li>
-                       <a href="${pageContext.request.contextPath}/admin/roles">
-                           Add Role
-                       </a>
-                   </li>
-
-                   <li>
-                       <a href="${pageContext.request.contextPath}/admin/designations">
-                           Add Designation
-                       </a>
-                   </li>
-
-                   <li>
-                       <a href="${pageContext.request.contextPath}/admin/employees">
-                           Employee List
-                       </a>
-                   </li>
-
-                 <li>    <a href="${pageContext.request.contextPath}/admin/employees?action=grid">
-                                                         Employee Grid
-                                                    </a>
-                                           </li>
-
-                   <li>
-                       <a href="${pageContext.request.contextPath}/admin/employees/details">
-                           Employee Details
-                       </a>
-                   </li>
-
-               </ul>
-
-           </li>
-                <!-- ATTENDANCE -->
-                <li class="submenu">
+                <li class="submenu active">
 
                     <a href="javascript:void(0);">
-                        <i class="ti ti-calendar-check"></i>
-                        <span>Attendance</span>
+
+                        <i class="ti ti-users"></i>
+
+                        <span>Employees</span>
+
                         <span class="menu-arrow"></span>
+
                     </a>
+
 
                     <ul>
 
                         <li>
-                            <a href="javascript:void(0);">
-                                <span>Leaves</span>
+
+                            <a href="${pageContext.request.contextPath}/admin/departments">
+
+                                Add Department
+
                             </a>
+
                         </li>
 
-                        <li>
-                            <a href="javascript:void(0);">
-                                <span>Attendance (Admin)</span>
-                            </a>
-                        </li>
 
                         <li>
-                            <a href="javascript:void(0);">
-                                <span>Timesheet</span>
+
+                            <a href="${pageContext.request.contextPath}/admin/roles">
+
+                                Add Role
+
                             </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a href="${pageContext.request.contextPath}/admin/designations">
+
+                                Add Designation
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a href="${pageContext.request.contextPath}/admin/employees">
+
+                                Employee List
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                         <a href="${pageContext.request.contextPath}/admin/employees?action=grid">
+                             Employee Grid
+                         </a>
+
+                        </li>
+
+
+                        <li>
+
+                     <a href="${pageContext.request.contextPath}/admin/employees?action=view&id=${employeeDetails.user.userId}"
+                        class="active">
+                         Employee Details
+                     </a>
                         </li>
 
                     </ul>
 
                 </li>
+
+
+                <!-- ATTENDANCE -->
+
+                <li class="submenu">
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-calendar-check"></i>
+
+                        <span>Attendance</span>
+
+                        <span class="menu-arrow"></span>
+
+                    </a>
+
+
+                    <ul>
+
+                        <li>
+
+                            <a href="javascript:void(0);">
+                                Leaves
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="javascript:void(0);">
+                                Attendance (Admin)
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="javascript:void(0);">
+                                Timesheet
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
 
                 <!-- EVENTS -->
+
                 <li class="submenu">
 
                     <a href="javascript:void(0);">
+
                         <i class="ti ti-calendar-event"></i>
+
                         <span>Events</span>
+
                         <span class="menu-arrow"></span>
+
                     </a>
+
 
                     <ul>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Add Event</span>
+                                Add Event
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Add Master Event</span>
+                                Add Master Event
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Event List</span>
+                                Event List
                             </a>
                         </li>
 
                     </ul>
 
                 </li>
+
 
                 <!-- PAYROLL -->
+
                 <li class="submenu">
 
                     <a href="javascript:void(0);">
+
                         <i class="ti ti-cash"></i>
+
                         <span>Payroll</span>
+
                         <span class="menu-arrow"></span>
+
                     </a>
+
 
                     <ul>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Add Employee Salary</span>
+                                Add Employee Salary
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Master Payroll</span>
+                                Master Payroll
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Employee Salary List</span>
+                                Employee Salary List
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Generate Payslips Monthly</span>
+                                Generate Payslips Monthly
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Transaction History</span>
+                                Transaction History
                             </a>
                         </li>
 
                     </ul>
 
                 </li>
+
 
                 <!-- TRAINING -->
+
                 <li class="submenu">
 
                     <a href="javascript:void(0);">
+
                         <i class="ti ti-school"></i>
+
                         <span>Training</span>
+
                         <span class="menu-arrow"></span>
+
                     </a>
+
 
                     <ul>
 
                         <li>
+
                             <a href="javascript:void(0);">
-                                <span>Trainer List</span>
+                                Trainer List
                             </a>
+
                         </li>
 
                         <li class="submenu">
 
                             <a href="javascript:void(0);">
+
                                 <span>Trainers</span>
+
                                 <span class="menu-arrow"></span>
+
                             </a>
+
 
                             <ul>
 
                                 <li>
+
                                     <a href="javascript:void(0);">
-                                        <span>Trainer Type</span>
+                                        Trainer Type
                                     </a>
+
                                 </li>
 
                             </ul>
@@ -402,73 +539,98 @@
                     </ul>
 
                 </li>
+
 
                 <!-- DOCUMENTS -->
+
                 <li class="submenu">
 
                     <a href="javascript:void(0);">
+
                         <i class="ti ti-file-description"></i>
+
                         <span>Documents</span>
+
                         <span class="menu-arrow"></span>
+
                     </a>
+
 
                     <ul>
 
                         <li class="submenu">
 
                             <a href="javascript:void(0);">
+
                                 <span>Upload Documents</span>
+
                                 <span class="menu-arrow"></span>
+
                             </a>
+
 
                             <ul>
 
                                 <li>
+
                                     <a href="javascript:void(0);">
-                                        <span>Upload Document</span>
+                                        Upload Document
                                     </a>
+
                                 </li>
 
                                 <li>
+
                                     <a href="javascript:void(0);">
-                                        <span>Document List</span>
+                                        Document List
                                     </a>
+
                                 </li>
 
                             </ul>
 
                         </li>
 
+
                         <li>
+
                             <a href="javascript:void(0);">
-                                <span>Generate Letter</span>
+                                Generate Letter
                             </a>
+
                         </li>
 
                     </ul>
 
                 </li>
+
 
                 <!-- MASTER DOCUMENT -->
+
                 <li class="submenu">
 
                     <a href="javascript:void(0);">
+
                         <i class="ti ti-files"></i>
+
                         <span>Master Document</span>
+
                         <span class="menu-arrow"></span>
+
                     </a>
+
 
                     <ul>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Master Document</span>
+                                Master Document
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Master Document List</span>
+                                Master Document List
                             </a>
                         </li>
 
@@ -476,93 +638,112 @@
 
                 </li>
 
-                <!-- PERFORMANCE & GOAL -->
+
+                <!-- PERFORMANCE -->
+
                 <li>
 
                     <a href="javascript:void(0);">
+
                         <i class="ti ti-chart-line"></i>
+
                         <span>Performance &amp; Goal</span>
+
                     </a>
 
                 </li>
+
 
                 <!-- PROJECTS -->
+
                 <li class="submenu">
 
                     <a href="javascript:void(0);">
+
                         <i class="ti ti-briefcase"></i>
+
                         <span>Projects</span>
+
                         <span class="menu-arrow"></span>
+
                     </a>
+
 
                     <ul>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Project</span>
+                                Project
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Tasks</span>
+                                Tasks
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Task Board</span>
+                                Task Board
                             </a>
                         </li>
 
                     </ul>
 
                 </li>
+
 
                 <!-- REPORTS -->
+
                 <li class="submenu">
 
                     <a href="javascript:void(0);">
+
                         <i class="ti ti-report-analytics"></i>
+
                         <span>Reports</span>
+
                         <span class="menu-arrow"></span>
+
                     </a>
+
 
                     <ul>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Employee Report</span>
+                                Employee Report
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Attendance Report</span>
+                                Attendance Report
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Leave Report</span>
+                                Leave Report
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Payslip Report</span>
+                                Payslip Report
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Task Report</span>
+                                Task Report
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:void(0);">
-                                <span>Daily Report</span>
+                                Daily Report
                             </a>
                         </li>
 
@@ -570,52 +751,94 @@
 
                 </li>
 
+
                 <!-- PROMOTIONS -->
+
                 <li>
+
                     <a href="javascript:void(0);">
+
                         <i class="ti ti-trending-up"></i>
+
                         <span>Promotions</span>
+
                     </a>
+
                 </li>
+
 
                 <!-- RESIGNATION -->
+
                 <li>
+
                     <a href="javascript:void(0);">
+
                         <i class="ti ti-logout-2"></i>
+
                         <span>Resignation</span>
+
                     </a>
+
                 </li>
+
 
                 <!-- TERMINATION -->
+
                 <li>
+
                     <a href="javascript:void(0);">
+
                         <i class="ti ti-user-x"></i>
+
                         <span>Termination</span>
+
                     </a>
+
                 </li>
 
-                <!-- HELP & SUPPORT -->
+
+                <!-- HELP -->
+
                 <li>
+
                     <a href="javascript:void(0);">
+
                         <i class="ti ti-headset"></i>
+
                         <span>Help &amp; Supports</span>
+
                     </a>
+
                 </li>
+
 
                 <!-- TICKETS -->
+
                 <li>
+
                     <a href="javascript:void(0);">
+
                         <i class="ti ti-ticket"></i>
+
                         <span>Tickets</span>
+
                     </a>
+
                 </li>
 
+
                 <!-- LOGOUT -->
+
                 <li class="mt-2">
+
                     <a href="javascript:void(0);">
+
                         <i class="ti ti-logout"></i>
+
                         <span>Logout</span>
+
                     </a>
+
                 </li>
 
             </ul>
@@ -624,32 +847,47 @@
 
     </div>
 
+
+    <!-- ========================================================= -->
+    <!-- PAGE -->
+    <!-- ========================================================= -->
+
     <div class="page-wrapper">
 
         <div class="content">
 
-            <!-- Breadcrumb -->
+
+            <!-- BREADCRUMB -->
+
             <div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
 
                 <div class="my-auto">
 
-                    <h2 class="mb-1">Employee Details</h2>
+                    <h2 class="mb-1">
+                        Employee Details
+                    </h2>
 
                     <nav>
+
                         <ol class="breadcrumb mb-0">
 
                             <li class="breadcrumb-item">
-                                <a href="${pageContext.request.contextPath}/employee/employees">
+
+                                <a href="${pageContext.request.contextPath}/admin/employees">
                                     Employees
                                 </a>
+
                             </li>
 
                             <li class="breadcrumb-item active"
                                 aria-current="page">
+
                                 Employee Details
+
                             </li>
 
                         </ol>
+
                     </nav>
 
                 </div>
@@ -657,16 +895,28 @@
             </div>
 
 
-            <!-- Employee Details -->
+            <!-- ================================================= -->
+            <!-- EMPLOYEE DETAILS -->
+            <!-- ================================================= -->
+
             <div class="row">
 
+
+                <!-- ================================================= -->
                 <!-- LEFT SIDE -->
+                <!-- ================================================= -->
+
                 <div class="col-xl-4 theiaStickySidebar">
 
-                    <!-- Profile Card -->
+
+                    <!-- PROFILE CARD -->
+
                     <div class="card card-bg-1">
 
                         <div class="card-body p-0">
+
+
+                            <!-- PROFILE IMAGE -->
 
                             <span class="avatar avatar-xl avatar-rounded border border-2 border-white m-auto d-flex mb-2">
 
@@ -693,38 +943,67 @@
                             </span>
 
 
+                            <!-- NAME -->
+
                             <div class="text-center px-3 pb-3 border-bottom">
 
                                 <div class="mb-3">
 
                                     <h5 class="d-flex align-items-center justify-content-center mb-1">
 
-                                        ${employeeDetails.user.firstName}
-                                        ${employeeDetails.user.lastName}
+                                        <c:choose>
+
+                                            <c:when test="${not empty employeeDetails.user}">
+
+                                                ${employeeDetails.user.firstName}
+                                                ${employeeDetails.user.lastName}
+
+                                            </c:when>
+
+                                            <c:otherwise>
+
+                                                Employee
+
+                                            </c:otherwise>
+
+                                        </c:choose>
+
 
                                         <i class="ti ti-discount-check-filled text-success ms-1"></i>
 
                                     </h5>
 
 
-                                    <span class="badge badge-soft-dark fw-medium me-2">
+                                    <!-- DESIGNATION -->
 
-                                        <i class="ti ti-point-filled me-1"></i>
+                                    <c:if test="${not empty employeeDetails.user.designationName}">
+<span class="badge badge-soft-dark fw-medium me-2">
 
-                                        ${employeeDetails.user.designationName}
+    <i class="ti ti-point-filled me-1"></i>
 
-                                    </span>
+    Designation ID: ${employeeDetails.user.designationId}
 
-                                    <span class="badge badge-soft-secondary fw-medium">
-                                        Employee
-                                    </span>
+</span>
+
+                                    </c:if>
+
+
+                                    <!-- ROLE -->
+
+                                   <span class="badge badge-soft-secondary fw-medium">
+
+                                       Role ID: ${employeeDetails.user.roleId}
+
+                                   </span>
 
                                 </div>
 
 
                                 <div>
 
-                                    <!-- User ID -->
+
+                                    <!-- USER ID -->
+
                                     <div class="d-flex align-items-center justify-content-between mb-2">
 
                                         <span class="d-inline-flex align-items-center">
@@ -735,14 +1014,17 @@
 
                                         </span>
 
-                                        <p class="text-dark">
+                                        <p class="text-dark mb-0">
+
                                             ${employeeDetails.user.userId}
+
                                         </p>
 
                                     </div>
 
 
-                                    <!-- Department -->
+                                    <!-- DEPARTMENT -->
+
                                     <div class="d-flex align-items-center justify-content-between mb-2">
 
                                         <span class="d-inline-flex align-items-center">
@@ -753,16 +1035,31 @@
 
                                         </span>
 
-                                        <p class="text-dark">
+                                        <p class="text-dark mb-0">
 
-                                            ${employeeDetails.user.departmentName}
+                                            <c:choose>
+
+                                                <c:when test="${not empty employeeDetails.user.departmentName}">
+
+                                                    ${employeeDetails.user.departmentName}
+
+                                                </c:when>
+
+                                                <c:otherwise>
+
+                                                    Not Available
+
+                                                </c:otherwise>
+
+                                            </c:choose>
 
                                         </p>
 
                                     </div>
 
 
-                                    <!-- Date Of Joining -->
+                                    <!-- DATE OF JOINING -->
+
                                     <div class="d-flex align-items-center justify-content-between mb-2">
 
                                         <span class="d-inline-flex align-items-center">
@@ -773,21 +1070,36 @@
 
                                         </span>
 
-                                        <p class="text-dark">
+                                        <p class="text-dark mb-0">
 
-                                            ${employeeDetails.user.dateOfJoining}
+                                            <c:choose>
+
+                                                <c:when test="${not empty employeeDetails.user.dateOfJoining}">
+
+                                                    ${employeeDetails.user.dateOfJoining}
+
+                                                </c:when>
+
+                                                <c:otherwise>
+
+                                                    Not Available
+
+                                                </c:otherwise>
+
+                                            </c:choose>
 
                                         </p>
 
                                     </div>
 
 
-                                    <!-- Reporting Manager -->
+                                    <!-- REPORTING MANAGER -->
+
                                     <div class="d-flex align-items-center justify-content-between">
 
                                         <span class="d-inline-flex align-items-center">
 
-                                            <i class="ti ti-calendar-check me-2"></i>
+                                            <i class="ti ti-user-check me-2"></i>
 
                                             Reporting Manager
 
@@ -795,49 +1107,57 @@
 
                                         <p class="text-gray-9 mb-0">
 
-                                            ${employeeDetails.user.reportingManager}
+                                            <c:choose>
+
+                                                <c:when test="${not empty employeeDetails.user.reportingManager}">
+
+                                                    ${employeeDetails.user.reportingManager}
+
+                                                </c:when>
+
+                                                <c:otherwise>
+
+                                                    Not Available
+
+                                                </c:otherwise>
+
+                                            </c:choose>
 
                                         </p>
 
                                     </div>
 
 
+                                    <!-- BUTTONS -->
+
                                     <div class="row gx-2 mt-3">
 
                                         <div class="col-6">
 
-                                            <div>
+                                            <a href="#"
+                                               class="btn btn-dark w-100"
+                                               data-bs-toggle="modal"
+                                               data-bs-target="#edit_employee">
 
-                                                <a href="#"
-                                                   class="btn btn-dark w-100"
-                                                   data-bs-toggle="modal"
-                                                   data-bs-target="#edit_employee">
+                                                <i class="ti ti-edit me-1"></i>
 
-                                                    <i class="ti ti-edit me-1"></i>
+                                                Edit Info
 
-                                                    Edit Info
-
-                                                </a>
-
-                                            </div>
+                                            </a>
 
                                         </div>
 
 
                                         <div class="col-6">
 
-                                            <div>
+                                            <a href="#"
+                                               class="btn btn-primary w-100">
 
-                                                <a href="#"
-                                                   class="btn btn-primary w-100">
+                                                <i class="ti ti-message-heart me-1"></i>
 
-                                                    <i class="ti ti-message-heart me-1"></i>
+                                                Message
 
-                                                    Message
-
-                                                </a>
-
-                                            </div>
+                                            </a>
 
                                         </div>
 
@@ -848,12 +1168,17 @@
                             </div>
 
 
+                            <!-- ================================================= -->
                             <!-- BASIC INFORMATION -->
+                            <!-- ================================================= -->
+
                             <div class="p-3 border-bottom">
 
                                 <div class="d-flex align-items-center justify-content-between mb-2">
 
-                                    <h6>Basic information</h6>
+                                    <h6>
+                                        Basic information
+                                    </h6>
 
                                     <a href="javascript:void(0);"
                                        class="btn btn-icon btn-sm"
@@ -867,7 +1192,8 @@
                                 </div>
 
 
-                                <!-- Phone -->
+                                <!-- PHONE -->
+
                                 <div class="d-flex align-items-center justify-content-between mb-2">
 
                                     <span class="d-inline-flex align-items-center">
@@ -878,16 +1204,31 @@
 
                                     </span>
 
-                                    <p class="text-dark">
+                                    <p class="text-dark mb-0">
 
-                                        ${employeeDetails.user.phoneNumber}
+                                        <c:choose>
+
+                                            <c:when test="${not empty employeeDetails.user.phoneNumber}">
+
+                                                ${employeeDetails.user.phoneNumber}
+
+                                            </c:when>
+
+                                            <c:otherwise>
+
+                                                Not Available
+
+                                            </c:otherwise>
+
+                                        </c:choose>
 
                                     </p>
 
                                 </div>
 
 
-                                <!-- Email -->
+                                <!-- EMAIL -->
+
                                 <div class="d-flex align-items-center justify-content-between mb-2">
 
                                     <span class="d-inline-flex align-items-center">
@@ -898,19 +1239,36 @@
 
                                     </span>
 
-                                    <a href="mailto:${employeeDetails.user.email}"
-                                       class="text-info d-inline-flex align-items-center">
+                                    <c:choose>
 
-                                        ${employeeDetails.user.email}
+                                        <c:when test="${not empty employeeDetails.user.email}">
 
-                                        <i class="ti ti-copy text-dark ms-2"></i>
+                                            <a href="mailto:${employeeDetails.user.email}"
+                                               class="text-info d-inline-flex align-items-center">
 
-                                    </a>
+                                                ${employeeDetails.user.email}
+
+                                                <i class="ti ti-copy text-dark ms-2"></i>
+
+                                            </a>
+
+                                        </c:when>
+
+                                        <c:otherwise>
+
+                                            <span class="text-dark">
+                                                Not Available
+                                            </span>
+
+                                        </c:otherwise>
+
+                                    </c:choose>
 
                                 </div>
 
 
-                                <!-- Gender -->
+                                <!-- GENDER -->
+
                                 <div class="d-flex align-items-center justify-content-between mb-2">
 
                                     <span class="d-inline-flex align-items-center">
@@ -921,16 +1279,31 @@
 
                                     </span>
 
-                                    <p class="text-dark text-end">
+                                    <p class="text-dark text-end mb-0">
 
-                                        ${employeeDetails.user.gender}
+                                        <c:choose>
+
+                                            <c:when test="${not empty employeeDetails.user.gender}">
+
+                                                ${employeeDetails.user.gender}
+
+                                            </c:when>
+
+                                            <c:otherwise>
+
+                                                Not Available
+
+                                            </c:otherwise>
+
+                                        </c:choose>
 
                                     </p>
 
                                 </div>
 
 
-                                <!-- Birthday -->
+                                <!-- BIRTHDAY -->
+
                                 <div class="d-flex align-items-center justify-content-between mb-2">
 
                                     <span class="d-inline-flex align-items-center">
@@ -941,16 +1314,31 @@
 
                                     </span>
 
-                                    <p class="text-dark text-end">
+                                    <p class="text-dark text-end mb-0">
 
-                                        ${employeeDetails.user.dateOfBirth}
+                                        <c:choose>
+
+                                            <c:when test="${not empty employeeDetails.user.dateOfBirth}">
+
+                                                ${employeeDetails.user.dateOfBirth}
+
+                                            </c:when>
+
+                                            <c:otherwise>
+
+                                                Not Available
+
+                                            </c:otherwise>
+
+                                        </c:choose>
 
                                     </p>
 
                                 </div>
 
 
-                                <!-- Address -->
+                                <!-- ADDRESS -->
+
                                 <div class="d-flex align-items-center justify-content-between">
 
                                     <span class="d-inline-flex align-items-center">
@@ -961,9 +1349,23 @@
 
                                     </span>
 
-                                    <p class="text-dark text-end">
+                                    <p class="text-dark text-end mb-0">
 
-                                        ${employeeDetails.user.address}
+                                        <c:choose>
+
+                                            <c:when test="${not empty employeeDetails.user.address}">
+
+                                                ${employeeDetails.user.address}
+
+                                            </c:when>
+
+                                            <c:otherwise>
+
+                                                Not Available
+
+                                            </c:otherwise>
+
+                                        </c:choose>
 
                                     </p>
 
@@ -972,13 +1374,17 @@
                             </div>
 
 
+                            <!-- ================================================= -->
                             <!-- PERSONAL INFORMATION -->
-                            <!-- These fields are not available in current User table -->
+                            <!-- ================================================= -->
+
                             <div class="p-3 border-bottom">
 
                                 <div class="d-flex align-items-center justify-content-between mb-2">
 
-                                    <h6>Personal Information</h6>
+                                    <h6>
+                                        Personal Information
+                                    </h6>
 
                                     <a href="javascript:void(0);"
                                        class="btn btn-icon btn-sm"
@@ -1002,7 +1408,9 @@
 
                                     </span>
 
-                                    <p class="text-dark">-</p>
+                                    <p class="text-dark mb-0">
+                                        -
+                                    </p>
 
                                 </div>
 
@@ -1017,7 +1425,9 @@
 
                                     </span>
 
-                                    <p class="text-dark text-end">-</p>
+                                    <p class="text-dark text-end mb-0">
+                                        -
+                                    </p>
 
                                 </div>
 
@@ -1032,7 +1442,9 @@
 
                                     </span>
 
-                                    <p class="text-dark text-end">-</p>
+                                    <p class="text-dark text-end mb-0">
+                                        -
+                                    </p>
 
                                 </div>
 
@@ -1047,7 +1459,9 @@
 
                                     </span>
 
-                                    <p class="text-dark text-end">-</p>
+                                    <p class="text-dark text-end mb-0">
+                                        -
+                                    </p>
 
                                 </div>
 
@@ -1062,7 +1476,9 @@
 
                                     </span>
 
-                                    <p class="text-dark text-end">-</p>
+                                    <p class="text-dark text-end mb-0">
+                                        -
+                                    </p>
 
                                 </div>
 
@@ -1077,7 +1493,9 @@
 
                                     </span>
 
-                                    <p class="text-dark text-end">-</p>
+                                    <p class="text-dark text-end mb-0">
+                                        -
+                                    </p>
 
                                 </div>
 
@@ -1092,7 +1510,9 @@
 
                                     </span>
 
-                                    <p class="text-dark text-end">-</p>
+                                    <p class="text-dark text-end mb-0">
+                                        -
+                                    </p>
 
                                 </div>
 
@@ -1103,10 +1523,15 @@
                     </div>
 
 
+                    <!-- ================================================= -->
                     <!-- EMERGENCY CONTACT -->
-                    <div class="d-flex align-items-center justify-content-between mb-2">
+                    <!-- ================================================= -->
 
-                        <h6>Emergency Contact Number</h6>
+                    <div class="d-flex align-items-center justify-content-between mb-2 mt-3">
+
+                        <h6>
+                            Emergency Contact Number
+                        </h6>
 
                         <a href="javascript:void(0);"
                            class="btn btn-icon btn-sm"
@@ -1123,6 +1548,7 @@
                     <div class="card">
 
                         <div class="card-body p-0">
+
 
                             <c:choose>
 
@@ -1155,7 +1581,7 @@
                                                     </span>
 
 
-                                                    <h6 class="d-flex align-items-center fw-medium mt-1">
+                                                    <h6 class="d-flex align-items-center fw-medium mt-1 mb-0">
 
                                                         ${family.name}
 
@@ -1172,7 +1598,7 @@
                                                 </div>
 
 
-                                                <p class="text-dark">
+                                                <p class="text-dark mb-0">
 
                                                     ${family.phone}
 
@@ -1185,6 +1611,7 @@
                                     </c:forEach>
 
                                 </c:when>
+
 
                                 <c:otherwise>
 
@@ -1205,48 +1632,281 @@
                 </div>
 
 
+                <!-- ================================================= -->
                 <!-- RIGHT SIDE -->
+                <!-- ================================================= -->
+
                 <div class="col-xl-8">
 
-                    <div>
 
-                        <div class="tab-content custom-accordion-items">
+                    <div class="tab-content custom-accordion-items">
 
-                            <div class="tab-pane active show"
-                                 id="bottom-justified-tab1"
-                                 role="tabpanel">
-
-                                <div class="accordion accordions-items-seperate"
-                                     id="accordionExample">
+                        <div class="tab-pane active show"
+                             id="bottom-justified-tab1"
+                             role="tabpanel">
 
 
-                                    <!-- ABOUT EMPLOYEE -->
-                                    <div class="accordion-item">
+                            <div class="accordion accordions-items-seperate"
+                                 id="accordionExample">
 
-                                        <div class="accordion-header"
-                                             id="headingOne">
 
-                                            <div class="accordion-button">
+                                <!-- ================================================= -->
+                                <!-- ABOUT EMPLOYEE -->
+                                <!-- ================================================= -->
 
-                                                <div class="d-flex align-items-center flex-fill">
+                                <div class="accordion-item">
 
-                                                    <h5>About Employee</h5>
+                                    <div class="accordion-header"
+                                         id="headingOne">
+
+                                        <div class="accordion-button">
+
+                                            <div class="d-flex align-items-center flex-fill">
+
+                                                <h5>
+                                                    About Employee
+                                                </h5>
+
+
+                                                <a href="#"
+                                                   class="btn btn-sm btn-icon ms-auto"
+                                                   data-bs-toggle="modal"
+                                                   data-bs-target="#edit_employee">
+
+                                                    <i class="ti ti-edit"></i>
+
+                                                </a>
+
+
+                                                <a href="#"
+                                                   class="d-flex align-items-center collapsed collapse-arrow"
+                                                   data-bs-toggle="collapse"
+                                                   data-bs-target="#primaryBorderOne"
+                                                   aria-expanded="true"
+                                                   aria-controls="primaryBorderOne">
+
+                                                    <i class="ti ti-chevron-down fs-18"></i>
+
+                                                </a>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div id="primaryBorderOne"
+                                         class="accordion-collapse collapse show border-top"
+                                         aria-labelledby="headingOne"
+                                         data-bs-parent="#accordionExample">
+
+                                        <div class="accordion-body mt-2">
+
+                                            <c:choose>
+
+                                                <c:when test="${not empty employeeDetails.user.aboutEmployee}">
+
+                                                    ${employeeDetails.user.aboutEmployee}
+
+                                                </c:when>
+
+                                                <c:otherwise>
+
+                                                    <span class="text-muted">
+                                                        No information available.
+                                                    </span>
+
+                                                </c:otherwise>
+
+                                            </c:choose>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ================================================= -->
+                                <!-- BANK INFORMATION -->
+                                <!-- ================================================= -->
+
+                                <div class="accordion-item">
+
+                                    <div class="accordion-header"
+                                         id="headingTwo">
+
+                                        <div class="accordion-button">
+
+                                            <div class="d-flex align-items-center flex-fill">
+
+                                                <h5>
+                                                    Bank Information
+                                                </h5>
+
+
+                                                <a href="#"
+                                                   class="btn btn-sm btn-icon ms-auto"
+                                                   data-bs-toggle="modal"
+                                                   data-bs-target="#edit_bank">
+
+                                                    <i class="ti ti-edit"></i>
+
+                                                </a>
+
+
+                                                <a href="#"
+                                                   class="d-flex align-items-center collapsed collapse-arrow"
+                                                   data-bs-toggle="collapse"
+                                                   data-bs-target="#primaryBorderTwo"
+                                                   aria-expanded="false"
+                                                   aria-controls="primaryBorderTwo">
+
+                                                    <i class="ti ti-chevron-down fs-18"></i>
+
+                                                </a>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div id="primaryBorderTwo"
+                                         class="accordion-collapse collapse border-top"
+                                         aria-labelledby="headingTwo"
+                                         data-bs-parent="#accordionExample">
+
+                                        <div class="accordion-body">
+
+
+                                            <c:choose>
+
+                                                <c:when test="${not empty employeeDetails.bankDetails}">
+
+                                                    <div class="row">
+
+                                                        <div class="col-md-3">
+
+                                                            <span class="d-inline-flex align-items-center">
+                                                                Bank Name
+                                                            </span>
+
+                                                            <h6 class="d-flex align-items-center fw-medium mt-1">
+
+                                                                ${employeeDetails.bankDetails.bankName}
+
+                                                            </h6>
+
+                                                        </div>
+
+
+                                                        <div class="col-md-3">
+
+                                                            <span class="d-inline-flex align-items-center">
+                                                                Bank account no
+                                                            </span>
+
+                                                            <h6 class="d-flex align-items-center fw-medium mt-1">
+
+                                                                ${employeeDetails.bankDetails.accountNumber}
+
+                                                            </h6>
+
+                                                        </div>
+
+
+                                                        <div class="col-md-3">
+
+                                                            <span class="d-inline-flex align-items-center">
+                                                                IFSC Code
+                                                            </span>
+
+                                                            <h6 class="d-flex align-items-center fw-medium mt-1">
+
+                                                                ${employeeDetails.bankDetails.IFSCCode}
+
+                                                            </h6>
+
+                                                        </div>
+
+
+                                                        <div class="col-md-3">
+
+                                                            <span class="d-inline-flex align-items-center">
+                                                                Branch
+                                                            </span>
+
+                                                            <h6 class="d-flex align-items-center fw-medium mt-1">
+
+                                                                ${employeeDetails.bankDetails.branchName}
+
+                                                            </h6>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </c:when>
+
+
+                                                <c:otherwise>
+
+                                                    <p class="mb-0 text-muted">
+
+                                                        No bank information available.
+
+                                                    </p>
+
+                                                </c:otherwise>
+
+                                            </c:choose>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ================================================= -->
+                                <!-- FAMILY INFORMATION -->
+                                <!-- ================================================= -->
+
+                                <div class="accordion-item">
+
+                                    <div class="accordion-header"
+                                         id="headingThree">
+
+                                        <div class="accordion-button">
+
+                                            <div class="d-flex align-items-center justify-content-between flex-fill">
+
+                                                <h5>
+                                                    Family Information
+                                                </h5>
+
+
+                                                <div class="d-flex">
 
                                                     <a href="#"
-                                                       class="btn btn-sm btn-icon ms-auto"
+                                                       class="btn btn-icon btn-sm"
                                                        data-bs-toggle="modal"
-                                                       data-bs-target="#edit_employee">
+                                                       data-bs-target="#edit_familyinformation">
 
                                                         <i class="ti ti-edit"></i>
 
                                                     </a>
 
+
                                                     <a href="#"
                                                        class="d-flex align-items-center collapsed collapse-arrow"
                                                        data-bs-toggle="collapse"
-                                                       data-bs-target="#primaryBorderOne"
+                                                       data-bs-target="#primaryBorderThree"
                                                        aria-expanded="false"
-                                                       aria-controls="primaryBorderOne">
+                                                       aria-controls="primaryBorderThree">
 
                                                         <i class="ti ti-chevron-down fs-18"></i>
 
@@ -1258,84 +1918,35 @@
 
                                         </div>
 
-
-                                        <div id="primaryBorderOne"
-                                             class="accordion-collapse collapse show border-top"
-                                             aria-labelledby="headingOne"
-                                             data-bs-parent="#accordionExample">
-
-                                            <div class="accordion-body mt-2">
-
-                                                ${employeeDetails.user.aboutEmployee}
-
-                                            </div>
-
-                                        </div>
-
                                     </div>
 
 
-                                    <!-- BANK INFORMATION -->
-                                    <div class="accordion-item">
+                                    <div id="primaryBorderThree"
+                                         class="accordion-collapse collapse border-top"
+                                         aria-labelledby="headingThree"
+                                         data-bs-parent="#accordionExample">
 
-                                        <div class="accordion-header"
-                                             id="headingTwo">
-
-                                            <div class="accordion-button">
-
-                                                <div class="d-flex align-items-center flex-fill">
-
-                                                    <h5>Bank Information</h5>
-
-                                                    <a href="#"
-                                                       class="btn btn-sm btn-icon ms-auto"
-                                                       data-bs-toggle="modal"
-                                                       data-bs-target="#edit_bank">
-
-                                                        <i class="ti ti-edit"></i>
-
-                                                    </a>
-
-                                                    <a href="#"
-                                                       class="d-flex align-items-center collapsed collapse-arrow"
-                                                       data-bs-toggle="collapse"
-                                                       data-bs-target="#primaryBorderTwo"
-                                                       aria-expanded="false"
-                                                       aria-controls="primaryBorderTwo">
-
-                                                        <i class="ti ti-chevron-down fs-18"></i>
-
-                                                    </a>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
+                                        <div class="accordion-body">
 
 
-                                        <div id="primaryBorderTwo"
-                                             class="accordion-collapse collapse border-top"
-                                             aria-labelledby="headingTwo"
-                                             data-bs-parent="#accordionExample">
+                                            <c:choose>
 
-                                            <div class="accordion-body">
+                                                <c:when test="${not empty employeeDetails.familyDetails}">
 
-                                                <c:choose>
+                                                    <c:forEach var="family"
+                                                               items="${employeeDetails.familyDetails}">
 
-                                                    <c:when test="${not empty employeeDetails.bankDetails}">
-
-                                                        <div class="row">
+                                                        <div class="row mb-3">
 
                                                             <div class="col-md-3">
 
                                                                 <span class="d-inline-flex align-items-center">
-                                                                    Bank Name
+                                                                    Name
                                                                 </span>
 
                                                                 <h6 class="d-flex align-items-center fw-medium mt-1">
 
-                                                                    ${employeeDetails.bankDetails.bankName}
+                                                                    ${family.name}
 
                                                                 </h6>
 
@@ -1345,12 +1956,12 @@
                                                             <div class="col-md-3">
 
                                                                 <span class="d-inline-flex align-items-center">
-                                                                    Bank account no
+                                                                    Relationship
                                                                 </span>
 
                                                                 <h6 class="d-flex align-items-center fw-medium mt-1">
 
-                                                                    ${employeeDetails.bankDetails.accountNumber}
+                                                                    ${family.relation}
 
                                                                 </h6>
 
@@ -1360,12 +1971,12 @@
                                                             <div class="col-md-3">
 
                                                                 <span class="d-inline-flex align-items-center">
-                                                                    IFSC Code
+                                                                    Date of birth
                                                                 </span>
 
                                                                 <h6 class="d-flex align-items-center fw-medium mt-1">
 
-                                                                    ${employeeDetails.bankDetails.IFSCCode}
+                                                                    ${family.dateOfBirth}
 
                                                                 </h6>
 
@@ -1375,12 +1986,12 @@
                                                             <div class="col-md-3">
 
                                                                 <span class="d-inline-flex align-items-center">
-                                                                    Branch
+                                                                    Phone
                                                                 </span>
 
                                                                 <h6 class="d-flex align-items-center fw-medium mt-1">
 
-                                                                    ${employeeDetails.bankDetails.branchName}
+                                                                    ${family.phone}
 
                                                                 </h6>
 
@@ -1388,210 +1999,81 @@
 
                                                         </div>
 
-                                                    </c:when>
+                                                        <hr>
 
-                                                    <c:otherwise>
+                                                    </c:forEach>
 
-                                                        <p class="mb-0">
-                                                            No bank information available.
-                                                        </p>
+                                                </c:when>
 
-                                                    </c:otherwise>
 
-                                                </c:choose>
+                                                <c:otherwise>
 
-                                            </div>
+                                                    <p class="mb-0 text-muted">
+
+                                                        No family information available.
+
+                                                    </p>
+
+                                                </c:otherwise>
+
+                                            </c:choose>
 
                                         </div>
 
                                     </div>
 
+                                </div>
 
-                                    <!-- FAMILY INFORMATION -->
-                                    <div class="accordion-item">
 
-                                        <div class="accordion-header"
-                                             id="headingThree">
+                                <!-- ================================================= -->
+                                <!-- EDUCATION + EXPERIENCE -->
+                                <!-- ================================================= -->
 
-                                            <div class="accordion-button">
+                                <div class="row">
 
-                                                <div class="d-flex align-items-center justify-content-between flex-fill">
 
-                                                    <h5>Family Information</h5>
+                                    <!-- EDUCATION -->
 
-                                                    <div class="d-flex">
+                                    <div class="col-md-6">
 
-                                                        <a href="#"
-                                                           class="btn btn-icon btn-sm"
-                                                           data-bs-toggle="modal"
-                                                           data-bs-target="#edit_familyinformation">
+                                        <div class="accordion-item">
 
-                                                            <i class="ti ti-edit"></i>
+                                            <div class="row">
 
-                                                        </a>
+                                                <div class="accordion-header"
+                                                     id="headingFour">
 
-                                                        <a href="#"
-                                                           class="d-flex align-items-center collapsed collapse-arrow"
-                                                           data-bs-toggle="collapse"
-                                                           data-bs-target="#primaryBorderThree"
-                                                           aria-expanded="false"
-                                                           aria-controls="primaryBorderThree">
+                                                    <div class="accordion-button">
 
-                                                            <i class="ti ti-chevron-down fs-18"></i>
+                                                        <div class="d-flex align-items-center justify-content-between flex-fill">
 
-                                                        </a>
+                                                            <h5>
+                                                                Education Details
+                                                            </h5>
 
-                                                    </div>
 
-                                                </div>
+                                                            <div class="d-flex">
 
-                                            </div>
+                                                                <a href="#"
+                                                                   class="btn btn-icon btn-sm"
+                                                                   data-bs-toggle="modal"
+                                                                   data-bs-target="#edit_education">
 
-                                        </div>
+                                                                    <i class="ti ti-edit"></i>
 
+                                                                </a>
 
-                                        <div id="primaryBorderThree"
-                                             class="accordion-collapse collapse border-top"
-                                             aria-labelledby="headingThree"
-                                             data-bs-parent="#accordionExample">
 
-                                            <div class="accordion-body">
+                                                                <a href="#"
+                                                                   class="d-flex align-items-center collapsed collapse-arrow"
+                                                                   data-bs-toggle="collapse"
+                                                                   data-bs-target="#primaryBorderFour"
+                                                                   aria-expanded="false"
+                                                                   aria-controls="primaryBorderFour">
 
-                                                <c:choose>
+                                                                    <i class="ti ti-chevron-down fs-18"></i>
 
-                                                    <c:when test="${not empty employeeDetails.familyDetails}">
-
-                                                        <c:forEach var="family"
-                                                                   items="${employeeDetails.familyDetails}">
-
-                                                            <div class="row mb-3">
-
-                                                                <div class="col-md-3">
-
-                                                                    <span class="d-inline-flex align-items-center">
-                                                                        Name
-                                                                    </span>
-
-                                                                    <h6 class="d-flex align-items-center fw-medium mt-1">
-
-                                                                        ${family.name}
-
-                                                                    </h6>
-
-                                                                </div>
-
-
-                                                                <div class="col-md-3">
-
-                                                                    <span class="d-inline-flex align-items-center">
-                                                                        Relationship
-                                                                    </span>
-
-                                                                    <h6 class="d-flex align-items-center fw-medium mt-1">
-
-                                                                        ${family.relation}
-
-                                                                    </h6>
-
-                                                                </div>
-
-
-                                                                <div class="col-md-3">
-
-                                                                    <span class="d-inline-flex align-items-center">
-                                                                        Date of birth
-                                                                    </span>
-
-                                                                    <h6 class="d-flex align-items-center fw-medium mt-1">
-
-                                                                        ${family.dateOfBirth}
-
-                                                                    </h6>
-
-                                                                </div>
-
-
-                                                                <div class="col-md-3">
-
-                                                                    <span class="d-inline-flex align-items-center">
-                                                                        Phone
-                                                                    </span>
-
-                                                                    <h6 class="d-flex align-items-center fw-medium mt-1">
-
-                                                                        ${family.phone}
-
-                                                                    </h6>
-
-                                                                </div>
-
-                                                            </div>
-
-                                                            <hr>
-
-                                                        </c:forEach>
-
-                                                    </c:when>
-
-                                                    <c:otherwise>
-
-                                                        <p class="mb-0">
-                                                            No family information available.
-                                                        </p>
-
-                                                    </c:otherwise>
-
-                                                </c:choose>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <!-- EDUCATION + EXPERIENCE -->
-                                    <div class="row">
-
-                                        <!-- EDUCATION -->
-                                        <div class="col-md-6">
-
-                                            <div class="accordion-item">
-
-                                                <div class="row">
-
-                                                    <div class="accordion-header"
-                                                         id="headingFour">
-
-                                                        <div class="accordion-button">
-
-                                                            <div class="d-flex align-items-center justify-content-between flex-fill">
-
-                                                                <h5>Education Details</h5>
-
-                                                                <div class="d-flex">
-
-                                                                    <a href="#"
-                                                                       class="btn btn-icon btn-sm"
-                                                                       data-bs-toggle="modal"
-                                                                       data-bs-target="#edit_education">
-
-                                                                        <i class="ti ti-edit"></i>
-
-                                                                    </a>
-
-                                                                    <a href="#"
-                                                                       class="d-flex align-items-center collapsed collapse-arrow"
-                                                                       data-bs-toggle="collapse"
-                                                                       data-bs-target="#primaryBorderFour"
-                                                                       aria-expanded="false"
-                                                                       aria-controls="primaryBorderFour">
-
-                                                                        <i class="ti ti-chevron-down fs-18"></i>
-
-                                                                    </a>
-
-                                                                </div>
+                                                                </a>
 
                                                             </div>
 
@@ -1599,137 +2081,75 @@
 
                                                     </div>
 
+                                                </div>
 
-                                                    <div id="primaryBorderFour"
-                                                         class="accordion-collapse collapse border-top"
-                                                         aria-labelledby="headingFour"
-                                                         data-bs-parent="#accordionExample">
 
-                                                        <div class="accordion-body">
+                                                <div id="primaryBorderFour"
+                                                     class="accordion-collapse collapse border-top"
+                                                     aria-labelledby="headingFour"
+                                                     data-bs-parent="#accordionExample">
 
-                                                            <c:choose>
+                                                    <div class="accordion-body">
 
-                                                                <c:when test="${not empty employeeDetails.educationDetails}">
 
-                                                                    <c:forEach var="education"
-                                                                               items="${employeeDetails.educationDetails}">
+                                                        <c:choose>
 
-                                                                        <div class="mb-3">
+                                                            <c:when test="${not empty employeeDetails.educationDetails}">
 
-                                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <c:forEach var="education"
+                                                                           items="${employeeDetails.educationDetails}">
 
-                                                                                <div>
+                                                                    <div class="mb-3">
 
-                                                                                    <span class="d-inline-flex align-items-center fw-normal">
+                                                                        <div class="d-flex align-items-center justify-content-between">
 
-                                                                                        ${education.universityName}
+                                                                            <div>
 
-                                                                                    </span>
+                                                                                <span class="d-inline-flex align-items-center fw-normal">
 
-                                                                                    <h6 class="d-flex align-items-center mt-1">
+                                                                                    ${education.universityName}
 
-                                                                                        ${education.educationType}
+                                                                                </span>
 
-                                                                                    </h6>
+                                                                                <h6 class="d-flex align-items-center mt-1">
 
-                                                                                </div>
+                                                                                    ${education.educationType}
 
-                                                                                <p class="text-dark">
-
-                                                                                    ${education.startdate}
-                                                                                    -
-                                                                                    ${education.enddate}
-
-                                                                                </p>
+                                                                                </h6>
 
                                                                             </div>
 
+
+                                                                            <p class="text-dark">
+
+                                                                                ${education.startdate}
+
+                                                                                -
+
+                                                                                ${education.enddate}
+
+                                                                            </p>
+
                                                                         </div>
 
-                                                                    </c:forEach>
+                                                                    </div>
 
-                                                                </c:when>
+                                                                </c:forEach>
 
-                                                                <c:otherwise>
-
-                                                                    <p class="mb-0">
-                                                                        No education details available.
-                                                                    </p>
-
-                                                                </c:otherwise>
-
-                                                            </c:choose>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
+                                                            </c:when>
 
 
-                                        <!-- EXPERIENCE -->
-                                        <div class="col-md-6">
+                                                            <c:otherwise>
 
-                                            <div class="accordion-item">
+                                                                <p class="mb-0 text-muted">
 
-                                                <div class="row">
+                                                                    No education details available.
 
-                                                    <div class="accordion-header"
-                                                         id="headingFive">
+                                                                </p>
 
-                                                        <div class="accordion-button collapsed">
+                                                            </c:otherwise>
 
-                                                            <div class="d-flex align-items-center justify-content-between flex-fill">
-
-                                                                <h5>Experience</h5>
-
-                                                                <div class="d-flex">
-
-                                                                    <a href="#"
-                                                                       class="btn btn-icon btn-sm"
-                                                                       data-bs-toggle="modal"
-                                                                       data-bs-target="#edit_experience">
-
-                                                                        <i class="ti ti-edit"></i>
-
-                                                                    </a>
-
-                                                                    <a href="#"
-                                                                       class="d-flex align-items-center collapsed collapse-arrow"
-                                                                       data-bs-toggle="collapse"
-                                                                       data-bs-target="#primaryBorderFive"
-                                                                       aria-expanded="false"
-                                                                       aria-controls="primaryBorderFive">
-
-                                                                        <i class="ti ti-chevron-down fs-18"></i>
-
-                                                                    </a>
-
-                                                                </div>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-
-                                                    <div id="primaryBorderFive"
-                                                         class="accordion-collapse collapse border-top"
-                                                         aria-labelledby="headingFive"
-                                                         data-bs-parent="#accordionExample">
-
-                                                        <div class="accordion-body">
-
-                                                            <p class="text-muted mb-0">
-                                                                Experience details are not available in the current database.
-                                                            </p>
-
-                                                        </div>
+                                                        </c:choose>
 
                                                     </div>
 
@@ -1742,84 +2162,48 @@
                                     </div>
 
 
-                                    <!-- PROJECTS / ASSETS -->
-                                    <div class="card">
+                                    <!-- EXPERIENCE -->
 
-                                        <div class="card-body">
+                                    <div class="col-md-6">
 
-                                            <div class="contact-grids-tab p-0 mb-3">
+                                        <div class="accordion-item">
 
-                                                <ul class="nav nav-underline"
-                                                    id="myTab"
-                                                    role="tablist">
+                                            <div class="row">
 
-                                                    <li class="nav-item"
-                                                        role="presentation">
+                                                <div class="accordion-header"
+                                                     id="headingFive">
 
-                                                        <button class="nav-link active"
-                                                                id="info-tab2"
-                                                                data-bs-toggle="tab"
-                                                                data-bs-target="#basic-info2"
-                                                                type="button"
-                                                                role="tab"
-                                                                aria-selected="true">
+                                                    <div class="accordion-button collapsed">
 
-                                                            Projects
+                                                        <div class="d-flex align-items-center justify-content-between flex-fill">
 
-                                                        </button>
-
-                                                    </li>
+                                                            <h5>
+                                                                Experience
+                                                            </h5>
 
 
-                                                    <li class="nav-item"
-                                                        role="presentation">
+                                                            <div class="d-flex">
 
-                                                        <button class="nav-link"
-                                                                id="address-tab2"
-                                                                data-bs-toggle="tab"
-                                                                data-bs-target="#address2"
-                                                                type="button"
-                                                                role="tab"
-                                                                aria-selected="false">
+                                                                <a href="#"
+                                                                   class="btn btn-icon btn-sm"
+                                                                   data-bs-toggle="modal"
+                                                                   data-bs-target="#edit_experience">
 
-                                                            Assets
+                                                                    <i class="ti ti-edit"></i>
 
-                                                        </button>
-
-                                                    </li>
-
-                                                </ul>
-
-                                            </div>
+                                                                </a>
 
 
-                                            <div class="tab-content"
-                                                 id="myTabContent3">
+                                                                <a href="#"
+                                                                   class="d-flex align-items-center collapsed collapse-arrow"
+                                                                   data-bs-toggle="collapse"
+                                                                   data-bs-target="#primaryBorderFive"
+                                                                   aria-expanded="false"
+                                                                   aria-controls="primaryBorderFive">
 
+                                                                    <i class="ti ti-chevron-down fs-18"></i>
 
-                                                <!-- PROJECTS -->
-                                                <div class="tab-pane fade show active"
-                                                     id="basic-info2"
-                                                     role="tabpanel"
-                                                     aria-labelledby="info-tab2"
-                                                     tabindex="0">
-
-                                                    <div class="row">
-
-                                                        <div class="col-md-12">
-
-                                                            <div class="card mb-0">
-
-                                                                <div class="card-body">
-
-                                                                    <p class="text-muted mb-0">
-
-                                                                        Project details are not available
-                                                                        in the current database.
-
-                                                                    </p>
-
-                                                                </div>
+                                                                </a>
 
                                                             </div>
 
@@ -1830,29 +2214,152 @@
                                                 </div>
 
 
-                                                <!-- ASSETS -->
-                                                <div class="tab-pane fade"
-                                                     id="address2"
-                                                     role="tabpanel"
-                                                     aria-labelledby="address-tab2"
-                                                     tabindex="0">
+                                                <div id="primaryBorderFive"
+                                                     class="accordion-collapse collapse border-top"
+                                                     aria-labelledby="headingFive"
+                                                     data-bs-parent="#accordionExample">
 
-                                                    <div class="row">
+                                                    <div class="accordion-body">
 
-                                                        <div class="col-md-12">
+                                                        <p class="text-muted mb-0">
 
-                                                            <div class="card mb-0">
+                                                            Experience details are not available in the current database.
 
-                                                                <div class="card-body">
+                                                        </p>
 
-                                                                    <p class="text-muted mb-0">
+                                                    </div>
 
-                                                                        Asset details are not available
-                                                                        in the current database.
+                                                </div>
 
-                                                                    </p>
+                                            </div>
 
-                                                                </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ================================================= -->
+                                <!-- PROJECTS / ASSETS -->
+                                <!-- ================================================= -->
+
+                                <div class="card">
+
+                                    <div class="card-body">
+
+
+                                        <div class="contact-grids-tab p-0 mb-3">
+
+                                            <ul class="nav nav-underline"
+                                                id="myTab"
+                                                role="tablist">
+
+
+                                                <!-- PROJECTS TAB -->
+
+                                                <li class="nav-item"
+                                                    role="presentation">
+
+                                                    <button class="nav-link active"
+                                                            id="info-tab2"
+                                                            data-bs-toggle="tab"
+                                                            data-bs-target="#basic-info2"
+                                                            type="button"
+                                                            role="tab"
+                                                            aria-selected="true">
+
+                                                        Projects
+
+                                                    </button>
+
+                                                </li>
+
+
+                                                <!-- ASSETS TAB -->
+
+                                                <li class="nav-item"
+                                                    role="presentation">
+
+                                                    <button class="nav-link"
+                                                            id="address-tab2"
+                                                            data-bs-toggle="tab"
+                                                            data-bs-target="#address2"
+                                                            type="button"
+                                                            role="tab"
+                                                            aria-selected="false">
+
+                                                        Assets
+
+                                                    </button>
+
+                                                </li>
+
+                                            </ul>
+
+                                        </div>
+
+
+                                        <div class="tab-content"
+                                             id="myTabContent3">
+
+
+                                            <!-- PROJECTS -->
+
+                                            <div class="tab-pane fade show active"
+                                                 id="basic-info2"
+                                                 role="tabpanel"
+                                                 aria-labelledby="info-tab2"
+                                                 tabindex="0">
+
+                                                <div class="row">
+
+                                                    <div class="col-md-12">
+
+                                                        <div class="card mb-0">
+
+                                                            <div class="card-body">
+
+                                                                <p class="text-muted mb-0">
+
+                                                                    Project details are not available
+                                                                    in the current database.
+
+                                                                </p>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- ASSETS -->
+
+                                            <div class="tab-pane fade"
+                                                 id="address2"
+                                                 role="tabpanel"
+                                                 aria-labelledby="address-tab2"
+                                                 tabindex="0">
+
+                                                <div class="row">
+
+                                                    <div class="col-md-12">
+
+                                                        <div class="card mb-0">
+
+                                                            <div class="card-body">
+
+                                                                <p class="text-muted mb-0">
+
+                                                                    Asset details are not available
+                                                                    in the current database.
+
+                                                                </p>
 
                                                             </div>
 
@@ -1886,6 +2393,10 @@
 
 </div>
 
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================================= -->
 
 <script src="${pageContext.request.contextPath}/assets/js/jquery-3.7.1.min.js"></script>
 
