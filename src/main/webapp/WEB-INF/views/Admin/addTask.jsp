@@ -1,3 +1,4 @@
+```
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
@@ -12,7 +13,7 @@
     <meta name="author" content="HRMS Team">
     <meta name="robots" content="noindex, nofollow">
 
-    <title>HRMS Admin Dashboard</title>
+    <title>Add New Task - HRMS</title>
 
     <link rel="shortcut icon"
           type="image/x-icon"
@@ -243,7 +244,7 @@
                 </li>
 
                 <!-- DASHBOARD -->
-                <li class="active">
+                <li>
                     <a href="${pageContext.request.contextPath}/admin/dashboard">
                         <i class="ti ti-smart-home"></i>
                         <span>Dashboard</span>
@@ -635,14 +636,12 @@
 
         <div class="content">
 
-            <!-- BREADCRUMB -->
+            <!-- PAGE BREADCRUMB -->
             <div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
 
                 <div class="my-auto mb-2">
 
-                    <h2 class="mb-1">
-                       Admin Dashboard
-                    </h2>
+                    <h2 class="mb-1">Add New Task</h2>
 
                     <nav>
                         <ol class="breadcrumb mb-0">
@@ -653,9 +652,14 @@
                                 </a>
                             </li>
 
-                            <li class="breadcrumb-item active"
-                                aria-current="page">
-                                Dashboard
+                            <li class="breadcrumb-item">
+                                <a href="${pageContext.request.contextPath}/AdminDashboardServlet?action=taskDetails">
+                                    Tasks
+                                </a>
+                            </li>
+
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Add New Task
                             </li>
 
                         </ol>
@@ -663,304 +667,248 @@
 
                 </div>
 
-                <div class="d-flex my-xl-auto right-content align-items-center flex-wrap">
-
-                    <div class="input-icon mb-2 position-relative">
-
-                        <span class="input-icon-addon">
-                            <i class="ti ti-calendar text-gray-9"></i>
-                        </span>
-
-                        <input type="text"
-                               class="form-control date-range bookingrange"
-                               placeholder="dd/mm/yyyy - dd/mm/yyyy">
-
-                    </div>
-
-                    <div class="ms-2 head-icons">
-
-                        <a href="javascript:void(0);"
-                           data-bs-toggle="tooltip"
-                           data-bs-placement="top"
-                           title="Collapse"
-                           id="collapse-header">
-
-                            <i class="ti ti-chevrons-up"></i>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
             </div>
 
-            <!-- WELCOME -->
-            <div class="welcome-wrap mb-4">
+            <!-- SUCCESS MESSAGE -->
+            <c:if test="${not empty successMessage}">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    ${successMessage}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+            </c:if>
 
-                <div class="d-flex align-items-center justify-content-between flex-wrap">
+            <!-- ERROR MESSAGE -->
+            <c:if test="${not empty errorMessage}">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ${errorMessage}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+            </c:if>
 
-                    <div class="mb-3">
+            <!-- ADD TASK FORM -->
+            <div class="card">
 
-                        <h2 class="mb-1 text-white">
-                            Welcome to HRMS
-                        </h2>
-
-                        <p class="text-light mb-0">
-                            Human Resource Management System - Admin Panel
-                        </p>
-
-                    </div>
-
+                <div class="card-header">
+                    <h5 class="mb-0">Add New Task</h5>
                 </div>
 
-                <div class="welcome-bg">
+                <div class="card-body">
 
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-02.svg"
-                         alt=""
-                         class="welcome-bg-01">
+                    <form action="${pageContext.request.contextPath}/AdminDashboardServlet"
+                          method="post"
+                          enctype="multipart/form-data">
 
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-03.svg"
-                         alt=""
-                         class="welcome-bg-02">
+                        <input type="hidden" name="action" value="addTask">
 
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-01.svg"
-                         alt=""
-                         class="welcome-bg-03">
+                        <!-- TITLE -->
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Title <span class="text-danger">*</span>
+                            </label>
 
-                </div>
+                            <input type="text"
+                                   class="form-control"
+                                   name="title"
+                                   id="title"
+                                   value="${title}"
+                                   required>
+                        </div>
 
-            </div>
+                        <div class="row">
 
-            <!-- SUMMARY CARDS -->
-            <div class="row">
+                            <!-- DUE DATE -->
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Due Date <span class="text-danger">*</span>
+                                    </label>
 
-                <div class="col-xl-3 col-sm-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
+                                    <input type="date"
+                                           class="form-control"
+                                           name="deadline"
+                                           id="deadline"
+                                           value="${deadline}"
+                                           required>
+                                </div>
+                            </div>
 
-                            <span class="avatar avatar-md bg-dark mb-3">
-                                <i class="ti ti-users fs-16"></i>
-                            </span>
+                            <!-- PROJECT -->
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Select Project <span class="text-danger">*</span>
+                                    </label>
 
-                            <h2 class="mb-1">
-                                ${totalEmployees}
-                            </h2>
+                                    <select class="form-select"
+                                            name="projectId"
+                                            id="projectId"
+                                            required>
 
-                            <p class="fs-13 mb-0">
-                                Total Employees
-                            </p>
+                                        <option value="">Select a Project</option>
+
+                                        <c:forEach var="project" items="${activeProjects}">
+                                            <option value="${project.projectId}"
+                                                ${project.projectId == projectId ? 'selected' : ''}>
+                                                ${project.projectName}
+                                            </option>
+                                        </c:forEach>
+
+                                    </select>
+                                </div>
+                            </div>
 
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-xl-3 col-sm-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
+                        <div class="row">
 
-                            <span class="avatar avatar-md bg-dark mb-3">
-                                <i class="ti ti-user-check fs-16"></i>
-                            </span>
+                            <!-- TEAM MEMBERS -->
+                            <div class="col-md-6">
+                                <div class="mb-3">
 
-                            <h2 class="mb-1">
-                                ${presentToday}
-                            </h2>
+                                    <label class="form-label">
+                                        Team Members <span class="text-danger">*</span>
+                                    </label>
 
-                            <p class="fs-13 mb-0">
-                                Present Today
-                            </p>
+                                    <select class="form-select"
+                                            name="teamMembers"
+                                            id="teamMembers"
+                                            required
+                                            disabled>
+
+                                        <option value="">Select Project First</option>
+
+                                    </select>
+
+                                    <small class="text-muted">
+                                        Team members will be loaded according to the selected project.
+                                    </small>
+
+                                </div>
+                            </div>
+
+                            <!-- STATUS -->
+                            <div class="col-md-6">
+                                <div class="mb-3">
+
+                                    <label class="form-label">
+                                        Status <span class="text-danger">*</span>
+                                    </label>
+
+                                    <select class="form-select"
+                                            name="status"
+                                            id="status"
+                                            required>
+
+                                        <option value="">Select</option>
+                                        <option value="Inprogress"
+                                            ${status == 'Inprogress' ? 'selected' : ''}>
+                                            Inprogress
+                                        </option>
+                                        <option value="Pending"
+                                            ${status == 'Pending' ? 'selected' : ''}>
+                                            Pending
+                                        </option>
+                                        <option value="Completed"
+                                            ${status == 'Completed' ? 'selected' : ''}>
+                                            Completed
+                                        </option>
+                                        <option value="Ongoing"
+                                            ${status == 'Ongoing' ? 'selected' : ''}>
+                                            Ongoing
+                                        </option>
+
+                                    </select>
+
+                                </div>
+                            </div>
 
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-xl-3 col-sm-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
+                        <div class="row">
 
-                            <span class="avatar avatar-md bg-dark mb-3">
-                                <i class="ti ti-calendar-off fs-16"></i>
-                            </span>
+                            <!-- PRIORITY -->
+                            <div class="col-md-6">
+                                <div class="mb-3">
 
-                            <h2 class="mb-1">
-                                ${onLeave}
-                            </h2>
+                                    <label class="form-label">
+                                        Priority <span class="text-danger">*</span>
+                                    </label>
 
-                            <p class="fs-13 mb-0">
-                                On Leave
-                            </p>
+                                    <select class="form-select"
+                                            name="priority"
+                                            id="priority"
+                                            required>
 
-                        </div>
-                    </div>
-                </div>
+                                        <option value="">Select</option>
+                                        <option value="High"
+                                            ${priority == 'High' ? 'selected' : ''}>
+                                            High
+                                        </option>
+                                        <option value="Medium"
+                                            ${priority == 'Medium' ? 'selected' : ''}>
+                                            Medium
+                                        </option>
+                                        <option value="Low"
+                                            ${priority == 'Low' ? 'selected' : ''}>
+                                            Low
+                                        </option>
 
-                <div class="col-xl-3 col-sm-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
+                                    </select>
 
-                            <span class="avatar avatar-md bg-dark mb-3">
-                                <i class="ti ti-clock-hour-4 fs-16"></i>
-                            </span>
-
-                            <h2 class="mb-1">
-                                ${pendingLeaves}
-                            </h2>
-
-                            <p class="fs-13 mb-0">
-                                Pending Leave Requests
-                            </p>
+                                </div>
+                            </div>
 
                         </div>
-                    </div>
-                </div>
 
-            </div>
+                        <!-- DESCRIPTION -->
+                        <div class="mb-3">
 
-            <!-- ATTENDANCE + EMPLOYEE OVERVIEW -->
-            <div class="row">
+                            <label class="form-label">
+                                Description <span class="text-danger">*</span>
+                            </label>
 
-                <div class="col-xxl-8 col-xl-7 d-flex">
+                            <textarea class="form-control"
+                                      name="description"
+                                      id="description"
+                                      rows="4"
+                                      maxlength="1000"
+                                      required>${description}</textarea>
 
-                    <div class="card flex-fill">
+                        </div>
 
-                        <div class="card-header pb-2 d-flex align-items-center justify-content-between">
+                        <!-- ATTACHMENT -->
+                        <div class="mb-4">
 
-                            <h5 class="mb-0">
-                                Attendance Overview
-                            </h5>
+                            <label class="form-label">
+                                Upload Attachment
+                            </label>
 
-                            <button type="button"
-                                    class="btn btn-white border btn-sm"
-                                    disabled>
-                                Overview
+                            <input type="file"
+                                   class="form-control"
+                                   name="attachment"
+                                   id="attachment">
+
+                        </div>
+
+                        <!-- BUTTONS -->
+                        <div class="d-flex justify-content-end gap-2">
+
+                            <a href="${pageContext.request.contextPath}/AdminDashboardServlet?action=taskDetails"
+                               class="btn btn-light border">
+                                Cancel
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-primary">
+                                <i class="ti ti-circle-plus me-2"></i>
+                                Add New Task
                             </button>
 
                         </div>
 
-                        <div class="card-body">
-
-                            <div id="attendance-overview-chart"
-                                 style="min-height:280px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-xxl-4 col-xl-5 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Employee Overview
-                            </h5>
-
-                        </div>
-
-                        <div class="card-body">
-
-                            <div id="employee-overview-chart"
-                                 style="min-height:280px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- LEAVE + RECENT ACTIVITY -->
-            <div class="row">
-
-                <div class="col-xl-6 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-header pb-2">
-                            <h5 class="mb-0">
-                                Leave Overview
-                            </h5>
-                        </div>
-
-                        <div class="card-body">
-
-                            <div id="leave-overview-chart"
-                                 style="min-height:250px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-xl-6 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Recent Activity
-                            </h5>
-
-                        </div>
-
-                        <div class="card-body">
-
-                            <div class="text-center py-5 text-muted">
-
-                                <i class="ti ti-activity fs-32 mb-2 d-block"></i>
-
-                                <p class="mb-0">
-                                    No activity available
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- HRMS INFORMATION -->
-            <div class="row">
-
-                <div class="col-12 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                HRMS Information
-                            </h5>
-
-                        </div>
-
-                        <div class="card-body">
-
-                            <div class="text-center py-4 text-muted">
-
-                                <p class="mb-0">
-                                    Information will appear here as HRMS modules are implemented.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
+                    </form>
 
                 </div>
 
@@ -996,7 +944,66 @@
 <script src="${pageContext.request.contextPath}/assets/plugins/select2/js/select2.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/theme-colorpicker.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
+<script>
+    document.getElementById("projectId").addEventListener("change", function () {
 
+        const projectId = this.value;
+        const teamMembers = document.getElementById("teamMembers");
+
+        // No project selected
+        if (!projectId) {
+            teamMembers.innerHTML =
+                '<option value="">Select Project First</option>';
+
+            teamMembers.disabled = true;
+            return;
+        }
+
+        // Show loading
+        teamMembers.innerHTML =
+            '<option value="">Loading members...</option>';
+
+        teamMembers.disabled = true;
+
+        fetch("${pageContext.request.contextPath}/AdminDashboardServlet?action=projectEmployees&projectId=" + projectId)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to load team members");
+                }
+
+                return response.text();
+            })
+            .then(data => {
+
+                teamMembers.innerHTML =
+                    '<option value="">Select Team Member</option>' + data;
+
+                teamMembers.disabled = false;
+            })
+            .catch(error => {
+
+                console.error(error);
+
+                teamMembers.innerHTML =
+                    '<option value="">Unable to load team members</option>';
+
+                teamMembers.disabled = true;
+            });
+    });
+
+    // Prevent selecting a previous date
+    const deadline = document.getElementById("deadline");
+
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+
+    deadline.min = `${year}-${month}-${day}`;
+</script>
 </body>
+
 </html>
 
+
+```
