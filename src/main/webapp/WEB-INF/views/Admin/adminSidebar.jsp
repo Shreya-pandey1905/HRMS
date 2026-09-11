@@ -430,7 +430,7 @@
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/leave-report">
                             <span>Leave Report</span>
                         </a>
                     </li>

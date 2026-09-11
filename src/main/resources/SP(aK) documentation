@@ -515,3 +515,41 @@ BEGIN
 END$$
 
 DELIMITER ;
+DROP PROCEDURE IF EXISTS GetLeaveReport;
+
+DELIMITER $$
+
+CREATE PROCEDURE GetLeaveReport()
+BEGIN
+
+    SELECT
+        l.LeaveRequestId,
+        l.UserId,
+        CONCAT(
+            u.FirstName,
+            ' ',
+            u.LastName
+        ) AS EmployeeName,
+        l.LeaveTypeId,
+        m.LeaveType,
+        l.StartDate,
+        l.EndDate,
+        l.NumberOfDays,
+        l.Reason,
+        l.ApprovedBy,
+        l.Status,
+        l.StatusHistory
+
+    FROM LeaveRequests l
+
+    INNER JOIN User u
+        ON l.UserId = u.UserId
+
+    INNER JOIN MasterLeaveTypes m
+        ON l.LeaveTypeId = m.LeaveTypeId
+
+    ORDER BY l.StartDate DESC;
+
+END$$
+
+DELIMITER ;
