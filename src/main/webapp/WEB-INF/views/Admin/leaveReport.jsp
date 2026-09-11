@@ -155,6 +155,24 @@
 
                 </div>
 
+                <div class="d-flex my-xl-auto right-content align-items-center flex-wrap">
+                    <div class="mb-2">
+                        <div class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
+                                <i class="ti ti-file-export me-1"></i>Export
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                                <li>
+                                    <a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-xls me-1"></i>Export as Excel</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
 

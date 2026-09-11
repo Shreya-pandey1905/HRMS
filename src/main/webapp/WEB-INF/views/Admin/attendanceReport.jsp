@@ -155,6 +155,24 @@
 
                 </div>
 
+                <div class="d-flex my-xl-auto right-content align-items-center flex-wrap">
+                    <div class="mb-2">
+                        <div class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
+                                <i class="ti ti-file-export me-1"></i>Export
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                                <li>
+                                    <a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-xls me-1"></i>Export as Excel</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
 
@@ -257,9 +275,20 @@
                 <div class="col-xl-6">
                     <div class="card">
                         <div class="card-header border-0 pb-0">
-                            <div class="d-flex align-items-center">
-                                <span class="me-2"><i class="ti ti-chart-line text-danger"></i></span>
-                                <h5>Attendance</h5>
+                            <div class="d-flex flex-wrap justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <span class="me-2"><i class="ti ti-chart-line text-danger"></i></span>
+                                    <h5>Attendance</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle btn btn-sm fs-12 btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
+                                        This Year
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end p-2">
+                                        <li><a href="javascript:void(0);" class="dropdown-item rounded-1">2024</a></li>
+                                        <li><a href="javascript:void(0);" class="dropdown-item rounded-1">2023</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body py-0 px-2">
