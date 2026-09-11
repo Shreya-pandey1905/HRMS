@@ -158,75 +158,114 @@
             </div>
 
 
-            <!-- ================= SUMMARY CARDS ================= -->
+            <!-- ================= SUMMARY CARDS + CHART ================= -->
+            <!-- Layout copied from the template's attendance-report.html: stat
+                 cards in a 2x2 grid on the left half, chart on the right half. -->
 
             <div class="row">
 
-                <div class="col-lg-3 col-md-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center overflow-hidden mb-2">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="fs-12 fw-normal mb-1 text-truncate">Total Days</p>
-                                    <h4>${summary.totalDays}</h4>
+                <div class="col-xl-6">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-md-6 d-flex">
+                            <div class="card flex-fill">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center overflow-hidden mb-2">
+                                        <div class="attendence-icon">
+                                            <span><i class="ti ti-calendar text-primary"></i></span>
+                                        </div>
+                                        <div class="ms-2 overflow-hidden">
+                                            <p class="fs-12 fw-normal mb-1 text-truncate">Total Days</p>
+                                            <h4>${summary.totalDays}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="attendance-report-bar mb-2">
+                                        <div class="progress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="height: 5px;">
+                                            <div class="progress-bar bg-success" style="width: 100%"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center overflow-hidden mb-2">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="fs-12 fw-normal mb-1 text-truncate">Total Present</p>
-                                    <h4>${summary.totalPresent}</h4>
+                        <div class="col-lg-6 col-md-6 d-flex">
+                            <div class="card flex-fill">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center overflow-hidden mb-2">
+                                        <div class="attendence-icon">
+                                            <span><i class="ti ti-calendar text-success"></i></span>
+                                        </div>
+                                        <div class="ms-2 overflow-hidden">
+                                            <p class="fs-12 fw-normal mb-1 text-truncate">Total Present</p>
+                                            <h4>${summary.totalPresent}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="attendance-report-bar mb-2">
+                                        <div class="progress" role="progressbar" aria-valuenow="${summary.totalPresent}" aria-valuemin="0" aria-valuemax="${summary.totalDays}" style="height: 5px;">
+                                            <div class="progress-bar bg-success" style="width: ${summary.totalDays > 0 ? (summary.totalPresent * 100 / summary.totalDays) : 0}%"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center overflow-hidden mb-2">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="fs-12 fw-normal mb-1 text-truncate">Total Absent</p>
-                                    <h4>${summary.totalAbsent}</h4>
+                        <div class="col-lg-6 col-md-6 d-flex">
+                            <div class="card flex-fill">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center overflow-hidden mb-2">
+                                        <div class="attendence-icon">
+                                            <span><i class="ti ti-calendar text-danger"></i></span>
+                                        </div>
+                                        <div class="ms-2 overflow-hidden">
+                                            <p class="fs-12 fw-normal mb-1 text-truncate">Total Absent</p>
+                                            <h4>${summary.totalAbsent}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="attendance-report-bar mb-2">
+                                        <div class="progress" role="progressbar" aria-valuenow="${summary.totalAbsent}" aria-valuemin="0" aria-valuemax="${summary.totalDays}" style="height: 5px;">
+                                            <div class="progress-bar bg-danger" style="width: ${summary.totalDays > 0 ? (summary.totalAbsent * 100 / summary.totalDays) : 0}%"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center overflow-hidden mb-2">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="fs-12 fw-normal mb-1 text-truncate">Total Half Day</p>
-                                    <h4>${summary.totalHalfDay}</h4>
+                        <div class="col-lg-6 col-md-6 d-flex">
+                            <div class="card flex-fill">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center overflow-hidden mb-2">
+                                        <div class="attendence-icon">
+                                            <span><i class="ti ti-calendar text-warning"></i></span>
+                                        </div>
+                                        <div class="ms-2 overflow-hidden">
+                                            <p class="fs-12 fw-normal mb-1 text-truncate">Total Half Day</p>
+                                            <h4>${summary.totalHalfDay}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="attendance-report-bar mb-2">
+                                        <div class="progress" role="progressbar" aria-valuenow="${summary.totalHalfDay}" aria-valuemin="0" aria-valuemax="${summary.totalDays}" style="height: 5px;">
+                                            <div class="progress-bar bg-warning" style="width: ${summary.totalDays > 0 ? (summary.totalHalfDay * 100 / summary.totalDays) : 0}%"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
-            </div>
-
-
-            <!-- ================= CHART ================= -->
-
-            <div class="card">
-
-                <div class="card-header">
-                    <h5 class="mb-0">Attendance (Present / Absent by Month)</h5>
-                </div>
-
-                <div class="card-body">
-                    <div id="attendance-chart" style="min-height:280px;"></div>
+                <div class="col-xl-6">
+                    <div class="card">
+                        <div class="card-header border-0 pb-0">
+                            <div class="d-flex align-items-center">
+                                <span class="me-2"><i class="ti ti-chart-line text-danger"></i></span>
+                                <h5>Attendance</h5>
+                            </div>
+                        </div>
+                        <div class="card-body py-0 px-2">
+                            <div id="attendance-chart" style="min-height:280px;"></div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
