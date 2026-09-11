@@ -436,6 +436,12 @@
                     </li>
 
                     <li>
+                        <a href="${pageContext.request.contextPath}/project-report">
+                            <span>Project Report</span>
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="javascript:void(0);">
                             <span>Payslip Report</span>
                         </a>

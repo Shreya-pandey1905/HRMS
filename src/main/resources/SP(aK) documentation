@@ -553,3 +553,47 @@ BEGIN
 END$$
 
 DELIMITER ;
+DROP PROCEDURE IF EXISTS GetProjectReport;
+
+DELIMITER $$
+
+CREATE PROCEDURE GetProjectReport()
+BEGIN
+
+    SELECT
+        p.ProjectId,
+        p.ProjectName,
+        p.ClientName,
+        p.ManagerName,
+        p.StartDate,
+        p.EndDate,
+        p.Priority,
+        p.Status,
+        GROUP_CONCAT(
+            CONCAT(u.FirstName, ' ', u.LastName)
+            SEPARATOR ', '
+        ) AS Members
+
+    FROM AllProjects p
+
+    LEFT JOIN ProjectsUser pu
+        ON p.ProjectId = pu.ProjectsProjectId
+
+    LEFT JOIN User u
+        ON pu.UsersUserId = u.UserId
+
+    GROUP BY
+        p.ProjectId,
+        p.ProjectName,
+        p.ClientName,
+        p.ManagerName,
+        p.StartDate,
+        p.EndDate,
+        p.Priority,
+        p.Status
+
+    ORDER BY p.StartDate DESC;
+
+END$$
+
+DELIMITER ;
