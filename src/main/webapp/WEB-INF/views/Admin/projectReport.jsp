@@ -64,6 +64,9 @@
           href="${pageContext.request.contextPath}/assets/plugins/flatpickr/flatpickr.min.css">
 
     <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/css/dataTables.bootstrap5.min.css">
+
+    <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/css/style.css">
 
 
@@ -164,7 +167,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end p-3">
                                 <li>
-                                    <a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a>
+                                    <a href="${pageContext.request.contextPath}/project-report?export=pdf" class="dropdown-item rounded-1"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-xls me-1"></i>Export as Excel</a>
@@ -289,24 +292,26 @@
                         <div class="dropdown me-3">
                             <a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">Select Priority</a>
                             <ul class="dropdown-menu dropdown-menu-end p-3">
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">High</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Medium</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Low</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="filterProjectPriority('')">All</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="filterProjectPriority('High')">High</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="filterProjectPriority('Medium')">Medium</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="filterProjectPriority('Low')">Low</a></li>
                             </ul>
                         </div>
                         <div class="dropdown me-3">
                             <a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">Select Status</a>
                             <ul class="dropdown-menu dropdown-menu-end p-3">
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Active</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Inactive</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="filterProjectStatus('')">All</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="filterProjectStatus('Active')">Active</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="filterProjectStatus('Inactive')">Inactive</a></li>
                             </ul>
                         </div>
                         <div class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">Sort By : Recent</a>
                             <ul class="dropdown-menu dropdown-menu-end p-3">
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Recently Added</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Ascending</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Descending</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="sortProjectTable('recent')">Recently Added</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="sortProjectTable('asc')">Ascending</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="sortProjectTable('desc')">Descending</a></li>
                             </ul>
                         </div>
                     </div>
@@ -430,6 +435,26 @@
             series: [${summary.activeProjects}, ${summary.inactiveProjects}],
             labels: ['Active', 'Inactive']
         }).render();
+    }
+
+    // Priority is column 7, Status is column 8 in the Project List table.
+    function filterProjectPriority(priority) {
+        $('.datatable').DataTable().column(7).search(priority, false, false).draw();
+    }
+
+    function filterProjectStatus(status) {
+        $('.datatable').DataTable().column(8).search(status, false, false).draw();
+    }
+
+    function sortProjectTable(direction) {
+        var table = $('.datatable').DataTable();
+        if (direction === 'asc') {
+            table.order([1, 'asc']).draw();
+        } else if (direction === 'desc') {
+            table.order([1, 'desc']).draw();
+        } else {
+            table.order([0, 'desc']).draw();
+        }
     }
 
 </script>

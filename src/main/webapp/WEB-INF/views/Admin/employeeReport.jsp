@@ -63,6 +63,9 @@
           href="${pageContext.request.contextPath}/assets/plugins/flatpickr/flatpickr.min.css">
 
     <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/css/dataTables.bootstrap5.min.css">
+
+    <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/css/style.css">
 
 
@@ -163,7 +166,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end p-3">
                                 <li>
-                                    <a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a>
+                                    <a href="${pageContext.request.contextPath}/employee-report?export=pdf" class="dropdown-item rounded-1"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-xls me-1"></i>Export as Excel</a>
@@ -281,16 +284,17 @@
                         <div class="dropdown me-3">
                             <a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">Select Status</a>
                             <ul class="dropdown-menu dropdown-menu-end p-3">
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Active</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Inactive</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="filterEmployeeStatus('')">All</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="filterEmployeeStatus('Active')">Active</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="filterEmployeeStatus('Inactive')">Inactive</a></li>
                             </ul>
                         </div>
                         <div class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">Sort By : Recent</a>
                             <ul class="dropdown-menu dropdown-menu-end p-3">
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Recently Added</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Ascending</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Descending</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="sortEmployeeTable('recent')">Recently Added</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="sortEmployeeTable('asc')">Ascending</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="sortEmployeeTable('desc')">Descending</a></li>
                             </ul>
                         </div>
                     </div>
@@ -434,6 +438,22 @@
                 categories: employeeCategories
             }
         }).render();
+    }
+
+    // Status column is index 6 in the Employees List table.
+    function filterEmployeeStatus(status) {
+        $('.datatable').DataTable().column(6).search(status, false, false).draw();
+    }
+
+    function sortEmployeeTable(direction) {
+        var table = $('.datatable').DataTable();
+        if (direction === 'asc') {
+            table.order([1, 'asc']).draw();
+        } else if (direction === 'desc') {
+            table.order([1, 'desc']).draw();
+        } else {
+            table.order([0, 'desc']).draw();
+        }
     }
 
 </script>

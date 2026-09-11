@@ -63,6 +63,9 @@
           href="${pageContext.request.contextPath}/assets/plugins/flatpickr/flatpickr.min.css">
 
     <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/css/dataTables.bootstrap5.min.css">
+
+    <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/css/style.css">
 
 
@@ -163,7 +166,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end p-3">
                                 <li>
-                                    <a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a>
+                                    <a href="${pageContext.request.contextPath}/leave-report?export=pdf" class="dropdown-item rounded-1"><i class="ti ti-file-type-pdf me-1"></i>Export as PDF</a>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-xls me-1"></i>Export as Excel</a>
@@ -285,17 +288,18 @@
                         <div class="dropdown me-3">
                             <a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">Select Status</a>
                             <ul class="dropdown-menu dropdown-menu-end p-3">
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Approved</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Pending</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Rejected</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="filterLeaveStatus('')">All</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="filterLeaveStatus('Approved')">Approved</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="filterLeaveStatus('Pending')">Pending</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="filterLeaveStatus('Rejected')">Rejected</a></li>
                             </ul>
                         </div>
                         <div class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">Sort By : Recent</a>
                             <ul class="dropdown-menu dropdown-menu-end p-3">
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Recently Added</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Ascending</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Descending</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="sortLeaveTable('recent')">Recently Added</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="sortLeaveTable('asc')">Ascending</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1" onclick="sortLeaveTable('desc')">Descending</a></li>
                             </ul>
                         </div>
                     </div>
@@ -440,6 +444,22 @@
                 categories: leaveTypeCategories
             }
         }).render();
+    }
+
+    // Status column is index 8 in the Leave Requests table.
+    function filterLeaveStatus(status) {
+        $('.datatable').DataTable().column(8).search(status, false, false).draw();
+    }
+
+    function sortLeaveTable(direction) {
+        var table = $('.datatable').DataTable();
+        if (direction === 'asc') {
+            table.order([1, 'asc']).draw();
+        } else if (direction === 'desc') {
+            table.order([1, 'desc']).draw();
+        } else {
+            table.order([0, 'desc']).draw();
+        }
     }
 
 </script>
