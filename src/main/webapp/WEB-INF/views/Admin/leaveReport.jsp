@@ -273,8 +273,32 @@
 
             <div class="card">
 
-                <div class="card-header">
+                <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
                     <h5 class="mb-0">Leave Requests</h5>
+                    <div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
+                        <div class="me-3">
+                            <div class="input-icon-end position-relative">
+                                <input type="text" class="form-control date-range bookingrange" placeholder="dd/mm/yyyy - dd/mm/yyyy">
+                                <span class="input-icon-addon"><i class="ti ti-chevron-down"></i></span>
+                            </div>
+                        </div>
+                        <div class="dropdown me-3">
+                            <a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">Select Status</a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Approved</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Pending</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Rejected</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">Sort By : Recent</a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Recently Added</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Ascending</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item rounded-1">Descending</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-body p-0">

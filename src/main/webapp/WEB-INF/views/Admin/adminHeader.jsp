@@ -77,8 +77,40 @@
 
             </div>
 
-        </div>
+            <div class="d-flex align-items-center">
 
+                <div class="me-1">
+                    <a href="#" class="btn btn-menubar btnFullscreen">
+                        <i class="ti ti-maximize"></i>
+                    </a>
+                </div>
+
+                <div class="me-1">
+                    <a href="javascript:void(0);" class="btn btn-menubar position-relative">
+                        <i class="ti ti-brand-hipchat"></i>
+                    </a>
+                </div>
+
+                <div class="me-1">
+                    <a href="javascript:void(0);" class="btn btn-menubar">
+                        <i class="ti ti-mail"></i>
+                    </a>
+                </div>
+
+                <div class="me-1">
+                    <a href="javascript:void(0);" class="btn btn-menubar position-relative" data-bs-toggle="dropdown">
+                        <i class="ti ti-bell"></i>
+                        <span class="notification-status-dot"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end notification-dropdown p-4">
+                        <h4 class="notification-title mb-2">Notifications</h4>
+                        <p class="text-muted mb-0">No new notifications</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
 
         <div class="dropdown mobile-user-menu">
 
