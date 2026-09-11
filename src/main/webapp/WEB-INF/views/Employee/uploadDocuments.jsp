@@ -11,79 +11,57 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-    <meta name="description"
-          content="HRMS Dashboard">
+    <meta name="description" content="HRMS Documents">
 
     <meta name="keywords"
-          content="HRMS, Human Resource Management System, Dashboard">
+          content="HRMS, Documents, Employee Documents">
 
-    <meta name="author"
-          content="HRMS Team">
+    <meta name="author" content="HRMS Team">
 
     <meta name="robots"
           content="noindex, nofollow">
 
-    <title>HRMS Dashboard</title>
-
+    <title>Upload Documents - HRMS</title>
 
     <link rel="shortcut icon"
           type="image/x-icon"
           href="${pageContext.request.contextPath}/assets/img/favicon.png">
 
-
     <script src="${pageContext.request.contextPath}/assets/js/theme-script.js"></script>
-
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
 
-
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/icons/feather/feather.css">
-
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/tabler-icons/tabler-icons.css">
 
-
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/select2/css/select2.min.css">
-
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/fontawesome/css/fontawesome.min.css">
 
-
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/fontawesome/css/all.min.css">
-
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/css/bootstrap-datetimepicker.min.css">
 
-
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/daterangepicker/daterangepicker.css">
 
-
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/flatpickr/flatpickr.min.css">
-
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/css/style.css">
 
 </head>
 
-
 <body>
-
-
-<c:set var="totalEmployees" value="0"/>
-<c:set var="presentToday" value="0"/>
-<c:set var="onLeave" value="0"/>
-<c:set var="pendingLeaves" value="0"/>
-
 
 <div id="global-loader">
 
@@ -101,7 +79,6 @@
 
         <div class="main-header">
 
-
             <div class="header-left">
 
                 <a href="${pageContext.request.contextPath}/admin/dashboard"
@@ -111,7 +88,6 @@
                          alt="HRMS Logo">
 
                 </a>
-
 
                 <a href="${pageContext.request.contextPath}/admin/dashboard"
                    class="dark-logo">
@@ -145,7 +121,6 @@
 
                     <div class="me-auto d-flex align-items-center"
                          id="header-search">
-
 
                         <a id="toggle_btn"
                            href="javascript:void(0);"
@@ -241,11 +216,11 @@
 
     <!-- ================= SIDEBAR ================= -->
 
-    <div class="sidebar" id="sidebar">
+    <div class="sidebar"
+         id="sidebar">
 
 
         <div class="sidebar-logo">
-
 
             <a href="${pageContext.request.contextPath}/admin/dashboard"
                class="logo logo-normal">
@@ -280,7 +255,6 @@
 
             <div class="text-center rounded bg-light p-3 mb-4 user-profile">
 
-
                 <div class="avatar avatar-lg online mb-3">
 
                     <img src="${pageContext.request.contextPath}/assets/img/profiles/avatar-02.jpg"
@@ -291,12 +265,16 @@
 
 
                 <h6 class="fs-12 fw-normal mb-1">
-                    Admin
+
+                    Employee
+
                 </h6>
 
 
                 <p class="fs-10 mb-0">
-                    Administrator
+
+                    Employee
+
                 </p>
 
             </div>
@@ -320,7 +298,7 @@
 
                 <!-- DASHBOARD -->
 
-                <li class="active">
+                <li>
 
                     <a href="${pageContext.request.contextPath}/admin/dashboard">
 
@@ -362,9 +340,7 @@
 
                     </a>
 
-
                     <ul>
-
 
                         <li class="submenu">
 
@@ -376,39 +352,24 @@
 
                             </a>
 
-
                             <ul>
 
                                 <li>
-
                                     <a href="javascript:void(0);">
-
                                         <span>Apply Leaves</span>
-
                                     </a>
-
                                 </li>
 
-
                                 <li>
-
                                     <a href="javascript:void(0);">
-
                                         <span>Leave Details</span>
-
                                     </a>
-
                                 </li>
 
-
                                 <li>
-
                                     <a href="javascript:void(0);">
-
                                         <span>Employee</span>
-
                                     </a>
-
                                 </li>
 
                             </ul>
@@ -455,7 +416,6 @@
                         <span class="menu-arrow"></span>
 
                     </a>
-
 
                     <ul>
 
@@ -519,8 +479,7 @@
                 </li>
 
 
-                <!-- ================= DOCUMENTS ================= -->
-                <!-- ================= DOCUMENTS ================= -->
+                <!-- DOCUMENTS -->
 
                 <li class="submenu active">
 
@@ -534,7 +493,9 @@
 
                     </a>
 
+
                     <ul>
+
 
                         <!-- COMPANY LETTERS -->
 
@@ -564,7 +525,7 @@
 
                         <!-- UPLOAD DOCUMENTS -->
 
-                        <li>
+                        <li class="active">
 
                             <a href="${pageContext.request.contextPath}/file-uploads">
 
@@ -573,6 +534,7 @@
                             </a>
 
                         </li>
+
 
                     </ul>
 
@@ -638,15 +600,16 @@
         <div class="content">
 
 
-            <!-- BREADCRUMB -->
+            <!-- PAGE HEADER -->
 
             <div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
-
 
                 <div class="my-auto mb-2">
 
                     <h2 class="mb-1">
-                        Employee Dashboard
+
+                        Upload Documents
+
                     </h2>
 
 
@@ -666,10 +629,17 @@
                             </li>
 
 
+                            <li class="breadcrumb-item">
+
+                                Documents
+
+                            </li>
+
+
                             <li class="breadcrumb-item active"
                                 aria-current="page">
 
-                                Dashboard
+                                Upload Documents
 
                             </li>
 
@@ -682,23 +652,6 @@
 
 
                 <div class="d-flex my-xl-auto right-content align-items-center flex-wrap">
-
-
-                    <div class="input-icon mb-2 position-relative">
-
-                        <span class="input-icon-addon">
-
-                            <i class="ti ti-calendar text-gray-9"></i>
-
-                        </span>
-
-
-                        <input type="text"
-                               class="form-control date-range bookingrange"
-                               placeholder="dd/mm/yyyy - dd/mm/yyyy">
-
-                    </div>
-
 
                     <div class="ms-2 head-icons">
 
@@ -719,23 +672,29 @@
             </div>
 
 
-            <!-- WELCOME -->
+            <!-- ================= PENDING DOCUMENTS ================= -->
 
-            <div class="welcome-wrap mb-4">
+            <c:if test="${not empty pendingDocuments}">
 
+                <div class="alert alert-warning d-flex align-items-center mb-4">
 
-                <div class="d-flex align-items-center justify-content-between flex-wrap">
-
-
-                    <div class="mb-3">
-
-                        <h2 class="mb-1 text-white">
-                            Welcome to HRMS
-                        </h2>
+                    <i class="ti ti-alert-circle fs-24 me-3"></i>
 
 
-                        <p class="text-light mb-0">
-                            Human Resource Management System
+                    <div>
+
+                        <h6 class="mb-1">
+
+                            Documents Required
+
+                        </h6>
+
+
+                        <p class="mb-0">
+
+                            You have documents assigned by Admin
+                            that need to be submitted.
+
                         </p>
 
                     </div>
@@ -743,54 +702,64 @@
                 </div>
 
 
-                <div class="welcome-bg">
+                <div class="card mb-4">
+
+                    <div class="card-header">
+
+                        <h5 class="card-title mb-0">
+
+                            Pending Documents
+
+                        </h5>
+
+                    </div>
 
 
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-02.svg"
-                         alt=""
-                         class="welcome-bg-01">
+                    <div class="card-body">
+
+                        <div class="row">
 
 
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-03.svg"
-                         alt=""
-                         class="welcome-bg-02">
+                            <c:forEach var="pending"
+                                       items="${pendingDocuments}">
 
 
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-01.svg"
-                         alt=""
-                         class="welcome-bg-03">
+                                <div class="col-md-6 mb-3">
 
-                </div>
-
-            </div>
+                                    <div class="border rounded p-3 d-flex align-items-center">
 
 
-            <!-- HRMS SUMMARY CARDS -->
+                                        <span class="avatar avatar-md bg-warning-transparent me-3">
 
-            <div class="row">
+                                            <i class="ti ti-file-alert fs-20"></i>
 
-
-                <div class="col-xl-3 col-sm-6 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-
-                                <i class="ti ti-users fs-16"></i>
-
-                            </span>
+                                        </span>
 
 
-                            <h2 class="mb-1">
-                                ${totalEmployees}
-                            </h2>
+                                        <div>
+
+                                            <h6 class="mb-1">
+
+                                                    ${pending.fileName}
+
+                                            </h6>
 
 
-                            <p class="fs-13 mb-0">
-                                Total Employees
-                            </p>
+                                            <span class="badge bg-warning">
+
+                                                PENDING
+
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </c:forEach>
+
 
                         </div>
 
@@ -798,264 +767,177 @@
 
                 </div>
 
-
-                <div class="col-xl-3 col-sm-6 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-
-                                <i class="ti ti-user-check fs-16"></i>
-
-                            </span>
+            </c:if>
 
 
-                            <h2 class="mb-1">
-                                ${presentToday}
-                            </h2>
+            <!-- ================= UPLOAD DOCUMENTS ================= -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h5 class="card-title mb-1">
+
+                        Upload Documents
+
+                    </h5>
 
 
-                            <p class="fs-13 mb-0">
-                                Present Today
-                            </p>
+                    <p class="text-muted mb-0">
 
-                        </div>
+                        Upload one or more documents
 
-                    </div>
+                    </p>
 
                 </div>
 
 
-                <div class="col-xl-3 col-sm-6 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-
-                                <i class="ti ti-calendar-off fs-16"></i>
-
-                            </span>
+                <div class="card-body">
 
 
-                            <h2 class="mb-1">
-                                ${onLeave}
-                            </h2>
+                    <form method="post"
+                          action="${pageContext.request.contextPath}/file-uploads"
+                          enctype="multipart/form-data">
 
 
-                            <p class="fs-13 mb-0">
-                                On Leave
-                            </p>
+                        <input type="hidden"
+                               name="userId"
+                               value="${userId}">
+
+
+                        <div id="documentRows">
+
+
+                            <!-- ================= FIRST ROW ================= -->
+
+                            <div class="document-row border rounded p-3 mb-3">
+
+                                <div class="row align-items-end">
+
+
+                                    <!-- DOCUMENT TYPE -->
+
+                                    <div class="col-md-5 mb-3 mb-md-0">
+
+                                        <label class="form-label">
+
+                                            Document Type
+
+                                            <span class="text-danger">*</span>
+
+                                        </label>
+
+
+                                        <select name="documentId"
+                                                class="form-select"
+                                                required>
+
+
+                                            <option value="">
+
+                                                Select Document
+
+                                            </option>
+
+
+                                            <c:forEach var="document"
+                                                       items="${documentNames}">
+
+                                                <option value="${document.id}">
+
+                                                        ${document.docName}
+
+                                                </option>
+
+                                            </c:forEach>
+
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <!-- FILE -->
+
+                                    <div class="col-md-5 mb-3 mb-md-0">
+
+                                        <label class="form-label">
+
+                                            Choose File
+
+                                            <span class="text-danger">*</span>
+
+                                        </label>
+
+
+                                        <input type="file"
+                                               name="file"
+                                               class="form-control"
+                                               required>
+
+                                    </div>
+
+
+                                    <!-- ADD / REMOVE BUTTONS -->
+
+                                    <div class="col-md-2">
+
+                                        <div class="d-flex gap-2">
+
+                                            <!-- ADD BUTTON -->
+
+                                            <button type="button"
+                                                    class="btn btn-light border add-row"
+                                                    title="Add Document">
+
+                                                <span style="font-size:20px; font-weight:bold;">
+                                                    +
+                                                </span>
+
+                                            </button>
+
+
+                                            <!-- REMOVE BUTTON -->
+
+                                            <button type="button"
+                                                    class="btn btn-danger remove-row"
+                                                    title="Remove Document"
+                                                    style="display:none;">
+
+                                                <span style="font-size:20px; font-weight:bold;">
+                                                    −
+                                                </span>
+
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
 
                         </div>
 
-                    </div>
 
-                </div>
+                        <!-- ================= UPLOAD BUTTON ================= -->
 
+                        <div class="text-end mt-3">
 
-                <div class="col-xl-3 col-sm-6 d-flex">
+                            <button type="submit"
+                                    class="btn btn-primary">
 
-                    <div class="card flex-fill">
-
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-
-                                <i class="ti ti-clock-hour-4 fs-16"></i>
-
-                            </span>
-
-
-                            <h2 class="mb-1">
-                                ${pendingLeaves}
-                            </h2>
-
-
-                            <p class="fs-13 mb-0">
-                                Pending Leave Requests
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- DASHBOARD WIDGETS -->
-
-            <div class="row">
-
-
-                <div class="col-xxl-8 col-xl-7 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2 d-flex align-items-center justify-content-between">
-
-                            <h5 class="mb-0">
-                                Attendance Overview
-                            </h5>
-
-
-                            <button type="button"
-                                    class="btn btn-white border btn-sm"
-                                    disabled>
-
-                                Overview
+                                Upload Documents
 
                             </button>
 
                         </div>
 
 
-                        <div class="card-body">
-
-                            <div id="attendance-overview-chart"
-                                 style="min-height:280px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-xxl-4 col-xl-5 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Employee Overview
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div id="employee-overview-chart"
-                                 style="min-height:280px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="row">
-
-
-                <div class="col-xl-6 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Leave Overview
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div id="leave-overview-chart"
-                                 style="min-height:250px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-xl-6 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Recent Activity
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div class="text-center py-5 text-muted">
-
-                                <i class="ti ti-activity fs-32 mb-2 d-block"></i>
-
-
-                                <p class="mb-0">
-                                    No activity available
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- HRMS INFORMATION -->
-
-            <div class="row">
-
-
-                <div class="col-12 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                HRMS Information
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div class="text-center py-4 text-muted">
-
-                                <p class="mb-0">
-                                    Information will appear here as HRMS modules are implemented.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
+                    </form>
 
                 </div>
 
@@ -1065,17 +947,21 @@
         </div>
 
 
-        <!-- FOOTER -->
+        <!-- ================= FOOTER ================= -->
 
         <div class="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
 
             <p class="mb-0">
+
                 HRMS
+
             </p>
 
 
             <p class="mb-0">
+
                 Human Resource Management System
+
             </p>
 
         </div>
@@ -1085,7 +971,7 @@
 </div>
 
 
-<!-- SCRIPTS -->
+<!-- ================= SCRIPTS ================= -->
 
 <script src="${pageContext.request.contextPath}/assets/js/jquery-3.7.1.min.js"></script>
 
@@ -1095,8 +981,6 @@
 
 <script src="${pageContext.request.contextPath}/assets/js/jquery.slimscroll.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/assets/plugins/apexchart/apexcharts.min.js"></script>
-
 <script src="${pageContext.request.contextPath}/assets/js/moment.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/js/bootstrap-datetimepicker.min.js"></script>
@@ -1105,9 +989,138 @@
 
 <script src="${pageContext.request.contextPath}/assets/plugins/select2/js/select2.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/assets/js/theme-colorpicker.js"></script>
-
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
+
+
+<!-- ================= ADD / REMOVE ROWS ================= -->
+
+<script>
+
+    document.addEventListener("click", function (event) {
+
+
+        /* ================= ADD ROW ================= */
+
+        const addButton =
+            event.target.closest(".add-row");
+
+
+        if (addButton) {
+
+
+            const container =
+                document.getElementById("documentRows");
+
+
+            const firstRow =
+                container.querySelector(".document-row");
+
+
+            const newRow =
+                firstRow.cloneNode(true);
+
+
+            /* CLEAR DOCUMENT TYPE */
+
+            const select =
+                newRow.querySelector(
+                    "select[name='documentId']"
+                );
+
+
+            if (select) {
+
+                select.value = "";
+
+            }
+
+
+            /* CLEAR FILE */
+
+            const fileInput =
+                newRow.querySelector(
+                    "input[type='file']"
+                );
+
+
+            if (fileInput) {
+
+                fileInput.value = "";
+
+            }
+
+
+            /* SHOW REMOVE BUTTON */
+
+            const removeButton =
+                newRow.querySelector(".remove-row");
+
+
+            if (removeButton) {
+
+                removeButton.style.display =
+                    "inline-block";
+
+            }
+
+
+            /* ADD BUTTON REMAINS AVAILABLE */
+
+            const newAddButton =
+                newRow.querySelector(".add-row");
+
+
+            if (newAddButton) {
+
+                newAddButton.style.display =
+                    "inline-block";
+
+            }
+
+
+            container.appendChild(newRow);
+
+
+            return;
+
+        }
+
+
+        /* ================= REMOVE ROW ================= */
+
+        const removeButton =
+            event.target.closest(".remove-row");
+
+
+        if (removeButton) {
+
+
+            const row =
+                removeButton.closest(".document-row");
+
+
+            const rows =
+                document.querySelectorAll(
+                    ".document-row"
+                );
+
+
+            /* DO NOT REMOVE LAST ROW */
+
+            if (rows.length > 1) {
+
+                row.remove();
+
+            }
+
+
+            return;
+
+        }
+
+    });
+
+</script>
 
 
 </body>

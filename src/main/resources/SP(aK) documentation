@@ -1,0 +1,499 @@
+USE Pulse360Db;
+
+DROP PROCEDURE IF EXISTS GetUserByEmail;
+
+DELIMITER //
+
+CREATE PROCEDURE GetUserByEmail(IN p_email VARCHAR(255))
+BEGIN
+    SELECT UserId, Email, PasswordHash, RoleId, Status
+    FROM `User`
+    WHERE Email = p_email;
+END //
+
+DELIMITER ;
+USE Pulse360Db;
+
+DROP PROCEDURE IF EXISTS GetRoleById;
+
+DELIMITER //
+
+CREATE PROCEDURE GetRoleById(IN p_roleId INT)
+BEGIN
+    SELECT RoleId, RoleName, Status
+    FROM `Role`
+    WHERE RoleId = p_roleId;
+END //
+
+DELIMITER ;
+
+USE Pulse360Db;
+
+-- STORED PROCEDURES EXTRACTED FROM THE PROVIDED FILE
+
+DROP PROCEDURE IF EXISTS GetAllAdminDocNames;
+DELIMITER //
+CREATE PROCEDURE GetAllAdminDocNames()
+BEGIN
+    SELECT Id, DocName
+    FROM addadmindocnames;
+END //
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS AddAdminDocName;
+DELIMITER //
+CREATE PROCEDURE AddAdminDocName(IN p_docName VARCHAR(255))
+BEGIN
+    INSERT INTO addadmindocnames (DocName)
+    VALUES (p_docName);
+END //
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS GetAllEmployeeDocNames;
+DROP PROCEDURE IF EXISTS AddEmployeeDocName;
+DROP PROCEDURE IF EXISTS DeleteEmployeeDocName;
+
+DELIMITER //
+CREATE PROCEDURE GetAllEmployeeDocNames()
+BEGIN
+    SELECT Id, DocName
+    FROM addemployeedocnames;
+END //
+
+CREATE PROCEDURE AddEmployeeDocName(IN p_docName VARCHAR(255))
+BEGIN
+    INSERT INTO addemployeedocnames (DocName)
+    VALUES (p_docName);
+END //
+
+CREATE PROCEDURE DeleteEmployeeDocName(IN p_id INT)
+BEGIN
+    DELETE FROM addemployeedocnames
+    WHERE Id = p_id;
+END //
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE GetAllAdminDocuments()
+BEGIN
+    SELECT AdminDocId, Email, DocName, DocFile
+    FROM admindocuments;
+END //
+
+CREATE PROCEDURE AddAdminDocument(
+    IN p_email VARCHAR(255),
+    IN p_docName VARCHAR(255),
+    IN p_docFile VARCHAR(255)
+)
+BEGIN
+    INSERT INTO admindocuments (Email, DocName, DocFile)
+    VALUES (p_email, p_docName, p_docFile);
+END //
+
+CREATE PROCEDURE DeleteAdminDocument(IN p_adminDocId INT)
+BEGIN
+    DELETE FROM admindocuments
+    WHERE AdminDocId = p_adminDocId;
+END //
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE GetAllUploadedFiles()
+BEGIN
+    SELECT Id, FileName, FilePath, UserId
+    FROM fileuploads;
+END //
+
+CREATE PROCEDURE AddUploadedFile(
+    IN p_fileName VARCHAR(255),
+    IN p_filePath VARCHAR(500),
+    IN p_userId INT
+)
+BEGIN
+    INSERT INTO fileuploads (FileName, FilePath, UserId)
+    VALUES (p_fileName, p_filePath, p_userId);
+END //
+
+CREATE PROCEDURE DeleteUploadedFile(IN p_id INT)
+BEGIN
+    DELETE FROM fileuploads
+    WHERE Id = p_id;
+END //
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS UpdateAdminDocName;
+DELIMITER $$
+CREATE PROCEDURE UpdateAdminDocName(
+    IN p_id INT,
+    IN p_docName VARCHAR(255)
+)
+BEGIN
+    UPDATE addAdminDocNames
+    SET DocName = p_docName
+    WHERE Id = p_id;
+END$$
+DELIMITER ;
+
+USE Pulse360Db;
+
+DELIMITER $$
+
+-- 1. Assign a document to an employee
+CREATE PROCEDURE AssignEmployeeDocument(
+    IN p_userId INT,
+    IN p_documentId INT
+)
+BEGIN
+    INSERT INTO employee_document_assignments
+        (UserId, DocumentId, Status)
+    VALUES
+        (p_userId, p_documentId, 'PENDING');
+END$$
+
+
+-- 2. Get all pending documents for an employee
+CREATE PROCEDURE GetPendingEmployeeDocuments(
+    IN p_userId INT
+)
+BEGIN
+    SELECT
+        a.AssignmentId,
+        a.UserId,
+        a.DocumentId,
+        d.DocName,
+        a.Status,
+        a.AssignedAt
+    FROM employee_document_assignments a
+    INNER JOIN addemployeedocnames d
+        ON a.DocumentId = d.Id
+    WHERE a.UserId = p_userId
+      AND a.Status = 'PENDING'
+    ORDER BY a.AssignedAt DESC;
+END$$
+
+
+-- 3. Add an employee uploaded document
+CREATE PROCEDURE AddEmployeeDocument(
+    IN p_fileName VARCHAR(255),
+    IN p_filePath VARCHAR(500),
+    IN p_userId INT,
+    IN p_documentId INT
+)
+BEGIN
+    INSERT INTO fileuploads
+        (FileName, FilePath, UserId, DocumentId)
+    VALUES
+        (p_fileName, p_filePath, p_userId, p_documentId);
+END$$
+
+
+-- 4. Mark the assigned document as submitted
+CREATE PROCEDURE MarkEmployeeDocumentSubmitted(
+    IN p_userId INT,
+    IN p_documentId INT
+)
+BEGIN
+    UPDATE employee_document_assignments
+    SET
+        Status = 'SUBMITTED',
+        SubmittedAt = CURRENT_TIMESTAMP
+    WHERE UserId = p_userId
+      AND DocumentId = p_documentId
+      AND Status = 'PENDING';
+END$$
+
+
+-- 5. Get employee's uploaded documents
+CREATE PROCEDURE GetEmployeeDocuments(
+    IN p_userId INT
+)
+BEGIN
+    SELECT
+        f.id,
+        f.FileName,
+        f.FilePath,
+        f.UserId,
+        f.DocumentId,
+        d.DocName
+    FROM fileuploads f
+    LEFT JOIN addemployeedocnames d
+        ON f.DocumentId = d.Id
+    WHERE f.UserId = p_userId
+    ORDER BY f.id DESC;
+END$$
+
+
+-- 6. Get all employee documents for Admin
+CREATE PROCEDURE GetAllEmployeeDocuments()
+BEGIN
+    SELECT
+        f.id,
+        f.FileName,
+        f.FilePath,
+        f.UserId,
+        f.DocumentId,
+        d.DocName,
+        u.FirstName,
+        u.LastName,
+        u.Email
+    FROM fileuploads f
+    LEFT JOIN addemployeedocnames d
+        ON f.DocumentId = d.Id
+    INNER JOIN user u
+        ON f.UserId = u.UserId
+    ORDER BY f.id DESC;
+END$$
+
+
+-- 7. Delete an employee uploaded document
+CREATE PROCEDURE DeleteEmployeeDocument(
+    IN p_id INT
+)
+BEGIN
+    DELETE FROM fileuploads
+    WHERE id = p_id;
+END$$
+
+DELIMITER ;
+SHOW PROCEDURE STATUS
+WHERE Db = 'pulse360db';
+USE Pulse360Db;
+
+DELIMITER $$
+
+CREATE PROCEDURE GetAllEmployees()
+BEGIN
+    SELECT UserId, FirstName, LastName, Email
+    FROM user
+    ORDER BY FirstName, LastName;
+END$$
+
+DELIMITER ;
+USE Pulse360Db;
+
+DELIMITER $$
+
+CREATE PROCEDURE GetAllEmployees()
+BEGIN
+    SELECT UserId, FirstName, LastName, Email
+    FROM user
+    ORDER BY FirstName, LastName;
+END$$
+
+DELIMITER ;
+USE Pulse360Db;
+
+DROP PROCEDURE IF EXISTS GetAllAdminDocuments;
+
+DELIMITER $$
+
+CREATE PROCEDURE GetAllAdminDocuments()
+BEGIN
+
+    SELECT
+        a.AdminDocId,
+        a.Email,
+        a.DocName,
+        a.DocFile,
+        CONCAT(
+            u.FirstName,
+            ' ',
+            u.LastName
+        ) AS EmployeeName
+
+    FROM admindocuments a
+
+    LEFT JOIN user u
+        ON a.Email = u.Email
+
+    ORDER BY a.AdminDocId DESC;
+
+END$$
+
+DELIMITER ;
+USE Pulse360Db;
+
+DROP PROCEDURE IF EXISTS GetAllAdminDocuments;
+
+DELIMITER $$
+
+CREATE PROCEDURE GetAllAdminDocuments()
+BEGIN
+    SELECT
+        a.AdminDocId,
+        a.Email,
+        a.DocName,
+        a.DocFile,
+        CONCAT(
+            u.FirstName,
+            ' ',
+            u.LastName
+        ) AS EmployeeName
+    FROM admindocuments a
+    LEFT JOIN user u
+        ON a.Email = u.Email
+    ORDER BY a.AdminDocId DESC;
+END$$
+
+DELIMITER ;
+
+USE Pulse360Db;
+
+DROP PROCEDURE IF EXISTS GetEmployeeCompanyLetters;
+
+DELIMITER $$
+
+CREATE PROCEDURE GetEmployeeCompanyLetters(IN p_userId INT)
+BEGIN
+
+    SELECT
+        a.AdminDocId,
+        a.Email,
+        a.DocName,
+        a.DocFile,
+        CONCAT(
+            u.FirstName,
+            ' ',
+            u.LastName
+        ) AS EmployeeName
+
+    FROM admindocuments a
+
+    INNER JOIN user u
+        ON a.Email = u.Email
+
+    WHERE u.UserId = p_userId
+
+    ORDER BY a.AdminDocId DESC;
+
+END$$
+
+DELIMITER ;
+USE Pulse360Db;
+
+SELECT *
+FROM admindocuments
+ORDER BY AdminDocId DESC;
+USE Pulse360Db;
+
+CALL GetAllAdminDocuments();
+USE Pulse360Db;
+
+DROP TABLE IF EXISTS generated_letters;
+
+CREATE TABLE generated_letters (
+    GeneratedLetterId INT NOT NULL AUTO_INCREMENT,
+    UserId INT NOT NULL,
+    LetterName VARCHAR(255) NOT NULL,
+    LetterFile VARCHAR(500) NOT NULL,
+    GeneratedDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (GeneratedLetterId),
+
+    CONSTRAINT FK_GeneratedLetter_User
+        FOREIGN KEY (UserId)
+        REFERENCES user(UserId)
+        ON DELETE CASCADE
+);
+
+DROP PROCEDURE IF EXISTS AddGeneratedLetter;
+DELIMITER $$
+
+CREATE PROCEDURE AddGeneratedLetter(
+    IN p_userId INT,
+    IN p_letterName VARCHAR(255),
+    IN p_letterFile VARCHAR(500)
+)
+BEGIN
+
+    INSERT INTO generated_letters
+    (
+        UserId,
+        LetterName,
+        LetterFile
+    )
+    VALUES
+    (
+        p_userId,
+        p_letterName,
+        p_letterFile
+    );
+
+END$$
+
+DELIMITER ;
+DROP PROCEDURE IF EXISTS GetAllGeneratedLetters;
+
+DELIMITER $$
+
+CREATE PROCEDURE GetAllGeneratedLetters()
+BEGIN
+
+    SELECT
+        g.GeneratedLetterId,
+        g.UserId,
+        CONCAT(
+            u.FirstName,
+            ' ',
+            u.LastName
+        ) AS EmployeeName,
+        u.Email,
+        g.LetterName,
+        g.LetterFile,
+        g.GeneratedDate
+
+    FROM generated_letters g
+
+    INNER JOIN user u
+        ON g.UserId = u.UserId
+
+    ORDER BY g.GeneratedLetterId DESC;
+
+END$$
+
+DELIMITER ;
+DROP PROCEDURE IF EXISTS GetEmployeeCompanyLetters;
+
+DELIMITER $$
+
+CREATE PROCEDURE GetEmployeeCompanyLetters(
+    IN p_userId INT
+)
+BEGIN
+
+    SELECT
+        g.GeneratedLetterId,
+        g.UserId,
+        g.LetterName,
+        g.LetterFile,
+        g.GeneratedDate
+
+    FROM generated_letters g
+
+    WHERE g.UserId = p_userId
+
+    ORDER BY g.GeneratedLetterId DESC;
+
+END$$
+
+DELIMITER ;
+DROP PROCEDURE IF EXISTS DeleteGeneratedLetter;
+
+DELIMITER $$
+
+CREATE PROCEDURE DeleteGeneratedLetter(
+    IN p_generatedLetterId INT
+)
+BEGIN
+
+    DELETE FROM generated_letters
+    WHERE GeneratedLetterId = p_generatedLetterId;
+
+END$$
+
+DELIMITER ;

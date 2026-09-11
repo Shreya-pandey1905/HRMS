@@ -1,110 +1,78 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ page import="java.util.List" %>
+<%@ page import="models.Trainers.Training" %>
+
+<%
+    List<Training> trainings =
+            (List<Training>) request.getAttribute("trainings");
+%>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
 
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=0">
+          content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-          content="HRMS Dashboard">
-
-    <meta name="keywords"
-          content="HRMS, Human Resource Management System, Dashboard">
-
-    <meta name="author"
-          content="HRMS Team">
-
-    <meta name="robots"
-          content="noindex, nofollow">
-
-    <title>HRMS Dashboard</title>
-
+    <title>My Training - HRMS</title>
 
     <link rel="shortcut icon"
           type="image/x-icon"
           href="${pageContext.request.contextPath}/assets/img/favicon.png">
 
-
     <script src="${pageContext.request.contextPath}/assets/js/theme-script.js"></script>
-
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
 
-
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/icons/feather/feather.css">
-
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/tabler-icons/tabler-icons.css">
 
-
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/select2/css/select2.min.css">
-
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/fontawesome/css/fontawesome.min.css">
 
-
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/fontawesome/css/all.min.css">
-
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/css/bootstrap-datetimepicker.min.css">
 
-
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/daterangepicker/daterangepicker.css">
-
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/flatpickr/flatpickr.min.css">
 
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/css/dataTables.bootstrap5.min.css">
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/css/style.css">
 
 </head>
 
-
 <body>
-
-
-<c:set var="totalEmployees" value="0"/>
-<c:set var="presentToday" value="0"/>
-<c:set var="onLeave" value="0"/>
-<c:set var="pendingLeaves" value="0"/>
-
-
-<div id="global-loader">
-
-    <div class="page-loader"></div>
-
-</div>
-
 
 <div class="main-wrapper">
 
-
-    <!-- ================= HEADER ================= -->
+    <!-- HEADER -->
 
     <div class="header">
 
         <div class="main-header">
 
-
             <div class="header-left">
 
-                <a href="${pageContext.request.contextPath}/admin/dashboard"
+                <a href="${pageContext.request.contextPath}/employee/dashboard"
                    class="logo">
 
                     <img src="${pageContext.request.contextPath}/assets/img/logo.svg"
@@ -112,8 +80,7 @@
 
                 </a>
 
-
-                <a href="${pageContext.request.contextPath}/admin/dashboard"
+                <a href="${pageContext.request.contextPath}/employee/dashboard"
                    class="dark-logo">
 
                     <img src="${pageContext.request.contextPath}/assets/img/logo-white.svg"
@@ -129,11 +96,9 @@
                href="#sidebar">
 
                 <span class="bar-icon">
-
                     <span></span>
                     <span></span>
                     <span></span>
-
                 </span>
 
             </a>
@@ -145,7 +110,6 @@
 
                     <div class="me-auto d-flex align-items-center"
                          id="header-search">
-
 
                         <a id="toggle_btn"
                            href="javascript:void(0);"
@@ -159,21 +123,15 @@
                         <div class="input-group input-group-flat d-inline-flex me-1">
 
                             <span class="input-icon-addon">
-
                                 <i class="ti ti-search"></i>
-
                             </span>
-
 
                             <input type="text"
                                    class="form-control"
                                    placeholder="Search in HRMS">
 
-
                             <span class="input-group-text">
-
                                 <kbd>CTRL + /</kbd>
-
                             </span>
 
                         </div>
@@ -214,14 +172,12 @@
 
                     </a>
 
-
                     <a class="dropdown-item"
                        href="javascript:void(0);">
 
                         Settings
 
                     </a>
-
 
                     <a class="dropdown-item"
                        href="javascript:void(0);">
@@ -238,16 +194,17 @@
 
     </div>
 
+    <!-- /HEADER -->
 
-    <!-- ================= SIDEBAR ================= -->
 
-    <div class="sidebar" id="sidebar">
+    <!-- SIDEBAR -->
 
+    <div class="sidebar"
+         id="sidebar">
 
         <div class="sidebar-logo">
 
-
-            <a href="${pageContext.request.contextPath}/admin/dashboard"
+            <a href="${pageContext.request.contextPath}/employee/dashboard"
                class="logo logo-normal">
 
                 <img src="${pageContext.request.contextPath}/assets/img/logo.svg"
@@ -256,7 +213,7 @@
             </a>
 
 
-            <a href="${pageContext.request.contextPath}/admin/dashboard"
+            <a href="${pageContext.request.contextPath}/employee/dashboard"
                class="logo-small">
 
                 <img src="${pageContext.request.contextPath}/assets/img/logo-small.svg"
@@ -265,7 +222,7 @@
             </a>
 
 
-            <a href="${pageContext.request.contextPath}/admin/dashboard"
+            <a href="${pageContext.request.contextPath}/employee/dashboard"
                class="dark-logo">
 
                 <img src="${pageContext.request.contextPath}/assets/img/logo-white.svg"
@@ -280,7 +237,6 @@
 
             <div class="text-center rounded bg-light p-3 mb-4 user-profile">
 
-
                 <div class="avatar avatar-lg online mb-3">
 
                     <img src="${pageContext.request.contextPath}/assets/img/profiles/avatar-02.jpg"
@@ -291,12 +247,12 @@
 
 
                 <h6 class="fs-12 fw-normal mb-1">
-                    Admin
+                    Employee
                 </h6>
 
 
                 <p class="fs-10 mb-0">
-                    Administrator
+                    Employee
                 </p>
 
             </div>
@@ -304,25 +260,22 @@
         </div>
 
 
-        <!-- ================= SIDEBAR MENU ================= -->
+        <!-- SIDEBAR MENU -->
 
         <div class="sidebar-menu">
 
             <ul>
 
-
                 <li class="menu-title">
-
                     <span>MAIN MENU</span>
-
                 </li>
 
 
                 <!-- DASHBOARD -->
 
-                <li class="active">
+                <li>
 
-                    <a href="${pageContext.request.contextPath}/admin/dashboard">
+                    <a href="${pageContext.request.contextPath}/employee/dashboard">
 
                         <i class="ti ti-smart-home"></i>
 
@@ -365,7 +318,6 @@
 
                     <ul>
 
-
                         <li class="submenu">
 
                             <a href="javascript:void(0);">
@@ -382,9 +334,7 @@
                                 <li>
 
                                     <a href="javascript:void(0);">
-
                                         <span>Apply Leaves</span>
-
                                     </a>
 
                                 </li>
@@ -393,9 +343,7 @@
                                 <li>
 
                                     <a href="javascript:void(0);">
-
                                         <span>Leave Details</span>
-
                                     </a>
 
                                 </li>
@@ -404,9 +352,7 @@
                                 <li>
 
                                     <a href="javascript:void(0);">
-
                                         <span>Employee</span>
-
                                     </a>
 
                                 </li>
@@ -476,7 +422,7 @@
 
                 <!-- MY TRAINING -->
 
-                <li>
+                <li class="active">
 
                     <a href="${pageContext.request.contextPath}/employee/trainings">
 
@@ -519,10 +465,9 @@
                 </li>
 
 
-                <!-- ================= DOCUMENTS ================= -->
-                <!-- ================= DOCUMENTS ================= -->
+                <!-- DOCUMENTS -->
 
-                <li class="submenu active">
+                <li>
 
                     <a href="javascript:void(0);">
 
@@ -530,30 +475,25 @@
 
                         <span>Documents</span>
 
-                        <span class="menu-arrow"></span>
-
                     </a>
+
 
                     <ul>
 
-                        <!-- COMPANY LETTERS -->
-
                         <li>
 
-                            <a href="${pageContext.request.contextPath}/company-letters">
+                            <a href="javascript:void(0);">
 
-                                <span>Company Letters</span>
+                                <span>Company Slips</span>
 
                             </a>
 
                         </li>
 
 
-                        <!-- MY DOCUMENTS -->
-
                         <li>
 
-                            <a href="${pageContext.request.contextPath}/file-uploads?action=list">
+                            <a href="javascript:void(0);">
 
                                 <span>My Documents</span>
 
@@ -562,11 +502,9 @@
                         </li>
 
 
-                        <!-- UPLOAD DOCUMENTS -->
-
                         <li>
 
-                            <a href="${pageContext.request.contextPath}/file-uploads">
+                            <a href="javascript:void(0);">
 
                                 <span>Upload Documents</span>
 
@@ -579,7 +517,7 @@
                 </li>
 
 
-                <!-- HELP & SUPPORT -->
+                <!-- HELP -->
 
                 <li>
 
@@ -623,30 +561,31 @@
 
                 </li>
 
-
             </ul>
 
         </div>
 
     </div>
 
+    <!-- /SIDEBAR -->
 
-    <!-- ================= PAGE WRAPPER ================= -->
+
+    <!-- PAGE WRAPPER -->
 
     <div class="page-wrapper">
 
         <div class="content">
 
 
-            <!-- BREADCRUMB -->
+            <!-- PAGE HEADER -->
 
-            <div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
+            <div class="d-md-flex d-block align-items-center
+                        justify-content-between page-breadcrumb mb-3">
 
-
-                <div class="my-auto mb-2">
+                <div class="my-auto">
 
                     <h2 class="mb-1">
-                        Employee Dashboard
+                        My Training
                     </h2>
 
 
@@ -654,10 +593,9 @@
 
                         <ol class="breadcrumb mb-0">
 
-
                             <li class="breadcrumb-item">
 
-                                <a href="${pageContext.request.contextPath}/admin/dashboard">
+                                <a href="${pageContext.request.contextPath}/employee/dashboard">
 
                                     <i class="ti ti-smart-home"></i>
 
@@ -666,13 +604,14 @@
                             </li>
 
 
-                            <li class="breadcrumb-item active"
-                                aria-current="page">
-
-                                Dashboard
-
+                            <li class="breadcrumb-item">
+                                Training
                             </li>
 
+
+                            <li class="breadcrumb-item active">
+                                My Training
+                            </li>
 
                         </ol>
 
@@ -680,403 +619,195 @@
 
                 </div>
 
-
-                <div class="d-flex my-xl-auto right-content align-items-center flex-wrap">
-
-
-                    <div class="input-icon mb-2 position-relative">
-
-                        <span class="input-icon-addon">
-
-                            <i class="ti ti-calendar text-gray-9"></i>
-
-                        </span>
+            </div>
 
 
-                        <input type="text"
-                               class="form-control date-range bookingrange"
-                               placeholder="dd/mm/yyyy - dd/mm/yyyy">
+            <!-- TRAINING LIST -->
 
-                    </div>
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h5 class="mb-0">
+                        My Training List
+                    </h5>
+
+                </div>
 
 
-                    <div class="ms-2 head-icons">
+                <div class="card-body p-0">
 
-                        <a href="javascript:void(0);"
-                           data-bs-toggle="tooltip"
-                           data-bs-placement="top"
-                           title="Collapse"
-                           id="collapse-header">
+                    <div class="custom-datatable-filter table-responsive">
 
-                            <i class="ti ti-chevrons-up"></i>
+                        <table id="employeeTrainingsTable"
+                               class="table table-nowrap datatable">
 
-                        </a>
+                            <thead class="thead-light">
+
+                            <tr>
+
+                                <th>Training ID</th>
+
+                                <th>Trainer Name</th>
+
+                                <th>Training Type</th>
+
+                                <th>Training Cost</th>
+
+                                <th>Description</th>
+
+                                <th>Status</th>
+
+                                <th>Start Date</th>
+
+                                <th>End Date</th>
+
+                            </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                            <%
+                                if (trainings != null &&
+                                        !trainings.isEmpty()) {
+
+                                    for (Training training : trainings) {
+
+                                        String trainerName =
+                                                ((training.getTrainerFirstName() == null)
+                                                        ? ""
+                                                        : training.getTrainerFirstName())
+                                                        + " "
+                                                        + ((training.getTrainerLastName() == null)
+                                                        ? ""
+                                                        : training.getTrainerLastName());
+
+                                        String status =
+                                                training.getStatus() == null
+                                                        ? ""
+                                                        : training.getStatus();
+                            %>
+
+                            <tr>
+
+                                <td>
+                                    <%= training.getTrainingId() %>
+                                </td>
+
+
+                                <td>
+                                    <%= trainerName.trim() %>
+                                </td>
+
+
+                                <td>
+                                    <%= training.getTrainingTypeName() == null
+                                            ? ""
+                                            : training.getTrainingTypeName() %>
+                                </td>
+
+
+                                <td>
+                                    <%= training.getTrainingCost() %>
+                                </td>
+
+
+                                <td>
+
+                                    <span class="text-truncate d-inline-block"
+                                          style="max-width:250px;">
+
+                                        <%= training.getDescription() == null
+                                                ? ""
+                                                : training.getDescription() %>
+
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+
+                                    <% if ("Active".equalsIgnoreCase(status)) { %>
+
+                                    <span class="badge badge-success
+                                                     d-inline-flex
+                                                     align-items-center">
+
+                                            <i class="ti ti-point-filled me-1"></i>
+
+                                            Active
+
+                                        </span>
+
+                                    <% } else { %>
+
+                                    <span class="badge badge-danger
+                                                     d-inline-flex
+                                                     align-items-center">
+
+                                            <i class="ti ti-point-filled me-1"></i>
+
+                                            <%= status %>
+
+                                        </span>
+
+                                    <% } %>
+
+                                </td>
+
+
+                                <td>
+
+                                    <%= training.getStartDate() == null
+                                            ? ""
+                                            : training.getStartDate() %>
+
+                                </td>
+
+
+                                <td>
+
+                                    <%= training.getEndDate() == null
+                                            ? ""
+                                            : training.getEndDate() %>
+
+                                </td>
+
+                            </tr>
+
+                            <%
+                                }
+
+                            } else {
+                            %>
+
+                            <tr>
+
+                                <td colspan="8"
+                                    class="text-center">
+
+                                    No training assigned to you.
+
+                                </td>
+
+                            </tr>
+
+                            <%
+                                }
+                            %>
+
+                            </tbody>
+
+                        </table>
 
                     </div>
 
                 </div>
 
             </div>
-
-
-            <!-- WELCOME -->
-
-            <div class="welcome-wrap mb-4">
-
-
-                <div class="d-flex align-items-center justify-content-between flex-wrap">
-
-
-                    <div class="mb-3">
-
-                        <h2 class="mb-1 text-white">
-                            Welcome to HRMS
-                        </h2>
-
-
-                        <p class="text-light mb-0">
-                            Human Resource Management System
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="welcome-bg">
-
-
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-02.svg"
-                         alt=""
-                         class="welcome-bg-01">
-
-
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-03.svg"
-                         alt=""
-                         class="welcome-bg-02">
-
-
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-01.svg"
-                         alt=""
-                         class="welcome-bg-03">
-
-                </div>
-
-            </div>
-
-
-            <!-- HRMS SUMMARY CARDS -->
-
-            <div class="row">
-
-
-                <div class="col-xl-3 col-sm-6 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-
-                                <i class="ti ti-users fs-16"></i>
-
-                            </span>
-
-
-                            <h2 class="mb-1">
-                                ${totalEmployees}
-                            </h2>
-
-
-                            <p class="fs-13 mb-0">
-                                Total Employees
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-xl-3 col-sm-6 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-
-                                <i class="ti ti-user-check fs-16"></i>
-
-                            </span>
-
-
-                            <h2 class="mb-1">
-                                ${presentToday}
-                            </h2>
-
-
-                            <p class="fs-13 mb-0">
-                                Present Today
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-xl-3 col-sm-6 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-
-                                <i class="ti ti-calendar-off fs-16"></i>
-
-                            </span>
-
-
-                            <h2 class="mb-1">
-                                ${onLeave}
-                            </h2>
-
-
-                            <p class="fs-13 mb-0">
-                                On Leave
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-xl-3 col-sm-6 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-
-                                <i class="ti ti-clock-hour-4 fs-16"></i>
-
-                            </span>
-
-
-                            <h2 class="mb-1">
-                                ${pendingLeaves}
-                            </h2>
-
-
-                            <p class="fs-13 mb-0">
-                                Pending Leave Requests
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- DASHBOARD WIDGETS -->
-
-            <div class="row">
-
-
-                <div class="col-xxl-8 col-xl-7 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2 d-flex align-items-center justify-content-between">
-
-                            <h5 class="mb-0">
-                                Attendance Overview
-                            </h5>
-
-
-                            <button type="button"
-                                    class="btn btn-white border btn-sm"
-                                    disabled>
-
-                                Overview
-
-                            </button>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div id="attendance-overview-chart"
-                                 style="min-height:280px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-xxl-4 col-xl-5 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Employee Overview
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div id="employee-overview-chart"
-                                 style="min-height:280px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="row">
-
-
-                <div class="col-xl-6 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Leave Overview
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div id="leave-overview-chart"
-                                 style="min-height:250px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-xl-6 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Recent Activity
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div class="text-center py-5 text-muted">
-
-                                <i class="ti ti-activity fs-32 mb-2 d-block"></i>
-
-
-                                <p class="mb-0">
-                                    No activity available
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- HRMS INFORMATION -->
-
-            <div class="row">
-
-
-                <div class="col-12 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                HRMS Information
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div class="text-center py-4 text-muted">
-
-                                <p class="mb-0">
-                                    Information will appear here as HRMS modules are implemented.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-        <!-- FOOTER -->
-
-        <div class="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
-
-            <p class="mb-0">
-                HRMS
-            </p>
-
-
-            <p class="mb-0">
-                Human Resource Management System
-            </p>
 
         </div>
 
@@ -1093,10 +824,6 @@
 
 <script src="${pageContext.request.contextPath}/assets/js/feather.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/assets/js/jquery.slimscroll.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/plugins/apexchart/apexcharts.min.js"></script>
-
 <script src="${pageContext.request.contextPath}/assets/js/moment.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/js/bootstrap-datetimepicker.min.js"></script>
@@ -1107,8 +834,33 @@
 
 <script src="${pageContext.request.contextPath}/assets/js/theme-colorpicker.js"></script>
 
+<script src="${pageContext.request.contextPath}/assets/js/jquery.slimscroll.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 
+
+<!-- DataTables -->
+
+<script src="${pageContext.request.contextPath}/assets/js/jquery.dataTables.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/assets/js/dataTables.bootstrap5.min.js"></script>
+
+
+<script>
+
+    $('#employeeTrainingsTable').DataTable({
+
+        "pageLength": 5,
+
+        "ordering": true,
+
+        "searching": true,
+
+        "lengthChange": true
+
+    });
+
+</script>
 
 </body>
 
