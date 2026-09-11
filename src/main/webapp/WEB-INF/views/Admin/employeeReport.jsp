@@ -301,7 +301,7 @@
                 </div>
 
                 <div class="card-body p-0">
-                    <div class="table-responsive">
+                    <div class="custom-datatable-filter table-responsive">
                         <table class="table datatable">
                             <thead class="thead-light">
                                 <tr>
