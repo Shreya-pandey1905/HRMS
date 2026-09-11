@@ -29,9 +29,14 @@ DELIMITER //
 
 CREATE PROCEDURE GetUserByEmail(IN p_email VARCHAR(255))
 BEGIN
+    -- Fix: the User table's Email column uses collation utf8mb4_unicode_ci,
+    -- but a plain VARCHAR parameter here picks up the server's own default
+    -- collation (utf8mb4_0900_ai_ci on MySQL 8), so comparing the two
+    -- straight up used to fail with "Illegal mix of collations" and login
+    -- never worked. Casting the parameter to the column's collation fixes it.
     SELECT UserId, Email, PasswordHash, RoleId, Status
     FROM `User`
-    WHERE Email = p_email;
+    WHERE Email = p_email COLLATE utf8mb4_unicode_ci;
 END //
 
 DELIMITER ;
