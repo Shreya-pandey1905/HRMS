@@ -362,6 +362,14 @@
 
 <script src="${pageContext.request.contextPath}/assets/js/theme-colorpicker.js"></script>
 
+<!-- Needed because this page has a "datatable" table, and must come
+     BEFORE script.js: script.js calls $('.datatable').DataTable() as
+     soon as it loads, so if the plugin isn't loaded yet that call
+     throws and the page loader never gets hidden. -->
+<script src="${pageContext.request.contextPath}/assets/js/jquery.dataTables.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/assets/js/dataTables.bootstrap5.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 
 
