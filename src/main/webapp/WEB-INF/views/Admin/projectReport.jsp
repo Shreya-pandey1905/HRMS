@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -158,75 +159,103 @@
             </div>
 
 
-            <!-- ================= SUMMARY CARDS ================= -->
+            <!-- ================= SUMMARY CARDS + CHART ================= -->
+            <!-- Layout copied from the template's project-report.html: stat
+                 cards in a 2x2 grid on the left half, chart + percentage
+                 breakdown on the right half. -->
 
             <div class="row">
 
-                <div class="col-lg-3 col-md-6 d-flex">
+                <div class="col-lg-6 col-md-6 d-flex">
+                    <div class="row flex-fill">
+
+                        <div class="col-lg-6 col-md-6 d-flex">
+                            <div class="card flex-fill">
+                                <div class="card-body">
+                                    <div class="mb-2">
+                                        <span class="fs-14 fw-normal text-truncate mb-1">Total Projects</span>
+                                        <h5>${summary.totalProjects}</h5>
+                                    </div>
+                                    <div class="progress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;height: 5px;">
+                                        <div class="progress-bar bg-pink" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 d-flex">
+                            <div class="card flex-fill">
+                                <div class="card-body">
+                                    <div class="mb-2">
+                                        <span class="fs-14 fw-normal text-truncate mb-1">Active Projects</span>
+                                        <h5>${summary.activeProjects}</h5>
+                                    </div>
+                                    <div class="progress" role="progressbar" aria-valuenow="${summary.activeProjects}" aria-valuemin="0" aria-valuemax="${summary.totalProjects}" style="width: 100%;height: 5px;">
+                                        <div class="progress-bar bg-success" style="width: ${summary.totalProjects > 0 ? (summary.activeProjects * 100 / summary.totalProjects) : 0}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 d-flex">
+                            <div class="card flex-fill">
+                                <div class="card-body">
+                                    <div class="mb-2">
+                                        <span class="fs-14 fw-normal text-truncate mb-1">Inactive Projects</span>
+                                        <h5>${summary.inactiveProjects}</h5>
+                                    </div>
+                                    <div class="progress" role="progressbar" aria-valuenow="${summary.inactiveProjects}" aria-valuemin="0" aria-valuemax="${summary.totalProjects}" style="width: 100%;height: 5px;">
+                                        <div class="progress-bar bg-danger" style="width: ${summary.totalProjects > 0 ? (summary.inactiveProjects * 100 / summary.totalProjects) : 0}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 d-flex">
+                            <div class="card flex-fill">
+                                <div class="card-body">
+                                    <div class="mb-2">
+                                        <span class="fs-14 fw-normal text-truncate mb-1">Overdue Projects</span>
+                                        <h5>${summary.overdueProjects}</h5>
+                                    </div>
+                                    <div class="progress" role="progressbar" aria-valuenow="${summary.overdueProjects}" aria-valuemin="0" aria-valuemax="${summary.totalProjects}" style="width: 100%;height: 5px;">
+                                        <div class="progress-bar bg-purple" style="width: ${summary.totalProjects > 0 ? (summary.overdueProjects * 100 / summary.totalProjects) : 0}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 d-flex">
                     <div class="card flex-fill">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center overflow-hidden mb-2">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="fs-12 fw-normal mb-1 text-truncate">Total Projects</p>
-                                    <h4>${summary.totalProjects}</h4>
+                        <div class="card-header border-0">
+                            <div class="d-flex align-items-center">
+                                <span class="me-2"><i class="ti ti-chart-pie text-danger"></i></span>
+                                <h5>Projects by Status</h5>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 d-flex justify-content-center">
+                                    <div id="project-chart"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row gy-4">
+                                        <div class="col-md-6">
+                                            <p class="fs-16 fw-normal mb-0 text-gray-5">Active</p>
+                                            <p class="fs-20 fw-bold text-dark"><fmt:formatNumber value="${summary.totalProjects > 0 ? (summary.activeProjects * 100 / summary.totalProjects) : 0}" maxFractionDigits="0"/>%</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="fs-16 fw-normal mb-0 text-gray-5">Inactive</p>
+                                            <p class="fs-20 fw-bold text-dark"><fmt:formatNumber value="${summary.totalProjects > 0 ? (summary.inactiveProjects * 100 / summary.totalProjects) : 0}" maxFractionDigits="0"/>%</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center overflow-hidden mb-2">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="fs-12 fw-normal mb-1 text-truncate">Active Projects</p>
-                                    <h4>${summary.activeProjects}</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center overflow-hidden mb-2">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="fs-12 fw-normal mb-1 text-truncate">Inactive Projects</p>
-                                    <h4>${summary.inactiveProjects}</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center overflow-hidden mb-2">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="fs-12 fw-normal mb-1 text-truncate">Overdue Projects</p>
-                                    <h4>${summary.overdueProjects}</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <!-- ================= CHART ================= -->
-
-            <div class="card">
-
-                <div class="card-header">
-                    <h5 class="mb-0">Projects by Status</h5>
-                </div>
-
-                <div class="card-body">
-                    <div id="project-chart" style="min-height:280px;"></div>
                 </div>
 
             </div>

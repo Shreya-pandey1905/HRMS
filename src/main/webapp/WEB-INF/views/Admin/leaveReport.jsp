@@ -158,75 +158,94 @@
             </div>
 
 
-            <!-- ================= SUMMARY CARDS ================= -->
+            <!-- ================= SUMMARY CARDS + CHART ================= -->
+            <!-- Layout copied from the template's leave-report.html: stat
+                 cards in a 2x2 grid on the left half, chart on the right half. -->
 
             <div class="row">
 
-                <div class="col-lg-3 col-md-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center overflow-hidden mb-2">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="fs-12 fw-normal mb-1 text-truncate">Total Leaves</p>
-                                    <h4>${summary.totalLeaves}</h4>
+                <div class="col-xl-6 d-flex">
+                    <div class="row flex-fill">
+
+                        <div class="col-lg-6 col-md-6 d-flex">
+                            <div class="card flex-fill">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between mb-2 overflow-hidden">
+                                        <div>
+                                            <p class="fs-12 fw-normal mb-1 text-truncate">Total Leaves</p>
+                                            <h4>${summary.totalLeaves}</h4>
+                                        </div>
+                                        <div class="leave-report-icon">
+                                            <span class="p-2 border border-primary bg-transparent-primary rounded-circle d-flex align-items-center justify-content-center"><i class="ti ti-calendar-x text-primary"></i></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center overflow-hidden mb-2">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="fs-12 fw-normal mb-1 text-truncate">Approved Leaves</p>
-                                    <h4>${summary.approvedLeaves}</h4>
+                        <div class="col-lg-6 col-md-6 d-flex">
+                            <div class="card flex-fill">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between mb-2 overflow-hidden">
+                                        <div>
+                                            <p class="fs-12 fw-normal mb-1 text-truncate">Approved Leaves</p>
+                                            <h4>${summary.approvedLeaves}</h4>
+                                        </div>
+                                        <div class="leave-report-icon">
+                                            <span class="p-2 border border-success bg-transparent-success rounded-circle d-flex align-items-center justify-content-center"><i class="ti ti-calendar-x text-success"></i></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center overflow-hidden mb-2">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="fs-12 fw-normal mb-1 text-truncate">Pending Requests</p>
-                                    <h4>${summary.pendingLeaves}</h4>
+                        <div class="col-lg-6 col-md-6 d-flex">
+                            <div class="card flex-fill">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between mb-2 overflow-hidden">
+                                        <div>
+                                            <p class="fs-12 fw-normal mb-1 text-truncate">Pending Requests</p>
+                                            <h4>${summary.pendingLeaves}</h4>
+                                        </div>
+                                        <div class="leave-report-icon">
+                                            <span class="p-2 border border-skyblue bg-transparent-skyblue rounded-circle d-flex align-items-center justify-content-center"><i class="ti ti-calendar-x text-skyblue"></i></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center overflow-hidden mb-2">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="fs-12 fw-normal mb-1 text-truncate">Rejected Leaves</p>
-                                    <h4>${summary.rejectedLeaves}</h4>
+                        <div class="col-lg-6 col-md-6 d-flex">
+                            <div class="card flex-fill">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between mb-2 overflow-hidden">
+                                        <div>
+                                            <p class="fs-12 fw-normal mb-1 text-truncate">Rejected Leaves</p>
+                                            <h4>${summary.rejectedLeaves}</h4>
+                                        </div>
+                                        <div class="leave-report-icon">
+                                            <span class="p-2 border border-danger bg-transparent-danger rounded-circle d-flex align-items-center justify-content-center"><i class="ti ti-calendar-x text-danger"></i></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
-            </div>
-
-
-            <!-- ================= CHART ================= -->
-
-            <div class="card">
-
-                <div class="card-header">
-                    <h5 class="mb-0">Leaves (by Leave Type)</h5>
-                </div>
-
-                <div class="card-body">
-                    <div id="leave-chart" style="min-height:280px;"></div>
+                <div class="col-xl-6 d-flex">
+                    <div class="card flex-fill">
+                        <div class="card-header border-0 pb-0">
+                            <div class="d-flex align-items-center">
+                                <span class="me-2"><i class="ti ti-chart-bar text-danger"></i></span>
+                                <h5>Leaves</h5>
+                            </div>
+                        </div>
+                        <div class="card-body py-0">
+                            <div id="leave-chart" style="min-height:280px;"></div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
