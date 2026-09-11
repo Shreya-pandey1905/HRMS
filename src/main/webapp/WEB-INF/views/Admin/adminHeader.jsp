@@ -104,10 +104,10 @@
                     Settings
                 </a>
 
-                <a class="dropdown-item"
-                   href="javascript:void(0);">
-                    Logout
-                </a>
+             <a href="${pageContext.request.contextPath}/logout">
+                 <i class="ti ti-logout"></i>
+                 <span>Logout</span>
+             </a>
 
             </div>
 

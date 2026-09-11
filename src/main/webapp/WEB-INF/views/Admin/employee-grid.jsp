@@ -1,5 +1,36 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.nio.charset.StandardCharsets" %>
+<%@ page import="models.Employees.User" %>
+<%!
+    String toProfileUrl(String contextPath, String profilePicture) {
+        if (profilePicture == null) {
+            return null;
+        }
+        String path = profilePicture.trim().replace('\\', '/');
+        if (path.isEmpty()) {
+            return null;
+        }
+        if (path.startsWith("http://") || path.startsWith("https://")) {
+            return path;
+        }
+        while (path.startsWith("/")) {
+            path = path.substring(1);
+        }
+        if (!path.contains("/")) {
+            path = "Content/uploads/" + path;
+        }
+        StringBuilder url = new StringBuilder(contextPath);
+        for (String part : path.split("/")) {
+            if (part.isEmpty()) {
+                continue;
+            }
+            url.append('/').append(URLEncoder.encode(part, StandardCharsets.UTF_8).replace("+", "%20"));
+        }
+        return url.toString();
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1254,19 +1285,29 @@
 
                             <a href="${pageContext.request.contextPath}/admin/employees?action=view&id=${employee.userId}"
                                class="avatar avatar-xl avatar-rounded online border p-1 border-primary rounded-circle">
-
+                                <%
+                                    User gridEmp = (User) pageContext.getAttribute("employee");
+                                    String gridImg = toProfileUrl(
+                                            request.getContextPath(),
+                                            gridEmp != null ? gridEmp.getProfilePicture() : null
+                                    );
+                                    pageContext.setAttribute("gridProfileImg", gridImg);
+                                %>
                                 <c:choose>
 
-                                    <c:when test="${not empty employee.profilePicture}">
-                                        <img src="${pageContext.request.contextPath}/${employee.profilePicture}"
-                                             class="img-fluid h-auto w-auto"
-                                             alt="Profile">
+                                    <c:when test="${not empty gridProfileImg}">
+                                        <img src="${gridProfileImg}"
+                                             class="img-fluid rounded-circle"
+                                             alt="Profile"
+                                             style="width:100%;height:100%;object-fit:cover;"
+                                             onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/assets/img/users/user-32.jpg';">
                                     </c:when>
 
                                     <c:otherwise>
                                         <img src="${pageContext.request.contextPath}/assets/img/users/user-32.jpg"
-                                             class="img-fluid h-auto w-auto"
-                                             alt="Profile">
+                                             class="img-fluid rounded-circle"
+                                             alt="Profile"
+                                             style="width:100%;height:100%;object-fit:cover;">
                                     </c:otherwise>
 
                                 </c:choose>

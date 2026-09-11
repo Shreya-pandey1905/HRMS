@@ -2,6 +2,38 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.nio.charset.StandardCharsets" %>
+<%@ page import="models.Employees.User" %>
+<%!
+    String toProfileUrl(String contextPath, String profilePicture) {
+        if (profilePicture == null) {
+            return null;
+        }
+        String path = profilePicture.trim().replace('\\', '/');
+        if (path.isEmpty()) {
+            return null;
+        }
+        if (path.startsWith("http://") || path.startsWith("https://")) {
+            return path;
+        }
+        while (path.startsWith("/")) {
+            path = path.substring(1);
+        }
+        if (!path.contains("/")) {
+            path = "Content/uploads/" + path;
+        }
+        StringBuilder url = new StringBuilder(contextPath);
+        for (String part : path.split("/")) {
+            if (part.isEmpty()) {
+                continue;
+            }
+            url.append('/').append(URLEncoder.encode(part, StandardCharsets.UTF_8).replace("+", "%20"));
+        }
+        return url.toString();
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,6 +79,25 @@
 
 <!-- Main CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+
+<style>
+    .employee-list-avatar {
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+        flex-shrink: 0;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .employee-list-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+</style>
 
 </head>
 
@@ -906,7 +957,14 @@
                             <c:when test="${not empty employees}">
 
                                 <c:forEach var="employee" items="${employees}">
-
+                                    <%
+                                        User listEmp = (User) pageContext.getAttribute("employee");
+                                        String listImg = toProfileUrl(
+                                                request.getContextPath(),
+                                                listEmp != null ? listEmp.getProfilePicture() : null
+                                        );
+                                        pageContext.setAttribute("listProfileImg", listImg);
+                                    %>
                                     <tr>
 
                                         <!-- Checkbox -->
@@ -930,18 +988,17 @@
                                             <div class="d-flex align-items-center">
 
                                                 <a href="${pageContext.request.contextPath}/admin/employees?action=view&id=${employee.userId}"
-                                                   class="avatar avatar-md">
+                                                   class="avatar avatar-md avatar-rounded employee-list-avatar">
 
                                                     <c:choose>
-                                                        <c:when test="${not empty employee.profilePicture}">
-                                                            <img src="${pageContext.request.contextPath}/${employee.profilePicture}"
-                                                                 class="img-fluid rounded-circle"
-                                                                 alt="Profile">
+                                                        <c:when test="${not empty listProfileImg}">
+                                                            <img src="${listProfileImg}"
+                                                                 alt="Profile"
+                                                                 onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/assets/img/users/user-32.jpg';">
                                                         </c:when>
 
                                                         <c:otherwise>
                                                             <img src="${pageContext.request.contextPath}/assets/img/users/user-32.jpg"
-                                                                 class="img-fluid rounded-circle"
                                                                  alt="Profile">
                                                         </c:otherwise>
                                                     </c:choose>
@@ -957,7 +1014,15 @@
                                                     </p>
 
                                                     <span class="fs-12">
-                                                        Department ID:  ${employee.departmentName}
+                                                        Department:
+                                                        <c:choose>
+                                                            <c:when test="${not empty employee.departmentName}">
+                                                                ${employee.departmentName}
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                Not Assigned
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </span>
 
                                                 </div>

@@ -87,11 +87,48 @@ public class EmployeeDao {
              CallableStatement statement = connection.prepareCall(sql)) {
             statement.setInt(1,userId);
             ResultSet rs = statement.executeQuery();
-            if(rs.next()) return mapUser(rs);
+            if(rs.next()) {
+                User user = mapUser(rs);
+                enrichEmployeeNames(user);
+                return user;
+            }
         } catch(Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private void enrichEmployeeNames(User user) {
+        if (user == null) {
+            return;
+        }
+        if (user.getDepartmentId() != null &&
+                (user.getDepartmentName() == null || user.getDepartmentName().isBlank())) {
+            for (User department : getDepartments()) {
+                if (user.getDepartmentId().equals(department.getDepartmentId())) {
+                    user.setDepartmentName(department.getDepartmentName());
+                    break;
+                }
+            }
+        }
+        if (user.getDesignationId() != null &&
+                (user.getDesignationName() == null || user.getDesignationName().isBlank())) {
+            for (User designation : getDesignations()) {
+                if (user.getDesignationId().equals(designation.getDesignationId())) {
+                    user.setDesignationName(designation.getDesignationName());
+                    break;
+                }
+            }
+        }
+        if (user.getRoleId() > 0 &&
+                (user.getRoleName() == null || user.getRoleName().isBlank())) {
+            for (User role : getRoles()) {
+                if (user.getRoleId() == role.getRoleId()) {
+                    user.setRoleName(role.getRoleName());
+                    break;
+                }
+            }
+        }
     }
 
     public boolean emailExists(String email) {
