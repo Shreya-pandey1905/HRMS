@@ -95,10 +95,10 @@
 <body>
 
 
-<c:set var="totalEmployees" value="0"/>
-<c:set var="presentToday" value="0"/>
-<c:set var="onLeave" value="0"/>
-<c:set var="pendingLeaves" value="0"/>
+<%--<c:set var="totalEmployees" value="0"/>--%>
+<%--<c:set var="presentToday" value="0"/>--%>
+<%--<c:set var="onLeave" value="0"/>--%>
+<%--<c:set var="pendingLeaves" value="0"/>--%>
 
 
 <div id="global-loader">
