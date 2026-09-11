@@ -418,7 +418,7 @@
                 <ul>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/employee-report">
                             <span>Employee Report</span>
                         </a>
                     </li>

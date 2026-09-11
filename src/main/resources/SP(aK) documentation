@@ -520,6 +520,36 @@ BEGIN
 END$$
 
 DELIMITER ;
+DROP PROCEDURE IF EXISTS GetEmployeeReport;
+
+DELIMITER $$
+
+CREATE PROCEDURE GetEmployeeReport()
+BEGIN
+
+    SELECT
+        u.UserId,
+        CONCAT(
+            u.FirstName,
+            ' ',
+            u.LastName
+        ) AS EmployeeName,
+        u.Email,
+        d.Name AS DepartmentName,
+        u.PhoneNumber,
+        u.DateOfJoining,
+        u.Status
+
+    FROM User u
+
+    LEFT JOIN Departments d
+        ON u.DepartmentId = d.DepartmentId
+
+    ORDER BY u.DateOfJoining DESC;
+
+END$$
+
+DELIMITER ;
 DROP PROCEDURE IF EXISTS GetLeaveReport;
 
 DELIMITER $$
