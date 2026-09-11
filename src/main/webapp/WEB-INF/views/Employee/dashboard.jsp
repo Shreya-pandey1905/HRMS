@@ -1,99 +1,200 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <meta name="description" content="HRMS Dashboard">
-    <meta name="keywords" content="HRMS, Human Resource Management System, Dashboard">
-    <meta name="author" content="HRMS Team">
-    <meta name="robots" content="noindex, nofollow">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+    <meta name="description"
+          content="HRMS Dashboard">
+
+    <meta name="keywords"
+          content="HRMS, Human Resource Management System, Dashboard">
+
+    <meta name="author"
+          content="HRMS Team">
+
+    <meta name="robots"
+          content="noindex, nofollow">
+
     <title>HRMS Dashboard</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.png">
+
+    <link rel="shortcut icon"
+          type="image/x-icon"
+          href="${pageContext.request.contextPath}/assets/img/favicon.png">
+
+
     <script src="${pageContext.request.contextPath}/assets/js/theme-script.js"></script>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/icons/feather/feather.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/tabler-icons/tabler-icons.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/daterangepicker/daterangepicker.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/flatpickr/flatpickr.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
+
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/plugins/icons/feather/feather.css">
+
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/plugins/tabler-icons/tabler-icons.css">
+
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/plugins/select2/css/select2.min.css">
+
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/plugins/fontawesome/css/fontawesome.min.css">
+
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/plugins/fontawesome/css/all.min.css">
+
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/css/bootstrap-datetimepicker.min.css">
+
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/plugins/daterangepicker/daterangepicker.css">
+
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/plugins/flatpickr/flatpickr.min.css">
+
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/css/style.css">
+
 </head>
 
+
 <body>
+
 
 <c:set var="totalEmployees" value="0"/>
 <c:set var="presentToday" value="0"/>
 <c:set var="onLeave" value="0"/>
 <c:set var="pendingLeaves" value="0"/>
 
+
 <div id="global-loader">
+
     <div class="page-loader"></div>
+
 </div>
+
 
 <div class="main-wrapper">
 
-    <!-- Header -->
+
+    <!-- ================= HEADER ================= -->
+
     <div class="header">
+
         <div class="main-header">
 
+
             <div class="header-left">
-                <a href="${pageContext.request.contextPath}/admin/dashboard" class="logo">
-                    <img src="${pageContext.request.contextPath}/assets/img/logo.svg" alt="HRMS Logo">
+
+                <a href="${pageContext.request.contextPath}/admin/dashboard"
+                   class="logo">
+
+                    <img src="${pageContext.request.contextPath}/assets/img/logo.svg"
+                         alt="HRMS Logo">
+
                 </a>
 
-                <a href="${pageContext.request.contextPath}/admin/dashboard" class="dark-logo">
-                    <img src="${pageContext.request.contextPath}/assets/img/logo-white.svg" alt="HRMS Logo">
+
+                <a href="${pageContext.request.contextPath}/admin/dashboard"
+                   class="dark-logo">
+
+                    <img src="${pageContext.request.contextPath}/assets/img/logo-white.svg"
+                         alt="HRMS Logo">
+
                 </a>
+
             </div>
 
-            <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+
+            <a id="mobile_btn"
+               class="mobile_btn"
+               href="#sidebar">
+
                 <span class="bar-icon">
+
                     <span></span>
                     <span></span>
                     <span></span>
+
                 </span>
+
             </a>
 
+
             <div class="header-user">
+
                 <div class="nav user-menu nav-list">
 
-                    <div class="me-auto d-flex align-items-center" id="header-search">
+                    <div class="me-auto d-flex align-items-center"
+                         id="header-search">
 
-                        <a id="toggle_btn" href="javascript:void(0);" class="btn btn-menubar me-1">
+
+                        <a id="toggle_btn"
+                           href="javascript:void(0);"
+                           class="btn btn-menubar me-1">
+
                             <i class="ti ti-arrow-bar-to-left"></i>
+
                         </a>
 
+
                         <div class="input-group input-group-flat d-inline-flex me-1">
+
                             <span class="input-icon-addon">
+
                                 <i class="ti ti-search"></i>
+
                             </span>
+
 
                             <input type="text"
                                    class="form-control"
                                    placeholder="Search in HRMS">
 
+
                             <span class="input-group-text">
+
                                 <kbd>CTRL + /</kbd>
+
                             </span>
+
                         </div>
 
-                        <a href="javascript:void(0);" class="btn btn-menubar">
+
+                        <a href="javascript:void(0);"
+                           class="btn btn-menubar">
+
                             <i class="ti ti-settings-cog"></i>
+
                         </a>
 
                     </div>
 
                 </div>
+
             </div>
 
+
             <div class="dropdown mobile-user-menu">
+
                 <a href="javascript:void(0);"
                    class="nav-link dropdown-toggle"
                    data-bs-toggle="dropdown"
@@ -103,32 +204,48 @@
 
                 </a>
 
+
                 <div class="dropdown-menu dropdown-menu-end">
 
-                    <a class="dropdown-item" href="javascript:void(0);">
+                    <a class="dropdown-item"
+                       href="javascript:void(0);">
+
                         Profile
+
                     </a>
 
-                    <a class="dropdown-item" href="javascript:void(0);">
+
+                    <a class="dropdown-item"
+                       href="javascript:void(0);">
+
                         Settings
+
                     </a>
 
-                    <a class="dropdown-item" href="javascript:void(0);">
+
+                    <a class="dropdown-item"
+                       href="javascript:void(0);">
+
                         Logout
+
                     </a>
 
                 </div>
+
             </div>
 
         </div>
+
     </div>
-    <!-- /Header -->
 
 
-    <!-- Sidebar -->
+    <!-- ================= SIDEBAR ================= -->
+
     <div class="sidebar" id="sidebar">
 
+
         <div class="sidebar-logo">
+
 
             <a href="${pageContext.request.contextPath}/admin/dashboard"
                class="logo logo-normal">
@@ -138,6 +255,7 @@
 
             </a>
 
+
             <a href="${pageContext.request.contextPath}/admin/dashboard"
                class="logo-small">
 
@@ -145,6 +263,7 @@
                      alt="HRMS Logo">
 
             </a>
+
 
             <a href="${pageContext.request.contextPath}/admin/dashboard"
                class="dark-logo">
@@ -161,6 +280,7 @@
 
             <div class="text-center rounded bg-light p-3 mb-4 user-profile">
 
+
                 <div class="avatar avatar-lg online mb-3">
 
                     <img src="${pageContext.request.contextPath}/assets/img/profiles/avatar-02.jpg"
@@ -169,9 +289,11 @@
 
                 </div>
 
+
                 <h6 class="fs-12 fw-normal mb-1">
                     Admin
                 </h6>
+
 
                 <p class="fs-10 mb-0">
                     Administrator
@@ -182,17 +304,22 @@
         </div>
 
 
-        <!-- Sidebar Menu -->
+        <!-- ================= SIDEBAR MENU ================= -->
+
         <div class="sidebar-menu">
 
             <ul>
 
+
                 <li class="menu-title">
+
                     <span>MAIN MENU</span>
+
                 </li>
 
 
-                <!-- Dashboard -->
+                <!-- DASHBOARD -->
+
                 <li class="active">
 
                     <a href="${pageContext.request.contextPath}/admin/dashboard">
@@ -206,7 +333,8 @@
                 </li>
 
 
-                <!-- Employees -->
+                <!-- EMPLOYEES -->
+
                 <li>
 
                     <a href="javascript:void(0);">
@@ -220,7 +348,8 @@
                 </li>
 
 
-                <!-- Attendance -->
+                <!-- ATTENDANCE -->
+
                 <li class="submenu">
 
                     <a href="javascript:void(0);">
@@ -236,7 +365,7 @@
 
                     <ul>
 
-                        <!-- Leaves -->
+
                         <li class="submenu">
 
                             <a href="javascript:void(0);">
@@ -250,7 +379,6 @@
 
                             <ul>
 
-                                <!-- Apply Leaves -->
                                 <li>
 
                                     <a href="javascript:void(0);">
@@ -262,7 +390,6 @@
                                 </li>
 
 
-                                <!-- Leave Details -->
                                 <li>
 
                                     <a href="javascript:void(0);">
@@ -274,7 +401,6 @@
                                 </li>
 
 
-                                <!-- Employee -->
                                 <li>
 
                                     <a href="javascript:void(0);">
@@ -290,7 +416,6 @@
                         </li>
 
 
-                        <!-- Attendance Employee -->
                         <li>
 
                             <a href="javascript:void(0);">
@@ -302,7 +427,6 @@
                         </li>
 
 
-                        <!-- Timesheet -->
                         <li>
 
                             <a href="javascript:void(0);">
@@ -318,7 +442,8 @@
                 </li>
 
 
-                <!-- Payroll -->
+                <!-- PAYROLL -->
+
                 <li class="submenu">
 
                     <a href="javascript:void(0);">
@@ -334,7 +459,6 @@
 
                     <ul>
 
-                        <!-- Payslips -->
                         <li>
 
                             <a href="javascript:void(0);">
@@ -350,7 +474,23 @@
                 </li>
 
 
-                <!-- Calendar -->
+                <!-- MY TRAINING -->
+
+                <li>
+
+                    <a href="${pageContext.request.contextPath}/employee/trainings">
+
+                        <i class="ti ti-school"></i>
+
+                        <span>My Training</span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- CALENDAR -->
+
                 <li>
 
                     <a href="javascript:void(0);">
@@ -364,7 +504,8 @@
                 </li>
 
 
-                <!-- Performance -->
+                <!-- PERFORMANCE -->
+
                 <li>
 
                     <a href="javascript:void(0);">
@@ -378,8 +519,10 @@
                 </li>
 
 
-                <!-- Documents -->
-                <li>
+                <!-- ================= DOCUMENTS ================= -->
+                <!-- ================= DOCUMENTS ================= -->
+
+                <li class="submenu active">
 
                     <a href="javascript:void(0);">
 
@@ -387,45 +530,57 @@
 
                         <span>Documents</span>
 
-                    </a>
-  <ul>
+                        <span class="menu-arrow"></span>
 
-                        <!-- Documents -->
+                    </a>
+
+                    <ul>
+
+                        <!-- COMPANY LETTERS -->
+
                         <li>
 
-                            <a href="javascript:void(0);">
+                            <a href="${pageContext.request.contextPath}/company-letters">
 
-                                <span>Company Slips</span>
+                                <span>Company Letters</span>
 
                             </a>
 
                         </li>
-                          <li>
-
-                                                    <a href="javascript:void(0);">
-
-                                                        <span>My Documents</span>
-
-                                                    </a>
-
-                          </li>
-                            <li>
-
-                                                      <a href="javascript:void(0);">
-
-                                                          <span>Upload Documents</span>
-
-                                                      </a>
-
-                             </li>
 
 
+                        <!-- MY DOCUMENTS -->
+
+                        <li>
+
+                            <a href="${pageContext.request.contextPath}/file-uploads?action=list">
+
+                                <span>My Documents</span>
+
+                            </a>
+
+                        </li>
+
+
+                        <!-- UPLOAD DOCUMENTS -->
+
+                        <li>
+
+                            <a href="${pageContext.request.contextPath}/file-uploads">
+
+                                <span>Upload Documents</span>
+
+                            </a>
+
+                        </li>
 
                     </ul>
+
                 </li>
 
 
-                <!-- Help & Support -->
+                <!-- HELP & SUPPORT -->
+
                 <li>
 
                     <a href="javascript:void(0);">
@@ -439,7 +594,8 @@
                 </li>
 
 
-                <!-- Tickets -->
+                <!-- TICKETS -->
+
                 <li>
 
                     <a href="javascript:void(0);">
@@ -453,7 +609,8 @@
                 </li>
 
 
-                <!-- Logout -->
+                <!-- LOGOUT -->
+
                 <li class="mt-2">
 
                     <a href="javascript:void(0);">
@@ -466,33 +623,37 @@
 
                 </li>
 
+
             </ul>
 
         </div>
-        <!-- /Sidebar Menu -->
 
     </div>
-    <!-- /Sidebar -->
 
 
-    <!-- Page Wrapper -->
+    <!-- ================= PAGE WRAPPER ================= -->
+
     <div class="page-wrapper">
 
         <div class="content">
 
 
-            <!-- Breadcrumb -->
+            <!-- BREADCRUMB -->
+
             <div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
+
 
                 <div class="my-auto mb-2">
 
                     <h2 class="mb-1">
-                     Employee Dashboard
+                        Employee Dashboard
                     </h2>
+
 
                     <nav>
 
                         <ol class="breadcrumb mb-0">
+
 
                             <li class="breadcrumb-item">
 
@@ -504,12 +665,14 @@
 
                             </li>
 
+
                             <li class="breadcrumb-item active"
                                 aria-current="page">
 
                                 Dashboard
 
                             </li>
+
 
                         </ol>
 
@@ -520,6 +683,7 @@
 
                 <div class="d-flex my-xl-auto right-content align-items-center flex-wrap">
 
+
                     <div class="input-icon mb-2 position-relative">
 
                         <span class="input-icon-addon">
@@ -527,6 +691,7 @@
                             <i class="ti ti-calendar text-gray-9"></i>
 
                         </span>
+
 
                         <input type="text"
                                class="form-control date-range bookingrange"
@@ -552,19 +717,22 @@
                 </div>
 
             </div>
-            <!-- /Breadcrumb -->
 
 
-            <!-- Welcome -->
+            <!-- WELCOME -->
+
             <div class="welcome-wrap mb-4">
 
+
                 <div class="d-flex align-items-center justify-content-between flex-wrap">
+
 
                     <div class="mb-3">
 
                         <h2 class="mb-1 text-white">
                             Welcome to HRMS
                         </h2>
+
 
                         <p class="text-light mb-0">
                             Human Resource Management System
@@ -577,13 +745,16 @@
 
                 <div class="welcome-bg">
 
+
                     <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-02.svg"
                          alt=""
                          class="welcome-bg-01">
 
+
                     <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-03.svg"
                          alt=""
                          class="welcome-bg-02">
+
 
                     <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-01.svg"
                          alt=""
@@ -592,13 +763,13 @@
                 </div>
 
             </div>
-            <!-- /Welcome -->
 
 
-            <!-- HRMS Summary Cards -->
+            <!-- HRMS SUMMARY CARDS -->
+
             <div class="row">
 
-                <!-- Total Employees -->
+
                 <div class="col-xl-3 col-sm-6 d-flex">
 
                     <div class="card flex-fill">
@@ -611,9 +782,11 @@
 
                             </span>
 
+
                             <h2 class="mb-1">
                                 ${totalEmployees}
                             </h2>
+
 
                             <p class="fs-13 mb-0">
                                 Total Employees
@@ -626,7 +799,6 @@
                 </div>
 
 
-                <!-- Present Today -->
                 <div class="col-xl-3 col-sm-6 d-flex">
 
                     <div class="card flex-fill">
@@ -639,9 +811,11 @@
 
                             </span>
 
+
                             <h2 class="mb-1">
                                 ${presentToday}
                             </h2>
+
 
                             <p class="fs-13 mb-0">
                                 Present Today
@@ -654,7 +828,6 @@
                 </div>
 
 
-                <!-- On Leave -->
                 <div class="col-xl-3 col-sm-6 d-flex">
 
                     <div class="card flex-fill">
@@ -667,9 +840,11 @@
 
                             </span>
 
+
                             <h2 class="mb-1">
                                 ${onLeave}
                             </h2>
+
 
                             <p class="fs-13 mb-0">
                                 On Leave
@@ -682,7 +857,6 @@
                 </div>
 
 
-                <!-- Pending Leaves -->
                 <div class="col-xl-3 col-sm-6 d-flex">
 
                     <div class="card flex-fill">
@@ -695,9 +869,11 @@
 
                             </span>
 
+
                             <h2 class="mb-1">
                                 ${pendingLeaves}
                             </h2>
+
 
                             <p class="fs-13 mb-0">
                                 Pending Leave Requests
@@ -710,21 +886,24 @@
                 </div>
 
             </div>
-            <!-- /HRMS Summary Cards -->
 
 
-            <!-- Dashboard Widgets -->
+            <!-- DASHBOARD WIDGETS -->
+
             <div class="row">
+
 
                 <div class="col-xxl-8 col-xl-7 d-flex">
 
                     <div class="card flex-fill">
+
 
                         <div class="card-header pb-2 d-flex align-items-center justify-content-between">
 
                             <h5 class="mb-0">
                                 Attendance Overview
                             </h5>
+
 
                             <button type="button"
                                     class="btn btn-white border btn-sm"
@@ -736,11 +915,11 @@
 
                         </div>
 
+
                         <div class="card-body">
 
                             <div id="attendance-overview-chart"
                                  style="min-height:280px;">
-
                             </div>
 
                         </div>
@@ -754,6 +933,7 @@
 
                     <div class="card flex-fill">
 
+
                         <div class="card-header pb-2">
 
                             <h5 class="mb-0">
@@ -762,11 +942,11 @@
 
                         </div>
 
+
                         <div class="card-body">
 
                             <div id="employee-overview-chart"
                                  style="min-height:280px;">
-
                             </div>
 
                         </div>
@@ -780,10 +960,11 @@
 
             <div class="row">
 
-                <!-- Leave Overview -->
+
                 <div class="col-xl-6 d-flex">
 
                     <div class="card flex-fill">
+
 
                         <div class="card-header pb-2">
 
@@ -793,11 +974,11 @@
 
                         </div>
 
+
                         <div class="card-body">
 
                             <div id="leave-overview-chart"
                                  style="min-height:250px;">
-
                             </div>
 
                         </div>
@@ -807,10 +988,10 @@
                 </div>
 
 
-                <!-- Recent Activity -->
                 <div class="col-xl-6 d-flex">
 
                     <div class="card flex-fill">
+
 
                         <div class="card-header pb-2">
 
@@ -820,11 +1001,13 @@
 
                         </div>
 
+
                         <div class="card-body">
 
                             <div class="text-center py-5 text-muted">
 
                                 <i class="ti ti-activity fs-32 mb-2 d-block"></i>
+
 
                                 <p class="mb-0">
                                     No activity available
@@ -841,12 +1024,15 @@
             </div>
 
 
-            <!-- HRMS Information -->
+            <!-- HRMS INFORMATION -->
+
             <div class="row">
+
 
                 <div class="col-12 d-flex">
 
                     <div class="card flex-fill">
+
 
                         <div class="card-header pb-2">
 
@@ -855,6 +1041,7 @@
                             </h5>
 
                         </div>
+
 
                         <div class="card-body">
 
@@ -874,15 +1061,18 @@
 
             </div>
 
+
         </div>
 
 
-        <!-- Footer -->
+        <!-- FOOTER -->
+
         <div class="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
 
             <p class="mb-0">
                 HRMS
             </p>
+
 
             <p class="mb-0">
                 Human Resource Management System
@@ -891,25 +1081,35 @@
         </div>
 
     </div>
-    <!-- /Page Wrapper -->
 
 </div>
-<!-- /Main Wrapper -->
 
 
-<!-- Scripts -->
+<!-- SCRIPTS -->
+
 <script src="${pageContext.request.contextPath}/assets/js/jquery-3.7.1.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/js/feather.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/js/jquery.slimscroll.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/plugins/apexchart/apexcharts.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/js/moment.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/js/bootstrap-datetimepicker.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/plugins/daterangepicker/daterangepicker.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/plugins/select2/js/select2.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/js/theme-colorpicker.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 
-</body>
-</html>
 
+</body>
+
+</html>

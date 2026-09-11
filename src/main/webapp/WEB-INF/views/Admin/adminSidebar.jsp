@@ -1,50 +1,40 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="sidebar" id="sidebar">
 
+    <!-- SIDEBAR LOGO -->
     <div class="sidebar-logo">
 
         <a href="${pageContext.request.contextPath}/admin/dashboard"
            class="logo logo-normal">
-
             <img src="${pageContext.request.contextPath}/assets/img/logo.svg"
                  alt="HRMS Logo">
-
         </a>
-
 
         <a href="${pageContext.request.contextPath}/admin/dashboard"
            class="logo-small">
-
             <img src="${pageContext.request.contextPath}/assets/img/logo-small.svg"
                  alt="HRMS Logo">
-
         </a>
-
 
         <a href="${pageContext.request.contextPath}/admin/dashboard"
            class="dark-logo">
-
             <img src="${pageContext.request.contextPath}/assets/img/logo-white.svg"
                  alt="HRMS Logo">
-
         </a>
 
     </div>
 
 
     <!-- ADMIN PROFILE -->
-
     <div class="modern-profile p-3 pb-0">
 
         <div class="text-center rounded bg-light p-3 mb-4 user-profile">
 
             <div class="avatar avatar-lg online mb-3">
-
                 <img src="${pageContext.request.contextPath}/assets/img/profiles/avatar-02.jpg"
                      alt="Admin Profile"
                      class="img-fluid rounded-circle">
-
             </div>
 
             <h6 class="fs-12 fw-normal mb-1">
@@ -61,7 +51,6 @@
 
 
     <!-- SIDEBAR MENU -->
-
     <div class="sidebar-menu">
 
         <ul>
@@ -72,8 +61,8 @@
 
 
             <!-- DASHBOARD -->
-
             <li>
+
                 <a href="${pageContext.request.contextPath}/admin/dashboard">
 
                     <i class="ti ti-smart-home"></i>
@@ -81,11 +70,11 @@
                     <span>Dashboard</span>
 
                 </a>
+
             </li>
 
 
             <!-- EMPLOYEES -->
-
             <li>
 
                 <a href="javascript:void(0);">
@@ -100,7 +89,6 @@
 
 
             <!-- ATTENDANCE -->
-
             <li class="submenu">
 
                 <a href="javascript:void(0);">
@@ -112,7 +100,6 @@
                     <span class="menu-arrow"></span>
 
                 </a>
-
 
                 <ul>
 
@@ -140,7 +127,6 @@
 
 
             <!-- EVENTS -->
-
             <li class="submenu">
 
                 <a href="javascript:void(0);">
@@ -152,7 +138,6 @@
                     <span class="menu-arrow"></span>
 
                 </a>
-
 
                 <ul>
 
@@ -180,7 +165,6 @@
 
 
             <!-- PAYROLL -->
-
             <li class="submenu">
 
                 <a href="javascript:void(0);">
@@ -192,7 +176,6 @@
                     <span class="menu-arrow"></span>
 
                 </a>
-
 
                 <ul>
 
@@ -232,7 +215,6 @@
 
 
             <!-- TRAINING -->
-
             <li class="submenu">
 
                 <a href="javascript:void(0);">
@@ -245,45 +227,24 @@
 
                 </a>
 
-
                 <ul>
 
-                    <!-- TRAINERS -->
-
                     <li>
-
                         <a href="${pageContext.request.contextPath}/trainers">
-
                             <span>Trainers</span>
-
                         </a>
-
                     </li>
 
-
-                    <!-- TRAINING -->
-
                     <li>
-
                         <a href="${pageContext.request.contextPath}/trainings">
-
                             <span>Training</span>
-
                         </a>
-
                     </li>
 
-
-                    <!-- TRAINING TYPE -->
-
                     <li>
-
                         <a href="${pageContext.request.contextPath}/training-type">
-
                             <span>Training Type</span>
-
                         </a>
-
                     </li>
 
                 </ul>
@@ -291,7 +252,56 @@
             </li>
 
 
-            <!-- DOCUMENTS -->
+            <!-- ================= MASTER DOCUMENTS ================= -->
+
+            <li class="submenu">
+
+                <a href="javascript:void(0);">
+
+                    <i class="ti ti-files"></i>
+
+                    <span>Master Documents</span>
+
+                    <span class="menu-arrow"></span>
+
+                </a>
+
+                <ul>
+
+                    <!-- ADD ADMIN DOCUMENT NAME -->
+                    <li>
+                        <a href="${pageContext.request.contextPath}/admin-document-names?action=add">
+                            <span>Add Admin Document Name</span>
+                        </a>
+                    </li>
+
+                    <!-- ADD EMPLOYEE DOCUMENT NAME -->
+                    <li>
+                        <a href="${pageContext.request.contextPath}/employee-document-names?action=add">
+                            <span>Add Employee Document Name</span>
+                        </a>
+                    </li>
+
+                    <!-- ADMIN DOCUMENT LIST -->
+                    <li>
+                        <a href="${pageContext.request.contextPath}/admin-document-names">
+                            <span>Admin Document List</span>
+                        </a>
+                    </li>
+
+                    <!-- EMPLOYEE DOCUMENT LIST -->
+                    <li>
+                        <a href="${pageContext.request.contextPath}/employee-document-names">
+                            <span>Employee Document List</span>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </li>
+
+
+            <!-- ================= DOCUMENTS ================= -->
 
             <li class="submenu">
 
@@ -305,80 +315,33 @@
 
                 </a>
 
-
                 <ul>
 
-                    <li class="submenu">
-
-                        <a href="javascript:void(0);">
-
-                            <span>Upload Documents</span>
-
-                            <span class="menu-arrow"></span>
-
-                        </a>
-
-
-                        <ul>
-
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <span>Upload Document</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <span>Document List</span>
-                                </a>
-                            </li>
-
-                        </ul>
-
-                    </li>
-
-
+                    <!-- ADMIN DOCUMENT LIST -->
                     <li>
-
-                        <a href="javascript:void(0);">
-
-                            <span>Generate Letter</span>
-
-                        </a>
-
-                    </li>
-
-                </ul>
-
-            </li>
-
-
-            <!-- MASTER DOCUMENT -->
-
-            <li class="submenu">
-
-                <a href="javascript:void(0);">
-
-                    <i class="ti ti-files"></i>
-
-                    <span>Master Document</span>
-
-                    <span class="menu-arrow"></span>
-
-                </a>
-
-
-                <ul>
-
-                    <li>
-                        <a href="javascript:void(0);">
-                            <span>Master Document</span>
+                        <a href="${pageContext.request.contextPath}/admin-documents">
+                            <span>Admin Documents</span>
                         </a>
                     </li>
 
+                    <!-- ADMIN FILE UPLOAD -->
                     <li>
-                        <a href="javascript:void(0);">
-                            <span>Master Document List</span>
+                        <a href="${pageContext.request.contextPath}/admin-documents?action=upload">
+                            <span>Admin File Upload</span>
+                        </a>
+                    </li>
+
+                    <!-- GENERATED LETTER -->
+                    <li>
+                        <a href="${pageContext.request.contextPath}/generated-letter">
+                            <span>Generated Letter</span>
+                        </a>
+                    </li>
+
+                    <!-- EMPLOYEE DOCUMENTS -->
+                    <li>
+                        <a href="${pageContext.request.contextPath}/admin-employee-documents">
+                            <span>Employee Documents</span>
                         </a>
                     </li>
 
@@ -388,7 +351,6 @@
 
 
             <!-- PERFORMANCE & GOAL -->
-
             <li>
 
                 <a href="javascript:void(0);">
@@ -403,7 +365,6 @@
 
 
             <!-- PROJECTS -->
-
             <li class="submenu">
 
                 <a href="javascript:void(0);">
@@ -415,7 +376,6 @@
                     <span class="menu-arrow"></span>
 
                 </a>
-
 
                 <ul>
 
@@ -443,7 +403,6 @@
 
 
             <!-- REPORTS -->
-
             <li class="submenu">
 
                 <a href="javascript:void(0);">
@@ -455,7 +414,6 @@
                     <span class="menu-arrow"></span>
 
                 </a>
-
 
                 <ul>
 
@@ -501,7 +459,6 @@
 
 
             <!-- PROMOTIONS -->
-
             <li>
 
                 <a href="javascript:void(0);">
@@ -516,7 +473,6 @@
 
 
             <!-- RESIGNATION -->
-
             <li>
 
                 <a href="javascript:void(0);">
@@ -531,7 +487,6 @@
 
 
             <!-- TERMINATION -->
-
             <li>
 
                 <a href="javascript:void(0);">
@@ -546,7 +501,6 @@
 
 
             <!-- HELP & SUPPORT -->
-
             <li>
 
                 <a href="javascript:void(0);">
@@ -561,7 +515,6 @@
 
 
             <!-- TICKETS -->
-
             <li>
 
                 <a href="javascript:void(0);">
@@ -576,7 +529,6 @@
 
 
             <!-- LOGOUT -->
-
             <li class="mt-2">
 
                 <a href="javascript:void(0);">
