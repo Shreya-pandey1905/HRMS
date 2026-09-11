@@ -7,7 +7,9 @@ import java.time.LocalDateTime;
 // (plus getEmail/setEmail) to this class separately, before either saw the
 // other's change. Merging the two branches kept both copies, which stopped
 // the project from compiling ("email is already defined"). Removed the
-// duplicate copy and kept a single "email" field below.
+// duplicate field, and later - merging in "main" - restored a single
+// getEmail/setEmail pair (an earlier fix here had accidentally dropped both
+// copies of the getter/setter, not just the duplicate one).
 public class User {
 
     private int userId;
@@ -47,14 +49,6 @@ public class User {
         return firstName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -66,6 +60,15 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 

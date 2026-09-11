@@ -1,10 +1,10 @@
 package dao.Auth;
 
+
 import models.AuthUser.Users;
 import util.DBConfig;
 
 import java.sql.*;
-
 public class AuthDao {
 
     public Users getUserByEmail(String email) {
@@ -19,6 +19,7 @@ public class AuthDao {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 authUser = new Users();
+
                 authUser.setUserId(rs.getInt("UserId"));
                 authUser.setEmail(rs.getString("Email"));
                 authUser.setPasswordHash(rs.getString("PasswordHash"));

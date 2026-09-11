@@ -1068,7 +1068,7 @@ SET FOREIGN_KEY_CHECKS=1;
 delimiter //
 create PROCEDURE GetUserByEmail(IN p_email VARCHAR(255))
 begin
-    SELECT UserId, Email, PasswordHash, RoleId1, Status
+    SELECT UserId, Email, PasswordHash, RoleId, Status
     FROM `User`
     WHERE Email = p_email;
 end //
