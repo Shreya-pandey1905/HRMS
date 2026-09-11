@@ -608,7 +608,7 @@
 
                 <!-- TICKETS -->
                 <li>
-                    <a href="javascript:void(0);">
+                    <a href="${pageContext.request.contextPath}/tickets">
                         <i class="ti ti-ticket"></i>
                         <span>Tickets</span>
                     </a>
