@@ -3,13 +3,16 @@ package models.Employees;
 
 import java.time.LocalDateTime;
 
+// Fix note: the "reports" and "main2" branches both added an "email" field
+// (plus getEmail/setEmail) to this class separately, before either saw the
+// other's change. Merging the two branches kept both copies, which stopped
+// the project from compiling ("email is already defined"). Removed the
+// duplicate copy and kept a single "email" field below.
 public class User {
 
     private int userId;
     private String firstName;
     private String lastName;
-    private String email;
-
     private String email;
     private String passwordHash;
     private String phoneNumber;
@@ -63,16 +66,6 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
 

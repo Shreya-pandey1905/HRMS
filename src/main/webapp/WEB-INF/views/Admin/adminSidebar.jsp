@@ -424,7 +424,7 @@
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/attendance-report">
                             <span>Attendance Report</span>
                         </a>
                     </li>

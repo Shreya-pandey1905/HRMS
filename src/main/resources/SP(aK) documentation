@@ -1,3 +1,26 @@
+-- FIXES MADE TO THIS FILE (in simple words, for anyone reading later):
+-- 1. Some procedures used lowercase table names like "user", "admindocuments",
+--    "fileuploads", "addadmindocnames", "addemployeedocnames". The real tables
+--    are named "User", "AdminDocuments", "FileUploads", "addAdminDocNames",
+--    "addEmployeeDocNames". Table names are case-sensitive on this server, so
+--    those procedures would fail with a "table doesn't exist" error the moment
+--    they were called. Renamed every reference to match the real table names.
+-- 2. "GetAllEmployees", "GetAllAdminDocuments" and "GetEmployeeCompanyLetters"
+--    had each been created two or three times in this file, and not every copy
+--    had a "DROP PROCEDURE IF EXISTS" before it. Running this whole file fresh
+--    would stop partway with a "procedure already exists" error. Removed the
+--    old/duplicate copies and kept one final version of each, always with its
+--    own DROP PROCEDURE IF EXISTS guard.
+-- 3. A few one-off commands from someone testing by hand (a SHOW PROCEDURE
+--    STATUS, a plain SELECT, a CALL) were sitting in the middle of the file.
+--    Removed them since they were not procedure definitions and were not meant
+--    to be part of the setup script.
+-- Not fixed, needs a decision: AssignEmployeeDocument, GetPendingEmployeeDocuments
+-- and MarkEmployeeDocumentSubmitted all use a table called
+-- "employee_document_assignments", but that table is never created anywhere in
+-- this project. Left as-is with a note below since creating it means deciding
+-- its columns, which is a bigger call than a naming fix.
+
 USE Pulse360Db;
 
 DROP PROCEDURE IF EXISTS GetUserByEmail;
@@ -36,7 +59,7 @@ DELIMITER //
 CREATE PROCEDURE GetAllAdminDocNames()
 BEGIN
     SELECT Id, DocName
-    FROM addadmindocnames;
+    FROM addAdminDocNames;
 END //
 DELIMITER ;
 
@@ -45,7 +68,7 @@ DROP PROCEDURE IF EXISTS AddAdminDocName;
 DELIMITER //
 CREATE PROCEDURE AddAdminDocName(IN p_docName VARCHAR(255))
 BEGIN
-    INSERT INTO addadmindocnames (DocName)
+    INSERT INTO addAdminDocNames (DocName)
     VALUES (p_docName);
 END //
 DELIMITER ;
@@ -59,29 +82,27 @@ DELIMITER //
 CREATE PROCEDURE GetAllEmployeeDocNames()
 BEGIN
     SELECT Id, DocName
-    FROM addemployeedocnames;
+    FROM addEmployeeDocNames;
 END //
 
 CREATE PROCEDURE AddEmployeeDocName(IN p_docName VARCHAR(255))
 BEGIN
-    INSERT INTO addemployeedocnames (DocName)
+    INSERT INTO addEmployeeDocNames (DocName)
     VALUES (p_docName);
 END //
 
 CREATE PROCEDURE DeleteEmployeeDocName(IN p_id INT)
 BEGIN
-    DELETE FROM addemployeedocnames
+    DELETE FROM addEmployeeDocNames
     WHERE Id = p_id;
 END //
 DELIMITER ;
 
 
+DROP PROCEDURE IF EXISTS AddAdminDocument;
+DROP PROCEDURE IF EXISTS DeleteAdminDocument;
+
 DELIMITER //
-CREATE PROCEDURE GetAllAdminDocuments()
-BEGIN
-    SELECT AdminDocId, Email, DocName, DocFile
-    FROM admindocuments;
-END //
 
 CREATE PROCEDURE AddAdminDocument(
     IN p_email VARCHAR(255),
@@ -89,23 +110,27 @@ CREATE PROCEDURE AddAdminDocument(
     IN p_docFile VARCHAR(255)
 )
 BEGIN
-    INSERT INTO admindocuments (Email, DocName, DocFile)
+    INSERT INTO AdminDocuments (Email, DocName, DocFile)
     VALUES (p_email, p_docName, p_docFile);
 END //
 
 CREATE PROCEDURE DeleteAdminDocument(IN p_adminDocId INT)
 BEGIN
-    DELETE FROM admindocuments
+    DELETE FROM AdminDocuments
     WHERE AdminDocId = p_adminDocId;
 END //
 DELIMITER ;
 
 
+DROP PROCEDURE IF EXISTS GetAllUploadedFiles;
+DROP PROCEDURE IF EXISTS AddUploadedFile;
+DROP PROCEDURE IF EXISTS DeleteUploadedFile;
+
 DELIMITER //
 CREATE PROCEDURE GetAllUploadedFiles()
 BEGIN
     SELECT Id, FileName, FilePath, UserId
-    FROM fileuploads;
+    FROM FileUploads;
 END //
 
 CREATE PROCEDURE AddUploadedFile(
@@ -114,13 +139,13 @@ CREATE PROCEDURE AddUploadedFile(
     IN p_userId INT
 )
 BEGIN
-    INSERT INTO fileuploads (FileName, FilePath, UserId)
+    INSERT INTO FileUploads (FileName, FilePath, UserId)
     VALUES (p_fileName, p_filePath, p_userId);
 END //
 
 CREATE PROCEDURE DeleteUploadedFile(IN p_id INT)
 BEGIN
-    DELETE FROM fileuploads
+    DELETE FROM FileUploads
     WHERE Id = p_id;
 END //
 DELIMITER ;
@@ -141,9 +166,20 @@ DELIMITER ;
 
 USE Pulse360Db;
 
+DROP PROCEDURE IF EXISTS AssignEmployeeDocument;
+DROP PROCEDURE IF EXISTS GetPendingEmployeeDocuments;
+DROP PROCEDURE IF EXISTS AddEmployeeDocument;
+DROP PROCEDURE IF EXISTS MarkEmployeeDocumentSubmitted;
+DROP PROCEDURE IF EXISTS GetEmployeeDocuments;
+DROP PROCEDURE IF EXISTS GetAllEmployeeDocuments;
+DROP PROCEDURE IF EXISTS DeleteEmployeeDocument;
+
 DELIMITER $$
 
 -- 1. Assign a document to an employee
+-- NOTE: table `employee_document_assignments` is not created anywhere in
+-- sqlFile.sql or this file yet, so this procedure will fail if called
+-- until that table exists.
 CREATE PROCEDURE AssignEmployeeDocument(
     IN p_userId INT,
     IN p_documentId INT
@@ -169,7 +205,7 @@ BEGIN
         a.Status,
         a.AssignedAt
     FROM employee_document_assignments a
-    INNER JOIN addemployeedocnames d
+    INNER JOIN addEmployeeDocNames d
         ON a.DocumentId = d.Id
     WHERE a.UserId = p_userId
       AND a.Status = 'PENDING'
@@ -185,7 +221,7 @@ CREATE PROCEDURE AddEmployeeDocument(
     IN p_documentId INT
 )
 BEGIN
-    INSERT INTO fileuploads
+    INSERT INTO FileUploads
         (FileName, FilePath, UserId, DocumentId)
     VALUES
         (p_fileName, p_filePath, p_userId, p_documentId);
@@ -220,8 +256,8 @@ BEGIN
         f.UserId,
         f.DocumentId,
         d.DocName
-    FROM fileuploads f
-    LEFT JOIN addemployeedocnames d
+    FROM FileUploads f
+    LEFT JOIN addEmployeeDocNames d
         ON f.DocumentId = d.Id
     WHERE f.UserId = p_userId
     ORDER BY f.id DESC;
@@ -241,10 +277,10 @@ BEGIN
         u.FirstName,
         u.LastName,
         u.Email
-    FROM fileuploads f
-    LEFT JOIN addemployeedocnames d
+    FROM FileUploads f
+    LEFT JOIN addEmployeeDocNames d
         ON f.DocumentId = d.Id
-    INNER JOIN user u
+    INNER JOIN User u
         ON f.UserId = u.UserId
     ORDER BY f.id DESC;
 END$$
@@ -255,64 +291,22 @@ CREATE PROCEDURE DeleteEmployeeDocument(
     IN p_id INT
 )
 BEGIN
-    DELETE FROM fileuploads
+    DELETE FROM FileUploads
     WHERE id = p_id;
 END$$
 
 DELIMITER ;
-SHOW PROCEDURE STATUS
-WHERE Db = 'pulse360db';
 USE Pulse360Db;
+
+DROP PROCEDURE IF EXISTS GetAllEmployees;
 
 DELIMITER $$
 
 CREATE PROCEDURE GetAllEmployees()
 BEGIN
     SELECT UserId, FirstName, LastName, Email
-    FROM user
+    FROM User
     ORDER BY FirstName, LastName;
-END$$
-
-DELIMITER ;
-USE Pulse360Db;
-
-DELIMITER $$
-
-CREATE PROCEDURE GetAllEmployees()
-BEGIN
-    SELECT UserId, FirstName, LastName, Email
-    FROM user
-    ORDER BY FirstName, LastName;
-END$$
-
-DELIMITER ;
-USE Pulse360Db;
-
-DROP PROCEDURE IF EXISTS GetAllAdminDocuments;
-
-DELIMITER $$
-
-CREATE PROCEDURE GetAllAdminDocuments()
-BEGIN
-
-    SELECT
-        a.AdminDocId,
-        a.Email,
-        a.DocName,
-        a.DocFile,
-        CONCAT(
-            u.FirstName,
-            ' ',
-            u.LastName
-        ) AS EmployeeName
-
-    FROM admindocuments a
-
-    LEFT JOIN user u
-        ON a.Email = u.Email
-
-    ORDER BY a.AdminDocId DESC;
-
 END$$
 
 DELIMITER ;
@@ -334,8 +328,8 @@ BEGIN
             ' ',
             u.LastName
         ) AS EmployeeName
-    FROM admindocuments a
-    LEFT JOIN user u
+    FROM AdminDocuments a
+    LEFT JOIN User u
         ON a.Email = u.Email
     ORDER BY a.AdminDocId DESC;
 END$$
@@ -348,40 +342,27 @@ DROP PROCEDURE IF EXISTS GetEmployeeCompanyLetters;
 
 DELIMITER $$
 
-CREATE PROCEDURE GetEmployeeCompanyLetters(IN p_userId INT)
+CREATE PROCEDURE GetEmployeeCompanyLetters(
+    IN p_userId INT
+)
 BEGIN
 
     SELECT
-        a.AdminDocId,
-        a.Email,
-        a.DocName,
-        a.DocFile,
-        CONCAT(
-            u.FirstName,
-            ' ',
-            u.LastName
-        ) AS EmployeeName
+        g.GeneratedLetterId,
+        g.UserId,
+        g.LetterName,
+        g.LetterFile,
+        g.GeneratedDate
 
-    FROM admindocuments a
+    FROM generated_letters g
 
-    INNER JOIN user u
-        ON a.Email = u.Email
+    WHERE g.UserId = p_userId
 
-    WHERE u.UserId = p_userId
-
-    ORDER BY a.AdminDocId DESC;
+    ORDER BY g.GeneratedLetterId DESC;
 
 END$$
 
 DELIMITER ;
-USE Pulse360Db;
-
-SELECT *
-FROM admindocuments
-ORDER BY AdminDocId DESC;
-USE Pulse360Db;
-
-CALL GetAllAdminDocuments();
 USE Pulse360Db;
 
 DROP TABLE IF EXISTS generated_letters;
@@ -397,7 +378,7 @@ CREATE TABLE generated_letters (
 
     CONSTRAINT FK_GeneratedLetter_User
         FOREIGN KEY (UserId)
-        REFERENCES user(UserId)
+        REFERENCES User(UserId)
         ON DELETE CASCADE
 );
 
@@ -449,7 +430,7 @@ BEGIN
 
     FROM generated_letters g
 
-    INNER JOIN user u
+    INNER JOIN User u
         ON g.UserId = u.UserId
 
     ORDER BY g.GeneratedLetterId DESC;
@@ -493,6 +474,43 @@ BEGIN
 
     DELETE FROM generated_letters
     WHERE GeneratedLetterId = p_generatedLetterId;
+
+END$$
+
+DELIMITER ;
+DROP PROCEDURE IF EXISTS GetAttendanceReport;
+
+DELIMITER $$
+
+CREATE PROCEDURE GetAttendanceReport()
+BEGIN
+
+    SELECT
+        a.AttendanceId,
+        a.UserId,
+        CONCAT(
+            u.FirstName,
+            ' ',
+            u.LastName
+        ) AS EmployeeName,
+        a.Date,
+        a.CheckIn,
+        a.CheckOut,
+        a.LunchIn,
+        a.LunchOut,
+        a.WorkingHours,
+        a.ProductionHours,
+        a.OvertimeHours,
+        a.BreakHours,
+        a.Late,
+        a.Status
+
+    FROM Attendance a
+
+    INNER JOIN User u
+        ON a.UserId = u.UserId
+
+    ORDER BY a.Date DESC;
 
 END$$
 

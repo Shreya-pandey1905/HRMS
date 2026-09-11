@@ -969,7 +969,11 @@ INSERT INTO `User` (`UserId`, `FirstName`, `LastName`, `Email`, `PasswordHash`, 
 INSERT INTO `User` (`UserId`, `FirstName`, `LastName`, `Email`, `PasswordHash`, `PhoneNumber`, `RoleId`, `DepartmentId`, `DesignationtId`, `DateOfJoining`, `DateOfBirth`, `Gender`, `Address`, `AboutEmployee`, `ProfilePicture`, `RoleId1`, `ReportingManager`, `CreatedAt`, `CreatedBy`, `ModifiedBy`, `ModifiedAt`, `Status`) VALUES (42, 'Nitesh', '', 'nitesh@gmail.com', '123', '9988776655', 10, 25, 12, '2025-03-13T00:00:00.0000000', '2025-03-26T00:00:00.0000000', 'Male', 'delhi', 'Nill', 'Content/uploads/stamp.jpg', NULL, 'Krish', '2025-03-01T13:00:04.843', 'admin', 'admin', '2025-03-02T10:25:25.893', 'Active');
 
 -- DEFAULTS
-ALTER TABLE `Events` ALTER COLUMN `Status` SET DEFAULT '';
+-- Removed: "ALTER TABLE Events ALTER COLUMN Status SET DEFAULT ''" used to be here.
+-- Events.Status is a LONGTEXT column, and MySQL does not allow TEXT/BLOB columns
+-- to have a DEFAULT value at all, so this line always errored and stopped the
+-- whole script from finishing. Every INSERT already sets a Status value anyway,
+-- so the default was not needed.
 ALTER TABLE `Taskmember` ALTER COLUMN `TaskId` SET DEFAULT (0);
 ALTER TABLE `Trainer` ALTER COLUMN `Phone` SET DEFAULT 0;
 
@@ -1035,14 +1039,13 @@ ALTER TABLE `User` ADD CONSTRAINT `FK_User_Role_RoleId1` FOREIGN KEY (`RoleId1`)
 SET FOREIGN_KEY_CHECKS=1;
 
 
-show tables;
-
-select  * from user;
-select  * from Departments;
-select  * from designations;
-
-
-desc user;
+-- Removed: a few leftover manual-testing commands used to be here
+-- ("show tables;", "select * from user;", "select * from Departments;",
+-- "select * from designations;", "desc user;"). They were just someone
+-- checking things by hand, not part of setting up the database, and
+-- "select * from user" even errored on its own (table is really named
+-- "User" with a capital U, and table names are case-sensitive here),
+-- which stopped the rest of this file from running.
 
 delimiter //
 create PROCEDURE GetUserByEmail(IN p_email VARCHAR(255))

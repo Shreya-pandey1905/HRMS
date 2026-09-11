@@ -6,6 +6,7 @@ public class AttendanceReport {
 
     private int attendanceId;
     private int userId;
+    private String employeeName;
 
     private LocalDateTime date;
     private LocalDateTime checkIn;
@@ -38,6 +39,14 @@ public class AttendanceReport {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
     public LocalDateTime getDate() {
