@@ -492,6 +492,9 @@
                 type: 'line',
                 height: 280
             },
+            stroke: {
+                curve: 'smooth'
+            },
             series: [
                 { name: 'Present', data: attendancePresentSeries },
                 { name: 'Absent', data: attendanceAbsentSeries }
