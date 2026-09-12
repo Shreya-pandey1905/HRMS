@@ -63,7 +63,7 @@
             <!-- DASHBOARD -->
             <li>
 
-                <a href="${pageContext.request.contextPath}/admin/dashboard">
+                <a href="${pageContext.request.contextPath}/Admin/dashboard">
 
                     <i class="ti ti-smart-home"></i>
 
@@ -488,9 +488,11 @@
             <!-- PROMOTIONS -->
             <li>
 
-                 <a href="${pageContext.request.contextPath}/promotion">
-                                    <i class="ti ti-trending-up"></i>
-                                    <span>Promotions</span>
+                <a href="javascript:void(0);">
+
+                    <i class="ti ti-trending-up"></i>
+
+                    <span>Promotions</span>
 
                 </a>
 
@@ -500,19 +502,20 @@
             <!-- RESIGNATION -->
             <li>
 
-                <a href="${pageContext.request.contextPath}/resignation">
+  <a href="javascript:void(0);">
 
-               <i class="ti ti-logout"></i>
-                <span>Logout</span>
-            </a>
+                    <i class="ti ti-user-x"></i>
+
+                    <span>Resignation</span>
+
+                </a>
             </li>
 
 
             <!-- TERMINATION -->
             <li>
 
-                <a href="${pageContext.request.contextPath}/termination">
-
+                <a href="javascript:void(0);">
 
                     <i class="ti ti-user-x"></i>
 
@@ -540,7 +543,7 @@
             <!-- TICKETS -->
             <li>
 
-                <a href="${pageContext.request.contextPath}/tickets">
+                <a href="javascript:void(0);">
 
                     <i class="ti ti-ticket"></i>
 

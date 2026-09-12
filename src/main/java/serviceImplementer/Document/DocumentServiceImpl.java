@@ -229,6 +229,6 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public List<User> getAllEmployees() {
-        return employeeDao.getAll();
+        return employeeDao.getAllEmployees();
     }
 }

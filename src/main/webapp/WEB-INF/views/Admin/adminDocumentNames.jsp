@@ -29,6 +29,7 @@
 <div class="main-wrapper">
 
     <%@ include file="adminHeader.jsp" %>
+
     <%@ include file="adminSidebar.jsp" %>
 
 
@@ -75,8 +76,6 @@
 
                     <!-- ADD DOCUMENT BUTTON -->
 
-                    <!-- ADD DOCUMENT BUTTON -->
-
                     <div class="col-auto ms-auto">
 
                         <a href="${pageContext.request.contextPath}/admin-document-names?action=add"
@@ -89,6 +88,10 @@
                         </a>
 
                     </div>
+
+                </div>
+
+            </div>
 
 
             <!-- ADMIN DOCUMENT NAME LIST CARD -->
@@ -140,11 +143,11 @@
                                 <tr>
 
                                     <td>
-                                            ${documentName.id}
+                                        ${documentName.id}
                                     </td>
 
                                     <td>
-                                            ${documentName.docName}
+                                        ${documentName.docName}
                                     </td>
 
                                     <td>
@@ -215,7 +218,7 @@
 
 <!-- ===================================================== -->
 <!-- EDIT AND DELETE MODALS -->
-<!-- KEEP MODALS OUTSIDE THE TABLE -->
+<!-- MODALS ARE OUTSIDE THE TABLE -->
 <!-- ===================================================== -->
 
 <c:forEach var="documentName"
@@ -348,7 +351,7 @@
                         Are you sure you want to delete
 
                         <strong>
-                                ${documentName.docName}
+                            ${documentName.docName}
                         </strong>?
 
                     </p>
@@ -384,16 +387,43 @@
 </c:forEach>
 
 
+<!-- ===================================================== -->
 <!-- JAVASCRIPT -->
+<!-- ===================================================== -->
 
-<script src="${pageContext.request.contextPath}/assets/js/jquery-3.7.1.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/js/jquery-3.7.1.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/js/bootstrap.bundle.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/assets/js/jquery.dataTables.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/js/feather.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/assets/js/dataTables.bootstrap5.min.js"></script>
+<script src="<%= request.getContextPath() %>/assets/js/moment.js"></script>
 
+<script src="<%= request.getContextPath() %>/assets/js/bootstrap-datetimepicker.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/plugins/select2/js/select2.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/theme-colorpicker.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/jquery.slimscroll.min.js"></script>
+
+
+<!-- DATATABLES -->
+
+<script src="<%= request.getContextPath() %>/assets/js/jquery.dataTables.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/dataTables.bootstrap5.min.js"></script>
+
+
+<!-- MAIN THEME SCRIPT -->
+<!-- Important for sidebar -->
+
+<script src="<%= request.getContextPath() %>/assets/js/script.js"></script>
+
+
+<!-- DATATABLE INITIALIZATION -->
 
 <script>
 

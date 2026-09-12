@@ -51,15 +51,15 @@
 
 <body>
 
-<%@ include file="adminHeader.jsp" %>
+<div class="main-wrapper">
 
-<%@ include file="adminSidebar.jsp" %>
+    <%@ include file="adminHeader.jsp" %>
 
+    <%@ include file="adminSidebar.jsp" %>
 
-<div class="page-wrapper">
+    <div class="page-wrapper">
 
-    <div class="content">
-
+        <div class="content">
 
         <!-- Page Header -->
 
@@ -476,10 +476,27 @@
 
 </div>
 
+</div>
 
 <script src="<%= request.getContextPath() %>/assets/js/jquery-3.7.1.min.js"></script>
 
 <script src="<%= request.getContextPath() %>/assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/feather.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/moment.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/bootstrap-datetimepicker.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/plugins/select2/js/select2.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/theme-colorpicker.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/jquery.slimscroll.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/script.js"></script>
 
 </body>
 

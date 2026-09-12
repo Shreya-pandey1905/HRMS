@@ -208,6 +208,18 @@
 
 <script src="<%= request.getContextPath() %>/assets/js/feather.min.js"></script>
 
+<script src="<%= request.getContextPath() %>/assets/js/moment.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/bootstrap-datetimepicker.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/plugins/select2/js/select2.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/theme-colorpicker.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/jquery.slimscroll.min.js"></script>
+
 <script src="<%= request.getContextPath() %>/assets/js/script.js"></script>
 
 </body>
