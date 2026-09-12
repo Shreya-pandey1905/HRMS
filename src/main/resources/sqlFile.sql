@@ -1,7 +1,7 @@
 
 
 CREATE DATABASE IF NOT EXISTS `Pulse360Db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `Pulse360Db`;
+USE `Pulse360Db`; 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
 
@@ -1285,12 +1285,16 @@ VALUES
 
 show tables;
 
-desc departments;
+desc user;
 select  * from user;
 select  * from role;
 desc designations;
 
-select  * from designations;
+select  * from EmployeeFamilyDetails;
+select  * from EmployeeBankDetails;
+select  * from  EducationDetails;
+
+
 select  * from departments;
 
 
