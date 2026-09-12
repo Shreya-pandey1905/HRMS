@@ -56,18 +56,22 @@ DROP PROCEDURE IF EXISTS AddEmployeeDocName;
 DROP PROCEDURE IF EXISTS DeleteEmployeeDocName;
 
 DELIMITER //
-CREATE PROCEDURE GetAllEmployeeDocNames()
+CREATE or replace PROCEDURE GetAllEmployeeDocNames()
 BEGIN
     SELECT Id, DocName
     FROM addemployeedocnames;
 END //
+delimiter ;
 
+DELIMITER //
 CREATE PROCEDURE AddEmployeeDocName(IN p_docName VARCHAR(255))
 BEGIN
     INSERT INTO addemployeedocnames (DocName)
     VALUES (p_docName);
 END //
+DELIMITER ;
 
+DELIMITER //
 CREATE PROCEDURE DeleteEmployeeDocName(IN p_id INT)
 BEGIN
     DELETE FROM addemployeedocnames
@@ -76,22 +80,31 @@ END //
 DELIMITER ;
 
 
+DROP PROCEDURE IF EXISTS GetAllAdminDocuments;
+
 DELIMITER //
+
 CREATE PROCEDURE GetAllAdminDocuments()
 BEGIN
-    SELECT AdminDocId, Email, DocName, DocFile
-    FROM admindocuments;
+    SELECT
+        a.AdminDocId,
+        a.Email,
+        a.DocName,
+        a.DocFile,
+        CONCAT(
+            u.FirstName,
+            ' ',
+            u.LastName
+        ) AS EmployeeName
+    FROM admindocuments a
+    LEFT JOIN `user` u
+        ON a.Email = u.Email
+    ORDER BY a.AdminDocId DESC;
 END //
 
-CREATE PROCEDURE AddAdminDocument(
-    IN p_email VARCHAR(255),
-    IN p_docName VARCHAR(255),
-    IN p_docFile VARCHAR(255)
-)
-BEGIN
-    INSERT INTO admindocuments (Email, DocName, DocFile)
-    VALUES (p_email, p_docName, p_docFile);
-END //
+DELIMITER ;
+
+delimiter //
 
 CREATE PROCEDURE DeleteAdminDocument(IN p_adminDocId INT)
 BEGIN
@@ -144,7 +157,7 @@ USE Pulse360Db;
 DELIMITER $$
 
 -- 1. Assign a document to an employee
-CREATE PROCEDURE AssignEmployeeDocument(
+CREATE or replace PROCEDURE AssignEmployeeDocument(
     IN p_userId INT,
     IN p_documentId INT
 )
@@ -157,7 +170,7 @@ END$$
 
 
 -- 2. Get all pending documents for an employee
-CREATE PROCEDURE GetPendingEmployeeDocuments(
+CREATE or replace PROCEDURE GetPendingEmployeeDocuments(
     IN p_userId INT
 )
 BEGIN
@@ -178,7 +191,7 @@ END$$
 
 
 -- 3. Add an employee uploaded document
-CREATE PROCEDURE AddEmployeeDocument(
+CREATE or replace PROCEDURE AddEmployeeDocument(
     IN p_fileName VARCHAR(255),
     IN p_filePath VARCHAR(500),
     IN p_userId INT,
@@ -193,7 +206,7 @@ END$$
 
 
 -- 4. Mark the assigned document as submitted
-CREATE PROCEDURE MarkEmployeeDocumentSubmitted(
+CREATE or replace PROCEDURE MarkEmployeeDocumentSubmitted(
     IN p_userId INT,
     IN p_documentId INT
 )
@@ -209,7 +222,7 @@ END$$
 
 
 -- 5. Get employee's uploaded documents
-CREATE PROCEDURE GetEmployeeDocuments(
+CREATE or replace PROCEDURE GetEmployeeDocuments(
     IN p_userId INT
 )
 BEGIN
@@ -229,7 +242,7 @@ END$$
 
 
 -- 6. Get all employee documents for Admin
-CREATE PROCEDURE GetAllEmployeeDocuments()
+CREATE or replace PROCEDURE GetAllEmployeeDocuments()
 BEGIN
     SELECT
         f.id,
@@ -251,7 +264,7 @@ END$$
 
 
 -- 7. Delete an employee uploaded document
-CREATE PROCEDURE DeleteEmployeeDocument(
+CREATE or replace PROCEDURE DeleteEmployeeDocument(
     IN p_id INT
 )
 BEGIN
@@ -266,7 +279,7 @@ USE Pulse360Db;
 
 DELIMITER $$
 
-CREATE PROCEDURE GetAllEmployees()
+CREATE or replace PROCEDURE GetAllEmployees()
 BEGIN
     SELECT UserId, FirstName, LastName, Email
     FROM user
@@ -278,7 +291,7 @@ USE Pulse360Db;
 
 DELIMITER $$
 
-CREATE PROCEDURE GetAllEmployees()
+CREATE or replace PROCEDURE GetAllEmployees()
 BEGIN
     SELECT UserId, FirstName, LastName, Email
     FROM user
@@ -292,7 +305,7 @@ DROP PROCEDURE IF EXISTS GetAllAdminDocuments;
 
 DELIMITER $$
 
-CREATE PROCEDURE GetAllAdminDocuments()
+CREATE or replace PROCEDURE GetAllAdminDocuments()
 BEGIN
 
     SELECT

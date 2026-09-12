@@ -63,7 +63,7 @@
             <!-- DASHBOARD -->
             <li>
 
-                <a href="${pageContext.request.contextPath}/admin/dashboard">
+                <a href="${pageContext.request.contextPath}/Admin/dashboard">
 
                     <i class="ti ti-smart-home"></i>
 
@@ -502,10 +502,13 @@
             <!-- RESIGNATION -->
             <li>
 
-            <a href="${pageContext.request.contextPath}/logout">
-                <i class="ti ti-logout"></i>
-                <span>Logout</span>
-            </a>
+  <a href="javascript:void(0);">
+
+                    <i class="ti ti-user-x"></i>
+
+                    <span>Resignation</span>
+
+                </a>
             </li>
 
 

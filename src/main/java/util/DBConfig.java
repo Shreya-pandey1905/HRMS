@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConfig {
-    private static final String url  = "jdbc:mysql://localhost:3307/Pulse360Db";
+    private static final String url  = "jdbc:mysql://localhost:3306/Pulse360Db";
     private static final String user = "root";
     private  static  final String  password = "";
 

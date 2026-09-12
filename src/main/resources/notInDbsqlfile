@@ -25,3 +25,24 @@ ADD CONSTRAINT FK_FileUploads_Document
 FOREIGN KEY (DocumentId)
 REFERENCES addemployeedocnames(Id)
 ON DELETE SET NULL;
+
+SELECT *
+FROM employee_document_assignments
+ORDER BY AssignmentId DESC;
+
+DROP TABLE IF EXISTS generated_letters;
+
+CREATE TABLE generated_letters (
+    GeneratedLetterId INT NOT NULL AUTO_INCREMENT,
+    UserId INT NOT NULL,
+    LetterName VARCHAR(255) NOT NULL,
+    LetterFile VARCHAR(500) NOT NULL,
+    GeneratedDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (GeneratedLetterId),
+
+    CONSTRAINT FK_GeneratedLetter_User
+        FOREIGN KEY (UserId)
+        REFERENCES user(UserId)
+        ON DELETE CASCADE
+);

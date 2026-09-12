@@ -20,8 +20,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 @MultipartConfig
-@WebServlet("/AdminDashboardServlet")
+@WebServlet({
+        "/Admin/dashboard",
+        "/AdminDashboardServlet"
+})
 public class AdminDashboardServlet extends HttpServlet {
+
     private final ProjectService projectService =
             new ProjectServiceImpl();
     private final UserService userService =

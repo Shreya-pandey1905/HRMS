@@ -99,7 +99,7 @@ public class AddAdminDocNamesDao {
 
     public void delete(int id) {
 
-        String sql = "{CALL DeleteAdminDocName(?)}";
+        String sql = "{CALL DeleteAdminDocument(?)}";
 
         try (Connection connection = DBConfig.getConnection();
              CallableStatement statement =

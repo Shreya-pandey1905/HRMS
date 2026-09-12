@@ -17,6 +17,18 @@
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
 
     <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/plugins/icons/feather/feather.css">
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/plugins/tabler-icons/tabler-icons.css">
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/plugins/fontawesome/css/fontawesome.min.css">
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/plugins/fontawesome/css/all.min.css">
+
+    <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/css/style.css">
 
     <link rel="stylesheet"
@@ -28,10 +40,14 @@
 
 <div class="main-wrapper">
 
+    <!-- Header -->
     <%@ include file="adminHeader.jsp" %>
+
+    <!-- Sidebar -->
     <%@ include file="adminSidebar.jsp" %>
 
 
+    <!-- Page Wrapper -->
     <div class="page-wrapper">
 
         <div class="content">
@@ -54,13 +70,17 @@
                             <li class="breadcrumb-item">
 
                                 <a href="${pageContext.request.contextPath}/admin/dashboard">
+
                                     Dashboard
+
                                 </a>
 
                             </li>
 
                             <li class="breadcrumb-item active">
+
                                 Admin Document List
+
                             </li>
 
                         </ul>
@@ -93,7 +113,9 @@
                 <div class="card-header">
 
                     <h5 class="card-title mb-0">
+
                         Admin Document List
+
                     </h5>
 
                 </div>
@@ -111,15 +133,21 @@
                             <tr>
 
                                 <th style="width:80px;">
+
                                     #
+
                                 </th>
 
                                 <th>
+
                                     Document Name
+
                                 </th>
 
                                 <th style="width:180px;">
+
                                     Action
+
                                 </th>
 
                             </tr>
@@ -136,12 +164,18 @@
                                 <tr>
 
                                     <td>
-                                            ${status.index + 1}
+
+                                        ${status.index + 1}
+
                                     </td>
 
+
                                     <td>
-                                            ${documentName.docName}
+
+                                        ${documentName.docName}
+
                                     </td>
+
 
                                     <td>
 
@@ -178,153 +212,6 @@
 
                                 </tr>
 
-
-                                <!-- EDIT MODAL -->
-
-                                <div class="modal fade"
-                                     id="editDocumentNameModal${documentName.id}"
-                                     tabindex="-1"
-                                     aria-hidden="true">
-
-                                    <div class="modal-dialog modal-dialog-centered">
-
-                                        <div class="modal-content">
-
-                                            <div class="modal-header">
-
-                                                <h5 class="modal-title">
-                                                    Edit Admin Document Name
-                                                </h5>
-
-                                                <button type="button"
-                                                        class="btn-close"
-                                                        data-bs-dismiss="modal">
-                                                </button>
-
-                                            </div>
-
-
-                                            <form method="post"
-                                                  action="${pageContext.request.contextPath}/admin-document-names">
-
-                                                <input type="hidden"
-                                                       name="action"
-                                                       value="edit">
-
-                                                <input type="hidden"
-                                                       name="id"
-                                                       value="${documentName.id}">
-
-
-                                                <div class="modal-body">
-
-                                                    <div class="mb-3">
-
-                                                        <label class="form-label">
-                                                            Document Name
-                                                        </label>
-
-                                                        <input type="text"
-                                                               name="docName"
-                                                               class="form-control"
-                                                               value="${documentName.docName}"
-                                                               required>
-
-                                                    </div>
-
-                                                </div>
-
-
-                                                <div class="modal-footer">
-
-                                                    <button type="button"
-                                                            class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">
-
-                                                        Cancel
-
-                                                    </button>
-
-                                                    <button type="submit"
-                                                            class="btn btn-primary">
-
-                                                        Save Changes
-
-                                                    </button>
-
-                                                </div>
-
-                                            </form>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-
-                                <!-- DELETE MODAL -->
-
-                                <div class="modal fade"
-                                     id="deleteDocumentNameModal${documentName.id}"
-                                     tabindex="-1"
-                                     aria-hidden="true">
-
-                                    <div class="modal-dialog modal-dialog-centered">
-
-                                        <div class="modal-content">
-
-                                            <div class="modal-header">
-
-                                                <h5 class="modal-title">
-                                                    Delete Admin Document Name
-                                                </h5>
-
-                                                <button type="button"
-                                                        class="btn-close"
-                                                        data-bs-dismiss="modal">
-                                                </button>
-
-                                            </div>
-
-
-                                            <div class="modal-body text-center">
-
-                                                <p>
-                                                    Are you sure you want to delete
-                                                    <strong>
-                                                            ${documentName.docName}
-                                                    </strong>?
-                                                </p>
-
-                                            </div>
-
-
-                                            <div class="modal-footer">
-
-                                                <button type="button"
-                                                        class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">
-
-                                                    Cancel
-
-                                                </button>
-
-                                                <a href="${pageContext.request.contextPath}/admin-document-names?action=delete&id=${documentName.id}"
-                                                   class="btn btn-danger">
-
-                                                    Yes, Delete
-
-                                                </a>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
                             </c:forEach>
 
 
@@ -360,22 +247,230 @@
 </div>
 
 
-<script src="${pageContext.request.contextPath}/assets/js/jquery-3.7.1.min.js"></script>
+<!-- ===================================================== -->
+<!-- EDIT AND DELETE MODALS -->
+<!-- IMPORTANT: These are OUTSIDE the table -->
+<!-- ===================================================== -->
 
-<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
+<c:forEach var="documentName"
+           items="${documentNames}">
 
-<script src="${pageContext.request.contextPath}/assets/js/jquery.dataTables.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/assets/js/dataTables.bootstrap5.min.js"></script>
+    <!-- EDIT MODAL -->
 
+    <div class="modal fade"
+         id="editDocumentNameModal${documentName.id}"
+         tabindex="-1"
+         aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+
+                        Edit Admin Document Name
+
+                    </h5>
+
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal">
+
+                    </button>
+
+                </div>
+
+
+                <form method="post"
+                      action="${pageContext.request.contextPath}/admin-document-names">
+
+                    <input type="hidden"
+                           name="action"
+                           value="edit">
+
+                    <input type="hidden"
+                           name="id"
+                           value="${documentName.id}">
+
+
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Document Name
+
+                            </label>
+
+
+                            <input type="text"
+                                   name="docName"
+                                   class="form-control"
+                                   value="${documentName.docName}"
+                                   required>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal-footer">
+
+                        <button type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal">
+
+                            Cancel
+
+                        </button>
+
+
+                        <button type="submit"
+                                class="btn btn-primary">
+
+                            Save Changes
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- DELETE MODAL -->
+
+    <div class="modal fade"
+         id="deleteDocumentNameModal${documentName.id}"
+         tabindex="-1"
+         aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+
+                        Delete Admin Document Name
+
+                    </h5>
+
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal">
+
+                    </button>
+
+                </div>
+
+
+                <div class="modal-body text-center">
+
+                    <p>
+
+                        Are you sure you want to delete
+
+                        <strong>
+
+                            ${documentName.docName}
+
+                        </strong>?
+
+                    </p>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+
+                        Cancel
+
+                    </button>
+
+
+                    <a href="${pageContext.request.contextPath}/admin-document-names?action=delete&id=${documentName.id}"
+                       class="btn btn-danger">
+
+                        Yes, Delete
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</c:forEach>
+
+
+<!-- ===================================================== -->
+<!-- JAVASCRIPT -->
+<!-- ===================================================== -->
+
+<script src="<%= request.getContextPath() %>/assets/js/jquery-3.7.1.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/feather.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/moment.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/bootstrap-datetimepicker.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/plugins/select2/js/select2.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/theme-colorpicker.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/jquery.slimscroll.min.js"></script>
+
+
+<!-- DataTables -->
+
+<script src="<%= request.getContextPath() %>/assets/js/jquery.dataTables.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/assets/js/dataTables.bootstrap5.min.js"></script>
+
+
+<!-- Main Theme JS -->
+
+<script src="<%= request.getContextPath() %>/assets/js/script.js"></script>
+
+
+<!-- DataTable Initialization -->
 
 <script>
 
     $(document).ready(function () {
 
         $('#adminDocumentListTable').DataTable({
+
             pageLength: 10,
+
             lengthMenu: [10, 25, 50, 100]
+
         });
 
     });

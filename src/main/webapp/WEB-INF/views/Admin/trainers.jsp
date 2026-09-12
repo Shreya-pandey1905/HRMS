@@ -388,14 +388,28 @@
                                                             Role
                                                         </label>
 
-                                                        <input type="text"
-                                                               name="role"
-                                                               class="form-control"
-                                                               value="<%= trainer.getRole() == null ? "" : trainer.getRole() %>">
+                                                        <select name="role"
+                                                                class="form-select"
+                                                                required>
+
+                                                            <option value="Employee"
+                                                                    <%= "Employee".equalsIgnoreCase(trainer.getRole()) ? "selected" : "" %>>
+                                                                Employee
+                                                            </option>
+
+                                                            <option value="Manager"
+                                                                    <%= "Manager".equalsIgnoreCase(trainer.getRole()) ? "selected" : "" %>>
+                                                                Manager
+                                                            </option>
+
+                                                            <option value="Admin"
+                                                                    <%= "Admin".equalsIgnoreCase(trainer.getRole()) ? "selected" : "" %>>
+                                                                Admin
+                                                            </option>
+
+                                                        </select>
 
                                                     </div>
-
-
                                                     <div class="col-md-6 mb-3">
 
                                                         <label class="form-label">
