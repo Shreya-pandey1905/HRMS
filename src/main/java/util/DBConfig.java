@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DBConfig {
     private static final String url  = "jdbc:mysql://localhost:3306/Pulse360Db";
     private static final String user = "root";
-    private  static  final String  password = "";
+    private  static  final String  password = "root";
 
     public  static Connection getConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");

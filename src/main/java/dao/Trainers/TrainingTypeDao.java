@@ -3,6 +3,10 @@ package dao.Trainers;
 import models.Trainers.TrainingType;
 import util.DBConfig;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +18,8 @@ public class TrainingTypeDao {
         List<TrainingType> trainingTypes = new ArrayList<>();
 
         String sql = "SELECT TrainingTypeId, TrainingTypeName, Description, Status " +
-                     "FROM TrainingType";
+                "FROM TrainingType";
+
 
         try (Connection connection = DBConfig.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
@@ -51,8 +56,9 @@ public class TrainingTypeDao {
     public void addTrainingType(TrainingType trainingType) {
 
         String sql = "INSERT INTO TrainingType " +
-                     "(TrainingTypeName, Description, Status) " +
-                     "VALUES (?, ?, ?)";
+                "(TrainingTypeName, Description, Status) " +
+                "VALUES (?, ?, ?)";
+
 
         try (Connection connection = DBConfig.getConnection();
              PreparedStatement statement =
@@ -117,10 +123,10 @@ public class TrainingTypeDao {
     public void updateTrainingType(TrainingType trainingType) {
 
         String sql = "UPDATE TrainingType SET " +
-                     "TrainingTypeName = ?, " +
-                     "Description = ?, " +
-                     "Status = ? " +
-                     "WHERE TrainingTypeId = ?";
+                "TrainingTypeName = ?, " +
+                "Description = ?, " +
+                "Status = ? " +
+                "WHERE TrainingTypeId = ?";
 
         try (Connection connection = DBConfig.getConnection();
              PreparedStatement statement =

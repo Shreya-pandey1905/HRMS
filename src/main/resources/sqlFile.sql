@@ -6,599 +6,599 @@ SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
 
 CREATE TABLE `__EFMigrationsHistory` (
-  `MigrationId` VARCHAR(150) NOT NULL,
-  `ProductVersion` VARCHAR(32) NOT NULL,
-  PRIMARY KEY (`MigrationId`)
+                                         `MigrationId` VARCHAR(150) NOT NULL,
+                                         `ProductVersion` VARCHAR(32) NOT NULL,
+                                         PRIMARY KEY (`MigrationId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Activity` (
-  `ActivityId` INT NOT NULL AUTO_INCREMENT,
-  `Title` VARCHAR(100) NOT NULL,
-  `ActivityType` VARCHAR(50) NOT NULL,
-  `DueDate` DATETIME NOT NULL,
-  `Owner` VARCHAR(100) NOT NULL,
-  `CreatedDate` DATETIME NOT NULL,
-  `Description` LONGTEXT NOT NULL,
-  `Status` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`ActivityId`)
+                            `ActivityId` INT NOT NULL AUTO_INCREMENT,
+                            `Title` VARCHAR(100) NOT NULL,
+                            `ActivityType` VARCHAR(50) NOT NULL,
+                            `DueDate` DATETIME NOT NULL,
+                            `Owner` VARCHAR(100) NOT NULL,
+                            `CreatedDate` DATETIME NOT NULL,
+                            `Description` LONGTEXT NOT NULL,
+                            `Status` VARCHAR(50) NOT NULL,
+                            PRIMARY KEY (`ActivityId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `addAdminDocNames` (
-  `Id` INT NOT NULL AUTO_INCREMENT,
-  `DocName` LONGTEXT NOT NULL,
-  PRIMARY KEY (`Id`)
+                                    `Id` INT NOT NULL AUTO_INCREMENT,
+                                    `DocName` LONGTEXT NOT NULL,
+                                    PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `addEmployeeDocNames` (
-  `Id` INT NOT NULL AUTO_INCREMENT,
-  `DocName` LONGTEXT NOT NULL,
-  PRIMARY KEY (`Id`)
+                                       `Id` INT NOT NULL AUTO_INCREMENT,
+                                       `DocName` LONGTEXT NOT NULL,
+                                       PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `AdminDocuments` (
-  `AdminDocId` INT NOT NULL AUTO_INCREMENT,
-  `Email` LONGTEXT NOT NULL,
-  `DocName` LONGTEXT NOT NULL,
-  `DocFile` LONGTEXT NOT NULL,
-  PRIMARY KEY (`AdminDocId`)
+                                  `AdminDocId` INT NOT NULL AUTO_INCREMENT,
+                                  `Email` LONGTEXT NOT NULL,
+                                  `DocName` LONGTEXT NOT NULL,
+                                  `DocFile` LONGTEXT NOT NULL,
+                                  PRIMARY KEY (`AdminDocId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `AllProjects` (
-  `ProjectId` INT NOT NULL AUTO_INCREMENT,
-  `ProjectName` VARCHAR(255) NOT NULL,
-  `ClientName` VARCHAR(255) NOT NULL,
-  `Description` VARCHAR(1000) NOT NULL,
-  `StartDate` DATETIME NOT NULL,
-  `EndDate` DATETIME NOT NULL,
-  `Priority` VARCHAR(50) NOT NULL,
-  `ProjectValue` DOUBLE NOT NULL,
-  `PriceType` VARCHAR(50) NOT NULL,
-  `FilePath` VARCHAR(255) NOT NULL,
-  `LogoPath` VARCHAR(255) NOT NULL,
-  `Status` VARCHAR(50) NOT NULL,
-  `ManagerName` LONGTEXT NOT NULL,
-  PRIMARY KEY (`ProjectId`)
+                               `ProjectId` INT NOT NULL AUTO_INCREMENT,
+                               `ProjectName` VARCHAR(255) NOT NULL,
+                               `ClientName` VARCHAR(255) NOT NULL,
+                               `Description` VARCHAR(1000) NOT NULL,
+                               `StartDate` DATETIME NOT NULL,
+                               `EndDate` DATETIME NOT NULL,
+                               `Priority` VARCHAR(50) NOT NULL,
+                               `ProjectValue` DOUBLE NOT NULL,
+                               `PriceType` VARCHAR(50) NOT NULL,
+                               `FilePath` VARCHAR(255) NOT NULL,
+                               `LogoPath` VARCHAR(255) NOT NULL,
+                               `Status` VARCHAR(50) NOT NULL,
+                               `ManagerName` LONGTEXT NOT NULL,
+                               PRIMARY KEY (`ProjectId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Attendance` (
-  `AttendanceId` INT NOT NULL AUTO_INCREMENT,
-  `UserId` INT NOT NULL,
-  `Date` DATETIME NOT NULL,
-  `CheckIn` DATETIME NULL,
-  `CheckOut` DATETIME NULL,
-  `LunchIn` DATETIME NULL,
-  `LunchOut` DATETIME NULL,
-  `WorkingHours` DECIMAL(18, 2) NOT NULL,
-  `ProductionHours` DECIMAL(18, 2) NOT NULL,
-  `OvertimeHours` DECIMAL(18, 2) NOT NULL,
-  `BreakHours` DECIMAL(18, 2) NOT NULL,
-  `Late` INT NOT NULL,
-  `Status` LONGTEXT NOT NULL,
-  PRIMARY KEY (`AttendanceId`)
+                              `AttendanceId` INT NOT NULL AUTO_INCREMENT,
+                              `UserId` INT NOT NULL,
+                              `Date` DATETIME NOT NULL,
+                              `CheckIn` DATETIME NULL,
+                              `CheckOut` DATETIME NULL,
+                              `LunchIn` DATETIME NULL,
+                              `LunchOut` DATETIME NULL,
+                              `WorkingHours` DECIMAL(18, 2) NOT NULL,
+                              `ProductionHours` DECIMAL(18, 2) NOT NULL,
+                              `OvertimeHours` DECIMAL(18, 2) NOT NULL,
+                              `BreakHours` DECIMAL(18, 2) NOT NULL,
+                              `Late` INT NOT NULL,
+                              `Status` LONGTEXT NOT NULL,
+                              PRIMARY KEY (`AttendanceId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Categories` (
-  `CategoryId` INT NOT NULL AUTO_INCREMENT,
-  `CategoryName` LONGTEXT NOT NULL,
-  PRIMARY KEY (`CategoryId`)
+                              `CategoryId` INT NOT NULL AUTO_INCREMENT,
+                              `CategoryName` LONGTEXT NOT NULL,
+                              PRIMARY KEY (`CategoryId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Deduction` (
-  `DeductionId` INT NOT NULL AUTO_INCREMENT,
-  `DeductionTypeId` INT NOT NULL,
-  `DepartmentId` INT NOT NULL,
-  `DesignationId` INT NOT NULL,
-  `DeductionPercentage` DECIMAL(5, 2) NOT NULL,
-  `CreatedAt` DATETIME NOT NULL,
-  `CreatedBy` LONGTEXT NULL,
-  `ModifiedAt` DATETIME NULL,
-  `ModifiedBy` LONGTEXT NULL,
-  PRIMARY KEY (`DeductionId`)
+                             `DeductionId` INT NOT NULL AUTO_INCREMENT,
+                             `DeductionTypeId` INT NOT NULL,
+                             `DepartmentId` INT NOT NULL,
+                             `DesignationId` INT NOT NULL,
+                             `DeductionPercentage` DECIMAL(5, 2) NOT NULL,
+                             `CreatedAt` DATETIME NOT NULL,
+                             `CreatedBy` LONGTEXT NULL,
+                             `ModifiedAt` DATETIME NULL,
+                             `ModifiedBy` LONGTEXT NULL,
+                             PRIMARY KEY (`DeductionId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `DeductionType` (
-  `DeductionTypeId` INT NOT NULL AUTO_INCREMENT,
-  `DeductionsName` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`DeductionTypeId`)
+                                 `DeductionTypeId` INT NOT NULL AUTO_INCREMENT,
+                                 `DeductionsName` VARCHAR(100) NOT NULL,
+                                 PRIMARY KEY (`DeductionTypeId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `DepartmentLeaves` (
-  `DepartmentLeavesId` INT NOT NULL AUTO_INCREMENT,
-  `DepartmentId` INT NOT NULL,
-  `LeaveTypeId` INT NOT NULL,
-  `LeavesCount` INT NOT NULL,
-  `Status` LONGTEXT NOT NULL,
-  PRIMARY KEY (`DepartmentLeavesId`)
+                                    `DepartmentLeavesId` INT NOT NULL AUTO_INCREMENT,
+                                    `DepartmentId` INT NOT NULL,
+                                    `LeaveTypeId` INT NOT NULL,
+                                    `LeavesCount` INT NOT NULL,
+                                    `Status` LONGTEXT NOT NULL,
+                                    PRIMARY KEY (`DepartmentLeavesId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Departments` (
-  `DepartmentId` INT NOT NULL AUTO_INCREMENT,
-  `Name` LONGTEXT NOT NULL,
-  `NoOfEmployee` INT NULL,
-  `Status` LONGTEXT NOT NULL,
-  `CreatedAt` DATETIME NULL,
-  `CreatedBy` VARCHAR(255) NULL,
-  `ModifiedBy` VARCHAR(255) NULL,
-  `ModifiedAt` DATETIME NULL,
-  PRIMARY KEY (`DepartmentId`)
+                               `DepartmentId` INT NOT NULL AUTO_INCREMENT,
+                               `Name` LONGTEXT NOT NULL,
+                               `NoOfEmployee` INT NULL,
+                               `Status` LONGTEXT NOT NULL,
+                               `CreatedAt` DATETIME NULL,
+                               `CreatedBy` VARCHAR(255) NULL,
+                               `ModifiedBy` VARCHAR(255) NULL,
+                               `ModifiedAt` DATETIME NULL,
+                               PRIMARY KEY (`DepartmentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Designations` (
-  `DesignationId` INT NOT NULL AUTO_INCREMENT,
-  `DepartmentId` INT NOT NULL,
-  `Name` LONGTEXT NOT NULL,
-  `NoOfEmployee` INT NULL,
-  `status` LONGTEXT NOT NULL,
-  `CreatedAt` DATETIME NULL,
-  `CreatedBy` VARCHAR(255) NULL,
-  `ModifiedBy` VARCHAR(255) NULL,
-  `ModifiedAt` DATETIME NULL,
-  PRIMARY KEY (`DesignationId`)
+                                `DesignationId` INT NOT NULL AUTO_INCREMENT,
+                                `DepartmentId` INT NOT NULL,
+                                `Name` LONGTEXT NOT NULL,
+                                `NoOfEmployee` INT NULL,
+                                `status` LONGTEXT NOT NULL,
+                                `CreatedAt` DATETIME NULL,
+                                `CreatedBy` VARCHAR(255) NULL,
+                                `ModifiedBy` VARCHAR(255) NULL,
+                                `ModifiedAt` DATETIME NULL,
+                                PRIMARY KEY (`DesignationId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Earning` (
-  `EarningsId` INT NOT NULL AUTO_INCREMENT,
-  `EarntypeId` INT NOT NULL,
-  `EarningsPercentage` DECIMAL(18, 2) NOT NULL,
-  `DepartmentId` INT NOT NULL,
-  `DesignationId` INT NOT NULL,
-  `CreatedBy` LONGTEXT NULL,
-  `CreatedAt` DATETIME NULL,
-  `ModifiedBy` LONGTEXT NULL,
-  `ModifiedAt` DATETIME NULL,
-  PRIMARY KEY (`EarningsId`)
+                           `EarningsId` INT NOT NULL AUTO_INCREMENT,
+                           `EarntypeId` INT NOT NULL,
+                           `EarningsPercentage` DECIMAL(18, 2) NOT NULL,
+                           `DepartmentId` INT NOT NULL,
+                           `DesignationId` INT NOT NULL,
+                           `CreatedBy` LONGTEXT NULL,
+                           `CreatedAt` DATETIME NULL,
+                           `ModifiedBy` LONGTEXT NULL,
+                           `ModifiedAt` DATETIME NULL,
+                           PRIMARY KEY (`EarningsId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `EarningType` (
-  `EarntypeId` INT NOT NULL AUTO_INCREMENT,
-  `EarningName` LONGTEXT NOT NULL,
-  PRIMARY KEY (`EarntypeId`)
+                               `EarntypeId` INT NOT NULL AUTO_INCREMENT,
+                               `EarningName` LONGTEXT NOT NULL,
+                               PRIMARY KEY (`EarntypeId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `EducationDetails` (
-  `EducationDetailsId` INT NOT NULL AUTO_INCREMENT,
-  `EducationType` LONGTEXT NOT NULL,
-  `UniversityName` LONGTEXT NOT NULL,
-  `UserId` INT NOT NULL,
-  `startdate` DATETIME NULL,
-  `enddate` DATETIME NULL,
-  PRIMARY KEY (`EducationDetailsId`)
+                                    `EducationDetailsId` INT NOT NULL AUTO_INCREMENT,
+                                    `EducationType` LONGTEXT NOT NULL,
+                                    `UniversityName` LONGTEXT NOT NULL,
+                                    `UserId` INT NOT NULL,
+                                    `startdate` DATETIME NULL,
+                                    `enddate` DATETIME NULL,
+                                    PRIMARY KEY (`EducationDetailsId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `EmployeeBankDetails` (
-  `BankDetailId` INT NOT NULL AUTO_INCREMENT,
-  `BankName` LONGTEXT NOT NULL,
-  `AccountNumber` LONGTEXT NOT NULL,
-  `IFSCCode` LONGTEXT NOT NULL,
-  `BranchName` LONGTEXT NOT NULL,
-  `UserId` INT NOT NULL,
-  PRIMARY KEY (`BankDetailId`)
+                                       `BankDetailId` INT NOT NULL AUTO_INCREMENT,
+                                       `BankName` LONGTEXT NOT NULL,
+                                       `AccountNumber` LONGTEXT NOT NULL,
+                                       `IFSCCode` LONGTEXT NOT NULL,
+                                       `BranchName` LONGTEXT NOT NULL,
+                                       `UserId` INT NOT NULL,
+                                       PRIMARY KEY (`BankDetailId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `EmployeeDeductions` (
-  `EmployeeDeductionId` INT NOT NULL AUTO_INCREMENT,
-  `SalaryId` INT NOT NULL,
-  `UserId` INT NOT NULL,
-  `DeductionId` INT NOT NULL,
-  `DeductionAmount` DECIMAL(18, 2) NOT NULL,
-  PRIMARY KEY (`EmployeeDeductionId`)
+                                      `EmployeeDeductionId` INT NOT NULL AUTO_INCREMENT,
+                                      `SalaryId` INT NOT NULL,
+                                      `UserId` INT NOT NULL,
+                                      `DeductionId` INT NOT NULL,
+                                      `DeductionAmount` DECIMAL(18, 2) NOT NULL,
+                                      PRIMARY KEY (`EmployeeDeductionId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `EmployeeEarnings` (
-  `EmployeeEarningId` INT NOT NULL AUTO_INCREMENT,
-  `SalaryId` INT NOT NULL,
-  `UserId` INT NOT NULL,
-  `EarningId` INT NOT NULL,
-  `EarningAmount` DECIMAL(18, 2) NOT NULL,
-  PRIMARY KEY (`EmployeeEarningId`)
+                                    `EmployeeEarningId` INT NOT NULL AUTO_INCREMENT,
+                                    `SalaryId` INT NOT NULL,
+                                    `UserId` INT NOT NULL,
+                                    `EarningId` INT NOT NULL,
+                                    `EarningAmount` DECIMAL(18, 2) NOT NULL,
+                                    PRIMARY KEY (`EmployeeEarningId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `EmployeeFamilyDetails` (
-  `FamilyDetailId` INT NOT NULL AUTO_INCREMENT,
-  `Name` LONGTEXT NOT NULL,
-  `Relation` LONGTEXT NOT NULL,
-  `DateOfBirth` DATETIME NOT NULL,
-  `phone` LONGTEXT NOT NULL,
-  `UserId` INT NOT NULL,
-  PRIMARY KEY (`FamilyDetailId`)
+                                         `FamilyDetailId` INT NOT NULL AUTO_INCREMENT,
+                                         `Name` LONGTEXT NOT NULL,
+                                         `Relation` LONGTEXT NOT NULL,
+                                         `DateOfBirth` DATETIME NOT NULL,
+                                         `phone` LONGTEXT NOT NULL,
+                                         `UserId` INT NOT NULL,
+                                         PRIMARY KEY (`FamilyDetailId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `EmployeePerformances` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `Name` LONGTEXT NOT NULL,
-  `Department` LONGTEXT NOT NULL,
-  `EmployeeId` INT NOT NULL,
-  `Designation` LONGTEXT NOT NULL,
-  `DateofJoin` DATETIME NOT NULL,
-  `ROName` LONGTEXT NOT NULL,
-  `DateofConfirmation` DATETIME NOT NULL,
-  `RODesignation` LONGTEXT NOT NULL,
-  `Qualification` LONGTEXT NOT NULL,
-  `PreviousyearsofExp` INT NOT NULL,
-  `Category` LONGTEXT NOT NULL,
-  `Sub_Category` LONGTEXT NOT NULL,
-  `Weightage` INT NULL,
-  `Percentage_Achieved_Self` DECIMAL(18, 2) NULL,
-  `Points_Scored_Self` INT NOT NULL,
-  `Percentage_Achieved_RO` DECIMAL(18, 2) NULL,
-  `Points_Scored_RO` INT NOT NULL,
-  PRIMARY KEY (`ID`)
+                                        `ID` INT NOT NULL AUTO_INCREMENT,
+                                        `Name` LONGTEXT NOT NULL,
+                                        `Department` LONGTEXT NOT NULL,
+                                        `EmployeeId` INT NOT NULL,
+                                        `Designation` LONGTEXT NOT NULL,
+                                        `DateofJoin` DATETIME NOT NULL,
+                                        `ROName` LONGTEXT NOT NULL,
+                                        `DateofConfirmation` DATETIME NOT NULL,
+                                        `RODesignation` LONGTEXT NOT NULL,
+                                        `Qualification` LONGTEXT NOT NULL,
+                                        `PreviousyearsofExp` INT NOT NULL,
+                                        `Category` LONGTEXT NOT NULL,
+                                        `Sub_Category` LONGTEXT NOT NULL,
+                                        `Weightage` INT NULL,
+                                        `Percentage_Achieved_Self` DECIMAL(18, 2) NULL,
+                                        `Points_Scored_Self` INT NOT NULL,
+                                        `Percentage_Achieved_RO` DECIMAL(18, 2) NULL,
+                                        `Points_Scored_RO` INT NOT NULL,
+                                        PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `EmployeeSalaries` (
-  `SalaryId` INT NOT NULL AUTO_INCREMENT,
-  `UserId` INT NOT NULL,
-  `TotalSalary` DECIMAL(18, 2) NOT NULL,
-  `NetSalary` DECIMAL(18, 2) NOT NULL,
-  `CreatedDate` DATETIME NOT NULL,
-  `UpdatedDate` DATETIME NULL,
-  PRIMARY KEY (`SalaryId`)
+                                    `SalaryId` INT NOT NULL AUTO_INCREMENT,
+                                    `UserId` INT NOT NULL,
+                                    `TotalSalary` DECIMAL(18, 2) NOT NULL,
+                                    `NetSalary` DECIMAL(18, 2) NOT NULL,
+                                    `CreatedDate` DATETIME NOT NULL,
+                                    `UpdatedDate` DATETIME NULL,
+                                    PRIMARY KEY (`SalaryId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Events` (
-  `Id` INT NOT NULL AUTO_INCREMENT,
-  `Title` LONGTEXT NOT NULL,
-  `Date` LONGTEXT NOT NULL,
-  `EventTypeId` INT NOT NULL,
-  `Status` LONGTEXT NOT NULL,
-  PRIMARY KEY (`Id`)
+                          `Id` INT NOT NULL AUTO_INCREMENT,
+                          `Title` LONGTEXT NOT NULL,
+                          `Date` LONGTEXT NOT NULL,
+                          `EventTypeId` INT NOT NULL,
+                          `Status` LONGTEXT NOT NULL,
+                          PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `EventTypes` (
-  `Id` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(50) NOT NULL,
-  `Color` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`Id`)
+                              `Id` INT NOT NULL AUTO_INCREMENT,
+                              `Name` VARCHAR(50) NOT NULL,
+                              `Color` VARCHAR(20) NOT NULL,
+                              PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Experience` (
-  `ExperienceId` INT NOT NULL AUTO_INCREMENT,
-  `DesignationName` LONGTEXT NOT NULL,
-  `FromDate` DATETIME NOT NULL,
-  `ToDate` DATETIME NOT NULL,
-  `UserId` INT NOT NULL,
-  `CompanyName` VARCHAR(100) NULL,
-  PRIMARY KEY (`ExperienceId`)
+                              `ExperienceId` INT NOT NULL AUTO_INCREMENT,
+                              `DesignationName` LONGTEXT NOT NULL,
+                              `FromDate` DATETIME NOT NULL,
+                              `ToDate` DATETIME NOT NULL,
+                              `UserId` INT NOT NULL,
+                              `CompanyName` VARCHAR(100) NULL,
+                              PRIMARY KEY (`ExperienceId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `FileUploads` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `FileName` LONGTEXT NOT NULL,
-  `FilePath` LONGTEXT NOT NULL,
-  `UserId` INT NOT NULL,
-  PRIMARY KEY (`id`)
+                               `id` INT NOT NULL AUTO_INCREMENT,
+                               `FileName` LONGTEXT NOT NULL,
+                               `FilePath` LONGTEXT NOT NULL,
+                               `UserId` INT NOT NULL,
+                               PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `GoalTrackingList` (
-  `GoalTrackingId` INT NOT NULL AUTO_INCREMENT,
-  `Subject` LONGTEXT NOT NULL,
-  `TargetAchievement` LONGTEXT NOT NULL,
-  `StartDate` DATETIME NOT NULL,
-  `EndDate` DATETIME NOT NULL,
-  `Description` LONGTEXT NOT NULL,
-  `Status` LONGTEXT NOT NULL,
-  `GoalId` INT NOT NULL,
-  PRIMARY KEY (`GoalTrackingId`)
+                                    `GoalTrackingId` INT NOT NULL AUTO_INCREMENT,
+                                    `Subject` LONGTEXT NOT NULL,
+                                    `TargetAchievement` LONGTEXT NOT NULL,
+                                    `StartDate` DATETIME NOT NULL,
+                                    `EndDate` DATETIME NOT NULL,
+                                    `Description` LONGTEXT NOT NULL,
+                                    `Status` LONGTEXT NOT NULL,
+                                    `GoalId` INT NOT NULL,
+                                    PRIMARY KEY (`GoalTrackingId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `GoalTypeList` (
-  `GoalId` INT NOT NULL AUTO_INCREMENT,
-  `GoalType` LONGTEXT NOT NULL,
-  `Description` LONGTEXT NOT NULL,
-  `Status` LONGTEXT NOT NULL,
-  PRIMARY KEY (`GoalId`)
+                                `GoalId` INT NOT NULL AUTO_INCREMENT,
+                                `GoalType` LONGTEXT NOT NULL,
+                                `Description` LONGTEXT NOT NULL,
+                                `Status` LONGTEXT NOT NULL,
+                                PRIMARY KEY (`GoalId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `KnowledgeBaseTopics` (
-  `Id` INT NOT NULL AUTO_INCREMENT,
-  `MasterTopic` LONGTEXT NOT NULL,
-  PRIMARY KEY (`Id`)
+                                       `Id` INT NOT NULL AUTO_INCREMENT,
+                                       `MasterTopic` LONGTEXT NOT NULL,
+                                       PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `LeaveBalances` (
-  `LeaveBalanceId` INT NOT NULL AUTO_INCREMENT,
-  `UserId` INT NOT NULL,
-  `DepartmentLeavesId` INT NOT NULL,
-  `LeaveTypeId` INT NOT NULL,
-  `TotalLeaves` INT NOT NULL,
-  `UsedLeaves` INT NOT NULL,
-  PRIMARY KEY (`LeaveBalanceId`)
+                                 `LeaveBalanceId` INT NOT NULL AUTO_INCREMENT,
+                                 `UserId` INT NOT NULL,
+                                 `DepartmentLeavesId` INT NOT NULL,
+                                 `LeaveTypeId` INT NOT NULL,
+                                 `TotalLeaves` INT NOT NULL,
+                                 `UsedLeaves` INT NOT NULL,
+                                 PRIMARY KEY (`LeaveBalanceId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `LeaveRequests` (
-  `LeaveRequestId` INT NOT NULL AUTO_INCREMENT,
-  `UserId` INT NOT NULL,
-  `LeaveTypeId` INT NOT NULL,
-  `StartDate` DATETIME NOT NULL,
-  `EndDate` DATETIME NOT NULL,
-  `NumberOfDays` INT NOT NULL,
-  `Reason` LONGTEXT NOT NULL,
-  `ApprovedBy` LONGTEXT NOT NULL,
-  `Status` LONGTEXT NOT NULL,
-  `StatusHistory` LONGTEXT NOT NULL,
-  PRIMARY KEY (`LeaveRequestId`)
+                                 `LeaveRequestId` INT NOT NULL AUTO_INCREMENT,
+                                 `UserId` INT NOT NULL,
+                                 `LeaveTypeId` INT NOT NULL,
+                                 `StartDate` DATETIME NOT NULL,
+                                 `EndDate` DATETIME NOT NULL,
+                                 `NumberOfDays` INT NOT NULL,
+                                 `Reason` LONGTEXT NOT NULL,
+                                 `ApprovedBy` LONGTEXT NOT NULL,
+                                 `Status` LONGTEXT NOT NULL,
+                                 `StatusHistory` LONGTEXT NOT NULL,
+                                 PRIMARY KEY (`LeaveRequestId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `MasterIndicators` (
-  `MasterIndicatorId` INT NOT NULL AUTO_INCREMENT,
-  `MasterIndicatorType` LONGTEXT NOT NULL,
-  `MasterIndicatorName` LONGTEXT NOT NULL,
-  `Status` LONGTEXT NOT NULL,
-  PRIMARY KEY (`MasterIndicatorId`)
+                                    `MasterIndicatorId` INT NOT NULL AUTO_INCREMENT,
+                                    `MasterIndicatorType` LONGTEXT NOT NULL,
+                                    `MasterIndicatorName` LONGTEXT NOT NULL,
+                                    `Status` LONGTEXT NOT NULL,
+                                    PRIMARY KEY (`MasterIndicatorId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `MasterLeaveTypes` (
-  `LeaveTypeId` INT NOT NULL AUTO_INCREMENT,
-  `LeaveType` LONGTEXT NOT NULL,
-  PRIMARY KEY (`LeaveTypeId`)
+                                    `LeaveTypeId` INT NOT NULL AUTO_INCREMENT,
+                                    `LeaveType` LONGTEXT NOT NULL,
+                                    PRIMARY KEY (`LeaveTypeId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Organization` (
-  `OrganizationId` INT NOT NULL AUTO_INCREMENT,
-  `OrganizationName` VARCHAR(100) NOT NULL,
-  `OrganizationDescription` VARCHAR(500) NOT NULL,
-  `OrganizationAddress` LONGTEXT NOT NULL,
-  `OrganizationPhone` LONGTEXT NOT NULL,
-  `OrganizationEmail` LONGTEXT NOT NULL,
-  `OrganizationLogo` LONGTEXT NOT NULL,
-  PRIMARY KEY (`OrganizationId`)
+                                `OrganizationId` INT NOT NULL AUTO_INCREMENT,
+                                `OrganizationName` VARCHAR(100) NOT NULL,
+                                `OrganizationDescription` VARCHAR(500) NOT NULL,
+                                `OrganizationAddress` LONGTEXT NOT NULL,
+                                `OrganizationPhone` LONGTEXT NOT NULL,
+                                `OrganizationEmail` LONGTEXT NOT NULL,
+                                `OrganizationLogo` LONGTEXT NOT NULL,
+                                PRIMARY KEY (`OrganizationId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Payslips` (
-  `PayslipId` INT NOT NULL AUTO_INCREMENT,
-  `UserId` INT NOT NULL,
-  `Month` LONGTEXT NOT NULL,
-  `Year` INT NOT NULL,
-  `PayslipPath` LONGTEXT NOT NULL,
-  `GeneratedOn` DATETIME NOT NULL,
-  PRIMARY KEY (`PayslipId`)
+                            `PayslipId` INT NOT NULL AUTO_INCREMENT,
+                            `UserId` INT NOT NULL,
+                            `Month` LONGTEXT NOT NULL,
+                            `Year` INT NOT NULL,
+                            `PayslipPath` LONGTEXT NOT NULL,
+                            `GeneratedOn` DATETIME NOT NULL,
+                            PRIMARY KEY (`PayslipId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `PerformanceAppriasal` (
-  `PerformanceAppriasalId` INT NOT NULL AUTO_INCREMENT,
-  `AppraisalDate` DATETIME NOT NULL,
-  `Status` LONGTEXT NOT NULL,
-  `CustomerExperience` LONGTEXT NOT NULL,
-  `Marketing` LONGTEXT NOT NULL,
-  `Management` LONGTEXT NOT NULL,
-  `Administration` LONGTEXT NOT NULL,
-  `PresentationSkills` LONGTEXT NOT NULL,
-  `QualityofWork` LONGTEXT NOT NULL,
-  `Efficiency` LONGTEXT NOT NULL,
-  `Integrity` LONGTEXT NOT NULL,
-  `Professionalism` LONGTEXT NOT NULL,
-  `TeamWork` LONGTEXT NOT NULL,
-  `CriticalThinking` LONGTEXT NOT NULL,
-  `ConflictManagement` LONGTEXT NOT NULL,
-  `Attendance` LONGTEXT NOT NULL,
-  `AbilityToMeetDeadline` LONGTEXT NOT NULL,
-  `UserId` INT NOT NULL,
-  `DepartmentId` INT NULL,
-  `DesignationId` INT NOT NULL,
-  PRIMARY KEY (`PerformanceAppriasalId`)
+                                        `PerformanceAppriasalId` INT NOT NULL AUTO_INCREMENT,
+                                        `AppraisalDate` DATETIME NOT NULL,
+                                        `Status` LONGTEXT NOT NULL,
+                                        `CustomerExperience` LONGTEXT NOT NULL,
+                                        `Marketing` LONGTEXT NOT NULL,
+                                        `Management` LONGTEXT NOT NULL,
+                                        `Administration` LONGTEXT NOT NULL,
+                                        `PresentationSkills` LONGTEXT NOT NULL,
+                                        `QualityofWork` LONGTEXT NOT NULL,
+                                        `Efficiency` LONGTEXT NOT NULL,
+                                        `Integrity` LONGTEXT NOT NULL,
+                                        `Professionalism` LONGTEXT NOT NULL,
+                                        `TeamWork` LONGTEXT NOT NULL,
+                                        `CriticalThinking` LONGTEXT NOT NULL,
+                                        `ConflictManagement` LONGTEXT NOT NULL,
+                                        `Attendance` LONGTEXT NOT NULL,
+                                        `AbilityToMeetDeadline` LONGTEXT NOT NULL,
+                                        `UserId` INT NOT NULL,
+                                        `DepartmentId` INT NULL,
+                                        `DesignationId` INT NOT NULL,
+                                        PRIMARY KEY (`PerformanceAppriasalId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `PerformanceIndicators` (
-  `PerformanceIndicatorId` INT NOT NULL AUTO_INCREMENT,
-  `ApprovedBy` LONGTEXT NOT NULL,
-  `CreatedAt` DATETIME NOT NULL,
-  `Status` LONGTEXT NOT NULL,
-  `CustomerExperience` LONGTEXT NOT NULL,
-  `Marketing` LONGTEXT NOT NULL,
-  `Management` LONGTEXT NOT NULL,
-  `Administration` LONGTEXT NOT NULL,
-  `PresentationSkills` LONGTEXT NOT NULL,
-  `QualityofWork` LONGTEXT NOT NULL,
-  `Efficiency` LONGTEXT NOT NULL,
-  `Integrity` LONGTEXT NOT NULL,
-  `Professionalism` LONGTEXT NOT NULL,
-  `TeamWork` LONGTEXT NOT NULL,
-  `CriticalThinking` LONGTEXT NOT NULL,
-  `ConflictManagement` LONGTEXT NOT NULL,
-  `Attendance` LONGTEXT NOT NULL,
-  `AbilityToMeetDeadline` LONGTEXT NOT NULL,
-  `DepartmentId` INT NULL,
-  `DesignationId` INT NOT NULL,
-  PRIMARY KEY (`PerformanceIndicatorId`)
+                                         `PerformanceIndicatorId` INT NOT NULL AUTO_INCREMENT,
+                                         `ApprovedBy` LONGTEXT NOT NULL,
+                                         `CreatedAt` DATETIME NOT NULL,
+                                         `Status` LONGTEXT NOT NULL,
+                                         `CustomerExperience` LONGTEXT NOT NULL,
+                                         `Marketing` LONGTEXT NOT NULL,
+                                         `Management` LONGTEXT NOT NULL,
+                                         `Administration` LONGTEXT NOT NULL,
+                                         `PresentationSkills` LONGTEXT NOT NULL,
+                                         `QualityofWork` LONGTEXT NOT NULL,
+                                         `Efficiency` LONGTEXT NOT NULL,
+                                         `Integrity` LONGTEXT NOT NULL,
+                                         `Professionalism` LONGTEXT NOT NULL,
+                                         `TeamWork` LONGTEXT NOT NULL,
+                                         `CriticalThinking` LONGTEXT NOT NULL,
+                                         `ConflictManagement` LONGTEXT NOT NULL,
+                                         `Attendance` LONGTEXT NOT NULL,
+                                         `AbilityToMeetDeadline` LONGTEXT NOT NULL,
+                                         `DepartmentId` INT NULL,
+                                         `DesignationId` INT NOT NULL,
+                                         PRIMARY KEY (`PerformanceIndicatorId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `PerformanceReviews` (
-  `ReviewId` INT NOT NULL AUTO_INCREMENT,
-  `Name` LONGTEXT NOT NULL,
-  `Department` LONGTEXT NOT NULL,
-  `EmployeeId` INT NOT NULL,
-  `Designation` LONGTEXT NOT NULL,
-  `DateofJoin` DATETIME NOT NULL,
-  `ROName` LONGTEXT NOT NULL,
-  `DateofConfirmation` DATETIME NOT NULL,
-  `RODesignation` LONGTEXT NOT NULL,
-  `Qualification` LONGTEXT NOT NULL,
-  `PreviousyearsofExp` INT NOT NULL,
-  PRIMARY KEY (`ReviewId`)
+                                      `ReviewId` INT NOT NULL AUTO_INCREMENT,
+                                      `Name` LONGTEXT NOT NULL,
+                                      `Department` LONGTEXT NOT NULL,
+                                      `EmployeeId` INT NOT NULL,
+                                      `Designation` LONGTEXT NOT NULL,
+                                      `DateofJoin` DATETIME NOT NULL,
+                                      `ROName` LONGTEXT NOT NULL,
+                                      `DateofConfirmation` DATETIME NOT NULL,
+                                      `RODesignation` LONGTEXT NOT NULL,
+                                      `Qualification` LONGTEXT NOT NULL,
+                                      `PreviousyearsofExp` INT NOT NULL,
+                                      PRIMARY KEY (`ReviewId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `ProjectsUser` (
-  `ProjectsProjectId` INT NOT NULL,
-  `UsersUserId` INT NOT NULL,
-  PRIMARY KEY (`ProjectsProjectId`, `UsersUserId`)
+                                `ProjectsProjectId` INT NOT NULL,
+                                `UsersUserId` INT NOT NULL,
+                                PRIMARY KEY (`ProjectsProjectId`, `UsersUserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Promotion` (
-  `PromotionId` INT NOT NULL AUTO_INCREMENT,
-  `UserID` INT NOT NULL,
-  `DesignationFrom` VARCHAR(100) NOT NULL,
-  `DesignationTo` VARCHAR(100) NOT NULL,
-  `Date` DATETIME NOT NULL,
-  PRIMARY KEY (`PromotionId`)
+                             `PromotionId` INT NOT NULL AUTO_INCREMENT,
+                             `UserID` INT NOT NULL,
+                             `DesignationFrom` VARCHAR(100) NOT NULL,
+                             `DesignationTo` VARCHAR(100) NOT NULL,
+                             `Date` DATETIME NOT NULL,
+                             PRIMARY KEY (`PromotionId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Resignation` (
-  `ResignationId` INT NOT NULL AUTO_INCREMENT,
-  `UserID` INT NOT NULL,
-  `DepartmentId` INT NOT NULL,
-  `NoticeDate` DATETIME NOT NULL,
-  `ResignDate` DATETIME NOT NULL,
-  `Reason` VARCHAR(500) NOT NULL,
-  PRIMARY KEY (`ResignationId`)
+                               `ResignationId` INT NOT NULL AUTO_INCREMENT,
+                               `UserID` INT NOT NULL,
+                               `DepartmentId` INT NOT NULL,
+                               `NoticeDate` DATETIME NOT NULL,
+                               `ResignDate` DATETIME NOT NULL,
+                               `Reason` VARCHAR(500) NOT NULL,
+                               PRIMARY KEY (`ResignationId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Role` (
-  `RoleId` INT NOT NULL AUTO_INCREMENT,
-  `RoleName` LONGTEXT NOT NULL,
-  `Status` LONGTEXT NOT NULL,
-  `CreatedAt` DATETIME NULL,
-  `CreatedBy` VARCHAR(255) NULL,
-  `ModifiedBy` VARCHAR(255) NULL,
-  `ModifiedAt` DATETIME NULL,
-  PRIMARY KEY (`RoleId`)
+                        `RoleId` INT NOT NULL AUTO_INCREMENT,
+                        `RoleName` LONGTEXT NOT NULL,
+                        `Status` LONGTEXT NOT NULL,
+                        `CreatedAt` DATETIME NULL,
+                        `CreatedBy` VARCHAR(255) NULL,
+                        `ModifiedBy` VARCHAR(255) NULL,
+                        `ModifiedAt` DATETIME NULL,
+                        PRIMARY KEY (`RoleId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `subTopics` (
-  `Id` INT NOT NULL AUTO_INCREMENT,
-  `Title` LONGTEXT NOT NULL,
-  `KnowledgeBaseTopicId` INT NOT NULL,
-  PRIMARY KEY (`Id`)
+                             `Id` INT NOT NULL AUTO_INCREMENT,
+                             `Title` LONGTEXT NOT NULL,
+                             `KnowledgeBaseTopicId` INT NOT NULL,
+                             PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Task` (
-  `TaskId` INT NOT NULL AUTO_INCREMENT,
-  `ProjectId` INT NOT NULL,
-  `Title` VARCHAR(255) NOT NULL,
-  `Description` VARCHAR(1000) NOT NULL,
-  `Status` VARCHAR(50) NOT NULL,
-  `Priority` VARCHAR(50) NOT NULL,
-  `FilePath` VARCHAR(255) NULL,
-  `Deadline` DATETIME NOT NULL,
-  PRIMARY KEY (`TaskId`)
+                        `TaskId` INT NOT NULL AUTO_INCREMENT,
+                        `ProjectId` INT NOT NULL,
+                        `Title` VARCHAR(255) NOT NULL,
+                        `Description` VARCHAR(1000) NOT NULL,
+                        `Status` VARCHAR(50) NOT NULL,
+                        `Priority` VARCHAR(50) NOT NULL,
+                        `FilePath` VARCHAR(255) NULL,
+                        `Deadline` DATETIME NOT NULL,
+                        PRIMARY KEY (`TaskId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `TaskBoards` (
-  `TaskBoardId` INT NOT NULL AUTO_INCREMENT,
-  `ProjectId` INT NOT NULL,
-  `TaskId` INT NOT NULL,
-  `Percentage` INT NOT NULL,
-  `DueDate` DATETIME NOT NULL,
-  `TasksTaskId` INT NULL,
-  PRIMARY KEY (`TaskBoardId`)
+                              `TaskBoardId` INT NOT NULL AUTO_INCREMENT,
+                              `ProjectId` INT NOT NULL,
+                              `TaskId` INT NOT NULL,
+                              `Percentage` INT NOT NULL,
+                              `DueDate` DATETIME NOT NULL,
+                              `TasksTaskId` INT NULL,
+                              PRIMARY KEY (`TaskBoardId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Taskmember` (
-  `AssignedId` INT NOT NULL AUTO_INCREMENT,
-  `TaskId` INT NOT NULL,
-  `UserId` INT NOT NULL,
-  PRIMARY KEY (`AssignedId`)
+                              `AssignedId` INT NOT NULL AUTO_INCREMENT,
+                              `TaskId` INT NOT NULL,
+                              `UserId` INT NOT NULL,
+                              PRIMARY KEY (`AssignedId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Termination` (
-  `TerminationId` INT NOT NULL AUTO_INCREMENT,
-  `UserID` INT NOT NULL,
-  `TerminationType` VARCHAR(100) NOT NULL,
-  `NoticeDate` DATETIME NOT NULL,
-  `ResignDate` DATETIME NOT NULL,
-  `Reason` VARCHAR(500) NOT NULL,
-  PRIMARY KEY (`TerminationId`)
+                               `TerminationId` INT NOT NULL AUTO_INCREMENT,
+                               `UserID` INT NOT NULL,
+                               `TerminationType` VARCHAR(100) NOT NULL,
+                               `NoticeDate` DATETIME NOT NULL,
+                               `ResignDate` DATETIME NOT NULL,
+                               `Reason` VARCHAR(500) NOT NULL,
+                               PRIMARY KEY (`TerminationId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `TicketReplies` (
-  `ReplyId` INT NOT NULL AUTO_INCREMENT,
-  `TicketId` INT NOT NULL,
-  `ReplyMessage` VARCHAR(500) NOT NULL,
-  `RepliedBy` VARCHAR(100) NOT NULL,
-  `RepliedAt` DATETIME NOT NULL,
-  PRIMARY KEY (`ReplyId`)
+                                 `ReplyId` INT NOT NULL AUTO_INCREMENT,
+                                 `TicketId` INT NOT NULL,
+                                 `ReplyMessage` VARCHAR(500) NOT NULL,
+                                 `RepliedBy` VARCHAR(100) NOT NULL,
+                                 `RepliedAt` DATETIME NOT NULL,
+                                 PRIMARY KEY (`ReplyId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Tickets` (
-  `TicketId` INT NOT NULL AUTO_INCREMENT,
-  `TicketTitle` VARCHAR(200) NOT NULL,
-  `EventCategory` LONGTEXT NOT NULL,
-  `Subject` VARCHAR(200) NOT NULL,
-  `AssignedBy` INT NOT NULL,
-  `AssignedTo` INT NOT NULL,
-  `TicketDescription` LONGTEXT NOT NULL,
-  `Priority` VARCHAR(50) NOT NULL,
-  `Status` VARCHAR(50) NOT NULL,
-  `Visibility` VARCHAR(10) NOT NULL,
-  `CreatedAt` DATETIME NOT NULL,
-  PRIMARY KEY (`TicketId`)
+                           `TicketId` INT NOT NULL AUTO_INCREMENT,
+                           `TicketTitle` VARCHAR(200) NOT NULL,
+                           `EventCategory` LONGTEXT NOT NULL,
+                           `Subject` VARCHAR(200) NOT NULL,
+                           `AssignedBy` INT NOT NULL,
+                           `AssignedTo` INT NOT NULL,
+                           `TicketDescription` LONGTEXT NOT NULL,
+                           `Priority` VARCHAR(50) NOT NULL,
+                           `Status` VARCHAR(50) NOT NULL,
+                           `Visibility` VARCHAR(10) NOT NULL,
+                           `CreatedAt` DATETIME NOT NULL,
+                           PRIMARY KEY (`TicketId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Timesheets` (
-  `TimesheetId` INT NOT NULL AUTO_INCREMENT,
-  `UserId` INT NOT NULL,
-  `Date` DATETIME NOT NULL,
-  `WorkHours` INT NOT NULL,
-  `Status` LONGTEXT NOT NULL,
-  `CreatedBy` LONGTEXT NOT NULL,
-  `CreatedAt` DATETIME NOT NULL,
-  `ApprovedBy` LONGTEXT NULL,
-  `ApprovedAt` DATETIME NULL,
-  `ProjectId` INT NOT NULL,
-  PRIMARY KEY (`TimesheetId`)
+                              `TimesheetId` INT NOT NULL AUTO_INCREMENT,
+                              `UserId` INT NOT NULL,
+                              `Date` DATETIME NOT NULL,
+                              `WorkHours` INT NOT NULL,
+                              `Status` LONGTEXT NOT NULL,
+                              `CreatedBy` LONGTEXT NOT NULL,
+                              `CreatedAt` DATETIME NOT NULL,
+                              `ApprovedBy` LONGTEXT NULL,
+                              `ApprovedAt` DATETIME NULL,
+                              `ProjectId` INT NOT NULL,
+                              PRIMARY KEY (`TimesheetId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Trainer` (
-  `TrainerId` INT NOT NULL AUTO_INCREMENT,
-  `FirstName` LONGTEXT NOT NULL,
-  `LastName` LONGTEXT NOT NULL,
-  `Role` LONGTEXT NOT NULL,
-  `Email` LONGTEXT NOT NULL,
-  `Description` LONGTEXT NOT NULL,
-  `Status` LONGTEXT NOT NULL,
-  `Phone` BIGINT NOT NULL,
-  `ProfilePicture` LONGTEXT NULL,
-  PRIMARY KEY (`TrainerId`)
+                           `TrainerId` INT NOT NULL AUTO_INCREMENT,
+                           `FirstName` LONGTEXT NOT NULL,
+                           `LastName` LONGTEXT NOT NULL,
+                           `Role` LONGTEXT NOT NULL,
+                           `Email` LONGTEXT NOT NULL,
+                           `Description` LONGTEXT NOT NULL,
+                           `Status` LONGTEXT NOT NULL,
+                           `Phone` BIGINT NOT NULL,
+                           `ProfilePicture` LONGTEXT NULL,
+                           PRIMARY KEY (`TrainerId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Training` (
-  `TrainingId` INT NOT NULL AUTO_INCREMENT,
-  `TrainerId` INT NOT NULL,
-  `TrainingTypeId` INT NOT NULL,
-  `UserId` INT NOT NULL,
-  `TrainingCost` DECIMAL(18, 2) NOT NULL,
-  `Description` LONGTEXT NOT NULL,
-  `Status` LONGTEXT NOT NULL,
-  `StartDate` DATETIME NOT NULL,
-  `EndDate` DATETIME NOT NULL,
-  `CreatedAt` DATETIME NULL,
-  `CreatedBy` VARCHAR(255) NULL,
-  `ModifiedBy` VARCHAR(255) NULL,
-  `ModifiedAt` DATETIME NULL,
-  PRIMARY KEY (`TrainingId`)
+                            `TrainingId` INT NOT NULL AUTO_INCREMENT,
+                            `TrainerId` INT NOT NULL,
+                            `TrainingTypeId` INT NOT NULL,
+                            `UserId` INT NOT NULL,
+                            `TrainingCost` DECIMAL(18, 2) NOT NULL,
+                            `Description` LONGTEXT NOT NULL,
+                            `Status` LONGTEXT NOT NULL,
+                            `StartDate` DATETIME NOT NULL,
+                            `EndDate` DATETIME NOT NULL,
+                            `CreatedAt` DATETIME NULL,
+                            `CreatedBy` VARCHAR(255) NULL,
+                            `ModifiedBy` VARCHAR(255) NULL,
+                            `ModifiedAt` DATETIME NULL,
+                            PRIMARY KEY (`TrainingId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `TrainingType` (
-  `TrainingTypeId` INT NOT NULL AUTO_INCREMENT,
-  `TrainingTypeName` LONGTEXT NOT NULL,
-  `Description` LONGTEXT NOT NULL,
-  `Status` LONGTEXT NOT NULL,
-  PRIMARY KEY (`TrainingTypeId`)
+                                `TrainingTypeId` INT NOT NULL AUTO_INCREMENT,
+                                `TrainingTypeName` LONGTEXT NOT NULL,
+                                `Description` LONGTEXT NOT NULL,
+                                `Status` LONGTEXT NOT NULL,
+                                PRIMARY KEY (`TrainingTypeId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `User` (
-  `UserId` INT NOT NULL AUTO_INCREMENT,
-  `FirstName` LONGTEXT NOT NULL,
-  `LastName` LONGTEXT NOT NULL,
-  `Email` LONGTEXT NOT NULL,
-  `PasswordHash` LONGTEXT NOT NULL,
-  `PhoneNumber` LONGTEXT NOT NULL,
-  `RoleId` INT NOT NULL,
-  `DepartmentId` INT NULL,
-  `DesignationtId` INT NULL,
-  `DateOfJoining` DATETIME NOT NULL,
-  `DateOfBirth` DATETIME NOT NULL,
-  `Gender` LONGTEXT NOT NULL,
-  `Address` LONGTEXT NOT NULL,
-  `AboutEmployee` LONGTEXT NOT NULL,
-  `ProfilePicture` LONGTEXT NOT NULL,
-  `RoleId1` INT NULL,
-  `ReportingManager` LONGTEXT NULL,
-  `CreatedAt` DATETIME NULL,
-  `CreatedBy` VARCHAR(255) NULL,
-  `ModifiedBy` VARCHAR(255) NULL,
-  `ModifiedAt` DATETIME NULL,
-  `Status` VARCHAR(100) NULL,
-  PRIMARY KEY (`UserId`)
+                        `UserId` INT NOT NULL AUTO_INCREMENT,
+                        `FirstName` LONGTEXT NOT NULL,
+                        `LastName` LONGTEXT NOT NULL,
+                        `Email` LONGTEXT NOT NULL,
+                        `PasswordHash` LONGTEXT NOT NULL,
+                        `PhoneNumber` LONGTEXT NOT NULL,
+                        `RoleId` INT NOT NULL,
+                        `DepartmentId` INT NULL,
+                        `DesignationtId` INT NULL,
+                        `DateOfJoining` DATETIME NOT NULL,
+                        `DateOfBirth` DATETIME NOT NULL,
+                        `Gender` LONGTEXT NOT NULL,
+                        `Address` LONGTEXT NOT NULL,
+                        `AboutEmployee` LONGTEXT NOT NULL,
+                        `ProfilePicture` LONGTEXT NOT NULL,
+                        `RoleId1` INT NULL,
+                        `ReportingManager` LONGTEXT NULL,
+                        `CreatedAt` DATETIME NULL,
+                        `CreatedBy` VARCHAR(255) NULL,
+                        `ModifiedBy` VARCHAR(255) NULL,
+                        `ModifiedAt` DATETIME NULL,
+                        `Status` VARCHAR(100) NULL,
+                        PRIMARY KEY (`UserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- DATA
@@ -945,31 +945,34 @@ INSERT INTO `TrainingType` (`TrainingTypeId`, `TrainingTypeName`, `Description`,
 INSERT INTO `TrainingType` (`TrainingTypeId`, `TrainingTypeName`, `Description`, `Status`) VALUES (5, 'Train', 'Something Train', 'Active');
 INSERT INTO `TrainingType` (`TrainingTypeId`, `TrainingTypeName`, `Description`, `Status`) VALUES (6, 'Session', 'session describe', 'Inactive');
 INSERT INTO `TrainingType` (`TrainingTypeId`, `TrainingTypeName`, `Description`, `Status`) VALUES (9, 'Listening', 'Nill', 'Active');
-INSERT INTO `User` (`UserId`, `FirstName`, `LastName`, `Email`, `PasswordHash`, `PhoneNumber`, `RoleId`, `DepartmentId`, `DesignationtId`, `DateOfJoining`, `DateOfBirth`, `Gender`, `Address`, `AboutEmployee`, `ProfilePicture`, `RoleId1`, `ReportingManager`, `CreatedAt`, `CreatedBy`, `ModifiedBy`, `ModifiedAt`, `Status`) VALUES (1, 'admin', 'a', 'admin@gmail.com', '123', '1222222222', 3, NULL, 12, '2025-02-11T00:00:00.0000000', '2025-02-11T00:00:00.0000000', 'Male', 'Mumbai', '																																																																																																																																															I am Software developer 
-												
-				
-												
-												
-												
-												
-												
-												
-												
-												
-												
+INSERT INTO `User` (`UserId`, `FirstName`, `LastName`, `Email`, `PasswordHash`, `PhoneNumber`, `RoleId`, `DepartmentId`, `DesignationtId`, `DateOfJoining`, `DateOfBirth`, `Gender`, `Address`, `AboutEmployee`, `ProfilePicture`, `RoleId1`, `ReportingManager`, `CreatedAt`, `CreatedBy`, `ModifiedBy`, `ModifiedAt`, `Status`) VALUES (1, 'admin', 'a', 'admin@gmail.com', '123', '1222222222', 3, NULL, 12, '2025-02-11T00:00:00.0000000', '2025-02-11T00:00:00.0000000', 'Male', 'Mumbai', '																																																																																																																																															I am Software developer
+
+
+
+
+
+
+
+
+
+
+
 												', 'Content/uploads/profile pic.png', NULL, NULL, NULL, NULL, NULL, NULL, 'Active');
 INSERT INTO `User` (`UserId`, `FirstName`, `LastName`, `Email`, `PasswordHash`, `PhoneNumber`, `RoleId`, `DepartmentId`, `DesignationtId`, `DateOfJoining`, `DateOfBirth`, `Gender`, `Address`, `AboutEmployee`, `ProfilePicture`, `RoleId1`, `ReportingManager`, `CreatedAt`, `CreatedBy`, `ModifiedBy`, `ModifiedAt`, `Status`) VALUES (35, 'Krish', 'Kheloji', 'khelojikrish@gmail.com', '123', '8877665544', 8, 25, 12, '2025-05-02T00:00:00.0000000', '2025-05-02T00:00:00.0000000', 'Male', 'Chicago', 'nill', 'Content/uploads/Krish Photo.jpeg', NULL, NULL, NULL, NULL, NULL, NULL, 'Active');
 INSERT INTO `User` (`UserId`, `FirstName`, `LastName`, `Email`, `PasswordHash`, `PhoneNumber`, `RoleId`, `DepartmentId`, `DesignationtId`, `DateOfJoining`, `DateOfBirth`, `Gender`, `Address`, `AboutEmployee`, `ProfilePicture`, `RoleId1`, `ReportingManager`, `CreatedAt`, `CreatedBy`, `ModifiedBy`, `ModifiedAt`, `Status`) VALUES (36, 'SurajR', 'K', 'suraj@gmail.com', '123', '6546378292', 10, 25, 12, '0001-01-01T00:00:00.0000000', '0001-01-01T00:00:00.0000000', 'Male', 'delhi', 'nill', 'Content/uploads/user1.jpg', NULL, 'Krish', '2025-02-19T06:47:46.540', 'admin', 'admin', '2025-02-24T05:14:29.550', 'Active');
 INSERT INTO `User` (`UserId`, `FirstName`, `LastName`, `Email`, `PasswordHash`, `PhoneNumber`, `RoleId`, `DepartmentId`, `DesignationtId`, `DateOfJoining`, `DateOfBirth`, `Gender`, `Address`, `AboutEmployee`, `ProfilePicture`, `RoleId1`, `ReportingManager`, `CreatedAt`, `CreatedBy`, `ModifiedBy`, `ModifiedAt`, `Status`) VALUES (37, 'Ram', 'Kheloji', 'ram@gmail.com', '123', '8877665544', 10, 25, 12, '0001-01-01T00:00:00.0000000', '0001-01-01T00:00:00.0000000', 'Male', 'Mumbai', '																																							nill
-												
-												
+
+
 												', 'Content/uploads/user2.jpg', NULL, 'Krish', '2025-02-19T19:43:57.600', 'admin', 'admin', '2025-02-22T08:45:09.050', 'Active');
 INSERT INTO `User` (`UserId`, `FirstName`, `LastName`, `Email`, `PasswordHash`, `PhoneNumber`, `RoleId`, `DepartmentId`, `DesignationtId`, `DateOfJoining`, `DateOfBirth`, `Gender`, `Address`, `AboutEmployee`, `ProfilePicture`, `RoleId1`, `ReportingManager`, `CreatedAt`, `CreatedBy`, `ModifiedBy`, `ModifiedAt`, `Status`) VALUES (38, 'Jack', 'J', 'jack@gmail.com', '123', '9988776655', 10, 25, 12, '0001-01-01T00:00:00.0000000', '0001-01-01T00:00:00.0000000', 'Male', 'Chicago', 'nill', 'Content/uploads/IMG_20230714_114721.jpg', NULL, 'Krish', '2025-02-22T06:00:33.777', 'admin', NULL, NULL, 'Active');
 INSERT INTO `User` (`UserId`, `FirstName`, `LastName`, `Email`, `PasswordHash`, `PhoneNumber`, `RoleId`, `DepartmentId`, `DesignationtId`, `DateOfJoining`, `DateOfBirth`, `Gender`, `Address`, `AboutEmployee`, `ProfilePicture`, `RoleId1`, `ReportingManager`, `CreatedAt`, `CreatedBy`, `ModifiedBy`, `ModifiedAt`, `Status`) VALUES (40, 'Harish', 'K', 'harish@gmail.com', '123', '9988776655', 10, 25, 12, '2025-02-26T00:00:00.0000000', '2025-02-20T00:00:00.0000000', 'Male', 'delhi', 'not mentioned', 'Content/uploads/photo.jpeg', NULL, 'Krish', '2025-02-24T06:18:50.260', 'admin', 'admin', '2025-03-05T09:15:35.810', 'Active');
 INSERT INTO `User` (`UserId`, `FirstName`, `LastName`, `Email`, `PasswordHash`, `PhoneNumber`, `RoleId`, `DepartmentId`, `DesignationtId`, `DateOfJoining`, `DateOfBirth`, `Gender`, `Address`, `AboutEmployee`, `ProfilePicture`, `RoleId1`, `ReportingManager`, `CreatedAt`, `CreatedBy`, `ModifiedBy`, `ModifiedAt`, `Status`) VALUES (42, 'Nitesh', '', 'nitesh@gmail.com', '123', '9988776655', 10, 25, 12, '2025-03-13T00:00:00.0000000', '2025-03-26T00:00:00.0000000', 'Male', 'delhi', 'Nill', 'Content/uploads/stamp.jpg', NULL, 'Krish', '2025-03-01T13:00:04.843', 'admin', 'admin', '2025-03-02T10:25:25.893', 'Active');
 
+-- my change
+ALTER TABLE Events
+    MODIFY COLUMN Status VARCHAR(50) NOT NULL DEFAULT '';
 -- DEFAULTS
-ALTER TABLE `Events` ALTER COLUMN `Status` SET DEFAULT '';
+-- ALTER TABLE `Events` ALTER COLUMN `Status` SET DEFAULT 'ACTIVE';
 ALTER TABLE `Taskmember` ALTER COLUMN `TaskId` SET DEFAULT (0);
 ALTER TABLE `Trainer` ALTER COLUMN `Phone` SET DEFAULT 0;
 
@@ -1044,6 +1047,7 @@ select  * from designations;
 
 desc user;
 
+
 delimiter //
 create PROCEDURE GetUserByEmail(IN p_email VARCHAR(255))
 begin
@@ -1056,9 +1060,9 @@ delimiter ;
 delimiter //
 create PROCEDURE GetRoleById(IN p_roleId INT)
 begin
-    SELECT RoleId, RoleName, Status
-    FROM `Role`
-    WHERE RoleId = p_roleId;
+SELECT RoleId, RoleName, Status
+FROM `Role`
+WHERE RoleId = p_roleId;
 end //
 
 delimiter ;
@@ -1093,49 +1097,49 @@ VALUES
 -- =========================
 
 (  'Rajesh',
-    'Sharma',
-    'rajesh.sharma@example.com',
-    '138b40fd6c295cb883fe9e9162cac0d8f4e6a4b1f619045d47bdbc361c15acf4',
-    '9876500001',
-    3,
-    25,
-    12,
-    '2022-01-10 09:00:00',
-    '1985-04-15 00:00:00',
-    'Male',
-    'Nashik, Maharashtra',
-    'System administrator responsible for managing the organization and users.',
-    'default-profile.jpg',
-    NULL,
-    NULL,
-    NOW(),
-    'system',
-    NULL,
-    NULL,
-    'Active'
+   'Sharma',
+   'rajesh.sharma@example.com',
+   '138b40fd6c295cb883fe9e9162cac0d8f4e6a4b1f619045d47bdbc361c15acf4',
+   '9876500001',
+   3,
+   25,
+   12,
+   '2022-01-10 09:00:00',
+   '1985-04-15 00:00:00',
+   'Male',
+   'Nashik, Maharashtra',
+   'System administrator responsible for managing the organization and users.',
+   'default-profile.jpg',
+   NULL,
+   NULL,
+   NOW(),
+   'system',
+   NULL,
+   NULL,
+   'Active'
 ),
 
 (    'Anita',
-    'Patil',
-    'anita.patil@example.com',
-    '138b40fd6c295cb883fe9e9162cac0d8f4e6a4b1f619045d47bdbc361c15acf4',
-    '9876500002',
-    3,
-    25,
-    12,
-    '2022-03-15 09:00:00',
-    '1988-07-22 00:00:00',
-    'Female',
-    'Pune, Maharashtra',
-    'Administrator responsible for employee management and system operations.',
-    'default-profile.jpg',
-    NULL,
-    NULL,
-    NOW(),
-    'system',
-    NULL,
-    NULL,
-    'Active'
+     'Patil',
+     'anita.patil@example.com',
+     '138b40fd6c295cb883fe9e9162cac0d8f4e6a4b1f619045d47bdbc361c15acf4',
+     '9876500002',
+     3,
+     25,
+     12,
+     '2022-03-15 09:00:00',
+     '1988-07-22 00:00:00',
+     'Female',
+     'Pune, Maharashtra',
+     'Administrator responsible for employee management and system operations.',
+     'default-profile.jpg',
+     NULL,
+     NULL,
+     NOW(),
+     'system',
+     NULL,
+     NULL,
+     'Active'
 ),
 
 -- =========================
@@ -1173,7 +1177,7 @@ VALUES
     'da1e1ba8da7a301f5039d51fb12695e3f874de89c8116203b6a37e776851b45a',
     '9876500004',
     8,
-   25,
+    25,
     12,
     '2023-04-10 09:00:00',
     '1992-02-28 00:00:00',
@@ -1201,7 +1205,7 @@ VALUES
     'f59dbd5831cd7796fc2bb037967cb32bbcdc7bd1805d055936559975fe6c8d6e',
     '9876500005',
     10,
-   25,
+    25,
     12,
     '2024-01-15 09:00:00',
     '1997-06-18 00:00:00',
