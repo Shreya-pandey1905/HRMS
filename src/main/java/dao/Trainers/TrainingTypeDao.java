@@ -6,6 +6,8 @@ import util.DBConfig;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class TrainingTypeDao {
 
         String sql = "SELECT TrainingTypeId, TrainingTypeName, Description, Status " +
                 "FROM TrainingType";
+
 
         try (Connection connection = DBConfig.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
@@ -56,6 +59,7 @@ public class TrainingTypeDao {
                 "(TrainingTypeName, Description, Status) " +
                 "VALUES (?, ?, ?)";
 
+
         try (Connection connection = DBConfig.getConnection();
              PreparedStatement statement =
                      connection.prepareStatement(sql)) {
@@ -78,8 +82,8 @@ public class TrainingTypeDao {
         TrainingType trainingType = null;
 
         String sql = "SELECT TrainingTypeId, TrainingTypeName, " +
-                "Description, Status " +
-                "FROM TrainingType WHERE TrainingTypeId = ?";
+                     "Description, Status " +
+                     "FROM TrainingType WHERE TrainingTypeId = ?";
 
         try (Connection connection = DBConfig.getConnection();
              PreparedStatement statement =

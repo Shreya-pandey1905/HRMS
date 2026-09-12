@@ -1,0 +1,27 @@
+CREATE TABLE employee_document_assignments (
+    AssignmentId INT NOT NULL AUTO_INCREMENT,
+    UserId INT NOT NULL,
+    DocumentId INT NOT NULL,
+    Status VARCHAR(50) NOT NULL DEFAULT 'PENDING',
+    AssignedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    SubmittedAt DATETIME NULL,
+
+    PRIMARY KEY (AssignmentId),
+
+    CONSTRAINT FK_Assignment_User
+        FOREIGN KEY (UserId)
+        REFERENCES user(UserId)
+        ON DELETE CASCADE,
+
+    CONSTRAINT FK_Assignment_Document
+        FOREIGN KEY (DocumentId)
+        REFERENCES addemployeedocnames(Id)
+        ON DELETE CASCADE
+);
+ALTER TABLE fileuploads
+ADD COLUMN DocumentId INT NULL;
+ALTER TABLE fileuploads
+ADD CONSTRAINT FK_FileUploads_Document
+FOREIGN KEY (DocumentId)
+REFERENCES addemployeedocnames(Id)
+ON DELETE SET NULL;

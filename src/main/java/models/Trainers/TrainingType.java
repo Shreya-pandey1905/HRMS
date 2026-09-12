@@ -1,6 +1,7 @@
 package models.Trainers;
 
 public class TrainingType {
+
     private int trainingTypeId;
     private String trainingTypeName;
     private String description;

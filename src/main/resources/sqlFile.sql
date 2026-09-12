@@ -1047,12 +1047,13 @@ select  * from designations;
 
 desc user;
 
+
 delimiter //
 create PROCEDURE GetUserByEmail(IN p_email VARCHAR(255))
 begin
-SELECT UserId, Email, PasswordHash, RoleId, Status
-FROM `User`
-WHERE Email = p_email;
+    SELECT UserId, Email, PasswordHash, RoleId, Status
+    FROM `User`
+    WHERE Email = p_email;
 end //
 delimiter ;
 

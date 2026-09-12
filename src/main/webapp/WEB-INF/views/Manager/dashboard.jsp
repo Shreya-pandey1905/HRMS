@@ -1,3 +1,5 @@
+````
+```
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
@@ -336,10 +338,22 @@
 
 
                 <!-- ================================================= -->
-                <!-- PROJECTS -->
+                <!-- DASHBOARD -->
                 <!-- ================================================= -->
 
                 <li>
+                    <a href="${pageContext.request.contextPath}/ManagerDashboardServlet?action=dashboard">
+                        <i class="ti ti-smart-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+
+                <!-- ================================================= -->
+                <!-- PROJECTS -->
+                <!-- ================================================= -->
+
+                <li class="submenu">
 
                     <a href="javascript:void(0);">
 
@@ -347,12 +361,47 @@
 
                         <span>Projects</span>
 
+                        <span class="menu-arrow ms-2"></span>
+
                     </a>
+
+                    <ul>
+
+                        <li class="active">
+
+                            <a href="${pageContext.request.contextPath}/ManagerDashboardServlet?action=projectDetails">
+
+                                <span>Project</span>
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                           <li>
+                               <a href="${pageContext.request.contextPath}/ManagerDashboardServlet?action=taskDetails">
+                                   <span>Tasks</span>
+                               </a>
+                           </li>
+
+                        </li>
+
+                        <li>
+
+                            <a href="javascript:void(0);">
+
+                                <span>Task Board</span>
+
+                            </a>
+
+                        </li>
+
+                    </ul>
 
                 </li>
 
 
-                <!-- ================================================= -->
                 <!-- LEAVE -->
                 <!-- ================================================= -->
 
@@ -1055,3 +1104,5 @@
 
 </html>
 
+
+````
