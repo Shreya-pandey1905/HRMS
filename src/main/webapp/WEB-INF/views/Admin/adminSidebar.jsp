@@ -164,7 +164,7 @@
             <!-- EVENTS -->
             <li class="submenu">
 
-                <a href="javascript:void(0);">
+                <a href="${pageContext.request.contextPath}/admin/events">
 
                     <i class="ti ti-calendar-event"></i>
 
@@ -177,19 +177,19 @@
                 <ul>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/admin/events">
                             <span>Add Event</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/admin/event-types">
                             <span>Add Master Event</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/admin/events/list">
                             <span>Event List</span>
                         </a>
                     </li>
@@ -488,7 +488,7 @@
             <!-- PROMOTIONS -->
             <li>
 
-                <a href="javascript:void(0);">
+                <a href="${pageContext.request.contextPath}/promotion">
 
                     <i class="ti ti-trending-up"></i>
 
@@ -502,7 +502,7 @@
             <!-- RESIGNATION -->
             <li>
 
-  <a href="javascript:void(0);">
+                <a href="${pageContext.request.contextPath}/resignation">
 
                     <i class="ti ti-user-x"></i>
 
@@ -515,7 +515,7 @@
             <!-- TERMINATION -->
             <li>
 
-                <a href="javascript:void(0);">
+                <a href="${pageContext.request.contextPath}/termination">
 
                     <i class="ti ti-user-x"></i>
 
@@ -543,7 +543,7 @@
             <!-- TICKETS -->
             <li>
 
-                <a href="javascript:void(0);">
+                <a href="${pageContext.request.contextPath}/tickets">
 
                     <i class="ti ti-ticket"></i>
 
