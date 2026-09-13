@@ -30,26 +30,21 @@
         </div>
     </div>
 
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-logo">
-            <a href="${pageContext.request.contextPath}/tickets" class="logo logo-normal">
-                <img src="${pageContext.request.contextPath}/assets/img/logo.svg" alt="HRMS">
-            </a>
-        </div>
-        <div class="sidebar-menu">
-            <ul>
-                <li class="menu-title"><span>MAIN MENU</span></li>
-                <li>
-                    <c:choose>
-                        <c:when test="${sessionScope.roleName eq 'Admin'}"><a href="${pageContext.request.contextPath}/admin/dashboard"><i class="ti ti-smart-home"></i><span>Dashboard</span></a></c:when>
-                        <c:when test="${sessionScope.roleName eq 'Manager'}"><a href="${pageContext.request.contextPath}/manager/dashboard"><i class="ti ti-smart-home"></i><span>Dashboard</span></a></c:when>
-                        <c:otherwise><a href="${pageContext.request.contextPath}/employee/dashboard"><i class="ti ti-smart-home"></i><span>Dashboard</span></a></c:otherwise>
-                    </c:choose>
-                </li>
-                <li class="active"><a href="${pageContext.request.contextPath}/tickets"><i class="ti ti-ticket"></i><span>Tickets</span></a></li>
-            </ul>
-        </div>
-    </div>
+<c:choose>
+
+    <c:when test="${sessionScope.roleName eq 'Admin'}">
+        <jsp:include page="/WEB-INF/views/Admin/adminSidebar.jsp" />
+    </c:when>
+
+    <c:when test="${sessionScope.roleName eq 'Manager'}">
+        <jsp:include page="/WEB-INF/views/common/manager-sidebar.jsp" />
+    </c:when>
+
+    <c:otherwise>
+        <jsp:include page="/WEB-INF/views/common/employee-sidebar.jsp" />
+    </c:otherwise>
+
+</c:choose>
 
     <div class="page-wrapper">
         <div class="content">

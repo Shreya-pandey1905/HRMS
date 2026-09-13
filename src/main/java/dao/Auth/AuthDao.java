@@ -28,9 +28,9 @@ public class AuthDao {
             }
 
         } catch (Exception e) {
-            throw new RuntimeException("Unable to fetch user", e);
-        }
-
+        e.printStackTrace();
+        throw new RuntimeException("Unable to fetch user", e);
+    }
         return authUser;
     }
 }
