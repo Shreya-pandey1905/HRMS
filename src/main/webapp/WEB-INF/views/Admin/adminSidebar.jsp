@@ -486,44 +486,63 @@
 
 
             <!-- PROMOTIONS -->
-            <li>
 
-                <a href="javascript:void(0);">
+                        <li>
 
-                    <i class="ti ti-trending-up"></i>
+                            <a href="${pageContext.request.contextPath}/promotion">
+                                <i class="ti ti-trending-up"></i>
+                                <span>Promotions</span>
+                            </a>
 
-                    <span>Promotions</span>
-
-                </a>
-
-            </li>
+                        </li>
 
 
-            <!-- RESIGNATION -->
-            <li>
+                        <!-- RESIGNATION -->
 
-  <a href="javascript:void(0);">
+                        <li>
 
-                    <i class="ti ti-user-x"></i>
+                            <a href="${pageContext.request.contextPath}/resignation">
 
-                    <span>Resignation</span>
+                                <i class="ti ti-logout-2"></i>
 
-                </a>
-            </li>
+                                <span>Resignation</span>
+
+                            </a>
+
+                        </li>
 
 
-            <!-- TERMINATION -->
-            <li>
+                        <!-- TERMINATION -->
 
-                <a href="javascript:void(0);">
+                        <li>
 
-                    <i class="ti ti-user-x"></i>
+                            <a href="${pageContext.request.contextPath}/termination">
 
-                    <span>Termination</span>
 
-                </a>
+                                <i class="ti ti-user-x"></i>
 
-            </li>
+                                <span>Termination</span>
+
+                            </a>
+
+                        </li>
+
+
+                        <!-- HELP & SUPPORT -->
+
+                        <li>
+
+                            <a href="javascript:void(0);">
+
+                                <i class="ti ti-headset"></i>
+
+                                <span>Help &amp; Supports</span>
+
+                            </a>
+
+                        </li>
+
+
 
 
             <!-- HELP & SUPPORT -->
@@ -539,19 +558,19 @@
 
             </li>
 
+   <!-- TICKETS -->
 
-            <!-- TICKETS -->
-            <li>
+                        <li>
 
-                <a href="javascript:void(0);">
+                            <a href="${pageContext.request.contextPath}/tickets">
 
-                    <i class="ti ti-ticket"></i>
+                                <i class="ti ti-ticket"></i>
 
-                    <span>Tickets</span>
+                                <span>Tickets</span>
 
-                </a>
+                            </a>
 
-            </li>
+                        </li>
 
 
             <!-- LOGOUT -->
