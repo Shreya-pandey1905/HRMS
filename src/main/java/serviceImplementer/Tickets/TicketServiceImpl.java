@@ -59,8 +59,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<User> getAssignableEmployees() {
-        return ticketDao.getAssignableEmployees();
+    public List<User> getAssignableEmployees(int excludedUserId) {
+        return ticketDao.getAssignableEmployees(excludedUserId);
     }
 
     @Override

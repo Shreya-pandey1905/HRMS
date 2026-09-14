@@ -18,7 +18,7 @@ public interface TicketService {
     List<TicketAttachment> getAttachments(int ticketId);
     TicketAttachment getAttachmentById(int attachmentId);
     TicketDashboardCounts getDashboardCounts(int userId, String roleName);
-    List<User> getAssignableEmployees();
+    List<User> getAssignableEmployees(int excludedUserId);
     void assignTicket(int ticketId, int assignedBy, int assignedTo, String assignmentComment);
     void startWork(int ticketId, int userId);
     void addComment(int ticketId, int userId, String commentText);

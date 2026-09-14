@@ -74,7 +74,7 @@ public class TicketServlet extends HttpServlet {
                 request.setAttribute("attachments", ticketService.getAttachments(ticketId));
 
                 if (isManagerOrAdmin(sessionUser.roleName)) {
-                    List<User> employees = ticketService.getAssignableEmployees();
+                    List<User> employees = ticketService.getAssignableEmployees(ticket.getRaisedBy());
                     request.setAttribute("employees", employees);
                 }
 
@@ -185,6 +185,10 @@ public class TicketServlet extends HttpServlet {
 
         if (!("Open".equalsIgnoreCase(ticket.getStatus()) || "Reopened".equalsIgnoreCase(ticket.getStatus()))) {
             throw new IllegalArgumentException("Only Open or Reopened tickets can be assigned");
+        }
+
+        if (assignedTo == ticket.getRaisedBy()) {
+            throw new IllegalArgumentException("A ticket cannot be assigned to the employee who raised it");
         }
 
         ticketService.assignTicket(ticketId, user.userId, assignedTo, comment);
@@ -299,45 +303,88 @@ public class TicketServlet extends HttpServlet {
         redirectToTicket(request, response, ticketId);
     }
 
-    private void saveUploadedPart(Part part, int ticketId, int uploadedBy, String type) throws IOException {
+    private void saveUploadedPart(
+            Part part,
+            int ticketId,
+            int uploadedBy,
+            String type
+    ) throws IOException {
+
         if (part == null || part.getSize() == 0) {
             return;
         }
 
         String originalName = safeFileName(part.getSubmittedFileName());
-        if (originalName.isEmpty()) {
+
+        if (originalName == null || originalName.trim().isEmpty()) {
             return;
         }
 
         String extension = "";
-        int dot = originalName.lastIndexOf('.');
-        if (dot >= 0 && dot < originalName.length() - 1) {
-            extension = originalName.substring(dot);
+
+        int dotIndex = originalName.lastIndexOf('.');
+
+        if (dotIndex >= 0 && dotIndex < originalName.length() - 1) {
+            extension = originalName.substring(dotIndex);
         }
 
-        String storedName = UUID.randomUUID() + extension;
-        String catalinaBase = System.getProperty("catalina.base", System.getProperty("java.io.tmpdir"));
-        Path uploadDirectory = Paths.get(catalinaBase, "hrms-ticket-uploads").toAbsolutePath().normalize();
+        String storedName = UUID.randomUUID().toString() + extension;
+
+        // Ticket files will be saved inside:
+        // Content/uploads/tickets
+        String uploadPath =
+                getServletContext().getRealPath("/Content/uploads/tickets");
+
+        if (uploadPath == null) {
+            throw new IOException(
+                    "Unable to determine Content/uploads/tickets directory"
+            );
+        }
+
+        Path uploadDirectory =
+                Paths.get(uploadPath)
+                        .toAbsolutePath()
+                        .normalize();
+
+        // Automatically creates "tickets" folder if it doesn't exist
         Files.createDirectories(uploadDirectory);
 
-        Path target = uploadDirectory.resolve(storedName).normalize();
+        Path target =
+                uploadDirectory
+                        .resolve(storedName)
+                        .normalize();
+
         if (!target.startsWith(uploadDirectory)) {
             throw new IOException("Invalid upload path");
         }
 
         try (InputStream inputStream = part.getInputStream()) {
-            Files.copy(inputStream, target, StandardCopyOption.REPLACE_EXISTING);
+
+            Files.copy(
+                    inputStream,
+                    target,
+                    StandardCopyOption.REPLACE_EXISTING
+            );
         }
 
         TicketAttachment attachment = new TicketAttachment();
+
         attachment.setTicketId(ticketId);
         attachment.setFileName(originalName);
         attachment.setStoredName(storedName);
         attachment.setFilePath(target.toString());
-        attachment.setContentType(part.getContentType() == null ? "application/octet-stream" : part.getContentType());
+
+        String contentType = part.getContentType();
+
+        if (contentType == null || contentType.trim().isEmpty()) {
+            contentType = "application/octet-stream";
+        }
+
+        attachment.setContentType(contentType);
         attachment.setAttachmentType(type);
         attachment.setUploadedBy(uploadedBy);
         attachment.setUploadedDate(LocalDateTime.now());
+
         ticketService.addAttachment(attachment);
     }
 
