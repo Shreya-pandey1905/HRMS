@@ -1,0 +1,44 @@
+/* Ticket module additions. Designed to sit on top of the existing SmartHR assets. */
+.ticket-shell .page-wrapper { background: #f7f8fa; }
+.ticket-shell .content { padding: 24px; }
+.ticket-shell .card { border: 1px solid #e8eaef; box-shadow: 0 1px 2px rgba(16,24,40,.04); }
+.ticket-stats .card { min-height: 168px; }
+.ticket-stat-icon, .ticket-round-icon {
+    width: 54px; height: 54px; border-radius: 50%; display: inline-flex;
+    align-items: center; justify-content: center; font-size: 24px; border: 1px dashed currentColor;
+}
+.ticket-stat-icon.open, .ticket-round-icon { color: #ff5b1f; background: #fff4ef; }
+.ticket-stat-icon.active { color: #a83cc4; background: #fbf0ff; }
+.ticket-stat-icon.resolved { color: #13b65b; background: #effbf4; }
+.ticket-stat-icon.closed { color: #2f80ed; background: #eef6ff; }
+.ticket-mini-bars { font-size: 28px; letter-spacing: 2px; color: #bcc3cc; white-space: nowrap; }
+.ticket-filter { width: 170px; }
+.ticket-card { transition: transform .15s ease, box-shadow .15s ease; }
+.ticket-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(16,24,40,.08); }
+.ticket-number { display: inline-block; padding: 4px 9px; border-radius: 5px; background: #eaf3ff; color: #2f80ed; font-weight: 700; font-size: 12px; }
+.priority-pill { display: inline-flex; align-items: center; border-radius: 5px; padding: 4px 9px; font-weight: 700; font-size: 12px; border: 1px solid currentColor; }
+.priority-High { color: #d92d20; background: #fff5f4; }
+.priority-Medium { color: #b54708; background: #fffaeb; }
+.priority-Low { color: #067647; background: #ecfdf3; }
+.ticket-meta-row { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; font-size: 14px; }
+.ticket-meta-row span { color: #667085; }
+.ticket-meta-row strong { text-align: right; color: #101828; }
+.status-text { color: #f04438 !important; }
+.status-badge { border-radius: 999px; padding: 6px 10px; background: #fff1f3; color: #e31b54; font-size: 12px; font-weight: 700; }
+.ticket-description { white-space: pre-wrap; color: #475467; line-height: 1.65; }
+.resolution-box { border: 1px solid #abefc6; background: #ecfdf3; border-radius: 10px; padding: 16px; }
+.ticket-comments { border-top: 1px solid #eaecf0; }
+.comment-item { display: flex; gap: 12px; padding: 16px 0; border-bottom: 1px solid #eaecf0; }
+.comment-avatar { width: 38px; height: 38px; border-radius: 50%; background: #f2f4f7; display: flex; align-items: center; justify-content: center; color: #667085; flex: 0 0 auto; }
+.ticket-side-row { display: flex; justify-content: space-between; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #eaecf0; font-size: 13px; }
+.ticket-side-row:last-child { border-bottom: 0; }
+.ticket-side-row span { color: #667085; }
+.ticket-side-row strong { text-align: right; color: #101828; }
+.attachment-card { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid #eaecf0; border-radius: 8px; color: inherit; text-decoration: none; background: #fff; }
+.attachment-card:hover { border-color: #ff5b1f; }
+.attachment-icon { width: 36px; height: 36px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; background: #fff4ef; color: #ff5b1f; }
+@media (max-width: 767.98px) {
+    .ticket-shell .content { padding: 16px; }
+    .ticket-filter { width: 145px; }
+    .ticket-mini-bars { display: none; }
+}
