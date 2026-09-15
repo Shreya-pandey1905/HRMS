@@ -545,20 +545,7 @@
 
 
 
-            <!-- HELP & SUPPORT -->
-            <li>
-
-                <a href="javascript:void(0);">
-
-                    <i class="ti ti-headset"></i>
-
-                    <span>Help &amp; Supports</span>
-
-                </a>
-
-            </li>
-
-   <!-- TICKETS -->
+                    <!-- TICKETS -->
 
                         <li>
 
@@ -573,15 +560,15 @@
                         </li>
 
 
-            <!-- LOGOUT -->
-            <li class="mt-2">
+                            <!-- LOGOUT -->
+                            <li class="mt-2">
 
-            <a href="${pageContext.request.contextPath}/logout">
-                <i class="ti ti-logout"></i>
-                <span>Logout</span>
-            </a>
+                            <a href="${pageContext.request.contextPath}/logout">
+                                <i class="ti ti-logout"></i>
+                                <span>Logout</span>
+                            </a>
 
-            </li>
+                            </li>
 
         </ul>
 

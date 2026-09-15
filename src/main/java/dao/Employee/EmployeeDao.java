@@ -202,7 +202,7 @@ public class EmployeeDao {
 
         List<User> employees = new ArrayList<>();
 
-        String sql = "{call GetAllEmployees()}";
+        String sql = "{call GetAllEmployeeDetails()}";
 
         try (Connection connection = DBConfig.getConnection();
              CallableStatement statement = connection.prepareCall(sql);

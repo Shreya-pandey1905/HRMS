@@ -1,9 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -40,13 +38,11 @@
 
 <div class="main-wrapper">
 
-      <!-- ================= SIDEBAR and Header ================= -->
+    <!-- ================= SIDEBAR and HEADER ================= -->
 
+    <%@ include file="adminHeader.jsp" %>
 
-     <%@ include file="adminHeader.jsp" %>
-
-       <%@ include file="adminSidebar.jsp" %>
-
+    <%@ include file="adminSidebar.jsp" %>
 
     <!-- ========================================================= -->
     <!-- PAGE -->
@@ -55,7 +51,6 @@
     <div class="page-wrapper">
 
         <div class="content">
-
 
             <!-- BREADCRUMB -->
 
@@ -94,13 +89,11 @@
 
             </div>
 
-
             <!-- ================================================= -->
             <!-- EMPLOYEE DETAILS -->
             <!-- ================================================= -->
 
             <div class="row">
-
 
                 <!-- ================================================= -->
                 <!-- LEFT SIDE -->
@@ -108,13 +101,11 @@
 
                 <div class="col-xl-4 theiaStickySidebar">
 
-
                     <!-- PROFILE CARD -->
 
                     <div class="card card-bg-1">
 
                         <div class="card-body p-0">
-
 
                             <!-- PROFILE IMAGE -->
 
@@ -142,7 +133,6 @@
 
                             </span>
 
-
                             <!-- NAME -->
 
                             <div class="text-center px-3 pb-3 border-bottom">
@@ -168,39 +158,37 @@
 
                                         </c:choose>
 
-
                                         <i class="ti ti-discount-check-filled text-success ms-1"></i>
 
                                     </h5>
 
-
                                     <!-- DESIGNATION -->
 
                                     <c:if test="${not empty employeeDetails.user.designationName}">
-<span class="badge badge-soft-dark fw-medium me-2">
 
-    <i class="ti ti-point-filled me-1"></i>
+                                        <span class="badge badge-soft-dark fw-medium me-2">
 
-    Designation ID: ${employeeDetails.user.designationId}
+                                            <i class="ti ti-point-filled me-1"></i>
 
-</span>
+                                            Designation ID:
+                                            ${employeeDetails.user.designationId}
+
+                                        </span>
 
                                     </c:if>
 
-
                                     <!-- ROLE -->
 
-                                   <span class="badge badge-soft-secondary fw-medium">
+                                    <span class="badge badge-soft-secondary fw-medium">
 
-                                       Role ID: ${employeeDetails.user.roleId}
+                                        Role ID:
+                                        ${employeeDetails.user.roleId}
 
-                                   </span>
+                                    </span>
 
                                 </div>
 
-
                                 <div>
-
 
                                     <!-- USER ID -->
 
@@ -221,7 +209,6 @@
                                         </p>
 
                                     </div>
-
 
                                     <!-- DEPARTMENT -->
 
@@ -257,7 +244,6 @@
 
                                     </div>
 
-
                                     <!-- DATE OF JOINING -->
 
                                     <div class="d-flex align-items-center justify-content-between mb-2">
@@ -291,7 +277,6 @@
                                         </p>
 
                                     </div>
-
 
                                     <!-- REPORTING MANAGER -->
 
@@ -327,7 +312,6 @@
 
                                     </div>
 
-
                                     <!-- BUTTONS -->
 
                                     <div class="row gx-2 mt-3">
@@ -347,7 +331,6 @@
 
                                         </div>
 
-
                                         <div class="col-6">
 
                                             <a href="#"
@@ -366,7 +349,6 @@
                                 </div>
 
                             </div>
-
 
                             <!-- ================================================= -->
                             <!-- BASIC INFORMATION -->
@@ -390,7 +372,6 @@
                                     </a>
 
                                 </div>
-
 
                                 <!-- PHONE -->
 
@@ -425,7 +406,6 @@
                                     </p>
 
                                 </div>
-
 
                                 <!-- EMAIL -->
 
@@ -466,7 +446,6 @@
 
                                 </div>
 
-
                                 <!-- GENDER -->
 
                                 <div class="d-flex align-items-center justify-content-between mb-2">
@@ -501,7 +480,6 @@
 
                                 </div>
 
-
                                 <!-- BIRTHDAY -->
 
                                 <div class="d-flex align-items-center justify-content-between mb-2">
@@ -535,7 +513,6 @@
                                     </p>
 
                                 </div>
-
 
                                 <!-- ADDRESS -->
 
@@ -573,13 +550,11 @@
 
                             </div>
 
-
                             <!-- ================================================= -->
                             <!-- PERSONAL INFORMATION -->
                             <!-- ================================================= -->
 
-                            <div class="p-3 border-bottom">
-
+<div class="p-3 border-bottom" style="display: none;">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
 
                                     <h6>
@@ -597,7 +572,6 @@
 
                                 </div>
 
-
                                 <div class="d-flex align-items-center justify-content-between mb-2">
 
                                     <span class="d-inline-flex align-items-center">
@@ -613,7 +587,6 @@
                                     </p>
 
                                 </div>
-
 
                                 <div class="d-flex align-items-center justify-content-between mb-2">
 
@@ -631,7 +604,6 @@
 
                                 </div>
 
-
                                 <div class="d-flex align-items-center justify-content-between mb-2">
 
                                     <span class="d-inline-flex align-items-center">
@@ -647,7 +619,6 @@
                                     </p>
 
                                 </div>
-
 
                                 <div class="d-flex align-items-center justify-content-between mb-2">
 
@@ -665,7 +636,6 @@
 
                                 </div>
 
-
                                 <div class="d-flex align-items-center justify-content-between mb-2">
 
                                     <span class="d-inline-flex align-items-center">
@@ -682,7 +652,6 @@
 
                                 </div>
 
-
                                 <div class="d-flex align-items-center justify-content-between mb-2">
 
                                     <span class="d-inline-flex align-items-center">
@@ -698,7 +667,6 @@
                                     </p>
 
                                 </div>
-
 
                                 <div class="d-flex align-items-center justify-content-between">
 
@@ -722,7 +690,6 @@
 
                     </div>
 
-
                     <!-- ================================================= -->
                     <!-- EMERGENCY CONTACT -->
                     <!-- ================================================= -->
@@ -744,11 +711,9 @@
 
                     </div>
 
-
                     <div class="card">
 
                         <div class="card-body p-0">
-
 
                             <c:choose>
 
@@ -780,7 +745,6 @@
 
                                                     </span>
 
-
                                                     <h6 class="d-flex align-items-center fw-medium mt-1 mb-0">
 
                                                         ${family.name}
@@ -797,7 +761,6 @@
 
                                                 </div>
 
-
                                                 <p class="text-dark mb-0">
 
                                                     ${family.phone}
@@ -811,7 +774,6 @@
                                     </c:forEach>
 
                                 </c:when>
-
 
                                 <c:otherwise>
 
@@ -831,13 +793,11 @@
 
                 </div>
 
-
                 <!-- ================================================= -->
                 <!-- RIGHT SIDE -->
                 <!-- ================================================= -->
 
                 <div class="col-xl-8">
-
 
                     <div class="tab-content custom-accordion-items">
 
@@ -845,10 +805,8 @@
                              id="bottom-justified-tab1"
                              role="tabpanel">
 
-
                             <div class="accordion accordions-items-seperate"
                                  id="accordionExample">
-
 
                                 <!-- ================================================= -->
                                 <!-- ABOUT EMPLOYEE -->
@@ -867,7 +825,6 @@
                                                     About Employee
                                                 </h5>
 
-
                                                 <a href="#"
                                                    class="btn btn-sm btn-icon ms-auto"
                                                    data-bs-toggle="modal"
@@ -876,7 +833,6 @@
                                                     <i class="ti ti-edit"></i>
 
                                                 </a>
-
 
                                                 <a href="#"
                                                    class="d-flex align-items-center collapsed collapse-arrow"
@@ -894,7 +850,6 @@
                                         </div>
 
                                     </div>
-
 
                                     <div id="primaryBorderOne"
                                          class="accordion-collapse collapse show border-top"
@@ -927,7 +882,6 @@
 
                                 </div>
 
-
                                 <!-- ================================================= -->
                                 <!-- BANK INFORMATION -->
                                 <!-- ================================================= -->
@@ -945,16 +899,17 @@
                                                     Bank Information
                                                 </h5>
 
+                                                <!-- ADD BANK -->
 
-                                                <a href="#"
+                                                <a href="${pageContext.request.contextPath}/employee/bank/add?userId=${employeeDetails.user.userId}"
                                                    class="btn btn-sm btn-icon ms-auto"
-                                                   data-bs-toggle="modal"
-                                                   data-bs-target="#edit_bank">
+                                                   title="Add Bank Details">
 
-                                                    <i class="ti ti-edit"></i>
+                                                    <i class="ti ti-plus"></i>
 
                                                 </a>
 
+                                                <!-- COLLAPSE -->
 
                                                 <a href="#"
                                                    class="d-flex align-items-center collapsed collapse-arrow"
@@ -973,7 +928,6 @@
 
                                     </div>
 
-
                                     <div id="primaryBorderTwo"
                                          class="accordion-collapse collapse border-top"
                                          aria-labelledby="headingTwo"
@@ -981,76 +935,106 @@
 
                                         <div class="accordion-body">
 
-
                                             <c:choose>
 
                                                 <c:when test="${not empty employeeDetails.bankDetails}">
 
-                                                    <div class="row">
+                                                    <c:forEach var="bank"
+                                                               items="${employeeDetails.bankDetails}">
 
-                                                        <div class="col-md-3">
+                                                        <div class="row mb-3">
 
-                                                            <span class="d-inline-flex align-items-center">
-                                                                Bank Name
-                                                            </span>
+                                                            <div class="col-md-3">
 
-                                                            <h6 class="d-flex align-items-center fw-medium mt-1">
+                                                                <span class="d-inline-flex align-items-center">
+                                                                    Bank Name
+                                                                </span>
 
-                                                                ${employeeDetails.bankDetails.bankName}
+                                                                <h6 class="fw-medium mt-1">
+                                                                    ${bank.bankName}
+                                                                </h6>
 
-                                                            </h6>
+                                                            </div>
 
-                                                        </div>
+                                                            <div class="col-md-3">
 
+                                                                <span class="d-inline-flex align-items-center">
+                                                                    Bank account no
+                                                                </span>
 
-                                                        <div class="col-md-3">
+                                                                <h6 class="fw-medium mt-1">
+                                                                    ${bank.accountNumber}
+                                                                </h6>
 
-                                                            <span class="d-inline-flex align-items-center">
-                                                                Bank account no
-                                                            </span>
+                                                            </div>
 
-                                                            <h6 class="d-flex align-items-center fw-medium mt-1">
+                                                            <div class="col-md-3">
 
-                                                                ${employeeDetails.bankDetails.accountNumber}
+                                                                <span class="d-inline-flex align-items-center">
+                                                                    IFSC Code
+                                                                </span>
 
-                                                            </h6>
+                                                                <h6 class="fw-medium mt-1">
+                                                                    ${bank.IFSCCode}
+                                                                </h6>
 
-                                                        </div>
+                                                            </div>
 
+                                                            <div class="col-md-2">
 
-                                                        <div class="col-md-3">
+                                                                <span class="d-inline-flex align-items-center">
+                                                                    Branch
+                                                                </span>
 
-                                                            <span class="d-inline-flex align-items-center">
-                                                                IFSC Code
-                                                            </span>
+                                                                <h6 class="fw-medium mt-1">
+                                                                    ${bank.branchName}
+                                                                </h6>
 
-                                                            <h6 class="d-flex align-items-center fw-medium mt-1">
+                                                            </div>
 
-                                                                ${employeeDetails.bankDetails.IFSCCode}
+                                                            <!-- EDIT BANK RECORD -->
 
-                                                            </h6>
+                                                    <div class="col-md-1 d-flex align-items-center">
 
-                                                        </div>
+                                                        <a href="${pageContext.request.contextPath}/employee/bank/edit?bankDetailId=${bank.bankDetailId}&userId=${bank.userId}"
+                                                           class="btn btn-icon btn-sm me-1"
+                                                           title="Edit Bank Details">
 
+                                                            <i class="ti ti-edit"></i>
 
-                                                        <div class="col-md-3">
+                                                        </a>
 
-                                                            <span class="d-inline-flex align-items-center">
-                                                                Branch
-                                                            </span>
+                                                        <form method="post"
+                                                              action="${pageContext.request.contextPath}/employee/bank/delete"
+                                                              onsubmit="return confirm('Are you sure you want to delete this bank information?');">
 
-                                                            <h6 class="d-flex align-items-center fw-medium mt-1">
+                                                            <input type="hidden"
+                                                                   name="bankDetailId"
+                                                                   value="${bank.bankDetailId}">
 
-                                                                ${employeeDetails.bankDetails.branchName}
+                                                            <input type="hidden"
+                                                                   name="userId"
+                                                                   value="${bank.userId}">
 
-                                                            </h6>
+                                                            <button type="submit"
+                                                                    class="btn btn-icon btn-sm text-danger"
+                                                                    title="Delete Bank Details">
 
-                                                        </div>
+                                                                <i class="ti ti-trash"></i>
+
+                                                            </button>
+
+                                                        </form>
 
                                                     </div>
 
-                                                </c:when>
+                                                        </div>
 
+                                                        <hr>
+
+                                                    </c:forEach>
+
+                                                </c:when>
 
                                                 <c:otherwise>
 
@@ -1070,7 +1054,6 @@
 
                                 </div>
 
-
                                 <!-- ================================================= -->
                                 <!-- FAMILY INFORMATION -->
                                 <!-- ================================================= -->
@@ -1088,18 +1071,19 @@
                                                     Family Information
                                                 </h5>
 
-
                                                 <div class="d-flex">
 
-                                                    <a href="#"
-                                                       class="btn btn-icon btn-sm"
-                                                       data-bs-toggle="modal"
-                                                       data-bs-target="#edit_familyinformation">
+                                                    <!-- ADD FAMILY -->
 
-                                                        <i class="ti ti-edit"></i>
+                                                    <a href="${pageContext.request.contextPath}/employee/family/add?userId=${employeeDetails.user.userId}"
+                                                       class="btn btn-sm btn-icon"
+                                                       title="Add Family Details">
+
+                                                        <i class="ti ti-plus"></i>
 
                                                     </a>
 
+                                                    <!-- COLLAPSE -->
 
                                                     <a href="#"
                                                        class="d-flex align-items-center collapsed collapse-arrow"
@@ -1120,14 +1104,12 @@
 
                                     </div>
 
-
                                     <div id="primaryBorderThree"
                                          class="accordion-collapse collapse border-top"
                                          aria-labelledby="headingThree"
                                          data-bs-parent="#accordionExample">
 
                                         <div class="accordion-body">
-
 
                                             <c:choose>
 
@@ -1144,14 +1126,11 @@
                                                                     Name
                                                                 </span>
 
-                                                                <h6 class="d-flex align-items-center fw-medium mt-1">
-
+                                                                <h6 class="fw-medium mt-1">
                                                                     ${family.name}
-
                                                                 </h6>
 
                                                             </div>
-
 
                                                             <div class="col-md-3">
 
@@ -1159,14 +1138,11 @@
                                                                     Relationship
                                                                 </span>
 
-                                                                <h6 class="d-flex align-items-center fw-medium mt-1">
-
+                                                                <h6 class="fw-medium mt-1">
                                                                     ${family.relation}
-
                                                                 </h6>
 
                                                             </div>
-
 
                                                             <div class="col-md-3">
 
@@ -1174,28 +1150,61 @@
                                                                     Date of birth
                                                                 </span>
 
-                                                                <h6 class="d-flex align-items-center fw-medium mt-1">
-
+                                                                <h6 class="fw-medium mt-1">
                                                                     ${family.dateOfBirth}
-
                                                                 </h6>
 
                                                             </div>
 
-
-                                                            <div class="col-md-3">
+                                                            <div class="col-md-2">
 
                                                                 <span class="d-inline-flex align-items-center">
                                                                     Phone
                                                                 </span>
 
-                                                                <h6 class="d-flex align-items-center fw-medium mt-1">
-
+                                                                <h6 class="fw-medium mt-1">
                                                                     ${family.phone}
-
                                                                 </h6>
 
                                                             </div>
+
+                                                            <!-- EDIT FAMILY RECORD -->
+
+                                                      <!-- EDIT + DELETE FAMILY RECORD -->
+
+                                                      <div class="col-md-1 d-flex align-items-center">
+
+                                                          <a href="${pageContext.request.contextPath}/employee/family/edit?familyDetailId=${family.familyDetailId}&userId=${family.userId}"
+                                                             class="btn btn-icon btn-sm me-1"
+                                                             title="Edit Family Details">
+
+                                                              <i class="ti ti-edit"></i>
+
+                                                          </a>
+
+                                                          <form method="post"
+                                                                action="${pageContext.request.contextPath}/employee/family/delete"
+                                                                onsubmit="return confirm('Are you sure you want to delete this family information?');">
+
+                                                              <input type="hidden"
+                                                                     name="familyDetailId"
+                                                                     value="${family.familyDetailId}">
+
+                                                              <input type="hidden"
+                                                                     name="userId"
+                                                                     value="${family.userId}">
+
+                                                              <button type="submit"
+                                                                      class="btn btn-icon btn-sm text-danger"
+                                                                      title="Delete Family Details">
+
+                                                                  <i class="ti ti-trash"></i>
+
+                                                              </button>
+
+                                                          </form>
+
+                                                      </div>
 
                                                         </div>
 
@@ -1204,7 +1213,6 @@
                                                     </c:forEach>
 
                                                 </c:when>
-
 
                                                 <c:otherwise>
 
@@ -1224,13 +1232,11 @@
 
                                 </div>
 
-
                                 <!-- ================================================= -->
                                 <!-- EDUCATION + EXPERIENCE -->
                                 <!-- ================================================= -->
 
                                 <div class="row">
-
 
                                     <!-- EDUCATION -->
 
@@ -1247,22 +1253,23 @@
 
                                                         <div class="d-flex align-items-center justify-content-between flex-fill">
 
-                                                            <h5>
+                                                            <h5 class="mb-0">
                                                                 Education Details
                                                             </h5>
 
+                                                            <div class="d-flex align-items-center">
 
-                                                            <div class="d-flex">
+                                                                <!-- ADD EDUCATION -->
 
-                                                                <a href="#"
+                                                                <a href="${pageContext.request.contextPath}/employee/education/add?userId=${employeeDetails.user.userId}"
                                                                    class="btn btn-icon btn-sm"
-                                                                   data-bs-toggle="modal"
-                                                                   data-bs-target="#edit_education">
+                                                                   title="Add Education Details">
 
-                                                                    <i class="ti ti-edit"></i>
+                                                                    <i class="ti ti-plus"></i>
 
                                                                 </a>
 
+                                                                <!-- COLLAPSE -->
 
                                                                 <a href="#"
                                                                    class="d-flex align-items-center collapsed collapse-arrow"
@@ -1283,14 +1290,12 @@
 
                                                 </div>
 
-
                                                 <div id="primaryBorderFour"
                                                      class="accordion-collapse collapse border-top"
                                                      aria-labelledby="headingFour"
                                                      data-bs-parent="#accordionExample">
 
                                                     <div class="accordion-body">
-
 
                                                         <c:choose>
 
@@ -1301,43 +1306,71 @@
 
                                                                     <div class="mb-3">
 
-                                                                        <div class="d-flex align-items-center justify-content-between">
+                                                                        <div class="d-flex align-items-start justify-content-between">
 
                                                                             <div>
 
-                                                                                <span class="d-inline-flex align-items-center fw-normal">
-
+                                                                                <span class="d-inline-flex align-items-center">
                                                                                     ${education.universityName}
-
                                                                                 </span>
 
-                                                                                <h6 class="d-flex align-items-center mt-1">
-
+                                                                                <h6 class="mt-1 mb-1">
                                                                                     ${education.educationType}
-
                                                                                 </h6>
+
+                                                                                <p class="text-muted mb-0">
+
+                                                                                    ${education.startdate}
+                                                                                    -
+                                                                                    ${education.enddate}
+
+                                                                                </p>
 
                                                                             </div>
 
+                                                                     <div class="d-flex align-items-center">
 
-                                                                            <p class="text-dark">
+                                                                         <a href="${pageContext.request.contextPath}/employee/education/edit?educationDetailsId=${education.educationDetailsId}&userId=${education.userId}"
+                                                                            class="btn btn-icon btn-sm me-1"
+                                                                            title="Edit Education Details">
 
-                                                                                ${education.startdate}
+                                                                             <i class="ti ti-edit"></i>
 
-                                                                                -
+                                                                         </a>
 
-                                                                                ${education.enddate}
+                                                                         <form method="post"
+                                                                               action="${pageContext.request.contextPath}/employee/education/delete"
+                                                                               onsubmit="return confirm('Are you sure you want to delete this education information?');">
 
-                                                                            </p>
+                                                                             <input type="hidden"
+                                                                                    name="educationDetailsId"
+                                                                                    value="${education.educationDetailsId}">
+
+                                                                             <input type="hidden"
+                                                                                    name="userId"
+                                                                                    value="${education.userId}">
+
+                                                                             <button type="submit"
+                                                                                     class="btn btn-icon btn-sm text-danger"
+                                                                                     title="Delete Education Details">
+
+                                                                                 <i class="ti ti-trash"></i>
+
+                                                                             </button>
+
+                                                                         </form>
+
+                                                                     </div>
 
                                                                         </div>
 
                                                                     </div>
 
+                                                                    <hr>
+
                                                                 </c:forEach>
 
                                                             </c:when>
-
 
                                                             <c:otherwise>
 
@@ -1361,83 +1394,10 @@
 
                                     </div>
 
-
-                                    <!-- EXPERIENCE -->
-
-                                    <div class="col-md-6">
-
-                                        <div class="accordion-item">
-
-                                            <div class="row">
-
-                                                <div class="accordion-header"
-                                                     id="headingFive">
-
-                                                    <div class="accordion-button collapsed">
-
-                                                        <div class="d-flex align-items-center justify-content-between flex-fill">
-
-                                                            <h5>
-                                                                Experience
-                                                            </h5>
-
-
-                                                            <div class="d-flex">
-
-                                                                <a href="#"
-                                                                   class="btn btn-icon btn-sm"
-                                                                   data-bs-toggle="modal"
-                                                                   data-bs-target="#edit_experience">
-
-                                                                    <i class="ti ti-edit"></i>
-
-                                                                </a>
-
-
-                                                                <a href="#"
-                                                                   class="d-flex align-items-center collapsed collapse-arrow"
-                                                                   data-bs-toggle="collapse"
-                                                                   data-bs-target="#primaryBorderFive"
-                                                                   aria-expanded="false"
-                                                                   aria-controls="primaryBorderFive">
-
-                                                                    <i class="ti ti-chevron-down fs-18"></i>
-
-                                                                </a>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
-
-                                                <div id="primaryBorderFive"
-                                                     class="accordion-collapse collapse border-top"
-                                                     aria-labelledby="headingFive"
-                                                     data-bs-parent="#accordionExample">
-
-                                                    <div class="accordion-body">
-
-                                                        <p class="text-muted mb-0">
-
-                                                            Experience details are not available in the current database.
-
-                                                        </p>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
                                         </div>
 
                                     </div>
 
-                                </div>
 
 
                                 <!-- ================================================= -->
@@ -1448,13 +1408,11 @@
 
                                     <div class="card-body">
 
-
                                         <div class="contact-grids-tab p-0 mb-3">
 
                                             <ul class="nav nav-underline"
                                                 id="myTab"
                                                 role="tablist">
-
 
                                                 <!-- PROJECTS TAB -->
 
@@ -1476,33 +1434,13 @@
                                                 </li>
 
 
-                                                <!-- ASSETS TAB -->
-
-                                                <li class="nav-item"
-                                                    role="presentation">
-
-                                                    <button class="nav-link"
-                                                            id="address-tab2"
-                                                            data-bs-toggle="tab"
-                                                            data-bs-target="#address2"
-                                                            type="button"
-                                                            role="tab"
-                                                            aria-selected="false">
-
-                                                        Assets
-
-                                                    </button>
-
-                                                </li>
 
                                             </ul>
 
                                         </div>
 
-
                                         <div class="tab-content"
                                              id="myTabContent3">
-
 
                                             <!-- PROJECTS -->
 
@@ -1520,12 +1458,81 @@
 
                                                             <div class="card-body">
 
-                                                                <p class="text-muted mb-0">
+<c:choose>
+    <c:when test="${not empty projects}">
+        <c:forEach var="project" items="${projects}">
+            <div class="border rounded p-3 mb-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <h6 class="mb-1">
+                            ${project.projectName}
+                        </h6>
 
-                                                                    Project details are not available
-                                                                    in the current database.
+                        <p class="text-muted mb-1">
+                            <c:if test="${not empty project.clientName}">
+                                Client: ${project.clientName}
+                            </c:if>
+                        </p>
+                    </div>
 
-                                                                </p>
+                    <span class="badge badge-soft-success">
+                        ${project.status}
+                    </span>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <small class="text-muted">Start Date</small>
+                        <p class="mb-0">
+                            <c:choose>
+                                <c:when test="${not empty project.startDate}">
+                                    ${project.startDate}
+                                </c:when>
+                                <c:otherwise>
+                                    Not Available
+                                </c:otherwise>
+                            </c:choose>
+                        </p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <small class="text-muted">End Date</small>
+                        <p class="mb-0">
+                            <c:choose>
+                                <c:when test="${not empty project.endDate}">
+                                    ${project.endDate}
+                                </c:when>
+                                <c:otherwise>
+                                    Not Available
+                                </c:otherwise>
+                            </c:choose>
+                        </p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <small class="text-muted">Priority</small>
+                        <p class="mb-0">
+                            ${project.priority}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <small class="text-muted">Manager</small>
+                    <p class="mb-0">
+                        ${project.managerName}
+                    </p>
+                </div>
+            </div>
+        </c:forEach>
+    </c:when>
+
+    <c:otherwise>
+        <p class="text-muted mb-0">
+            No projects assigned to this employee.
+        </p>
+    </c:otherwise>
+</c:choose>
 
                                                             </div>
 
@@ -1536,40 +1543,9 @@
                                                 </div>
 
                                             </div>
-
 
                                             <!-- ASSETS -->
 
-                                            <div class="tab-pane fade"
-                                                 id="address2"
-                                                 role="tabpanel"
-                                                 aria-labelledby="address-tab2"
-                                                 tabindex="0">
-
-                                                <div class="row">
-
-                                                    <div class="col-md-12">
-
-                                                        <div class="card mb-0">
-
-                                                            <div class="card-body">
-
-                                                                <p class="text-muted mb-0">
-
-                                                                    Asset details are not available
-                                                                    in the current database.
-
-                                                                </p>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
 
                                         </div>
 
@@ -1593,7 +1569,6 @@
 
 </div>
 
-
 <!-- ========================================================= -->
 <!-- JAVASCRIPT -->
 <!-- ========================================================= -->
@@ -1602,9 +1577,22 @@
 
 <script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
 
-<script src="${pageContext.request.contextPath}/assets/js/theme-script.js"></script>
-
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
+
+<script>
+$(document).ready(function () {
+
+    $('.sidebar-menu li.submenu > a').on('click', function (e) {
+        e.preventDefault();
+
+        $(this).parent().toggleClass('subdrop');
+        $(this).next('ul').slideToggle();
+    });
+
+});
+</script>
+
+
 
 </body>
 

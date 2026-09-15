@@ -90,17 +90,9 @@ public class EmployeeServlet extends HttpServlet {
 
         int id = Integer.parseInt(request.getParameter("id"));
 
-        EmployeeDetails employeeDetails =
-                employeeDetailsService.getEmployeeDetails(id);
-
-        request.setAttribute("employeeDetails", employeeDetails);
-
-        RequestDispatcher dispatcher =
-                request.getRequestDispatcher(
-                        "/WEB-INF/views/Admin/employee-details.jsp"
-                );
-
-        dispatcher.forward(request, response);
+        response.sendRedirect(
+                request.getContextPath() + "/employee/details?userId=" + id
+        );
 
     } else if (action.equals("delete")) {
 

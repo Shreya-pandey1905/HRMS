@@ -5,7 +5,6 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -17,56 +16,26 @@
 
     <title>Promotions - HRMS</title>
 
-
-    <!-- Bootstrap -->
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
 
-
-    <!-- Feather Icons -->
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/icons/feather/feather.css">
 
-
-    <!-- Tabler Icons -->
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/tabler-icons/tabler-icons.css">
 
-
-    <!-- Font Awesome -->
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/fontawesome/css/fontawesome.min.css">
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/plugins/fontawesome/css/all.min.css">
 
-
-    <!-- Main CSS -->
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/css/style.css">
 
 
     <style>
-
-        .sidebar {
-            height: 100vh !important;
-            overflow-y: auto !important;
-            overflow-x: hidden !important;
-        }
-
-        .sidebar-menu {
-            height: auto !important;
-            overflow: visible !important;
-        }
-
-        .sidebar::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        .sidebar::-webkit-scrollbar-thumb {
-            background: #ccc;
-            border-radius: 10px;
-        }
 
         .promotion-card {
             border: 1px solid #e9ecef;
@@ -145,7 +114,7 @@
 <div class="main-wrapper">
 
 
-    <!-- ================= HEADER ================= -->
+    <!-- HEADER -->
 
     <div class="header">
 
@@ -205,15 +174,21 @@
                         <div class="input-group input-group-flat d-inline-flex me-1">
 
                             <span class="input-icon-addon">
+
                                 <i class="ti ti-search"></i>
+
                             </span>
+
 
                             <input type="text"
                                    class="form-control"
                                    placeholder="Search in HRMS">
 
+
                             <span class="input-group-text">
+
                                 <kbd>CTRL + /</kbd>
+
                             </span>
 
                         </div>
@@ -229,19 +204,19 @@
     </div>
 
 
-    <!-- ================= SIDEBAR ================= -->
+    <!-- SIDEBAR -->
 
-    <jsp:include page="adminSidebar.jsp"/>
+    <%@ include file="adminSidebar.jsp" %>
 
 
-    <!-- ================= PAGE CONTENT ================= -->
+    <!-- PAGE CONTENT -->
 
     <div class="page-wrapper">
 
         <div class="content">
 
 
-            <!-- ================= PAGE HEADER ================= -->
+            <!-- PAGE HEADER -->
 
             <div class="page-header">
 
@@ -262,8 +237,6 @@
 
                     <div class="col-sm-4 text-sm-end mt-3 mt-sm-0">
 
-                        <!-- IMPORTANT:
-                             This opens ADD PROMOTION page -->
                         <a href="${pageContext.request.contextPath}/promotion?action=add"
                            class="btn add-promotion-btn">
 
@@ -280,15 +253,14 @@
             </div>
 
 
-            <!-- ================= PROMOTION LIST ================= -->
+            <!-- PROMOTION LIST -->
 
             <div class="card promotion-card">
 
                 <div class="card-body">
 
 
-                    <div class="d-flex justify-content-between
-                                align-items-center mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
 
                         <h5 class="promotion-title mb-0">
                             Promotion List
@@ -352,12 +324,6 @@
 
                             <tbody>
 
-                            <!-- =========================================
-                                 DATABASE RECORDS
-                                 Expected request attribute:
-                                 promotions
-                                 ========================================= -->
-
                             <c:choose>
 
                                 <c:when test="${not empty promotions}">
@@ -368,8 +334,10 @@
                                         <tr>
 
                                             <td>
+
                                                 <input type="checkbox"
                                                        value="${promotion.promotionId}">
+
                                             </td>
 
 
@@ -378,8 +346,11 @@
                                                 <div class="d-flex align-items-center">
 
                                                     <div class="employee-avatar">
+
                                                         ${promotion.firstName.substring(0,1)}
+
                                                     </div>
+
 
                                                     <span class="employee-name">
 
@@ -415,7 +386,6 @@
 
                                             <td>
 
-                                                <!-- Edit -->
                                                 <a href="${pageContext.request.contextPath}/promotion?action=edit&id=${promotion.promotionId}"
                                                    class="action-btn edit-btn"
                                                    title="Edit">
@@ -425,7 +395,6 @@
                                                 </a>
 
 
-                                                <!-- Delete -->
                                                 <form action="${pageContext.request.contextPath}/promotion"
                                                       method="post"
                                                       style="display: inline;">
@@ -438,6 +407,7 @@
                                                            name="promotionId"
                                                            value="${promotion.promotionId}">
 
+
                                                     <button type="submit"
                                                             class="action-btn delete-btn"
                                                             title="Delete"
@@ -448,6 +418,8 @@
                                                     </button>
 
                                                 </form>
+
+                                            </td>
 
                                         </tr>
 
@@ -480,10 +452,9 @@
                     </div>
 
 
-                    <!-- ================= FOOTER ================= -->
+                    <!-- FOOTER -->
 
-                    <div class="d-flex justify-content-between
-                                align-items-center mt-4">
+                    <div class="d-flex justify-content-between align-items-center mt-4">
 
                         <span class="text-muted">
 
@@ -499,25 +470,27 @@
 
             </div>
 
-
         </div>
 
     </div>
 
-
 </div>
 
 
-<!-- ================= JAVASCRIPT ================= -->
+<!-- JAVASCRIPT -->
 
 <script src="${pageContext.request.contextPath}/assets/js/jquery-3.7.1.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
 
+<script src="${pageContext.request.contextPath}/assets/js/feather.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/assets/js/jquery.slimscroll.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 
 
-<!-- ================= SEARCH ================= -->
+<!-- SEARCH -->
 
 <script>
 

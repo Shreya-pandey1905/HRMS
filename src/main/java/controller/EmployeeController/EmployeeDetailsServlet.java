@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.Employees.EmployeeDetails;
+import models.Projects.AllProjects;
 import service.Employee.EmployeeDetailsService;
 import serviceImplementer.Employee.EmployeeDetailsServiceImpl;
 
@@ -16,6 +17,8 @@ import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+
 @WebServlet("/employee/details")
 public class EmployeeDetailsServlet extends HttpServlet {
 
@@ -31,6 +34,10 @@ public class EmployeeDetailsServlet extends HttpServlet {
                          HttpServletResponse response)
             throws ServletException, IOException {
 
+        System.out.println("======================================");
+        System.out.println("NEW EMPLOYEE DETAILS SERVLET RUNNING");
+        System.out.println("======================================");
+
         HttpSession session = request.getSession(false);
 
         if (session == null || session.getAttribute("userId") == null) {
@@ -38,10 +45,27 @@ public class EmployeeDetailsServlet extends HttpServlet {
             return;
         }
 
-        int userId = (int) session.getAttribute("userId");
+        String userIdParameter = request.getParameter("userId");
 
+        int userId;
+
+        if (userIdParameter != null && !userIdParameter.isEmpty()) {
+            userId = Integer.parseInt(userIdParameter);
+        } else {
+            userId = (int) session.getAttribute("userId");
+        }
         EmployeeDetails employeeDetails =
                 employeeDetailsService.getEmployeeDetails(userId);
+
+        List<AllProjects> projects =
+                null;
+        try {
+            projects = employeeDetailsService.getProjectsByUserId(userId);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        request.setAttribute("projects", projects);
 
         request.setAttribute("employeeDetails", employeeDetails);
 
@@ -52,4 +76,6 @@ public class EmployeeDetailsServlet extends HttpServlet {
 
         dispatcher.forward(request, response);
     }
+
+
 }
