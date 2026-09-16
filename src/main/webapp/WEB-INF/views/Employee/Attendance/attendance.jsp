@@ -1374,7 +1374,7 @@
                     <ul>
                         <!-- Apply Leaves -->
                         <li>
-                            <a href="javascript:void(0);">
+                            <a href="${pageContext.request.contextPath}/employee/leave">
                                 <span>Apply Leaves</span>
                             </a>
                         </li>
@@ -1386,12 +1386,7 @@
                             </a>
                         </li>
 
-                        <!-- Employee -->
-                        <li>
-                            <a href="javascript:void(0);">
-                                <span>Employee</span>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </li>
 

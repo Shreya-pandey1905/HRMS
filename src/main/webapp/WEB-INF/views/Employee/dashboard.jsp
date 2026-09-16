@@ -253,7 +253,7 @@
                                 <!-- Apply Leaves -->
                                 <li>
 
-                                    <a href="javascript:void(0);">
+                                    <a href="${pageContext.request.contextPath}/employee/leave">
 
                                         <span>Apply Leaves</span>
 
@@ -268,18 +268,6 @@
                                     <a href="javascript:void(0);">
 
                                         <span>Leave Details</span>
-
-                                    </a>
-
-                                </li>
-
-
-                                <!-- Employee -->
-                                <li>
-
-                                    <a href="javascript:void(0);">
-
-                                        <span>Employee</span>
 
                                     </a>
 
