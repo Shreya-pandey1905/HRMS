@@ -7,7 +7,7 @@ public class EmployeeDetails {
     private User user;
     private Department department;
     private Designation designation;
-    private EmployeeBankDetails bankDetails;
+    private List<EmployeeBankDetails> bankDetails;
     private List<EmployeeFamilyDetails> familyDetails;
     private List<EmployeeEducationDetails> educationDetails;
 
@@ -35,11 +35,11 @@ public class EmployeeDetails {
         this.designation = designation;
     }
 
-    public EmployeeBankDetails getBankDetails() {
+    public  List<EmployeeBankDetails> getBankDetails() {
         return bankDetails;
     }
 
-    public void setBankDetails(EmployeeBankDetails bankDetails) {
+    public void setBankDetails( List<EmployeeBankDetails> bankDetails) {
         this.bankDetails = bankDetails;
     }
 
