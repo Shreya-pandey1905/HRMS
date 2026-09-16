@@ -26,6 +26,27 @@ end //
 
 delimiter ;
 
+
+    --     DELIMITER //        attendance module for testing perpose
+--
+-- DROP PROCEDURE IF EXISTS GetRoleById//
+--
+-- CREATE PROCEDURE GetRoleById(IN p_roleId INT)
+-- BEGIN
+-- SELECT
+--     RoleId,
+--     RoleName,
+--     Status,
+--     CreatedAt,
+--     CreatedBy,
+--     ModifiedBy,
+--     ModifiedAt
+-- FROM `Role`
+-- WHERE RoleId = p_roleId;
+-- END //
+--
+-- DELIMITER ;
+
 DELIMITER //
 CREATE PROCEDURE AddRole(
     IN p_RoleName LONGTEXT,

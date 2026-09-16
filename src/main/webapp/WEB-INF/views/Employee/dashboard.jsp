@@ -293,7 +293,7 @@
                         <!-- Attendance Employee -->
                         <li>
 
-                            <a href="javascript:void(0);">
+                            <a href="${pageContext.request.contextPath}/attendance">
 
                                 <span>Attendance (Employee)</span>
 
