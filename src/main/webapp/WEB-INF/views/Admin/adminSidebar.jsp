@@ -164,7 +164,7 @@
             <!-- EVENTS -->
             <li class="submenu">
 
-                <a href="javascript:void(0);">
+                <a href="${pageContext.request.contextPath}/admin/events">
 
                     <i class="ti ti-calendar-event"></i>
 
@@ -177,19 +177,19 @@
                 <ul>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/admin/events">
                             <span>Add Event</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/admin/event-types">
                             <span>Add Master Event</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/admin/events/list">
                             <span>Event List</span>
                         </a>
                     </li>
@@ -486,89 +486,83 @@
 
 
             <!-- PROMOTIONS -->
+            <li>
 
-                        <li>
+                <a href="${pageContext.request.contextPath}/promotion">
 
-                            <a href="${pageContext.request.contextPath}/promotion">
-                                <i class="ti ti-trending-up"></i>
-                                <span>Promotions</span>
-                            </a>
+                    <i class="ti ti-trending-up"></i>
 
-                        </li>
+                    <span>Promotions</span>
 
+                </a>
 
-                        <!-- RESIGNATION -->
-
-                        <li>
-
-                            <a href="${pageContext.request.contextPath}/resignation">
-
-                                <i class="ti ti-logout-2"></i>
-
-                                <span>Resignation</span>
-
-                            </a>
-
-                        </li>
+            </li>
 
 
-                        <!-- TERMINATION -->
+            <!-- RESIGNATION -->
+            <li>
 
-                        <li>
+                <a href="${pageContext.request.contextPath}/resignation">
 
-                            <a href="${pageContext.request.contextPath}/termination">
+                    <i class="ti ti-user-x"></i>
 
+                    <span>Resignation</span>
 
-                                <i class="ti ti-user-x"></i>
-
-                                <span>Termination</span>
-
-                            </a>
-
-                        </li>
+                </a>
+            </li>
 
 
-                        <!-- HELP & SUPPORT -->
+            <!-- TERMINATION -->
+            <li>
 
-                        <li>
+                <a href="${pageContext.request.contextPath}/termination">
 
-                            <a href="javascript:void(0);">
+                    <i class="ti ti-user-x"></i>
 
-                                <i class="ti ti-headset"></i>
+                    <span>Termination</span>
 
-                                <span>Help &amp; Supports</span>
+                </a>
 
-                            </a>
-
-                        </li>
-
+            </li>
 
 
+            <!-- HELP & SUPPORT -->
+            <li>
 
-                    <!-- TICKETS -->
+                <a href="javascript:void(0);">
 
-                        <li>
+                    <i class="ti ti-headset"></i>
 
-                            <a href="${pageContext.request.contextPath}/tickets">
+                    <span>Help &amp; Supports</span>
 
-                                <i class="ti ti-ticket"></i>
+                </a>
 
-                                <span>Tickets</span>
-
-                            </a>
-
-                        </li>
+            </li>
 
 
-                            <!-- LOGOUT -->
-                            <li class="mt-2">
+            <!-- TICKETS -->
+            <li>
 
-                            <a href="${pageContext.request.contextPath}/logout">
-                                <i class="ti ti-logout"></i>
-                                <span>Logout</span>
-                            </a>
+                <a href="${pageContext.request.contextPath}/tickets">
 
-                            </li>
+                    <i class="ti ti-ticket"></i>
+
+                    <span>Tickets</span>
+
+                </a>
+
+            </li>
+
+
+            <!-- LOGOUT -->
+            <li class="mt-2">
+
+            <a href="${pageContext.request.contextPath}/logout">
+                <i class="ti ti-logout"></i>
+                <span>Logout</span>
+            </a>
+
+            </li>
 
         </ul>
 

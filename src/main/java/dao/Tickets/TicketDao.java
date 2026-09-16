@@ -205,20 +205,23 @@ public class TicketDao {
         }
     }
 
-    public List<User> getAssignableEmployees() {
+    public List<User> getAssignableEmployees(int excludedUserId) {
         List<User> users = new ArrayList<>();
-        String sql = "{CALL GetTicketAssignableEmployees()}";
+        String sql = "{CALL GetTicketAssignableEmployees(?)}";
 
         try (Connection connection = DBConfig.getConnection();
-             CallableStatement statement = connection.prepareCall(sql);
-             ResultSet resultSet = statement.executeQuery()) {
+             CallableStatement statement = connection.prepareCall(sql)) {
 
+            statement.setInt(1, excludedUserId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 User user = new User();
                 user.setUserId(resultSet.getInt("UserId"));
                 user.setFirstName(resultSet.getString("FirstName"));
                 user.setLastName(resultSet.getString("LastName"));
                 users.add(user);
+            }
             }
         } catch (Exception e) {
             throw new RuntimeException("Unable to fetch assignable employees", e);
