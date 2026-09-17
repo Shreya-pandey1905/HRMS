@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import models.Trainers.Trainer;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/trainers", "/trainers/add"})
@@ -43,15 +44,22 @@ public class TrainerServlet extends HttpServlet {
 
             if ("delete".equalsIgnoreCase(action)) {
 
-                String idParameter =
-                        request.getParameter("id");
+                String idParameter = request.getParameter("id");
 
-                if (idParameter != null &&
-                        !idParameter.isEmpty()) {
+                if (idParameter != null && !idParameter.isEmpty()) {
 
                     int id = Integer.parseInt(idParameter);
 
-                    trainerDao.deleteTrainer(id);
+                    try {
+                        trainerDao.deleteTrainer(id);
+
+                    } catch (IllegalStateException e) {
+
+                        request.getSession().setAttribute(
+                                "trainerDeleteError",
+                                "This trainer is linked with existing training records and cannot be deleted. Please mark the trainer as Inactive."
+                        );
+                    }
                 }
 
                 response.sendRedirect(
@@ -60,6 +68,7 @@ public class TrainerServlet extends HttpServlet {
 
                 return;
             }
+
 
             List<Trainer> trainers =
                     trainerDao.getAllTrainers();
