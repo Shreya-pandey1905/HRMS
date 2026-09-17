@@ -130,44 +130,45 @@
         </div>
 
 
-        <!-- Success Message -->
 
-        <c:if test="${not empty success}">
+     <!-- Success Message -->
 
-            <div class="alert alert-success alert-dismissible fade show"
-                 role="alert">
+     <c:if test="${not empty requestScope.success}">
 
-                <c:out value="${success}"/>
+         <div class="alert alert-success alert-dismissible fade show"
+              role="alert">
 
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert"
-                        aria-label="Close">
-                </button>
+             <c:out value="${requestScope.success}"/>
 
-            </div>
+             <button type="button"
+                     class="btn-close"
+                     data-bs-dismiss="alert"
+                     aria-label="Close">
+             </button>
 
-        </c:if>
+         </div>
+
+     </c:if>
 
 
-        <!-- Error Message -->
+     <!-- Error Message -->
 
-        <c:if test="${not empty error}">
+     <c:if test="${not empty requestScope.error}">
 
-            <div class="alert alert-danger alert-dismissible fade show"
-                 role="alert">
+         <div class="alert alert-danger alert-dismissible fade show"
+              role="alert">
 
-                <c:out value="${error}"/>
+             <c:out value="${requestScope.error}"/>
 
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert"
-                        aria-label="Close">
-                </button>
+             <button type="button"
+                     class="btn-close"
+                     data-bs-dismiss="alert"
+                     aria-label="Close">
+             </button>
 
-            </div>
+         </div>
 
-        </c:if>
+     </c:if>
 
 
         <!-- Department Table -->

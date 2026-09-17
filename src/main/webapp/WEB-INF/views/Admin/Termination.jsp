@@ -430,7 +430,7 @@
             row.style.display =
                 row.innerText.toLowerCase().includes(value)
                     ? ''
-                    : 'none';
+                     : 'none';
 
         });
 

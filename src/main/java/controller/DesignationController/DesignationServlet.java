@@ -135,19 +135,24 @@ public class DesignationServlet extends HttpServlet {
 
         response.sendRedirect(request.getContextPath() + "/admin/designations");
     }
-
     private void deleteDesignation(HttpServletRequest request,
                                    HttpServletResponse response,
                                    HttpSession session)
             throws IOException {
+
         int designationId = Integer.parseInt(request.getParameter("designationId"));
 
-        boolean result = designationService.deleteDesignation(designationId);
+        try {
+            boolean result = designationService.deleteDesignation(designationId);
 
-        if (result) {
-            session.setAttribute("success", "Designation deleted successfully.");
-        } else {
-            session.setAttribute("error", "Failed to delete designation.");
+            if (result) {
+                session.setAttribute("success", "Designation deleted successfully.");
+            } else {
+                session.setAttribute("error", "Failed to delete designation.");
+            }
+
+        } catch (RuntimeException e) {
+            session.setAttribute("error", e.getMessage());
         }
 
         response.sendRedirect(request.getContextPath() + "/admin/designations");

@@ -136,44 +136,50 @@
             </div>
 
 
-            <!-- Success Message -->
 
-            <c:if test="${not empty success}">
+           <!-- Success Message -->
 
-                <div class="alert alert-success alert-dismissible fade show"
-                     role="alert">
+           <c:if test="${not empty sessionScope.success}">
 
-                    <c:out value="${success}"/>
+               <div class="alert alert-success alert-dismissible fade show"
+                    role="alert">
 
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="alert"
-                            aria-label="Close">
-                    </button>
+                   <c:out value="${sessionScope.success}"/>
 
-                </div>
+                   <button type="button"
+                           class="btn-close"
+                           data-bs-dismiss="alert"
+                           aria-label="Close">
+                   </button>
 
-            </c:if>
+               </div>
+
+               <% session.removeAttribute("success"); %>
+
+           </c:if>
 
 
-            <!-- Error Message -->
+           <!-- Error Message -->
 
-            <c:if test="${not empty error}">
+           <c:if test="${not empty sessionScope.error}">
 
-                <div class="alert alert-danger alert-dismissible fade show"
-                     role="alert">
+               <div class="alert alert-danger alert-dismissible fade show"
+                    role="alert">
 
-                    <c:out value="${error}"/>
+                   <c:out value="${sessionScope.error}"/>
 
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="alert"
-                            aria-label="Close">
-                    </button>
+                   <button type="button"
+                           class="btn-close"
+                           data-bs-dismiss="alert"
+                           aria-label="Close">
+                   </button>
 
-                </div>
+               </div>
 
-            </c:if>
+               <% session.removeAttribute("error"); %>
+
+           </c:if>
+
 
 
             <!-- ========================================================= -->

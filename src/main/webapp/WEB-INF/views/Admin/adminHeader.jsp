@@ -35,47 +35,41 @@
 
         <div class="header-user">
 
-            <div class="nav user-menu nav-list">
+            <div class="nav user-menu nav-list d-flex align-items-center w-100">
 
-                <div class="me-auto d-flex align-items-center"
-                     id="header-search">
+                <div id="header-search" class="d-flex align-items-center flex-grow-1">
 
-                    <a id="toggle_btn"
-                       href="javascript:void(0);"
-                       class="btn btn-menubar me-1">
-
+                    <a id="toggle_btn" href="javascript:void(0);" class="btn btn-menubar me-1">
                         <i class="ti ti-arrow-bar-to-left"></i>
-
                     </a>
 
-
-                    <div class="input-group input-group-flat d-inline-flex me-1">
-
-                        <span class="input-icon-addon">
-                            <i class="ti ti-search"></i>
-                        </span>
-
-                        <input type="text"
-                               class="form-control"
-                               placeholder="Search in HRMS">
-
-                        <span class="input-group-text">
-                            <kbd>CTRL + /</kbd>
-                        </span>
-
+                    <div class="input-group input-group-flat d-inline-flex me-1 flex-grow-1">
+                        <span class="input-icon-addon"><i class="ti ti-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Search in HRMS">
+                        <span class="input-group-text"><kbd>CTRL + /</kbd></span>
                     </div>
 
-
-                    <a href="javascript:void(0);"
-                       class="btn btn-menubar">
-
+                    <a href="javascript:void(0);" class="btn btn-menubar ms-2 me-3">
                         <i class="ti ti-settings-cog"></i>
-
                     </a>
+
+                    <!-- Profile icon (rightmost) -->
+                    <div class="ms-auto">
+                        <a href="${pageContext.request.contextPath}/admin/employees?action=view&id=${sessionScope.userId}" title="My Profile" class="header-avatar d-inline-flex align-items-center text-decoration-none">
+                            <img src="${pageContext.request.contextPath}/assets/img/profiles/avatar-02.jpg" alt="Profile" style="width:42px;height:42px;object-fit:cover;border-radius:50%;border:2px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,0.12);transition:transform .12s ease-in-out;">
+                        </a>
+                    </div>
 
                 </div>
 
             </div>
+
+            <style>
+                .header-avatar:hover img{ transform: scale(1.06); }
+                .main-header{ position: relative; }
+                /* ensure search input doesn't overflow */
+                #header-search .input-group .form-control{ min-width:220px; }
+            </style>
 
         </div>
 

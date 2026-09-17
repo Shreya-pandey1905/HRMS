@@ -1,5 +1,3 @@
-````
-```
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
@@ -597,13 +595,16 @@
     </div>
 
 </div>
-<!-- jQuery -->
 <script src="${pageContext.request.contextPath}/assets/js/jquery-3.7.1.min.js"></script>
 
-<!-- Bootstrap Core JS -->
 <script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
-<!-- Bootstrap JS -->
+
+<script src="${pageContext.request.contextPath}/assets/plugins/icons/feather/feather.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/plugins/select2/js/select2.min.js"></script>
+
 <script>
     $(document).ready(function () {
 

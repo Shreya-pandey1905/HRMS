@@ -177,23 +177,27 @@ public class RoleServlet extends HttpServlet {
                 request.getParameter("roleId")
         );
 
-        boolean result = roleService.deleteRole(roleId);
+        try {
+            boolean result = roleService.deleteRole(roleId);
 
-        if (result) {
+            if (result) {
+                session.setAttribute(
+                        "success",
+                        "Role deleted successfully."
+                );
+            } else {
+                session.setAttribute(
+                        "error",
+                        "Failed to delete role."
+                );
+            }
 
-            session.setAttribute(
-                    "success",
-                    "Role deleted successfully."
-            );
-
-        } else {
-
+        } catch (RuntimeException e) {
             session.setAttribute(
                     "error",
-                    "Failed to delete role."
+                    e.getMessage()
             );
         }
-
         response.sendRedirect(
                 request.getContextPath() + "/admin/roles"
         );

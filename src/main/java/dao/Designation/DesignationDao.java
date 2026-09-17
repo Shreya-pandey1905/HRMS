@@ -6,6 +6,7 @@ import util.DBConfig;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -259,7 +260,6 @@ public class DesignationDao {
 
 
     public boolean deleteDesignation(int designationId) {
-
         String sql = "{call DeleteDesignation(?)}";
 
         try (Connection connection = DBConfig.getConnection();
@@ -271,6 +271,8 @@ public class DesignationDao {
 
             return result > 0;
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }

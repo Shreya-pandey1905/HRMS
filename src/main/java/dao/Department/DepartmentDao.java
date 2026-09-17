@@ -214,7 +214,6 @@ public class DepartmentDao {
     }
 
     public boolean deleteDepartment(int departmentId) {
-
         String sql = "{call DeleteDepartment(?)}";
 
         try (Connection connection = DBConfig.getConnection();
@@ -225,7 +224,9 @@ public class DepartmentDao {
 
             return statement.executeUpdate() > 0;
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 

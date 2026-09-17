@@ -135,12 +135,12 @@
 
         <!-- Success Message -->
 
-        <c:if test="${not empty success}">
+        <c:if test="${not empty sessionScope.success}">
 
             <div class="alert alert-success alert-dismissible fade show"
                  role="alert">
 
-                <c:out value="${success}"/>
+                <c:out value="${sessionScope.success}"/>
 
                 <button type="button"
                         class="btn-close"
@@ -149,18 +149,20 @@
                 </button>
 
             </div>
+
+            <% session.removeAttribute("success"); %>
 
         </c:if>
 
 
         <!-- Error Message -->
 
-        <c:if test="${not empty error}">
+        <c:if test="${not empty sessionScope.error}">
 
             <div class="alert alert-danger alert-dismissible fade show"
                  role="alert">
 
-                <c:out value="${error}"/>
+                <c:out value="${sessionScope.error}"/>
 
                 <button type="button"
                         class="btn-close"
@@ -170,8 +172,9 @@
 
             </div>
 
-        </c:if>
+            <% session.removeAttribute("error"); %>
 
+        </c:if>
 
         <!-- Designation Table -->
 

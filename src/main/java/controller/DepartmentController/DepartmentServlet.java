@@ -151,6 +151,8 @@ public class DepartmentServlet extends HttpServlet {
 
         } catch (NumberFormatException e) {
             request.setAttribute("error", "Invalid department ID.");
+        } catch (RuntimeException e) {
+            request.setAttribute("error", e.getMessage());
         }
 
         forwardToDepartmentPage(request, response);

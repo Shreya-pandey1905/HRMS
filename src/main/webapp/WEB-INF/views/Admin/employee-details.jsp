@@ -32,6 +32,21 @@
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/assets/css/style.css">
 
+    <!-- Hide add/edit/delete controls for non-admin users -->
+    <c:if test="${sessionScope.roleName ne 'Admin'}">
+        <style>
+            /* modal edit buttons */
+            [data-bs-target^="#edit_"] { display: none !important; }
+            /* primary add/edit links for employee details (bank/family/education) */
+            a[href*="/employee/"][href*="add"] { display: none !important; }
+            a[href*="/employee/"][href*="edit"] { display: none !important; }
+            form[action*="/employee/"][action*="delete"] { display: none !important; }
+            /* admin employees edit/delete links */
+            a[href*="/admin/employees?action=edit"] { display: none !important; }
+            a[href*="/admin/employees?action=delete"] { display: none !important; }
+        </style>
+    </c:if>
+
 </head>
 
 <body>
