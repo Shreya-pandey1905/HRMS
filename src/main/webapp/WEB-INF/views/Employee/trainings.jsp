@@ -1,6 +1,4 @@
-﻿
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ include file="../common/personal-dashboard-data.jsp" %>
 <%@ page import="java.util.List" %>
 <%@ page import="models.Trainers.Training" %>
 
@@ -92,6 +90,7 @@
 
             </div>
 
+
             <a id="mobile_btn"
                class="mobile_btn"
                href="#sidebar">
@@ -103,6 +102,7 @@
                 </span>
 
             </a>
+
 
             <div class="header-user">
 
@@ -118,6 +118,7 @@
                             <i class="ti ti-arrow-bar-to-left"></i>
 
                         </a>
+
 
                         <div class="input-group input-group-flat d-inline-flex me-1">
 
@@ -135,6 +136,7 @@
 
                         </div>
 
+
                         <a href="javascript:void(0);"
                            class="btn btn-menubar">
 
@@ -148,6 +150,7 @@
 
             </div>
 
+
             <div class="dropdown mobile-user-menu">
 
                 <a href="javascript:void(0);"
@@ -159,21 +162,28 @@
 
                 </a>
 
+
                 <div class="dropdown-menu dropdown-menu-end">
 
                     <a class="dropdown-item"
                        href="javascript:void(0);">
+
                         Profile
+
                     </a>
 
                     <a class="dropdown-item"
                        href="javascript:void(0);">
+
                         Settings
+
                     </a>
 
                     <a class="dropdown-item"
                        href="javascript:void(0);">
+
                         Logout
+
                     </a>
 
                 </div>
@@ -187,16 +197,385 @@
     <!-- /HEADER -->
 
 
-    <%
-        request.setAttribute("activeMenu", "trainings");
-    %>
+    <!-- SIDEBAR -->
 
-    <%@ include file="../common/employee-sidebar.jsp" %>
+    <div class="sidebar"
+         id="sidebar">
 
+        <div class="sidebar-logo">
+
+            <a href="${pageContext.request.contextPath}/employee/dashboard"
+               class="logo logo-normal">
+
+                <img src="${pageContext.request.contextPath}/assets/img/logo.svg"
+                     alt="HRMS Logo">
+
+            </a>
+
+
+            <a href="${pageContext.request.contextPath}/employee/dashboard"
+               class="logo-small">
+
+                <img src="${pageContext.request.contextPath}/assets/img/logo-small.svg"
+                     alt="HRMS Logo">
+
+            </a>
+
+
+            <a href="${pageContext.request.contextPath}/employee/dashboard"
+               class="dark-logo">
+
+                <img src="${pageContext.request.contextPath}/assets/img/logo-white.svg"
+                     alt="HRMS Logo">
+
+            </a>
+
+        </div>
+
+
+        <div class="modern-profile p-3 pb-0">
+
+            <div class="text-center rounded bg-light p-3 mb-4 user-profile">
+
+                <div class="avatar avatar-lg online mb-3">
+
+                    <img src="${pageContext.request.contextPath}/assets/img/profiles/avatar-02.jpg"
+                         alt="Profile"
+                         class="img-fluid rounded-circle">
+
+                </div>
+
+
+                <h6 class="fs-12 fw-normal mb-1">
+                    Employee
+                </h6>
+
+
+                <p class="fs-10 mb-0">
+                    Employee
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SIDEBAR MENU -->
+
+        <div class="sidebar-menu">
+
+            <ul>
+
+                <li class="menu-title">
+                    <span>MAIN MENU</span>
+                </li>
+
+
+                <!-- DASHBOARD -->
+
+                <li>
+
+                    <a href="${pageContext.request.contextPath}/employee/dashboard">
+
+                        <i class="ti ti-smart-home"></i>
+
+                        <span>Employee Dashboard</span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- EMPLOYEES -->
+
+                <li>
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-users"></i>
+
+                        <span>Employees</span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- ATTENDANCE -->
+
+                <li class="submenu">
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-file-time"></i>
+
+                        <span>Attendance</span>
+
+                        <span class="menu-arrow"></span>
+
+                    </a>
+
+
+                    <ul>
+
+                        <li class="submenu">
+
+                            <a href="javascript:void(0);">
+
+                                <span>Leaves</span>
+
+                                <span class="menu-arrow"></span>
+
+                            </a>
+
+
+                            <ul>
+
+                                <li>
+
+                                    <a href="javascript:void(0);">
+                                        <span>Apply Leaves</span>
+                                    </a>
+
+                                </li>
+
+
+                                <li>
+
+                                    <a href="javascript:void(0);">
+                                        <span>Leave Details</span>
+                                    </a>
+
+                                </li>
+
+
+                                <li>
+
+                                    <a href="javascript:void(0);">
+                                        <span>Employee</span>
+                                    </a>
+
+                                </li>
+
+                            </ul>
+
+                        </li>
+
+
+                        <li>
+
+                            <a href="javascript:void(0);">
+
+                                <span>Attendance (Employee)</span>
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a href="javascript:void(0);">
+
+                                <span>Timesheet</span>
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- PAYROLL -->
+
+                <li class="submenu">
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-cash"></i>
+
+                        <span>Payroll</span>
+
+                        <span class="menu-arrow"></span>
+
+                    </a>
+
+
+                    <ul>
+
+                        <li>
+
+                            <a href="javascript:void(0);">
+
+                                <span>Payslips</span>
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- MY TRAINING -->
+
+                <li class="active">
+
+                    <a href="${pageContext.request.contextPath}/employee/trainings">
+
+                        <i class="ti ti-school"></i>
+
+                        <span>My Training</span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- CALENDAR -->
+
+                <li>
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-calendar-event"></i>
+
+                        <span>Calendar</span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- PERFORMANCE -->
+
+                <li>
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-chart-line"></i>
+
+                        <span>Performance</span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- DOCUMENTS -->
+
+                <li>
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-file-text"></i>
+
+                        <span>Documents</span>
+
+                    </a>
+
+
+                    <ul>
+
+                        <li>
+
+                            <a href="javascript:void(0);">
+
+                                <span>Company Slips</span>
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a href="javascript:void(0);">
+
+                                <span>My Documents</span>
+
+                            </a>
+
+                        </li>
+
+
+                        <li>
+
+                            <a href="javascript:void(0);">
+
+                                <span>Upload Documents</span>
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- HELP -->
+
+                <li>
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-headset"></i>
+
+                        <span>Help &amp; Support</span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- TICKETS -->
+
+                <li>
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-ticket"></i>
+
+                        <span>Tickets</span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- LOGOUT -->
+
+                <li class="mt-2">
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-logout"></i>
+
+                        <span>Logout</span>
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- /SIDEBAR -->
+
+
+    <!-- PAGE WRAPPER -->
 
     <div class="page-wrapper">
 
         <div class="content">
+
 
             <!-- PAGE HEADER -->
 
@@ -208,6 +587,7 @@
                     <h2 class="mb-1">
                         My Training
                     </h2>
+
 
                     <nav>
 
@@ -223,9 +603,11 @@
 
                             </li>
 
+
                             <li class="breadcrumb-item">
                                 Training
                             </li>
+
 
                             <li class="breadcrumb-item active">
                                 My Training
@@ -314,9 +696,11 @@
                                     <%= training.getTrainingId() %>
                                 </td>
 
+
                                 <td>
                                     <%= trainerName.trim() %>
                                 </td>
+
 
                                 <td>
                                     <%= training.getTrainingTypeName() == null
@@ -324,9 +708,11 @@
                                             : training.getTrainingTypeName() %>
                                 </td>
 
+
                                 <td>
                                     <%= training.getTrainingCost() %>
                                 </td>
+
 
                                 <td>
 
@@ -341,35 +727,37 @@
 
                                 </td>
 
+
                                 <td>
 
                                     <% if ("Active".equalsIgnoreCase(status)) { %>
 
                                     <span class="badge badge-success
-                                                 d-inline-flex
-                                                 align-items-center">
+                                                     d-inline-flex
+                                                     align-items-center">
 
-                                        <i class="ti ti-point-filled me-1"></i>
+                                            <i class="ti ti-point-filled me-1"></i>
 
-                                        Active
+                                            Active
 
-                                    </span>
+                                        </span>
 
                                     <% } else { %>
 
                                     <span class="badge badge-danger
-                                                 d-inline-flex
-                                                 align-items-center">
+                                                     d-inline-flex
+                                                     align-items-center">
 
-                                        <i class="ti ti-point-filled me-1"></i>
+                                            <i class="ti ti-point-filled me-1"></i>
 
-                                        <%= status %>
+                                            <%= status %>
 
-                                    </span>
+                                        </span>
 
                                     <% } %>
 
                                 </td>
+
 
                                 <td>
 
@@ -378,6 +766,7 @@
                                             : training.getStartDate() %>
 
                                 </td>
+
 
                                 <td>
 
@@ -390,7 +779,23 @@
                             </tr>
 
                             <%
-                                    }
+                                }
+
+                            } else {
+                            %>
+
+                            <tr>
+
+                                <td colspan="8"
+                                    class="text-center">
+
+                                    No training assigned to you.
+
+                                </td>
+
+                            </tr>
+
+                            <%
                                 }
                             %>
 
@@ -451,11 +856,7 @@
 
         "searching": true,
 
-        "lengthChange": true,
-
-        "language": {
-            "emptyTable": "No training assigned to you."
-        }
+        "lengthChange": true
 
     });
 
@@ -464,4 +865,3 @@
 </body>
 
 </html>
-

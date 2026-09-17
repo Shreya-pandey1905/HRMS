@@ -129,40 +129,9 @@
 </div>
 
 
-<!-- ================= JAVASCRIPT ================= -->
-
 <script src="${pageContext.request.contextPath}/assets/js/jquery-3.7.1.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/js/feather.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/js/jquery.slimscroll.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/plugins/@simonwep/pickr/pickr.es5.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/js/jquery.dataTables.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/js/dataTables.bootstrap5.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/js/moment.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/plugins/daterangepicker/daterangepicker.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/js/bootstrap-datetimepicker.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/plugins/select2/js/select2.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/plugins/apexchart/apexcharts.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/plugins/apexchart/chart-data.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/js/theme-colorpicker.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
-
 
 </body>
 

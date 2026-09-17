@@ -152,36 +152,20 @@
                             </div>
 
 
-                         <!-- Role -->
-                         <div class="col-md-6 mb-3">
+                            <!-- Role -->
+                            <div class="col-md-6 mb-3">
 
-                             <label class="form-label">
-                                 Role <span class="text-danger">*</span>
-                             </label>
+                                <label class="form-label">
+                                    Role <span class="text-danger">*</span>
+                                </label>
 
-                             <select name="role"
-                                     class="form-select"
-                                     required>
+                                <input type="text"
+                                       name="role"
+                                       class="form-control"
+                                       placeholder="Enter role"
+                                       required>
 
-                                 <option value="">
-                                     Select Role
-                                 </option>
-
-                                 <option value="Employee">
-                                     Employee
-                                 </option>
-
-                                 <option value="Manager">
-                                     Manager
-                                 </option>
-
-                                 <option value="Admin">
-                                     Admin
-                                 </option>
-
-                             </select>
-
-                         </div>
+                            </div>
 
 
                             <!-- Email -->
