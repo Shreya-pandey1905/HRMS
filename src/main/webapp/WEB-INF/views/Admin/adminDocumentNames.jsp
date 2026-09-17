@@ -394,7 +394,9 @@
 
 <script src="${pageContext.request.contextPath}/assets/js/dataTables.bootstrap5.min.js"></script>
 
+        <script src="${pageContext.request.contextPath}/assets/plugins/icons/feather/feather.min.js"></script>
 
+        <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 <script>
 
     $(document).ready(function () {

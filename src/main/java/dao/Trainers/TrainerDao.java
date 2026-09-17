@@ -14,8 +14,8 @@ public class TrainerDao {
         List<Trainer> trainers = new ArrayList<>();
 
         String sql = "SELECT TrainerId, FirstName, LastName, Role, Email, " +
-                     "Description, Status, Phone, ProfilePicture " +
-                     "FROM Trainer";
+                "Description, Status, Phone, ProfilePicture " +
+                "FROM Trainer";
 
         try (Connection connection = DBConfig.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
@@ -48,8 +48,8 @@ public class TrainerDao {
     public void addTrainer(Trainer trainer) {
 
         String sql = "INSERT INTO Trainer " +
-                     "(FirstName, LastName, Role, Email, Description, Status, Phone, ProfilePicture) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                "(FirstName, LastName, Role, Email, Description, Status, Phone, ProfilePicture) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DBConfig.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -75,8 +75,8 @@ public class TrainerDao {
         Trainer trainer = null;
 
         String sql = "SELECT TrainerId, FirstName, LastName, Role, Email, " +
-                     "Description, Status, Phone, ProfilePicture " +
-                     "FROM Trainer WHERE TrainerId = ?";
+                "Description, Status, Phone, ProfilePicture " +
+                "FROM Trainer WHERE TrainerId = ?";
 
         try (Connection connection = DBConfig.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -111,15 +111,15 @@ public class TrainerDao {
     public void updateTrainer(Trainer trainer) {
 
         String sql = "UPDATE Trainer SET " +
-                     "FirstName = ?, " +
-                     "LastName = ?, " +
-                     "Role = ?, " +
-                     "Email = ?, " +
-                     "Description = ?, " +
-                     "Status = ?, " +
-                     "Phone = ?, " +
-                     "ProfilePicture = ? " +
-                     "WHERE TrainerId = ?";
+                "FirstName = ?, " +
+                "LastName = ?, " +
+                "Role = ?, " +
+                "Email = ?, " +
+                "Description = ?, " +
+                "Status = ?, " +
+                "Phone = ?, " +
+                "ProfilePicture = ? " +
+                "WHERE TrainerId = ?";
 
         try (Connection connection = DBConfig.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -143,16 +143,45 @@ public class TrainerDao {
 
     public void deleteTrainer(int id) {
 
-        String sql = "DELETE FROM Trainer WHERE TrainerId = ?";
+        String checkSql =
+                "SELECT COUNT(*) FROM Training WHERE TrainerId = ?";
+
+        String deleteSql =
+                "DELETE FROM Trainer WHERE TrainerId = ?";
 
         try (Connection connection = DBConfig.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+             PreparedStatement checkStatement =
+                     connection.prepareStatement(checkSql)) {
 
-            statement.setInt(1, id);
-            statement.executeUpdate();
+            checkStatement.setInt(1, id);
+
+            try (ResultSet rs = checkStatement.executeQuery()) {
+
+                if (rs.next() && rs.getInt(1) > 0) {
+
+                    throw new IllegalStateException(
+                            "Trainer cannot be deleted because it is linked with existing training records."
+                    );
+                }
+            }
+
+            try (PreparedStatement deleteStatement =
+                         connection.prepareStatement(deleteSql)) {
+
+                deleteStatement.setInt(1, id);
+                deleteStatement.executeUpdate();
+            }
+
+        } catch (IllegalStateException e) {
+
+            throw e;
 
         } catch (Exception e) {
-            throw new RuntimeException("Unable to delete trainer", e);
+
+            throw new RuntimeException(
+                    "Unable to delete trainer",
+                    e
+            );
         }
     }
 }

@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 
 <!DOCTYPE html>
@@ -43,7 +42,6 @@
 
     <!-- Sidebar -->
     <%@ include file="adminSidebar.jsp" %>
-
 
     <!-- Page Wrapper -->
     <div class="page-wrapper">
@@ -131,6 +129,8 @@
                                        name="firstName"
                                        class="form-control"
                                        placeholder="Enter first name"
+                                       pattern="[A-Za-z ]+"
+                                       title="First name should contain only letters and spaces"
                                        required>
 
                             </div>
@@ -147,6 +147,8 @@
                                        name="lastName"
                                        class="form-control"
                                        placeholder="Enter last name"
+                                       pattern="[A-Za-z ]+"
+                                       title="Last name should contain only letters and spaces"
                                        required>
 
                             </div>
@@ -162,7 +164,8 @@
                                 <input type="text"
                                        name="role"
                                        class="form-control"
-                                       placeholder="Enter role"
+                                       value="Trainer"
+                                       readonly
                                        required>
 
                             </div>
@@ -194,7 +197,11 @@
                                 <input type="tel"
                                        name="phone"
                                        class="form-control"
-                                       placeholder="Enter phone number"
+                                       placeholder="Enter 10 digit phone number"
+                                       pattern="[6-9][0-9]{9}"
+                                       maxlength="10"
+                                       minlength="10"
+                                       title="Please enter a valid 10-digit phone number starting with 6, 7, 8 or 9"
                                        required>
 
                             </div>

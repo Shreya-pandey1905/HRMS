@@ -22,6 +22,7 @@
             <img src="${pageContext.request.contextPath}/assets/img/logo-white.svg"
                  alt="HRMS Logo">
         </a>
+        <a href="${pageContext.request.contextPath}/trainers/add"></a>
 
     </div>
 
