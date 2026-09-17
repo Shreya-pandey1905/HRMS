@@ -3,7 +3,9 @@ package dao.Trainers;
 import models.Trainers.Trainer;
 import util.DBConfig;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 

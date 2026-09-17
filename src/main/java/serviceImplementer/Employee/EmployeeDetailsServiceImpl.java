@@ -1,7 +1,6 @@
 package serviceImplementer.Employee;
 
 import dao.Employee.EmployeeDetailsDao;
-import dao.Projects.ProjectDao;
 import models.Employees.EmployeeBankDetails;
 import models.Employees.EmployeeDetails;
 import models.Employees.EmployeeEducationDetails;

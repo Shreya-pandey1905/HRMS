@@ -1,18 +1,10 @@
 package dao.Tickets;
 
 import models.Employees.User;
-import models.Tickets.Ticket;
-import models.Tickets.TicketAttachment;
-import models.Tickets.TicketComment;
-import models.Tickets.TicketDashboardCounts;
-import models.Tickets.TicketResolution;
+import models.Tickets.*;
 import util.DBConfig;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.sql.Types;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -205,23 +197,20 @@ public class TicketDao {
         }
     }
 
-    public List<User> getAssignableEmployees(int excludedUserId) {
+    public List<User> getAssignableEmployees() {
         List<User> users = new ArrayList<>();
-        String sql = "{CALL GetTicketAssignableEmployees(?)}";
+        String sql = "{CALL GetTicketAssignableEmployees()}";
 
         try (Connection connection = DBConfig.getConnection();
-             CallableStatement statement = connection.prepareCall(sql)) {
+             CallableStatement statement = connection.prepareCall(sql);
+             ResultSet resultSet = statement.executeQuery()) {
 
-            statement.setInt(1, excludedUserId);
-
-            try (ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 User user = new User();
                 user.setUserId(resultSet.getInt("UserId"));
                 user.setFirstName(resultSet.getString("FirstName"));
                 user.setLastName(resultSet.getString("LastName"));
                 users.add(user);
-            }
             }
         } catch (Exception e) {
             throw new RuntimeException("Unable to fetch assignable employees", e);

@@ -1,11 +1,6 @@
 package service.Documents;
 
-import models.Documents.AddAdminDocNames;
-import models.Documents.AddEmployeeDocNames;
-import models.Documents.AdminDocuments;
-import models.Documents.EmployeeDocumentAssignment;
-import models.Documents.FileUploads;
-import models.Documents.GeneratedLetter;
+import models.Documents.*;
 import models.Employees.User;
 
 import java.util.List;

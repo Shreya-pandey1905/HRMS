@@ -16,7 +16,7 @@ public class EmployeeDocumentAssignmentDao {
         List<EmployeeDocumentAssignment> assignments =
                 new ArrayList<>();
 
-        String sql = "{CALL GetEmployeeDocumentAssignments()}";
+        String sql = "{CALL GetAllEmployeeDocumentAssignments()}";
 
         try (
                 Connection connection = DBConfig.getConnection();

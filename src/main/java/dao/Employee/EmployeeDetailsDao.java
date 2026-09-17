@@ -1,10 +1,6 @@
 package dao.Employee;
 
-import models.Employees.EmployeeBankDetails;
-import models.Employees.EmployeeDetails;
-import models.Employees.EmployeeEducationDetails;
-import models.Employees.EmployeeFamilyDetails;
-import models.Employees.User;
+import models.Employees.*;
 import models.Projects.AllProjects;
 import util.DBConfig;
 

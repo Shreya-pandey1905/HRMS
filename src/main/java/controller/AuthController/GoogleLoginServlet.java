@@ -5,10 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import util.GoogleOAuthConfig;
 
 import java.io.IOException;
-
-import util.GoogleOAuthConfig;
 
 @WebServlet("/oauth/login")
 public class GoogleLoginServlet extends HttpServlet {

@@ -15,8 +15,8 @@
 </head>
 <body>
 <div class="main-wrapper">
-    <jsp:include page="adminHeader.jsp"/>
-    <jsp:include page="adminSidebar.jsp"/>
+     <%@ include file="adminHeader.jsp" %>
+     <%@ include file="adminSidebar.jsp" %>
     <div class="page-wrapper"><div class="content">
         <div class="page-header"><div class="row align-items-center"><div class="col-sm-12">
             <h4 class="page-title">Master Events</h4><p class="text-muted mb-0">Create event types and assign their calendar colors</p>
@@ -49,6 +49,7 @@
 </div>
 <script src="${pageContext.request.contextPath}/assets/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/feather.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 </body>
 </html>

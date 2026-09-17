@@ -3,15 +3,9 @@ package controller.DocumentController;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
-
+import jakarta.servlet.http.*;
 import models.Documents.AddEmployeeDocNames;
 import models.Documents.FileUploads;
-
 import service.Documents.DocumentService;
 import serviceImplementer.Document.DocumentServiceImpl;
 
@@ -212,6 +206,9 @@ public class FileUploadsServlet extends HttpServlet {
 
             HttpSession session =
                     request.getSession(false);
+
+            System.out.println("SESSION = " + session);
+            System.out.println("USER ID = " + (session != null ? session.getAttribute("userId") : null));
 
             Integer userId = null;
 

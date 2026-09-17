@@ -2,11 +2,7 @@ package serviceImplementer.Tickets;
 
 import dao.Tickets.TicketDao;
 import models.Employees.User;
-import models.Tickets.Ticket;
-import models.Tickets.TicketAttachment;
-import models.Tickets.TicketComment;
-import models.Tickets.TicketDashboardCounts;
-import models.Tickets.TicketResolution;
+import models.Tickets.*;
 import service.Tickets.TicketService;
 
 import java.util.List;
@@ -59,8 +55,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<User> getAssignableEmployees(int excludedUserId) {
-        return ticketDao.getAssignableEmployees(excludedUserId);
+    public List<User> getAssignableEmployees() {
+        return ticketDao.getAssignableEmployees();
     }
 
     @Override

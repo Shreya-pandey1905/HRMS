@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import models.Employees.EmployeeDetails;
 import models.Employees.User;
 import service.Employee.EmployeeDetailsService;
 import service.Employee.EmployeeService;

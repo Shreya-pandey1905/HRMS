@@ -1,11 +1,7 @@
 package service.Tickets;
 
 import models.Employees.User;
-import models.Tickets.Ticket;
-import models.Tickets.TicketAttachment;
-import models.Tickets.TicketComment;
-import models.Tickets.TicketDashboardCounts;
-import models.Tickets.TicketResolution;
+import models.Tickets.*;
 
 import java.util.List;
 
@@ -18,7 +14,7 @@ public interface TicketService {
     List<TicketAttachment> getAttachments(int ticketId);
     TicketAttachment getAttachmentById(int attachmentId);
     TicketDashboardCounts getDashboardCounts(int userId, String roleName);
-    List<User> getAssignableEmployees(int excludedUserId);
+    List<User> getAssignableEmployees();
     void assignTicket(int ticketId, int assignedBy, int assignedTo, String assignmentComment);
     void startWork(int ticketId, int userId);
     void addComment(int ticketId, int userId, String commentText);

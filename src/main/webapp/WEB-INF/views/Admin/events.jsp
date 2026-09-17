@@ -14,7 +14,8 @@
 </head>
 <body>
 <div class="main-wrapper">
-    <jsp:include page="adminHeader.jsp"/><jsp:include page="adminSidebar.jsp"/>
+    <%@ include file="adminHeader.jsp" %>
+    <%@ include file="adminSidebar.jsp" %>
     <div class="page-wrapper"><div class="content">
         <div class="page-header"><div class="row"><div class="col-12"><h4 class="page-title">Events</h4><p class="text-muted mb-0">Company event calendar</p></div></div></div>
         <c:if test="${param.message == 'added'}"><div class="alert alert-success">Event added successfully.</div></c:if>
@@ -65,7 +66,10 @@
     </div>
 </div>
 
-<script src="${pageContext.request.contextPath}/assets/js/jquery-3.7.1.min.js"></script><script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script><script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jquery-3.7.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/feather.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 <script>
 (function(){
     const events=Array.from(document.querySelectorAll('.calendar-event-data')).map(el=>({id:el.dataset.id,title:el.dataset.title,date:el.dataset.date,color:el.dataset.color}));
