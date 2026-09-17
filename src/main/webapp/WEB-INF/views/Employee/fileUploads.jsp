@@ -1,5 +1,4 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ include file="../common/personal-dashboard-data.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
@@ -187,11 +186,325 @@
     </div>
     <!-- /Header -->
 
-    <%
-        request.setAttribute("activeMenu", "myDocuments");
-    %>
-    <%@ include file="../common/employee-sidebar.jsp" %>
 
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+
+        <div class="sidebar-logo">
+
+            <a href="${pageContext.request.contextPath}/admin/dashboard"
+               class="logo logo-normal">
+
+                <img src="${pageContext.request.contextPath}/assets/img/logo.svg"
+                     alt="HRMS Logo">
+
+            </a>
+
+            <a href="${pageContext.request.contextPath}/admin/dashboard"
+               class="logo-small">
+
+                <img src="${pageContext.request.contextPath}/assets/img/logo-small.svg"
+                     alt="HRMS Logo">
+
+            </a>
+
+            <a href="${pageContext.request.contextPath}/admin/dashboard"
+               class="dark-logo">
+
+                <img src="${pageContext.request.contextPath}/assets/img/logo-white.svg"
+                     alt="HRMS Logo">
+
+            </a>
+
+        </div>
+
+
+        <div class="modern-profile p-3 pb-0">
+
+            <div class="text-center rounded bg-light p-3 mb-4 user-profile">
+
+                <div class="avatar avatar-lg online mb-3">
+
+                    <img src="${pageContext.request.contextPath}/assets/img/profiles/avatar-02.jpg"
+                         alt="Profile"
+                         class="img-fluid rounded-circle">
+
+                </div>
+
+                <h6 class="fs-12 fw-normal mb-1">
+                    Employee
+                </h6>
+
+                <p class="fs-10 mb-0">
+                    Employee
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Sidebar Menu -->
+        <div class="sidebar-menu">
+
+            <ul>
+
+                <li class="menu-title">
+                    <span>MAIN MENU</span>
+                </li>
+
+                <!-- Dashboard -->
+                <li>
+
+                    <a href="${pageContext.request.contextPath}/admin/dashboard">
+
+                        <i class="ti ti-smart-home"></i>
+
+                        <span>Employee Dashboard</span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- Employees -->
+                <li>
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-users"></i>
+
+                        <span>Employees</span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- Attendance -->
+                <li class="submenu">
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-file-time"></i>
+
+                        <span>Attendance</span>
+
+                        <span class="menu-arrow"></span>
+
+                    </a>
+
+                    <ul>
+
+                        <li class="submenu">
+
+                            <a href="javascript:void(0);">
+
+                                <span>Leaves</span>
+
+                                <span class="menu-arrow"></span>
+
+                            </a>
+
+                            <ul>
+
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <span>Apply Leaves</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <span>Leave Details</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <span>Employee</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0);">
+                                <span>Attendance (Employee)</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0);">
+                                <span>Timesheet</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- Payroll -->
+                <li class="submenu">
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-cash"></i>
+
+                        <span>Payroll</span>
+
+                        <span class="menu-arrow"></span>
+
+                    </a>
+
+                    <ul>
+
+                        <li>
+                            <a href="javascript:void(0);">
+                                <span>Payslips</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- My Training -->
+                <li>
+
+                    <a href="${pageContext.request.contextPath}/employee/trainings">
+
+                        <i class="ti ti-school"></i>
+
+                        <span>My Training</span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- Calendar -->
+                <li>
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-calendar-event"></i>
+
+                        <span>Calendar</span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- Performance -->
+                <li>
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-chart-line"></i>
+
+                        <span>Performance</span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- Documents -->
+                <li class="submenu active">
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-file-text"></i>
+
+                        <span>Documents</span>
+
+                        <span class="menu-arrow"></span>
+
+                    </a>
+
+                    <ul>
+
+                        <li>
+
+                            <a href="${pageContext.request.contextPath}/file-uploads">
+
+                                <span>My Documents</span>
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="${pageContext.request.contextPath}/file-uploads">
+
+                                <span>Upload Documents</span>
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- Help & Support -->
+                <li>
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-headset"></i>
+
+                        <span>Help &amp; Support</span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- Tickets -->
+                <li>
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-ticket"></i>
+
+                        <span>Tickets</span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- Logout -->
+                <li class="mt-2">
+
+                    <a href="javascript:void(0);">
+
+                        <i class="ti ti-logout"></i>
+
+                        <span>Logout</span>
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+    <!-- /Sidebar -->
+
+
+    <!-- Page Wrapper -->
     <div class="page-wrapper">
 
         <div class="content">

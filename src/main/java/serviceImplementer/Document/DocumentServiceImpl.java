@@ -1,10 +1,17 @@
 package serviceImplementer.Document;
 
-import dao.Documents.*;
-import dao.Employee.EmployeeDao;
+import dao.Documents.AddAdminDocNamesDao;
+import dao.Documents.AddEmployeeDocNamesDao;
+import dao.Documents.AdminDocumentsDao;
+import dao.Documents.EmployeeDocumentAssignmentDao;
+import dao.Documents.FileUploadsDao;
+import dao.Documents.GeneratedLetterDao;
+
 import models.Documents.*;
-import models.Employees.User;
+
 import service.Documents.DocumentService;
+import dao.Employee.EmployeeDao;
+import models.Employees.User;
 
 import java.util.List;
 
@@ -222,6 +229,6 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public List<User> getAllEmployees() {
-        return employeeDao.getAllEmployees();
+        return employeeDao.getAll();
     }
 }

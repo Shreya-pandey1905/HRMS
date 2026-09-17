@@ -29,9 +29,7 @@
 <div class="main-wrapper">
 
     <%@ include file="adminHeader.jsp" %>
-
     <%@ include file="adminSidebar.jsp" %>
-
 
     <div class="page-wrapper">
 
@@ -90,7 +88,6 @@
 
                 </div>
 
-
                 <div class="card-body">
 
                     <div class="table-responsive">
@@ -126,7 +123,6 @@
 
                             </thead>
 
-
                             <tbody>
 
                             <c:forEach var="document"
@@ -136,15 +132,15 @@
                                 <tr>
 
                                     <td>
-                                        ${status.index + 1}
+                                            ${status.index + 1}
                                     </td>
 
                                     <td>
-                                        ${document.employeeName}
+                                            ${document.employeeName}
                                     </td>
 
                                     <td>
-                                        ${document.docName}
+                                            ${document.docName}
                                     </td>
 
                                     <td>
@@ -158,7 +154,6 @@
 
                                         </a>
 
-
                                         <a href="${pageContext.request.contextPath}${document.docFile}"
                                            download
                                            class="btn btn-sm btn-secondary">
@@ -169,7 +164,6 @@
                                         </a>
 
                                     </td>
-
 
                                     <td>
 
@@ -189,22 +183,6 @@
 
                             </c:forEach>
 
-
-                            <c:if test="${empty documents}">
-
-                                <tr>
-
-                                    <td colspan="5"
-                                        class="text-center">
-
-                                        No Admin Documents Found
-
-                                    </td>
-
-                                </tr>
-
-                            </c:if>
-
                             </tbody>
 
                         </table>
@@ -222,10 +200,7 @@
 </div>
 
 
-<!-- ===================================================== -->
 <!-- DELETE MODALS -->
-<!-- MODALS ARE OUTSIDE THE TABLE -->
-<!-- ===================================================== -->
 
 <c:forEach var="document"
            items="${documents}">
@@ -233,7 +208,6 @@
     <div class="modal fade"
          id="deleteAdminDocumentModal${document.adminDocId}"
          tabindex="-1"
-         aria-labelledby="deleteAdminDocumentLabel${document.adminDocId}"
          aria-hidden="true">
 
         <div class="modal-dialog modal-dialog-centered">
@@ -242,11 +216,8 @@
 
                 <div class="modal-header">
 
-                    <h5 class="modal-title"
-                        id="deleteAdminDocumentLabel${document.adminDocId}">
-
+                    <h5 class="modal-title">
                         Delete Admin Document
-
                     </h5>
 
                     <button type="button"
@@ -257,21 +228,19 @@
 
                 </div>
 
-
                 <div class="modal-body text-center">
 
-                    <p class="mb-0">
+                    <p>
 
                         Are you sure you want to delete
 
                         <strong>
-                            ${document.docName}
+                                ${document.docName}
                         </strong>?
 
                     </p>
 
                 </div>
-
 
                 <div class="modal-footer">
 
@@ -282,7 +251,6 @@
                         Cancel
 
                     </button>
-
 
                     <a href="${pageContext.request.contextPath}/admin-documents?action=delete&id=${document.adminDocId}"
                        class="btn btn-danger">
@@ -302,43 +270,15 @@
 </c:forEach>
 
 
-<!-- ===================================================== -->
 <!-- JAVASCRIPT -->
-<!-- ===================================================== -->
 
-<script src="<%= request.getContextPath() %>/assets/js/jquery-3.7.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jquery-3.7.1.min.js"></script>
 
-<script src="<%= request.getContextPath() %>/assets/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
 
-<script src="<%= request.getContextPath() %>/assets/js/feather.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jquery.dataTables.min.js"></script>
 
-<script src="<%= request.getContextPath() %>/assets/js/moment.js"></script>
-
-<script src="<%= request.getContextPath() %>/assets/js/bootstrap-datetimepicker.min.js"></script>
-
-<script src="<%= request.getContextPath() %>/assets/plugins/daterangepicker/daterangepicker.js"></script>
-
-<script src="<%= request.getContextPath() %>/assets/plugins/select2/js/select2.min.js"></script>
-
-<script src="<%= request.getContextPath() %>/assets/js/theme-colorpicker.js"></script>
-
-<script src="<%= request.getContextPath() %>/assets/js/jquery.slimscroll.min.js"></script>
-
-
-<!-- DATATABLES -->
-
-<script src="<%= request.getContextPath() %>/assets/js/jquery.dataTables.min.js"></script>
-
-<script src="<%= request.getContextPath() %>/assets/js/dataTables.bootstrap5.min.js"></script>
-
-
-<!-- MAIN THEME SCRIPT -->
-<!-- Required for sidebar -->
-
-<script src="<%= request.getContextPath() %>/assets/js/script.js"></script>
-
-
-<!-- DATATABLE INITIALIZATION -->
+<script src="${pageContext.request.contextPath}/assets/js/dataTables.bootstrap5.min.js"></script>
 
 <script>
 
