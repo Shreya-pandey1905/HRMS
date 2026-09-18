@@ -1,3 +1,7 @@
+DROP PROCEDURE IF EXISTS GetAllEmployees;
+
+DELIMITER //
+
 CREATE PROCEDURE GetAllEmployees()
 BEGIN
 

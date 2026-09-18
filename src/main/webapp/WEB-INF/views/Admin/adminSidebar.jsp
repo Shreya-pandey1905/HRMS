@@ -466,37 +466,43 @@
                 <ul>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/employee-report">
                             <span>Employee Report</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/attendance-report">
                             <span>Attendance Report</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/leave-report">
                             <span>Leave Report</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/project-report">
+                            <span>Project Report</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="${pageContext.request.contextPath}/payslip-report">
                             <span>Payslip Report</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/task-report">
                             <span>Task Report</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/daily-report">
                             <span>Daily Report</span>
                         </a>
                     </li>

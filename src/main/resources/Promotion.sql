@@ -28,8 +28,6 @@ END //
 DELIMITER ;
 
 
-DELIMITER //
-
 USE pulse360db;
 
 DELIMITER //

@@ -642,6 +642,24 @@ INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut
 INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (30, 42, '2026-08-24T00:00:00.0000000', '2026-08-24T14:18:26.8421903', NULL, '2026-08-24T14:19:21.7616458', NULL, 0.00, 0.00, 0.00, 0.00, 0, 'Present');
 INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (31, 37, '2026-09-05T00:00:00.0000000', '2026-09-05T10:10:53.6553837', '2026-09-05T10:12:23.5833485', '2026-09-05T10:11:09.1497355', '2026-09-05T10:11:15.2535366', 0.02, 0.00, 0.00, 0.00, 90, 'Half Day');
 INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (32, 42, '2026-09-05T00:00:00.0000000', '2026-09-05T15:22:24.4679946', '2026-09-05T15:24:25.2254540', '2026-09-05T15:22:34.3568576', '2026-09-05T15:22:38.8153281', 0.03, 0.00, 0.00, 0.00, 390, 'Half Day');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (33, 37, '2025-01-05T00:00:00.0000000', '2025-01-05T09:05:00.0000000', '2025-01-05T18:10:00.0000000', '2025-01-05T13:00:00.0000000', '2025-01-05T13:30:00.0000000', 8.50, 8.00, 0.50, 0.50, 5, 'Present');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (34, 42, '2025-01-05T00:00:00.0000000', '2025-01-05T09:15:00.0000000', '2025-01-05T18:00:00.0000000', '2025-01-05T13:00:00.0000000', '2025-01-05T13:30:00.0000000', 8.20, 7.80, 0.00, 0.50, 15, 'Present');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (35, 37, '2025-02-05T00:00:00.0000000', NULL, NULL, NULL, NULL, 0.00, 0.00, 0.00, 0.00, 0, 'Absent');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (36, 42, '2025-02-05T00:00:00.0000000', '2025-02-05T09:00:00.0000000', '2025-02-05T18:00:00.0000000', '2025-02-05T13:00:00.0000000', '2025-02-05T13:30:00.0000000', 8.50, 8.10, 0.00, 0.50, 0, 'Present');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (37, 37, '2025-03-05T00:00:00.0000000', '2025-03-05T09:00:00.0000000', '2025-03-05T18:00:00.0000000', '2025-03-05T13:00:00.0000000', '2025-03-05T13:30:00.0000000', 8.50, 8.20, 0.00, 0.50, 0, 'Present');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (38, 42, '2025-03-05T00:00:00.0000000', '2025-03-05T09:00:00.0000000', '2025-03-05T18:00:00.0000000', '2025-03-05T13:00:00.0000000', '2025-03-05T13:30:00.0000000', 8.50, 8.20, 0.00, 0.50, 0, 'Present');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (39, 37, '2025-04-05T00:00:00.0000000', '2025-04-05T09:10:00.0000000', '2025-04-05T18:05:00.0000000', '2025-04-05T13:00:00.0000000', '2025-04-05T13:30:00.0000000', 8.30, 7.90, 0.00, 0.50, 10, 'Present');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (40, 42, '2025-04-05T00:00:00.0000000', NULL, NULL, NULL, NULL, 0.00, 0.00, 0.00, 0.00, 0, 'Absent');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (41, 37, '2025-05-05T00:00:00.0000000', '2025-05-05T09:00:00.0000000', '2025-05-05T17:50:00.0000000', '2025-05-05T13:00:00.0000000', '2025-05-05T13:30:00.0000000', 8.20, 7.80, 0.00, 0.50, 0, 'Present');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (42, 42, '2025-05-05T00:00:00.0000000', '2025-05-05T09:05:00.0000000', '2025-05-05T18:00:00.0000000', '2025-05-05T13:00:00.0000000', '2025-05-05T13:30:00.0000000', 8.30, 7.90, 0.00, 0.50, 5, 'Present');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (43, 37, '2025-06-05T00:00:00.0000000', '2025-06-05T09:00:00.0000000', '2025-06-05T13:00:00.0000000', NULL, NULL, 4.00, 3.80, 0.00, 0.00, 0, 'Half Day');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (44, 42, '2025-06-05T00:00:00.0000000', '2025-06-05T09:00:00.0000000', '2025-06-05T18:15:00.0000000', '2025-06-05T13:00:00.0000000', '2025-06-05T13:30:00.0000000', 8.60, 8.30, 0.20, 0.50, 0, 'Present');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (45, 37, '2025-07-05T00:00:00.0000000', '2025-07-05T09:00:00.0000000', '2025-07-05T18:20:00.0000000', '2025-07-05T13:00:00.0000000', '2025-07-05T13:30:00.0000000', 8.70, 8.40, 0.30, 0.50, 0, 'Present');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (46, 42, '2025-07-05T00:00:00.0000000', '2025-07-05T09:00:00.0000000', '2025-07-05T13:10:00.0000000', NULL, NULL, 4.20, 4.00, 0.00, 0.00, 0, 'Half Day');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (47, 37, '2025-08-05T00:00:00.0000000', '2025-08-05T09:05:00.0000000', '2025-08-05T18:00:00.0000000', '2025-08-05T13:00:00.0000000', '2025-08-05T13:30:00.0000000', 8.40, 8.00, 0.00, 0.50, 5, 'Present');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (48, 42, '2025-08-05T00:00:00.0000000', '2025-08-05T09:00:00.0000000', '2025-08-05T17:55:00.0000000', '2025-08-05T13:00:00.0000000', '2025-08-05T13:30:00.0000000', 8.40, 8.00, 0.00, 0.50, 0, 'Present');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (49, 37, '2025-09-05T00:00:00.0000000', '2025-09-05T09:00:00.0000000', '2025-09-05T18:00:00.0000000', '2025-09-05T13:00:00.0000000', '2025-09-05T13:30:00.0000000', 8.50, 8.20, 0.00, 0.50, 0, 'Present');
+INSERT INTO `Attendance` (`AttendanceId`, `UserId`, `Date`, `CheckIn`, `CheckOut`, `LunchIn`, `LunchOut`, `WorkingHours`, `ProductionHours`, `OvertimeHours`, `BreakHours`, `Late`, `Status`) VALUES (50, 42, '2025-09-05T00:00:00.0000000', '2025-09-05T09:00:00.0000000', '2025-09-05T18:30:00.0000000', '2025-09-05T13:00:00.0000000', '2025-09-05T13:30:00.0000000', 8.60, 8.30, 0.30, 0.50, 0, 'Present');
 INSERT INTO `Categories` (`CategoryId`, `CategoryName`) VALUES (3, 'Test');
 INSERT INTO `Deduction` (`DeductionId`, `DeductionTypeId`, `DepartmentId`, `DesignationId`, `DeductionPercentage`, `CreatedAt`, `CreatedBy`, `ModifiedAt`, `ModifiedBy`) VALUES (3, 1, 25, 12, 10.00, '2025-02-26T14:48:47.4190908', 'admin@gmail.com', NULL, NULL);
 INSERT INTO `Deduction` (`DeductionId`, `DeductionTypeId`, `DepartmentId`, `DesignationId`, `DeductionPercentage`, `CreatedAt`, `CreatedBy`, `ModifiedAt`, `ModifiedBy`) VALUES (4, 3, 25, 12, 20.00, '2026-08-24T09:28:51.7702064', 'admin@gmail.com', NULL, NULL);
@@ -969,7 +987,11 @@ INSERT INTO `User` (`UserId`, `FirstName`, `LastName`, `Email`, `PasswordHash`, 
 INSERT INTO `User` (`UserId`, `FirstName`, `LastName`, `Email`, `PasswordHash`, `PhoneNumber`, `RoleId`, `DepartmentId`, `DesignationtId`, `DateOfJoining`, `DateOfBirth`, `Gender`, `Address`, `AboutEmployee`, `ProfilePicture`, `RoleId1`, `ReportingManager`, `CreatedAt`, `CreatedBy`, `ModifiedBy`, `ModifiedAt`, `Status`) VALUES (42, 'Nitesh', '', 'nitesh@gmail.com', '123', '9988776655', 10, 25, 12, '2025-03-13T00:00:00.0000000', '2025-03-26T00:00:00.0000000', 'Male', 'delhi', 'Nill', 'Content/uploads/stamp.jpg', NULL, 'Krish', '2025-03-01T13:00:04.843', 'admin', 'admin', '2025-03-02T10:25:25.893', 'Active');
 
 -- DEFAULTS
-ALTER TABLE `Events` ALTER COLUMN `Status` SET DEFAULT '';
+-- Removed: "ALTER TABLE Events ALTER COLUMN Status SET DEFAULT ''" used to be here.
+-- Events.Status is a LONGTEXT column, and MySQL does not allow TEXT/BLOB columns
+-- to have a DEFAULT value at all, so this line always errored and stopped the
+-- whole script from finishing. Every INSERT already sets a Status value anyway,
+-- so the default was not needed.
 ALTER TABLE `Taskmember` ALTER COLUMN `TaskId` SET DEFAULT (0);
 ALTER TABLE `Trainer` ALTER COLUMN `Phone` SET DEFAULT 0;
 
@@ -1035,8 +1057,13 @@ ALTER TABLE `User` ADD CONSTRAINT `FK_User_Role_RoleId1` FOREIGN KEY (`RoleId1`)
 SET FOREIGN_KEY_CHECKS=1;
 
 
-
-
+-- Removed: a few leftover manual-testing commands used to be here
+-- ("show tables;", "select * from user;", "select * from Departments;",
+-- "select * from designations;", "desc user;"). They were just someone
+-- checking things by hand, not part of setting up the database, and
+-- "select * from user" even errored on its own (table is really named
+-- "User" with a capital U, and table names are case-sensitive here),
+-- which stopped the rest of this file from running.
 
 
 INSERT INTO `User`(
@@ -1292,7 +1319,7 @@ select  * from departments;
 
 select version();
 
-ALTER TABLE `designations`
+ALTER TABLE `User`
 CHANGE COLUMN `DesignationtId` `DesignationId` INT NULL;
 desc user;
 

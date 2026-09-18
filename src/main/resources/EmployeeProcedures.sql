@@ -232,7 +232,7 @@ BEGIN
         RoleId,
         Status
     FROM `User`
-    WHERE Email = p_Email;
+    WHERE Email = p_Email COLLATE utf8mb4_unicode_ci;
 END $$
 
 DELIMITER ;
