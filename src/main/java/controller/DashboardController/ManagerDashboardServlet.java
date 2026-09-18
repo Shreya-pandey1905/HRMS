@@ -284,109 +284,63 @@ public class ManagerDashboardServlet extends HttpServlet {
 
 
     private void projectDetails(HttpServletRequest req,
-                                HttpServletResponse resp)
-            throws Exception {
+                                HttpServletResponse resp) throws Exception {
 
+        HttpSession session = req.getSession(false);
 
+        if (session == null || session.getAttribute("userId") == null) {
+            resp.sendRedirect(req.getContextPath() + "/LoginServlet");
+            return;
+        }
 
+        // Logged-in Manager's UserId
+        int managerId = (int) session.getAttribute("userId");
+
+        // Pagination
         int page = 1;
 
-        String pageParam =
-                req.getParameter("page");
+        String pageParam = req.getParameter("page");
 
-        if (pageParam != null) {
-
+        if (pageParam != null && !pageParam.isEmpty()) {
             try {
-
                 page = Integer.parseInt(pageParam);
-
+                if (page < 1) {
+                    page = 1;
+                }
             } catch (NumberFormatException e) {
-
                 page = 1;
             }
         }
 
-        if (page < 1) {
-            page = 1;
-        }
+        int pageSize = 5;
 
-
-
-
-        String sort =
-                req.getParameter("sort");
+        // Sorting
+        String sort = req.getParameter("sort");
 
         if (!"asc".equalsIgnoreCase(sort)) {
             sort = "desc";
         }
 
-
-
-        int pageSize = 5;
-
-
+        // Count ONLY this Manager's projects
         int totalProjects =
-                projectService.getProjectCount();
-
-
-
+                projectService.getProjectCountByManager(managerId);
 
         int totalPages =
-                (int) Math.ceil(
-                        (double) totalProjects / pageSize
-                );
+                (int) Math.ceil((double) totalProjects / pageSize);
 
-
-
-        if (totalPages > 0 &&
-                page > totalPages) {
-
-            page = totalPages;
-        }
-
-
-
-
+        // Get ONLY this Manager's projects
         List<AllProjects> projects =
-                projectService.getAllProjects(
+                projectService.getProjectsByManager(
+                        managerId,
                         page,
                         pageSize,
                         sort
                 );
 
-
-
-        req.setAttribute(
-                "projects",
-                projects
-        );
-
-        req.setAttribute(
-                "currentPage",
-                page
-        );
-
-        req.setAttribute(
-                "totalPages",
-                totalPages
-        );
-
-        req.setAttribute(
-                "totalProjects",
-                totalProjects
-        );
-
-        req.setAttribute(
-                "pageSize",
-                pageSize
-        );
-
-        req.setAttribute(
-                "sort",
-                sort
-        );
-
-
+        req.setAttribute("projects", projects);
+        req.setAttribute("currentPage", page);
+        req.setAttribute("totalPages", totalPages);
+        req.setAttribute("sort", sort);
 
         req.getRequestDispatcher(
                 "/WEB-INF/views/Manager/project.jsp"
@@ -1155,21 +1109,65 @@ public class ManagerDashboardServlet extends HttpServlet {
                              HttpServletResponse resp)
             throws Exception {
 
-        String priority = req.getParameter("priority");
+        HttpSession session = req.getSession(false);
 
-        if (priority == null || priority.trim().isEmpty()) {
+        if (session == null ||
+                session.getAttribute("userId") == null) {
+
+            resp.sendRedirect(
+                    req.getContextPath() + "/LoginServlet"
+            );
+
+            return;
+        }
+
+        // Logged-in Manager's UserId
+        int managerId =
+                (int) session.getAttribute("userId");
+
+
+        // Priority filter
+        String priority =
+                req.getParameter("priority");
+
+        if (priority == null ||
+                priority.trim().isEmpty()) {
+
             priority = "All";
         }
 
+
+        // Manager's projects only
         List<AllProjects> projects =
-                projectService.getTaskProjectsByPriority(priority);
+                projectService.getTaskProjectsByManager(
+                        managerId,
+                        priority
+                );
 
+
+        // Manager's tasks only
         List<Task> tasks =
-                taskService.getTasksByPriority(priority);
+                taskService.getTasksByManager(
+                        managerId,
+                        priority
+                );
 
-        req.setAttribute("taskProjects", projects);
-        req.setAttribute("tasks", tasks);
-        req.setAttribute("selectedPriority", priority);
+
+        req.setAttribute(
+                "taskProjects",
+                projects
+        );
+
+        req.setAttribute(
+                "tasks",
+                tasks
+        );
+
+        req.setAttribute(
+                "selectedPriority",
+                priority
+        );
+
 
         req.getRequestDispatcher(
                 "/WEB-INF/views/Manager/tasks.jsp"
@@ -1183,10 +1181,31 @@ public class ManagerDashboardServlet extends HttpServlet {
                              HttpServletResponse resp)
             throws Exception {
 
-        List<AllProjects> activeProjects =
-                projectService.getActiveProjects();
+        HttpSession session = req.getSession(false);
 
-        req.setAttribute("activeProjects", activeProjects);
+        if (session == null ||
+                session.getAttribute("userId") == null) {
+
+            resp.sendRedirect(
+                    req.getContextPath() + "/LoginServlet"
+            );
+
+            return;
+        }
+
+        int managerId =
+                (int) session.getAttribute("userId");
+
+        // Get ONLY this Manager's active projects
+        List<AllProjects> activeProjects =
+                projectService.getActiveProjectsByManager(
+                        managerId
+                );
+
+        req.setAttribute(
+                "activeProjects",
+                activeProjects
+        );
 
         req.getRequestDispatcher(
                 "/WEB-INF/views/Manager/addTask.jsp"
@@ -1313,8 +1332,26 @@ public class ManagerDashboardServlet extends HttpServlet {
                                  HttpServletResponse resp)
             throws Exception {
 
+        HttpSession session = req.getSession(false);
+
+        if (session == null ||
+                session.getAttribute("userId") == null) {
+
+            resp.sendRedirect(
+                    req.getContextPath() + "/LoginServlet"
+            );
+
+            return;
+        }
+
+        int managerId =
+                (int) session.getAttribute("userId");
+
+        // Get ONLY this Manager's active projects
         List<AllProjects> activeProjects =
-                projectService.getActiveProjects();
+                projectService.getActiveProjectsByManager(
+                        managerId
+                );
 
         req.setAttribute(
                 "activeProjects",
@@ -1332,33 +1369,40 @@ public class ManagerDashboardServlet extends HttpServlet {
                                 HttpServletResponse resp)
             throws Exception {
 
+        HttpSession session = req.getSession(false);
+
+        if (session == null || session.getAttribute("userId") == null) {
+            resp.sendRedirect(req.getContextPath() + "/LoginServlet");
+            return;
+        }
+
+        int managerId = (int) session.getAttribute("userId");
+
+
         String sort =
                 req.getParameter("sort");
-
 
         if (!"asc".equalsIgnoreCase(sort)) {
             sort = "desc";
         }
 
 
-
+        // Get ONLY this Manager's projects
         List<AllProjects> projects =
-                projectService.getAllProjectsForExport(
+                projectService.getProjectsByManagerForExport(
+                        managerId,
                         sort
                 );
-
 
 
         resp.setContentType(
                 "application/pdf"
         );
 
-
         resp.setHeader(
                 "Content-Disposition",
                 "attachment; filename=projects.pdf"
         );
-
 
 
         com.lowagie.text.Document document =
@@ -1398,21 +1442,15 @@ public class ManagerDashboardServlet extends HttpServlet {
 
         document.add(title);
 
-
         document.add(
                 new com.lowagie.text.Paragraph(" ")
         );
 
 
-
-
         com.lowagie.text.pdf.PdfPTable table =
                 new com.lowagie.text.pdf.PdfPTable(7);
 
-
         table.setWidthPercentage(100);
-
-
 
 
         table.addCell("ID");
@@ -1424,8 +1462,6 @@ public class ManagerDashboardServlet extends HttpServlet {
         table.addCell("Team Members");
 
 
-
-
         for (AllProjects project : projects) {
 
             table.addCell(
@@ -1434,11 +1470,9 @@ public class ManagerDashboardServlet extends HttpServlet {
                     )
             );
 
-
             table.addCell(
                     project.getProjectName()
             );
-
 
             table.addCell(
                     project.getClientName()
@@ -1446,7 +1480,6 @@ public class ManagerDashboardServlet extends HttpServlet {
 
 
             String endDate = "";
-
 
             if (project.getEndDate() != null) {
 
@@ -1456,14 +1489,11 @@ public class ManagerDashboardServlet extends HttpServlet {
                                 .toString();
             }
 
-
             table.addCell(endDate);
-
 
             table.addCell(
                     project.getPriority()
             );
-
 
             table.addCell(
                     project.getStatus()
@@ -1473,13 +1503,11 @@ public class ManagerDashboardServlet extends HttpServlet {
             String teamMembers =
                     project.getTeamMembers();
 
-
             if (teamMembers == null ||
                     teamMembers.trim().isEmpty()) {
 
                 teamMembers = "-";
             }
-
 
             table.addCell(
                     teamMembers
@@ -1488,9 +1516,6 @@ public class ManagerDashboardServlet extends HttpServlet {
 
 
         document.add(table);
-
-
-
 
         document.close();
     }

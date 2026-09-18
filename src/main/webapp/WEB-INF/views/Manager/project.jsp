@@ -591,11 +591,7 @@
 
                        </div>
                    </div>
-                   <a href="${pageContext.request.contextPath}/ManagerDashboardServlet?action=addProject"
-                      class="btn btn-primary d-flex align-items-center">
-                       <i class="ti ti-circle-plus me-2"></i>
-                       Add Project
-                   </a>
+
                    <div class="ms-2 head-icons">
                       <a href="javascript:void(0);" class="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Collapse" id="collapse-header">
                          <i class="ti ti-chevrons-up"></i>

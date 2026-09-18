@@ -869,3 +869,441 @@ DELIMITER ;
 
 CALL sp_get_tasks('All');
 
+DROP PROCEDURE IF EXISTS sp_get_projects_by_manager;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_projects_by_manager(
+    IN p_manager_id INT,
+    IN p_page INT,
+    IN p_page_size INT,
+    IN p_sort VARCHAR(10)
+)
+BEGIN
+
+    DECLARE v_offset INT;
+
+    SET v_offset = (p_page - 1) * p_page_size;
+
+    IF LOWER(p_sort) = 'asc' THEN
+
+        SELECT
+            p.ProjectId,
+            p.ProjectName,
+            p.ManagerName,
+            p.EndDate,
+            p.Priority,
+            p.Status,
+
+            GROUP_CONCAT(
+                CONCAT(u.FirstName, ' ', u.LastName)
+                ORDER BY u.FirstName
+                SEPARATOR ', '
+            ) AS TeamMembers
+
+        FROM AllProjects p
+
+        LEFT JOIN ProjectsUser pu
+            ON p.ProjectId = pu.ProjectsProjectId
+
+        LEFT JOIN `User` u
+            ON pu.UsersUserId = u.UserId
+
+        WHERE LOWER(TRIM(p.ManagerName)) =
+              LOWER(
+                  TRIM(
+                      (
+                          SELECT CONCAT(FirstName, ' ', LastName)
+                          FROM `User`
+                          WHERE UserId = p_manager_id
+                            AND RoleId = 8
+                      )
+                  )
+              )
+
+        GROUP BY
+            p.ProjectId,
+            p.ProjectName,
+            p.ManagerName,
+            p.EndDate,
+            p.Priority,
+            p.Status
+
+        ORDER BY p.ProjectId ASC
+
+        LIMIT v_offset, p_page_size;
+
+    ELSE
+
+        SELECT
+            p.ProjectId,
+            p.ProjectName,
+            p.ManagerName,
+            p.EndDate,
+            p.Priority,
+            p.Status,
+
+            GROUP_CONCAT(
+                CONCAT(u.FirstName, ' ', u.LastName)
+                ORDER BY u.FirstName
+                SEPARATOR ', '
+            ) AS TeamMembers
+
+        FROM AllProjects p
+
+        LEFT JOIN ProjectsUser pu
+            ON p.ProjectId = pu.ProjectsProjectId
+
+        LEFT JOIN `User` u
+            ON pu.UsersUserId = u.UserId
+
+        WHERE LOWER(TRIM(p.ManagerName)) =
+              LOWER(
+                  TRIM(
+                      (
+                          SELECT CONCAT(FirstName, ' ', LastName)
+                          FROM `User`
+                          WHERE UserId = p_manager_id
+                            AND RoleId = 8
+                      )
+                  )
+              )
+
+        GROUP BY
+            p.ProjectId,
+            p.ProjectName,
+            p.ManagerName,
+            p.EndDate,
+            p.Priority,
+            p.Status
+
+        ORDER BY p.ProjectId DESC
+
+        LIMIT v_offset, p_page_size;
+
+    END IF;
+
+END $$
+
+DELIMITER ;
+CALL sp_get_projects_by_manager(45, 1, 5, 'desc');
+
+DROP PROCEDURE IF EXISTS sp_get_project_count_by_manager;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_project_count_by_manager(
+    IN p_manager_id INT
+)
+BEGIN
+
+    SELECT COUNT(*) AS TotalProjects
+
+    FROM AllProjects p
+
+    WHERE LOWER(TRIM(p.ManagerName)) =
+          LOWER(
+              TRIM(
+                  (
+                      SELECT CONCAT(FirstName, ' ', LastName)
+                      FROM `User`
+                      WHERE UserId = p_manager_id
+                        AND RoleId = 8
+                  )
+              )
+          );
+
+END $$
+
+DELIMITER ;
+
+CALL sp_get_project_count_by_manager(45);
+
+DROP PROCEDURE IF EXISTS sp_get_projects_by_manager_for_export;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_projects_by_manager_for_export(
+    IN p_manager_id INT,
+    IN p_sort VARCHAR(10)
+)
+BEGIN
+
+    IF LOWER(p_sort) = 'asc' THEN
+
+        SELECT
+            p.ProjectId,
+            p.ProjectName,
+            p.ClientName,
+            p.Description,
+            p.StartDate,
+            p.EndDate,
+            p.Priority,
+            p.ProjectValue,
+            p.PriceType,
+            p.Status,
+            p.ManagerName,
+
+            GROUP_CONCAT(
+                CONCAT(u.FirstName, ' ', u.LastName)
+                ORDER BY u.FirstName
+                SEPARATOR ', '
+            ) AS TeamMembers
+
+        FROM AllProjects p
+
+        LEFT JOIN ProjectsUser pu
+            ON p.ProjectId = pu.ProjectsProjectId
+
+        LEFT JOIN `User` u
+            ON pu.UsersUserId = u.UserId
+
+        WHERE LOWER(TRIM(p.ManagerName)) =
+              LOWER(
+                  TRIM(
+                      (
+                          SELECT CONCAT(FirstName, ' ', LastName)
+                          FROM `User`
+                          WHERE UserId = p_manager_id
+                            AND RoleId = 8
+                      )
+                  )
+              )
+
+        GROUP BY
+            p.ProjectId,
+            p.ProjectName,
+            p.ClientName,
+            p.Description,
+            p.StartDate,
+            p.EndDate,
+            p.Priority,
+            p.ProjectValue,
+            p.PriceType,
+            p.Status,
+            p.ManagerName
+
+        ORDER BY p.ProjectId ASC;
+
+    ELSE
+
+        SELECT
+            p.ProjectId,
+            p.ProjectName,
+            p.ClientName,
+            p.Description,
+            p.StartDate,
+            p.EndDate,
+            p.Priority,
+            p.ProjectValue,
+            p.PriceType,
+            p.Status,
+            p.ManagerName,
+
+            GROUP_CONCAT(
+                CONCAT(u.FirstName, ' ', u.LastName)
+                ORDER BY u.FirstName
+                SEPARATOR ', '
+            ) AS TeamMembers
+
+        FROM AllProjects p
+
+        LEFT JOIN ProjectsUser pu
+            ON p.ProjectId = pu.ProjectsProjectId
+
+        LEFT JOIN `User` u
+            ON pu.UsersUserId = u.UserId
+
+        WHERE LOWER(TRIM(p.ManagerName)) =
+              LOWER(
+                  TRIM(
+                      (
+                          SELECT CONCAT(FirstName, ' ', LastName)
+                          FROM `User`
+                          WHERE UserId = p_manager_id
+                            AND RoleId = 8
+                      )
+                  )
+              )
+
+        GROUP BY
+            p.ProjectId,
+            p.ProjectName,
+            p.ClientName,
+            p.Description,
+            p.StartDate,
+            p.EndDate,
+            p.Priority,
+            p.ProjectValue,
+            p.PriceType,
+            p.Status,
+            p.ManagerName
+
+        ORDER BY p.ProjectId DESC;
+
+    END IF;
+
+END $$
+
+DELIMITER ;
+
+CALL sp_get_projects_by_manager_for_export(45, 'desc');
+
+DROP PROCEDURE IF EXISTS sp_get_task_projects_by_manager;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_task_projects_by_manager(
+    IN p_manager_id INT,
+    IN p_priority VARCHAR(50)
+)
+BEGIN
+
+    SELECT
+        p.ProjectId,
+        p.ProjectName,
+        p.ClientName,
+        p.ProjectValue,
+        p.Priority,
+        p.Status,
+        p.ManagerName,
+        p.StartDate,
+        p.EndDate
+
+    FROM AllProjects p
+
+    WHERE LOWER(TRIM(p.ManagerName)) =
+          LOWER(
+              TRIM(
+                  (
+                      SELECT CONCAT(FirstName, ' ', LastName)
+                      FROM `User`
+                      WHERE UserId = p_manager_id
+                        AND RoleId = 8
+                  )
+              )
+          )
+
+      AND (
+          p_priority = 'All'
+          OR LOWER(p.Priority) = LOWER(p_priority)
+      )
+
+    ORDER BY p.ProjectId DESC;
+
+END $$
+
+DELIMITER ;
+
+CALL sp_get_task_projects_by_manager(45, 'All');
+CALL sp_get_task_projects_by_manager(45, 'High');
+CALL sp_get_task_projects_by_manager(45, 'Medium');
+CALL sp_get_task_projects_by_manager(45, 'Low');
+
+DROP PROCEDURE IF EXISTS sp_get_tasks_by_manager;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_tasks_by_manager(
+    IN p_manager_id INT,
+    IN p_priority VARCHAR(50)
+)
+BEGIN
+
+    SELECT
+        t.TaskId,
+        t.ProjectId,
+        t.Title,
+        t.Description,
+        t.Status,
+        t.Priority,
+        t.FilePath,
+        t.Deadline,
+
+        u.UserId,
+        u.FirstName,
+        u.LastName
+
+    FROM Task t
+
+    INNER JOIN AllProjects p
+        ON p.ProjectId = t.ProjectId
+
+    LEFT JOIN TaskMember tm
+        ON tm.TaskId = t.TaskId
+
+    LEFT JOIN `User` u
+        ON u.UserId = tm.UserId
+
+    WHERE LOWER(TRIM(p.ManagerName)) =
+          LOWER(
+              TRIM(
+                  (
+                      SELECT CONCAT(FirstName, ' ', LastName)
+                      FROM `User`
+                      WHERE UserId = p_manager_id
+                        AND RoleId = 8
+                  )
+              )
+          )
+
+      AND (
+          p_priority = 'All'
+          OR LOWER(t.Priority) = LOWER(p_priority)
+      )
+
+    ORDER BY
+        t.ProjectId DESC,
+        t.TaskId DESC;
+
+END $$
+
+DELIMITER ;
+CALL sp_get_tasks_by_manager(45, 'All');
+CALL sp_get_tasks_by_manager(45, 'High');
+CALL sp_get_tasks_by_manager(45, 'Medium');
+CALL sp_get_tasks_by_manager(45, 'Low');
+
+DROP PROCEDURE IF EXISTS sp_get_active_projects_by_manager;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_active_projects_by_manager(
+    IN p_manager_id INT
+)
+BEGIN
+
+    SELECT
+        p.ProjectId,
+        p.ProjectName,
+        p.ClientName,
+        p.ProjectValue,
+        p.Priority,
+        p.Status,
+        p.ManagerName,
+        p.StartDate,
+        p.EndDate
+
+    FROM AllProjects p
+
+    WHERE p.Status = 'Active'
+
+      AND LOWER(TRIM(p.ManagerName)) =
+          LOWER(
+              TRIM(
+                  (
+                      SELECT CONCAT(FirstName, ' ', LastName)
+                      FROM `User`
+                      WHERE UserId = p_manager_id
+                        AND RoleId = 8
+                  )
+              )
+          )
+
+    ORDER BY p.ProjectId DESC;
+
+END $$
+
+DELIMITER ;
+
+CALL sp_get_active_projects_by_manager(45);

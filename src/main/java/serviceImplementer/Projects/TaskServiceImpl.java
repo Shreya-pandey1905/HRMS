@@ -21,4 +21,16 @@ public class TaskServiceImpl implements TaskService {
     public void addTask(Task task, int userId) throws Exception {
         taskDao.addTask(task, userId);
     }
+
+    @Override
+    public List<Task> getTasksByManager(
+            int managerId,
+            String priority
+    ) throws Exception {
+
+        return taskDao.getTasksByManager(
+                managerId,
+                priority
+        );
+    }
 }
