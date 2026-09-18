@@ -45,7 +45,7 @@
 
                     <div class="input-group input-group-flat d-inline-flex me-1 flex-grow-1">
                         <span class="input-icon-addon"><i class="ti ti-search"></i></span>
-                        <input type="text" class="form-control" placeholder="Search in HRMS">
+                        <input type="text" id="globalHeaderSearch" class="form-control" placeholder="Search in HRMS">
                         <span class="input-group-text"><kbd>CTRL + /</kbd></span>
                     </div>
 
@@ -109,3 +109,13 @@
 
     </div>
 </div>
+
+<script>
+    document.addEventListener("keydown", function(e) {
+        if (e.ctrlKey && e.key === "/") {
+            e.preventDefault();
+            var search = document.getElementById("globalHeaderSearch");
+            if (search) { search.focus(); }
+        }
+    });
+</script>

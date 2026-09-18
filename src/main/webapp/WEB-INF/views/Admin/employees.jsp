@@ -288,58 +288,70 @@
 
                 <div class="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
 
+                    <!-- Search -->
                     <div class="me-3">
                         <div class="input-icon-end position-relative">
                             <input type="text"
-                                   class="form-control date-range bookingrange"
-                                   placeholder="dd/mm/yyyy - dd/mm/yyyy">
+                                   id="employeeSearch"
+                                   class="form-control"
+                                   placeholder="Search employee..."
+                                   style="width: 240px;">
                             <span class="input-icon-addon">
-                                <i class="ti ti-chevron-down"></i>
+                                <i class="ti ti-search"></i>
                             </span>
                         </div>
                     </div>
 
+                    <!-- Designation Filter -->
                     <div class="dropdown me-3">
                         <a href="javascript:void(0);"
+                           id="selectedDesignationList"
                            class="dropdown-toggle btn btn-white d-inline-flex align-items-center"
                            data-bs-toggle="dropdown">
-                            Designation
+                            Designation: All
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end p-3">
+                        <ul class="dropdown-menu dropdown-menu-end p-3" id="designationDropdownList" style="max-height: 280px; overflow-y: auto;">
                             <li>
-                                <a href="#" class="dropdown-item rounded-1">All</a>
+                                <a href="javascript:void(0);" class="dropdown-item rounded-1 active" data-designation="all">All</a>
                             </li>
                         </ul>
                     </div>
 
+                    <!-- Status Filter -->
                     <div class="dropdown me-3">
                         <a href="javascript:void(0);"
+                           id="selectedStatusList"
                            class="dropdown-toggle btn btn-white d-inline-flex align-items-center"
                            data-bs-toggle="dropdown">
-                            Select Status
+                            Status: All
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end p-3">
+                        <ul class="dropdown-menu dropdown-menu-end p-3" id="statusDropdownList">
                             <li>
-                                <a href="#" class="dropdown-item rounded-1">Active</a>
+                                <a href="javascript:void(0);" class="dropdown-item rounded-1 active" data-status="all">All</a>
                             </li>
                             <li>
-                                <a href="#" class="dropdown-item rounded-1">Inactive</a>
+                                <a href="javascript:void(0);" class="dropdown-item rounded-1" data-status="Active">Active</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="dropdown-item rounded-1" data-status="Inactive">Inactive</a>
                             </li>
                         </ul>
                     </div>
 
+                    <!-- Sort By -->
                     <div class="dropdown">
                         <a href="javascript:void(0);"
+                           id="selectedSortList"
                            class="dropdown-toggle btn btn-white d-inline-flex align-items-center"
                            data-bs-toggle="dropdown">
-                            Sort By
+                            Sort By: Ascending
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end p-3">
+                        <ul class="dropdown-menu dropdown-menu-end p-3" id="sortDropdownList">
                             <li>
-                                <a href="#" class="dropdown-item rounded-1">Ascending</a>
+                                <a href="javascript:void(0);" class="dropdown-item rounded-1 active" data-sort="asc">Ascending (A-Z)</a>
                             </li>
                             <li>
-                                <a href="#" class="dropdown-item rounded-1">Descending</a>
+                                <a href="javascript:void(0);" class="dropdown-item rounded-1" data-sort="desc">Descending (Z-A)</a>
                             </li>
                         </ul>
                     </div>
@@ -351,7 +363,7 @@
 
                 <div class="custom-datatable-filter table-responsive">
 
-                    <table class="table datatable">
+                    <table class="table table-hover mb-0" id="employeeTable">
 
                         <thead class="thead-light">
                             <tr>
@@ -374,7 +386,7 @@
                             </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody id="employeeTableBody">
 
                         <c:choose>
 
@@ -389,9 +401,11 @@
                                         );
                                         pageContext.setAttribute("listProfileImg", listImg);
                                     %>
-                                    <tr>
-
-                                        <!-- Checkbox -->
+                                    <tr class="employee-row"
+                                        data-name="${employee.firstName} ${employee.lastName}"
+                                        data-designation="${employee.designationName}"
+                                        data-status="${employee.status}"
+                                        data-id="${employee.userId}">
                                         <td>
                                             <div class="form-check form-check-md">
                                                 <input class="form-check-input"
@@ -574,9 +588,185 @@
 <script src="${pageContext.request.contextPath}/assets/js/bootstrap-datetimepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/plugins/daterangepicker/daterangepicker.js"></script>
 <script src="${pageContext.request.contextPath}/assets/plugins/select2/js/select2.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/theme-colorpicker.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const empSearch = document.getElementById("employeeSearch");
+        const globalSearch = document.getElementById("globalHeaderSearch");
+        const empTbody = document.getElementById("employeeTableBody");
+        const designationDropdown = document.getElementById("designationDropdownList");
+        const selectedDesignationLabel = document.getElementById("selectedDesignationList");
+        const selectedStatusLabel = document.getElementById("selectedStatusList");
+        const selectedSortLabel = document.getElementById("selectedSortList");
+
+        let currentSearchQuery = "";
+        let currentDesignation = "all";
+        let currentStatus = "all";
+        let currentSort = "asc";
+
+        // 1. Dynamically populate Designation dropdown with unique values
+        if (empTbody && designationDropdown) {
+            const rows = empTbody.querySelectorAll(".employee-row");
+            const designationsSet = new Set();
+            rows.forEach(function (row) {
+                const desig = (row.getAttribute("data-designation") || "").trim();
+                if (desig) {
+                    designationsSet.add(desig);
+                }
+            });
+
+            const sortedDesignations = Array.from(designationsSet).sort();
+            sortedDesignations.forEach(function (desig) {
+                const li = document.createElement("li");
+                li.innerHTML = '<a href="javascript:void(0);" class="dropdown-item rounded-1 designation-filter-opt" data-designation="' + desig + '">' + desig + '</a>';
+                designationDropdown.appendChild(li);
+            });
+        }
+
+        // 2. Main Filter & Sort Engine
+        function applyFiltersAndSort() {
+            if (!empTbody) return;
+            const rows = Array.from(empTbody.querySelectorAll(".employee-row"));
+            let visibleCount = 0;
+            const q = (currentSearchQuery || "").trim().toLowerCase();
+
+            rows.forEach(function (row) {
+                const text = row.textContent.toLowerCase();
+                const rowDesig = (row.getAttribute("data-designation") || "").trim().toLowerCase();
+                const rowStatus = (row.getAttribute("data-status") || "").trim().toLowerCase();
+
+                const matchesSearch = !q || text.includes(q);
+                const matchesDesig = currentDesignation === "all" || rowDesig === currentDesignation.toLowerCase();
+                const matchesStatus = currentStatus === "all" || rowStatus === currentStatus.toLowerCase();
+
+                if (matchesSearch && matchesDesig && matchesStatus) {
+                    row.style.display = "";
+                    visibleCount++;
+                } else {
+                    row.style.display = "none";
+                }
+            });
+
+            // Sorting rows
+            rows.sort(function (a, b) {
+                const nameA = (a.getAttribute("data-name") || "").trim().toLowerCase();
+                const nameB = (b.getAttribute("data-name") || "").trim().toLowerCase();
+                if (currentSort === "asc") {
+                    return nameA.localeCompare(nameB);
+                } else {
+                    return nameB.localeCompare(nameA);
+                }
+            });
+
+            // Re-append rows in sorted order
+            rows.forEach(function (row) {
+                empTbody.appendChild(row);
+            });
+
+            // No match feedback
+            let noMatchRow = document.getElementById("empNoMatchRow");
+            if (visibleCount === 0 && rows.length > 0) {
+                if (!noMatchRow) {
+                    noMatchRow = document.createElement("tr");
+                    noMatchRow.id = "empNoMatchRow";
+                    noMatchRow.className = "no-search-match";
+                    noMatchRow.innerHTML = '<td colspan="10" class="text-center py-4"><i class="ti ti-users fs-1 text-muted d-block mb-2"></i><h6 class="mb-1">No employees found</h6><p class="text-muted mb-0">No employees match your selected filter criteria.</p></td>';
+                }
+                noMatchRow.style.display = "";
+                empTbody.appendChild(noMatchRow);
+            } else if (noMatchRow) {
+                noMatchRow.style.display = "none";
+            }
+        }
+
+        // 3. Designation Selection Handler
+        if (designationDropdown) {
+            designationDropdown.addEventListener("click", function (e) {
+                const opt = e.target.closest("[data-designation]");
+                if (!opt) return;
+                e.preventDefault();
+                currentDesignation = opt.getAttribute("data-designation");
+
+                designationDropdown.querySelectorAll(".dropdown-item").forEach(function (el) {
+                    el.classList.remove("active");
+                });
+                opt.classList.add("active");
+
+                if (selectedDesignationLabel) {
+                    selectedDesignationLabel.innerHTML = 'Designation: ' + (currentDesignation === "all" ? "All" : currentDesignation);
+                }
+                applyFiltersAndSort();
+            });
+        }
+
+        // 4. Status Selection Handler
+        const statusDropdown = document.getElementById("statusDropdownList");
+        if (statusDropdown) {
+            statusDropdown.addEventListener("click", function (e) {
+                const opt = e.target.closest("[data-status]");
+                if (!opt) return;
+                e.preventDefault();
+                currentStatus = opt.getAttribute("data-status");
+
+                statusDropdown.querySelectorAll(".dropdown-item").forEach(function (el) {
+                    el.classList.remove("active");
+                });
+                opt.classList.add("active");
+
+                if (selectedStatusLabel) {
+                    selectedStatusLabel.innerHTML = 'Status: ' + (currentStatus === "all" ? "All" : currentStatus);
+                }
+                applyFiltersAndSort();
+            });
+        }
+
+        // 5. Sort Selection Handler
+        const sortDropdown = document.getElementById("sortDropdownList");
+        if (sortDropdown) {
+            sortDropdown.addEventListener("click", function (e) {
+                const opt = e.target.closest("[data-sort]");
+                if (!opt) return;
+                e.preventDefault();
+                currentSort = opt.getAttribute("data-sort");
+
+                sortDropdown.querySelectorAll(".dropdown-item").forEach(function (el) {
+                    el.classList.remove("active");
+                });
+                opt.classList.add("active");
+
+                if (selectedSortLabel) {
+                    selectedSortLabel.innerHTML = 'Sort By: ' + (currentSort === "asc" ? "Ascending" : "Descending");
+                }
+                applyFiltersAndSort();
+            });
+        }
+
+        // 6. Search Input Handlers
+        if (empSearch) {
+            empSearch.addEventListener("input", function () {
+                currentSearchQuery = this.value;
+                applyFiltersAndSort();
+                if (globalSearch && globalSearch.value !== this.value) {
+                    globalSearch.value = this.value;
+                }
+            });
+        }
+
+        if (globalSearch) {
+            globalSearch.addEventListener("input", function () {
+                if (empSearch) {
+                    empSearch.value = this.value;
+                }
+                currentSearchQuery = this.value;
+                applyFiltersAndSort();
+            });
+        }
+
+        // Initial sort/filter application
+        applyFiltersAndSort();
+    });
+</script>
 
 </body>
 

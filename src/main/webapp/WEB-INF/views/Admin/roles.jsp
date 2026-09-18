@@ -190,29 +190,45 @@
 
                 <div class="card-header">
 
-                    <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
 
                         <h5 class="card-title mb-0">
                             Role List
                         </h5>
 
-                        <span class="role-count">
+                        <div class="d-flex align-items-center flex-wrap gap-3">
 
-                            Total:
+                            <div class="input-icon-end position-relative">
+                                <input type="text"
+                                       id="roleSearch"
+                                       class="form-control"
+                                       placeholder="Search role..."
+                                       style="width: 240px;">
+                                <span class="input-icon-addon">
+                                    <i class="ti ti-search"></i>
+                                </span>
+                            </div>
 
-                            <c:choose>
+                            <span class="role-count">
 
-                                <c:when test="${not empty roles}">
-                                    ${roles.size()}
-                                </c:when>
+                                Total:
+                                <span id="roleTotalCount">
+                                <c:choose>
 
-                                <c:otherwise>
-                                    0
-                                </c:otherwise>
+                                    <c:when test="${not empty roles}">
+                                        ${roles.size()}
+                                    </c:when>
 
-                            </c:choose>
+                                    <c:otherwise>
+                                        0
+                                    </c:otherwise>
 
-                        </span>
+                                </c:choose>
+                                </span>
+
+                            </span>
+
+                        </div>
 
                     </div>
 
@@ -223,7 +239,7 @@
 
                     <div class="table-responsive">
 
-                        <table class="table table-hover mb-0">
+                        <table class="table table-hover mb-0" id="rolesTable">
 
                             <thead>
 
@@ -252,7 +268,7 @@
                             </thead>
 
 
-                            <tbody>
+                            <tbody id="rolesTableBody">
 
                             <c:choose>
 
@@ -915,6 +931,69 @@
             });
 
         });
+
+        // Role Search Filter
+        const roleSearch = document.getElementById("roleSearch");
+        const globalSearch = document.getElementById("globalHeaderSearch");
+        const roleCountEl = document.getElementById("roleTotalCount");
+        const roleTbody = document.getElementById("rolesTableBody");
+
+        function filterRoles(query) {
+            if (!roleTbody) return;
+            const q = (query || "").trim().toLowerCase();
+            const rows = roleTbody.querySelectorAll("tr:not(.no-search-match)");
+            let visibleCount = 0;
+
+            rows.forEach(function (row) {
+                if (row.querySelector("td[colspan]")) {
+                    return;
+                }
+                const text = row.textContent.toLowerCase();
+                if (text.includes(q)) {
+                    row.style.display = "";
+                    visibleCount++;
+                } else {
+                    row.style.display = "none";
+                }
+            });
+
+            let noMatchRow = document.getElementById("roleNoMatchRow");
+            if (visibleCount === 0 && q.length > 0) {
+                if (!noMatchRow) {
+                    noMatchRow = document.createElement("tr");
+                    noMatchRow.id = "roleNoMatchRow";
+                    noMatchRow.className = "no-search-match";
+                    noMatchRow.innerHTML = '<td colspan="8" class="text-center py-4"><i class="ti ti-search fs-1 text-muted d-block mb-2"></i><h6 class="mb-1">No roles found</h6><p class="text-muted mb-0">No roles match your search term.</p></td>';
+                    roleTbody.appendChild(noMatchRow);
+                } else {
+                    noMatchRow.style.display = "";
+                }
+            } else if (noMatchRow) {
+                noMatchRow.style.display = "none";
+            }
+
+            if (roleCountEl) {
+                roleCountEl.textContent = visibleCount;
+            }
+        }
+
+        if (roleSearch) {
+            roleSearch.addEventListener("input", function () {
+                filterRoles(this.value);
+                if (globalSearch && globalSearch.value !== this.value) {
+                    globalSearch.value = this.value;
+                }
+            });
+        }
+
+        if (globalSearch) {
+            globalSearch.addEventListener("input", function () {
+                if (roleSearch) {
+                    roleSearch.value = this.value;
+                }
+                filterRoles(this.value);
+            });
+        }
 
     });
 

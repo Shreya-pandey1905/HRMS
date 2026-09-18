@@ -372,67 +372,79 @@
 
             <div class="d-flex align-items-center flex-wrap row-gap-3">
 
+                <!-- Search Filter -->
+                <div class="me-3">
+                    <div class="input-icon-end position-relative">
+                        <input type="text"
+                               id="employeeGridSearch"
+                               class="form-control"
+                               placeholder="Search employee..."
+                               style="width: 240px;">
+                        <span class="input-icon-addon">
+                            <i class="ti ti-search"></i>
+                        </span>
+                    </div>
+                </div>
+
                 <!-- Designation Filter -->
                 <div class="dropdown me-3">
                     <a href="javascript:void(0);"
+                       id="selectedDesignationGrid"
                        class="dropdown-toggle btn btn-white d-inline-flex align-items-center"
                        data-bs-toggle="dropdown">
-                        Designation
+                        Designation: All
                     </a>
-
-                    <ul class="dropdown-menu dropdown-menu-end p-3">
-
+                    <ul class="dropdown-menu dropdown-menu-end p-3" id="designationDropdownGrid" style="max-height: 280px; overflow-y: auto;">
                         <li>
-                            <a href="${pageContext.request.contextPath}/admin/employees?action=grid"
-                               class="dropdown-item rounded-1">
-                                All
-                            </a>
+                            <a href="javascript:void(0);" class="dropdown-item rounded-1 active" data-designation="all">All</a>
                         </li>
-
-                        <c:set var="designationList" value="${employees}"/>
-
-                        <c:forEach var="employee" items="${designationList}">
-                            <c:if test="${not empty employee.designationName}">
-                                <li>
-                                    <a href="javascript:void(0);"
-                                       class="dropdown-item rounded-1">
-                                        ${employee.designationName}
-                                    </a>
-                                </li>
-                            </c:if>
-                        </c:forEach>
-
                     </ul>
                 </div>
 
+                <!-- Status Filter -->
+                <div class="dropdown me-3">
+                    <a href="javascript:void(0);"
+                       id="selectedStatusGrid"
+                       class="dropdown-toggle btn btn-white d-inline-flex align-items-center"
+                       data-bs-toggle="dropdown">
+                        Status: All
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end p-3" id="statusDropdownGrid">
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item rounded-1 active" data-status="all">All</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item rounded-1" data-status="Active">Active</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item rounded-1" data-status="Inactive">Inactive</a>
+                        </li>
+                    </ul>
+                </div>
 
                 <!-- Sort -->
                 <div class="dropdown">
                     <a href="javascript:void(0);"
+                       id="selectedSortGrid"
                        class="dropdown-toggle btn btn-white d-inline-flex align-items-center"
                        data-bs-toggle="dropdown">
-                        Sort By : Last 7 Days
+                        Sort By: Ascending
                     </a>
 
-                    <ul class="dropdown-menu dropdown-menu-end p-3">
+                    <ul class="dropdown-menu dropdown-menu-end p-3" id="sortDropdownGrid">
                         <li>
                             <a href="javascript:void(0);"
-                               class="dropdown-item rounded-1">
-                                Last 7 Days
+                               class="dropdown-item rounded-1 active"
+                               data-sort="asc">
+                                Ascending (A-Z)
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:void(0);"
-                               class="dropdown-item rounded-1">
-                                Ascending
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript:void(0);"
-                               class="dropdown-item rounded-1">
-                                Descending
+                               class="dropdown-item rounded-1"
+                               data-sort="desc">
+                                Descending (Z-A)
                             </a>
                         </li>
                     </ul>
@@ -445,11 +457,15 @@
 
 
 <!-- Employees Grid -->
-<div class="row">
+<div class="row" id="employeeGridRow">
 
     <c:forEach var="employee" items="${employees}">
 
-        <div class="col-xl-3 col-lg-4 col-md-6">
+        <div class="col-xl-3 col-lg-4 col-md-6 employee-grid-card"
+             data-name="${employee.firstName} ${employee.lastName}"
+             data-designation="${employee.designationName}"
+             data-status="${employee.status}"
+             data-id="${employee.userId}">
 
             <div class="card">
 
@@ -688,22 +704,6 @@
     </c:if>
 
 
-    <!-- Load More -->
-    <div class="col-md-12">
-
-        <div class="text-center mb-4">
-
-            <a href="javascript:void(0);"
-               class="btn btn-primary">
-
-                <i class="ti ti-loader-3 me-1"></i>
-                Load More
-
-            </a>
-
-        </div>
-
-    </div>
 
 </div>
 <!-- /Employees Grid -->
@@ -721,6 +721,24 @@
 
 	</div>
 	<!-- /Main Wrapper -->
+
+
+    <!-- Load More -->
+    <div class="col-md-12">
+
+        <div class="text-center mb-4">
+
+            <a href="javascript:void(0);"
+               class="btn btn-primary">
+
+                <i class="ti ti-loader-3 me-1"></i>
+                Load More
+
+            </a>
+
+        </div>
+
+    </div>
 
 <!-- jQuery -->
 <script src="${pageContext.request.contextPath}/assets/js/jquery-3.7.1.min.js"></script>
@@ -763,6 +781,184 @@
 <script src="${pageContext.request.contextPath}/assets/js/theme-colorpicker.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const gridSearch = document.getElementById("employeeGridSearch");
+        const globalSearch = document.getElementById("globalHeaderSearch");
+        const gridRow = document.getElementById("employeeGridRow");
+        const designationDropdown = document.getElementById("designationDropdownGrid");
+        const selectedDesignationLabel = document.getElementById("selectedDesignationGrid");
+        const selectedStatusLabel = document.getElementById("selectedStatusGrid");
+        const selectedSortLabel = document.getElementById("selectedSortGrid");
+
+        let currentSearchQuery = "";
+        let currentDesignation = "all";
+        let currentStatus = "all";
+        let currentSort = "asc";
+
+        // 1. Dynamically populate Designation dropdown with unique values
+        if (gridRow && designationDropdown) {
+            const cards = gridRow.querySelectorAll(".employee-grid-card");
+            const designationsSet = new Set();
+            cards.forEach(function (card) {
+                const desig = (card.getAttribute("data-designation") || "").trim();
+                if (desig) {
+                    designationsSet.add(desig);
+                }
+            });
+
+            const sortedDesignations = Array.from(designationsSet).sort();
+            sortedDesignations.forEach(function (desig) {
+                const li = document.createElement("li");
+                li.innerHTML = '<a href="javascript:void(0);" class="dropdown-item rounded-1 designation-filter-opt" data-designation="' + desig + '">' + desig + '</a>';
+                designationDropdown.appendChild(li);
+            });
+        }
+
+        // 2. Main Filter & Sort Engine
+        function applyFiltersAndSort() {
+            if (!gridRow) return;
+            const cards = Array.from(gridRow.querySelectorAll(".employee-grid-card"));
+            let visibleCount = 0;
+            const q = (currentSearchQuery || "").trim().toLowerCase();
+
+            cards.forEach(function (card) {
+                const text = card.textContent.toLowerCase();
+                const cardDesig = (card.getAttribute("data-designation") || "").trim().toLowerCase();
+                const cardStatus = (card.getAttribute("data-status") || "").trim().toLowerCase();
+
+                const matchesSearch = !q || text.includes(q);
+                const matchesDesig = currentDesignation === "all" || cardDesig === currentDesignation.toLowerCase();
+                const matchesStatus = currentStatus === "all" || cardStatus === currentStatus.toLowerCase();
+
+                if (matchesSearch && matchesDesig && matchesStatus) {
+                    card.style.display = "";
+                    visibleCount++;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            // Sorting cards
+            cards.sort(function (a, b) {
+                const nameA = (a.getAttribute("data-name") || "").trim().toLowerCase();
+                const nameB = (b.getAttribute("data-name") || "").trim().toLowerCase();
+                if (currentSort === "asc") {
+                    return nameA.localeCompare(nameB);
+                } else {
+                    return nameB.localeCompare(nameA);
+                }
+            });
+
+            // Re-append cards in sorted order
+            cards.forEach(function (card) {
+                gridRow.appendChild(card);
+            });
+
+            // No match feedback
+            let noMatchDiv = document.getElementById("employeeGridNoMatch");
+            if (visibleCount === 0 && cards.length > 0) {
+                if (!noMatchDiv) {
+                    noMatchDiv = document.createElement("div");
+                    noMatchDiv.id = "employeeGridNoMatch";
+                    noMatchDiv.className = "col-12 text-center py-5";
+                    noMatchDiv.innerHTML = '<div class="card p-4"><i class="ti ti-users fs-1 text-muted d-block mb-2"></i><h5 class="mb-1">No employees found</h5><p class="text-muted mb-0">No employees match your selected filter criteria.</p></div>';
+                }
+                noMatchDiv.style.display = "";
+                gridRow.appendChild(noMatchDiv);
+            } else if (noMatchDiv) {
+                noMatchDiv.style.display = "none";
+            }
+        }
+
+        // 3. Designation Selection Handler
+        if (designationDropdown) {
+            designationDropdown.addEventListener("click", function (e) {
+                const opt = e.target.closest("[data-designation]");
+                if (!opt) return;
+                e.preventDefault();
+                currentDesignation = opt.getAttribute("data-designation");
+
+                designationDropdown.querySelectorAll(".dropdown-item").forEach(function (el) {
+                    el.classList.remove("active");
+                });
+                opt.classList.add("active");
+
+                if (selectedDesignationLabel) {
+                    selectedDesignationLabel.innerHTML = 'Designation: ' + (currentDesignation === "all" ? "All" : currentDesignation);
+                }
+                applyFiltersAndSort();
+            });
+        }
+
+        // 4. Status Selection Handler
+        const statusDropdown = document.getElementById("statusDropdownGrid");
+        if (statusDropdown) {
+            statusDropdown.addEventListener("click", function (e) {
+                const opt = e.target.closest("[data-status]");
+                if (!opt) return;
+                e.preventDefault();
+                currentStatus = opt.getAttribute("data-status");
+
+                statusDropdown.querySelectorAll(".dropdown-item").forEach(function (el) {
+                    el.classList.remove("active");
+                });
+                opt.classList.add("active");
+
+                if (selectedStatusLabel) {
+                    selectedStatusLabel.innerHTML = 'Status: ' + (currentStatus === "all" ? "All" : currentStatus);
+                }
+                applyFiltersAndSort();
+            });
+        }
+
+        // 5. Sort Selection Handler
+        const sortDropdown = document.getElementById("sortDropdownGrid");
+        if (sortDropdown) {
+            sortDropdown.addEventListener("click", function (e) {
+                const opt = e.target.closest("[data-sort]");
+                if (!opt) return;
+                e.preventDefault();
+                currentSort = opt.getAttribute("data-sort");
+
+                sortDropdown.querySelectorAll(".dropdown-item").forEach(function (el) {
+                    el.classList.remove("active");
+                });
+                opt.classList.add("active");
+
+                if (selectedSortLabel) {
+                    selectedSortLabel.innerHTML = 'Sort By: ' + (currentSort === "asc" ? "Ascending" : "Descending");
+                }
+                applyFiltersAndSort();
+            });
+        }
+
+        // 6. Search Handlers
+        if (gridSearch) {
+            gridSearch.addEventListener("input", function () {
+                currentSearchQuery = this.value;
+                applyFiltersAndSort();
+                if (globalSearch && globalSearch.value !== this.value) {
+                    globalSearch.value = this.value;
+                }
+            });
+        }
+
+        if (globalSearch) {
+            globalSearch.addEventListener("input", function () {
+                if (gridSearch) {
+                    gridSearch.value = this.value;
+                }
+                currentSearchQuery = this.value;
+                applyFiltersAndSort();
+            });
+        }
+
+        // Initial sort/filter
+        applyFiltersAndSort();
+    });
+</script>
 
 </body>
 

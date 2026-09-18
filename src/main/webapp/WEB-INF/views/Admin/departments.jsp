@@ -177,28 +177,45 @@
 
             <div class="card-header">
 
-                <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
 
                     <h5 class="card-title mb-0">
                         Department List
                     </h5>
 
-                    <span class="department-count">
+                    <div class="d-flex align-items-center flex-wrap gap-3">
 
-                        Total:
-                        <c:choose>
+                        <div class="input-icon-end position-relative">
+                            <input type="text"
+                                   id="departmentSearch"
+                                   class="form-control"
+                                   placeholder="Search department..."
+                                   style="width: 240px;">
+                            <span class="input-icon-addon">
+                                <i class="ti ti-search"></i>
+                            </span>
+                        </div>
 
-                            <c:when test="${not empty departments}">
-                                ${departments.size()}
-                            </c:when>
+                        <span class="department-count">
 
-                            <c:otherwise>
-                                0
-                            </c:otherwise>
+                            Total:
+                            <span id="departmentTotalCount">
+                            <c:choose>
 
-                        </c:choose>
+                                <c:when test="${not empty departments}">
+                                    ${departments.size()}
+                                </c:when>
 
-                    </span>
+                                <c:otherwise>
+                                    0
+                                </c:otherwise>
+
+                            </c:choose>
+                            </span>
+
+                        </span>
+
+                    </div>
 
                 </div>
 
@@ -208,7 +225,7 @@
 
                 <div class="table-responsive">
 
-                    <table class="table table-hover mb-0">
+                    <table class="table table-hover mb-0" id="departmentsTable">
 
                         <thead>
 
@@ -232,7 +249,7 @@
 
                         </thead>
 
-                        <tbody>
+                        <tbody id="departmentsTableBody">
 
                         <c:choose>
 
@@ -888,6 +905,70 @@
 
         });
 
+        // Departments Search Filter
+        const deptSearch = document.getElementById("departmentSearch");
+        const globalSearch = document.getElementById("globalHeaderSearch");
+        const deptCountEl = document.getElementById("departmentTotalCount");
+        const deptTbody = document.getElementById("departmentsTableBody");
+
+        function filterDepartments(query) {
+            if (!deptTbody) return;
+            const q = (query || "").trim().toLowerCase();
+            const rows = deptTbody.querySelectorAll("tr:not(.no-search-match)");
+            let visibleCount = 0;
+
+            rows.forEach(function (row) {
+                // If this is the initial "No departments available" row
+                if (row.querySelector("td[colspan]")) {
+                    return;
+                }
+                const text = row.textContent.toLowerCase();
+                if (text.includes(q)) {
+                    row.style.display = "";
+                    visibleCount++;
+                } else {
+                    row.style.display = "none";
+                }
+            });
+
+            // Handle "No matching departments found" row
+            let noMatchRow = document.getElementById("deptNoMatchRow");
+            if (visibleCount === 0 && q.length > 0) {
+                if (!noMatchRow) {
+                    noMatchRow = document.createElement("tr");
+                    noMatchRow.id = "deptNoMatchRow";
+                    noMatchRow.className = "no-search-match";
+                    noMatchRow.innerHTML = '<td colspan="7" class="text-center py-4"><i class="ti ti-search fs-1 text-muted d-block mb-2"></i><h6 class="mb-1">No departments found</h6><p class="text-muted mb-0">No departments match your search term.</p></td>';
+                    deptTbody.appendChild(noMatchRow);
+                } else {
+                    noMatchRow.style.display = "";
+                }
+            } else if (noMatchRow) {
+                noMatchRow.style.display = "none";
+            }
+
+            if (deptCountEl) {
+                deptCountEl.textContent = visibleCount;
+            }
+        }
+
+        if (deptSearch) {
+            deptSearch.addEventListener("input", function () {
+                filterDepartments(this.value);
+                if (globalSearch && globalSearch.value !== this.value) {
+                    globalSearch.value = this.value;
+                }
+            });
+        }
+
+        if (globalSearch) {
+            globalSearch.addEventListener("input", function () {
+                if (deptSearch) {
+                    deptSearch.value = this.value;
+                }
+                filterDepartments(this.value);
+            });
+        }
     });
 
 </script>

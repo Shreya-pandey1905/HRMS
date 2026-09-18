@@ -182,29 +182,45 @@
 
             <div class="card-header">
 
-                <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
 
                     <h5 class="card-title mb-0">
                         Designation List
                     </h5>
 
-                    <span class="designation-count">
+                    <div class="d-flex align-items-center flex-wrap gap-3">
 
-                        Total:
+                        <div class="input-icon-end position-relative">
+                            <input type="text"
+                                   id="designationSearch"
+                                   class="form-control"
+                                   placeholder="Search designation..."
+                                   style="width: 240px;">
+                            <span class="input-icon-addon">
+                                <i class="ti ti-search"></i>
+                            </span>
+                        </div>
 
-                        <c:choose>
+                        <span class="designation-count">
 
-                            <c:when test="${not empty designations}">
-                                ${designations.size()}
-                            </c:when>
+                            Total:
+                            <span id="designationTotalCount">
+                            <c:choose>
 
-                            <c:otherwise>
-                                0
-                            </c:otherwise>
+                                <c:when test="${not empty designations}">
+                                    ${designations.size()}
+                                </c:when>
 
-                        </c:choose>
+                                <c:otherwise>
+                                    0
+                                </c:otherwise>
 
-                    </span>
+                            </c:choose>
+                            </span>
+
+                        </span>
+
+                    </div>
 
                 </div>
 
@@ -215,7 +231,7 @@
 
                 <div class="table-responsive">
 
-                    <table class="table table-hover mb-0">
+                    <table class="table table-hover mb-0" id="designationsTable">
 
                         <thead>
 
@@ -244,7 +260,7 @@
                         </thead>
 
 
-                        <tbody>
+                        <tbody id="designationsTableBody">
 
                         <c:choose>
 
@@ -1026,6 +1042,69 @@
             });
 
         });
+
+        // Designation Search Filter
+        const designationSearch = document.getElementById("designationSearch");
+        const globalSearch = document.getElementById("globalHeaderSearch");
+        const designationCountEl = document.getElementById("designationTotalCount");
+        const designationTbody = document.getElementById("designationsTableBody");
+
+        function filterDesignations(query) {
+            if (!designationTbody) return;
+            const q = (query || "").trim().toLowerCase();
+            const rows = designationTbody.querySelectorAll("tr:not(.no-search-match)");
+            let visibleCount = 0;
+
+            rows.forEach(function (row) {
+                if (row.querySelector("td[colspan]")) {
+                    return;
+                }
+                const text = row.textContent.toLowerCase();
+                if (text.includes(q)) {
+                    row.style.display = "";
+                    visibleCount++;
+                } else {
+                    row.style.display = "none";
+                }
+            });
+
+            let noMatchRow = document.getElementById("designationNoMatchRow");
+            if (visibleCount === 0 && q.length > 0) {
+                if (!noMatchRow) {
+                    noMatchRow = document.createElement("tr");
+                    noMatchRow.id = "designationNoMatchRow";
+                    noMatchRow.className = "no-search-match";
+                    noMatchRow.innerHTML = '<td colspan="8" class="text-center py-4"><i class="ti ti-search fs-1 text-muted d-block mb-2"></i><h6 class="mb-1">No designations found</h6><p class="text-muted mb-0">No designations match your search term.</p></td>';
+                    designationTbody.appendChild(noMatchRow);
+                } else {
+                    noMatchRow.style.display = "";
+                }
+            } else if (noMatchRow) {
+                noMatchRow.style.display = "none";
+            }
+
+            if (designationCountEl) {
+                designationCountEl.textContent = visibleCount;
+            }
+        }
+
+        if (designationSearch) {
+            designationSearch.addEventListener("input", function () {
+                filterDesignations(this.value);
+                if (globalSearch && globalSearch.value !== this.value) {
+                    globalSearch.value = this.value;
+                }
+            });
+        }
+
+        if (globalSearch) {
+            globalSearch.addEventListener("input", function () {
+                if (designationSearch) {
+                    designationSearch.value = this.value;
+                }
+                filterDesignations(this.value);
+            });
+        }
 
     });
 
