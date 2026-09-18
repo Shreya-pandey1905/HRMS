@@ -35,4 +35,27 @@ public interface ProjectService {
 
     List<AllProjects> getActiveProjects() throws Exception;
 
+    List<AllProjects> getProjectsByManager(
+            int managerId,
+            int page,
+            int pageSize,
+            String sort
+    ) throws Exception;
+
+    int getProjectCountByManager(int managerId) throws Exception;
+
+    List<AllProjects> getProjectsByManagerForExport(
+            int managerId,
+            String sort
+    ) throws Exception;
+
+    List<AllProjects> getTaskProjectsByManager(
+            int managerId,
+            String priority
+    ) throws Exception;
+
+    List<AllProjects> getActiveProjectsByManager(
+            int managerId
+    ) throws Exception;
+
 }

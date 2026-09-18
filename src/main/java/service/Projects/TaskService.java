@@ -8,4 +8,8 @@ public interface TaskService
 {
     List<Task> getTasksByPriority(String priority) throws Exception;
     void addTask(Task task, int userId) throws Exception;
+    List<Task> getTasksByManager(
+            int managerId,
+            String priority
+    ) throws Exception;
 }

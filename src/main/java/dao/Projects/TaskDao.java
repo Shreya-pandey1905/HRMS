@@ -71,7 +71,7 @@ public class TaskDao {
         return tasks;
     }
 
-    public void addTask(Task task, int userId) throws Exception {
+    public void  addTask(Task task, int userId) throws Exception {
 
         String sql = "{CALL sp_add_task(?,?,?,?,?,?,?,?)}";
 
@@ -96,5 +96,100 @@ public class TaskDao {
 
             cs.execute();
         }
+    }
+
+    public List<Task> getTasksByManager(
+            int managerId,
+            String priority
+    ) throws Exception {
+
+        List<Task> tasks = new ArrayList<>();
+
+        String sql = "{CALL sp_get_tasks_by_manager(?, ?)}";
+
+        try (
+                Connection connection = DBConfig.getConnection();
+                CallableStatement cs = connection.prepareCall(sql)
+        ) {
+
+            cs.setInt(1, managerId);
+            cs.setString(2, priority);
+
+            try (ResultSet rs = cs.executeQuery()) {
+
+                while (rs.next()) {
+
+                    Task task = new Task();
+
+                    task.setTaskId(
+                            rs.getInt("TaskId")
+                    );
+
+                    task.setProjectId(
+                            rs.getInt("ProjectId")
+                    );
+
+                    task.setTitle(
+                            rs.getString("Title")
+                    );
+
+                    task.setDescription(
+                            rs.getString("Description")
+                    );
+
+                    task.setStatus(
+                            rs.getString("Status")
+                    );
+
+                    task.setPriority(
+                            rs.getString("Priority")
+                    );
+
+                    task.setFilePath(
+                            rs.getString("FilePath")
+                    );
+
+                    Timestamp deadline =
+                            rs.getTimestamp("Deadline");
+
+                    if (deadline != null) {
+                        task.setDeadline(
+                                deadline.toLocalDateTime()
+                        );
+                    }
+
+                    // Employee information
+                    task.setUserId(
+                            rs.getInt("UserId")
+                    );
+
+                    String firstName =
+                            rs.getString("FirstName");
+
+                    String lastName =
+                            rs.getString("LastName");
+
+                    String employeeName = "";
+
+                    if (firstName != null) {
+                        employeeName = firstName;
+                    }
+
+                    if (lastName != null &&
+                            !lastName.trim().isEmpty()) {
+
+                        employeeName += " " + lastName;
+                    }
+
+                    task.setEmployeeName(
+                            employeeName.trim()
+                    );
+
+                    tasks.add(task);
+                }
+            }
+        }
+
+        return tasks;
     }
 }

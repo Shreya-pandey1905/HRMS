@@ -1,13 +1,7 @@
-USE Pulse360Db;
+DROP PROCEDURE IF EXISTS sp_add_project;
 
 DELIMITER $$
 
-
--- =========================================================
--- PROJECT PROCEDURES
--- =========================================================
-
-DROP PROCEDURE IF EXISTS sp_add_project $$
 CREATE PROCEDURE sp_add_project(
     IN p_project_name VARCHAR(255),
     IN p_client_name VARCHAR(255),
@@ -23,6 +17,7 @@ CREATE PROCEDURE sp_add_project(
     IN p_manager_name LONGTEXT
 )
 BEGIN
+
     INSERT INTO AllProjects
     (
         ProjectName,
@@ -55,45 +50,68 @@ BEGIN
     );
 
     SELECT LAST_INSERT_ID() AS ProjectId;
+
 END $$
 
+DELIMITER ;
 
-DROP PROCEDURE IF EXISTS sp_get_project_managers $$
+USE Pulse360Db;
+
+DROP PROCEDURE IF EXISTS sp_get_project_managers;
+
+DELIMITER $$
+
 CREATE PROCEDURE sp_get_project_managers()
 BEGIN
+
     SELECT
         UserId,
         FirstName,
         LastName,
         Email
-    FROM `User`
+    FROM User
     WHERE RoleId = 8
       AND (Status IS NULL OR Status = 'Active')
     ORDER BY FirstName, LastName;
+
 END $$
 
+DELIMITER ;
 
-DROP PROCEDURE IF EXISTS sp_get_project_employees $$
+DROP PROCEDURE IF EXISTS sp_get_project_employees;
+
+DELIMITER $$
+
 CREATE PROCEDURE sp_get_project_employees()
 BEGIN
+
     SELECT
         UserId,
         FirstName,
         LastName,
         Email
-    FROM `User`
+    FROM User
     WHERE RoleId NOT IN (3, 8)
       AND (Status IS NULL OR Status = 'Active')
     ORDER BY FirstName, LastName;
+
 END $$
 
+DELIMITER ;
+select * from user;
 
-DROP PROCEDURE IF EXISTS sp_add_project_employee $$
+USE Pulse360Db;
+
+DROP PROCEDURE IF EXISTS sp_add_project_employee;
+
+DELIMITER $$
+
 CREATE PROCEDURE sp_add_project_employee(
     IN p_project_id INT,
     IN p_user_id INT
 )
 BEGIN
+
     INSERT INTO ProjectsUser
     (
         ProjectsProjectId,
@@ -104,29 +122,64 @@ BEGIN
         p_project_id,
         p_user_id
     );
+
 END $$
 
+DELIMITER ;
 
-DROP PROCEDURE IF EXISTS sp_get_project_count $$
+SHOW PROCEDURE STATUS
+WHERE Db = 'Pulse360Db'
+AND Name = 'sp_add_project_employee';
+
+SELECT *
+FROM AllProjects
+ORDER BY ProjectId DESC
+LIMIT 1;
+SELECT *
+FROM ProjectsUser
+WHERE ProjectsProjectId = 25;
+
+SELECT *
+FROM ProjectsUser
+ORDER BY ProjectsProjectId DESC;
+
+DROP PROCEDURE IF EXISTS sp_get_project_count;
+
+DELIMITER $$
+
 CREATE PROCEDURE sp_get_project_count()
 BEGIN
+
     SELECT COUNT(*) AS TotalProjects
     FROM AllProjects;
+
 END $$
 
+DELIMITER ;
 
-DROP PROCEDURE IF EXISTS sp_project_name_exists $$
+DROP PROCEDURE IF EXISTS sp_project_name_exists;
+
+DELIMITER $$
+
 CREATE PROCEDURE sp_project_name_exists(
     IN p_project_name VARCHAR(255)
 )
 BEGIN
+
     SELECT COUNT(*) AS ProjectCount
     FROM AllProjects
     WHERE LOWER(TRIM(ProjectName)) = LOWER(TRIM(p_project_name));
+
 END $$
 
+DELIMITER ;
+CALL sp_project_name_exists('HRMS');
+CALL sp_project_name_exists('SomethingNew');
 
-DROP PROCEDURE IF EXISTS sp_delete_project $$
+DROP PROCEDURE IF EXISTS sp_delete_project;
+
+DELIMITER $$
+
 CREATE PROCEDURE sp_delete_project(
     IN p_project_id INT
 )
@@ -162,8 +215,23 @@ BEGIN
 
 END $$
 
+DELIMITER ;
 
-DROP PROCEDURE IF EXISTS sp_get_project_by_id $$
+SELECT * FROM AllProjects WHERE ProjectId = 5;
+SET SQL_SAFE_UPDATES = 0;
+
+SELECT
+    TABLE_NAME,
+    COLUMN_NAME,
+    CONSTRAINT_NAME
+FROM information_schema.KEY_COLUMN_USAGE
+WHERE REFERENCED_TABLE_SCHEMA = 'pulse360db'
+  AND REFERENCED_TABLE_NAME IN ('Task', 'TaskBoards', 'Timesheets');
+
+DROP PROCEDURE IF EXISTS sp_get_project_by_id;
+
+DELIMITER $$
+
 CREATE PROCEDURE sp_get_project_by_id(
     IN p_project_id INT
 )
@@ -187,6 +255,7 @@ BEGIN
     FROM AllProjects
     WHERE ProjectId = p_project_id;
 
+
     -- Assigned team members
     SELECT
         UsersUserId AS UserId
@@ -195,8 +264,14 @@ BEGIN
 
 END $$
 
+DELIMITER ;
 
-DROP PROCEDURE IF EXISTS sp_project_name_exists_for_edit $$
+CALL sp_get_project_by_id(20);
+
+DROP PROCEDURE IF EXISTS sp_project_name_exists_for_edit;
+
+DELIMITER $$
+
 CREATE PROCEDURE sp_project_name_exists_for_edit(
     IN p_project_name VARCHAR(255),
     IN p_project_id INT
@@ -208,8 +283,13 @@ BEGIN
       AND ProjectId <> p_project_id;
 END $$
 
+DELIMITER ;
+CALL sp_project_name_exists_for_edit('HRMS Project', 20);
 
-DROP PROCEDURE IF EXISTS sp_update_project $$
+DROP PROCEDURE IF EXISTS sp_update_project;
+
+DELIMITER $$
+
 CREATE PROCEDURE sp_update_project(
     IN p_project_id INT,
     IN p_project_name VARCHAR(255),
@@ -224,6 +304,7 @@ CREATE PROCEDURE sp_update_project(
     IN p_manager_name LONGTEXT
 )
 BEGIN
+
     UPDATE AllProjects
     SET
         ProjectName = p_project_name,
@@ -237,10 +318,17 @@ BEGIN
         Status = p_status,
         ManagerName = p_manager_name
     WHERE ProjectId = p_project_id;
+
 END $$
 
+DELIMITER ;
 
-DROP PROCEDURE IF EXISTS sp_delete_project_employees $$
+CALL sp_project_name_exists_for_edit('HRMS Project', 20);
+
+DROP PROCEDURE IF EXISTS sp_delete_project_employees;
+
+DELIMITER $$
+
 CREATE PROCEDURE sp_delete_project_employees(
     IN p_project_id INT
 )
@@ -249,8 +337,12 @@ BEGIN
     WHERE ProjectsProjectId = p_project_id;
 END $$
 
+DELIMITER ;
 
-DROP PROCEDURE IF EXISTS sp_get_all_projects $$
+DROP PROCEDURE IF EXISTS sp_get_all_projects;
+
+DELIMITER $$
+
 CREATE PROCEDURE sp_get_all_projects(
     IN p_page INT,
     IN p_page_size INT,
@@ -283,7 +375,7 @@ BEGIN
         LEFT JOIN ProjectsUser pu
             ON p.ProjectId = pu.ProjectsProjectId
 
-        LEFT JOIN `User` u
+        LEFT JOIN User u
             ON pu.UsersUserId = u.UserId
 
         GROUP BY
@@ -319,7 +411,7 @@ BEGIN
         LEFT JOIN ProjectsUser pu
             ON p.ProjectId = pu.ProjectsProjectId
 
-        LEFT JOIN `User` u
+        LEFT JOIN User u
             ON pu.UsersUserId = u.UserId
 
         GROUP BY
@@ -338,8 +430,14 @@ BEGIN
 
 END $$
 
+DELIMITER ;
 
-DROP PROCEDURE IF EXISTS sp_get_all_projects_for_export $$
+CALL sp_get_all_projects(1, 5, 'asc');
+
+DROP PROCEDURE IF EXISTS sp_get_all_projects_for_export;
+
+DELIMITER $$
+
 CREATE PROCEDURE sp_get_all_projects_for_export(
     IN p_sort VARCHAR(10)
 )
@@ -371,7 +469,7 @@ BEGIN
         LEFT JOIN ProjectsUser pu
             ON p.ProjectId = pu.ProjectsProjectId
 
-        LEFT JOIN `User` u
+        LEFT JOIN User u
             ON pu.UsersUserId = u.UserId
 
         GROUP BY
@@ -415,7 +513,7 @@ BEGIN
         LEFT JOIN ProjectsUser pu
             ON p.ProjectId = pu.ProjectsProjectId
 
-        LEFT JOIN `User` u
+        LEFT JOIN User u
             ON pu.UsersUserId = u.UserId
 
         GROUP BY
@@ -437,192 +535,16 @@ BEGIN
 
 END $$
 
+DELIMITER ;
 
-DROP PROCEDURE IF EXISTS sp_get_project_employees_by_project $$
-CREATE PROCEDURE sp_get_project_employees_by_project(
-    IN p_project_id INT
-)
-BEGIN
-    SELECT
-        u.UserId,
-        u.FirstName,
-        u.LastName,
-        u.Email
-    FROM `User` u
-    INNER JOIN ProjectsUser pu
-        ON pu.UsersUserId = u.UserId
-    WHERE pu.ProjectsProjectId = p_project_id
-      AND (u.Status IS NULL OR u.Status = 'Active')
-    ORDER BY u.FirstName, u.LastName;
-END $$
+CALL sp_get_all_projects_for_export('asc');
+CALL sp_get_all_projects_for_export('desc');
+select * from user;
 
+DROP PROCEDURE IF EXISTS sp_get_task_page;
 
-DROP PROCEDURE IF EXISTS sp_get_active_projects $$
-CREATE PROCEDURE sp_get_active_projects()
-BEGIN
-    SELECT
-        ProjectId,
-        ProjectName
-    FROM AllProjects
-    WHERE LOWER(Status) = 'active'
-    ORDER BY ProjectName;
-END $$
+DELIMITER $$
 
-
--- =========================================================
--- TASK PROCEDURES
--- =========================================================
-
-DROP PROCEDURE IF EXISTS sp_add_task $$
-CREATE PROCEDURE sp_add_task(
-    IN p_project_id INT,
-    IN p_title VARCHAR(255),
-    IN p_description VARCHAR(1000),
-    IN p_status VARCHAR(50),
-    IN p_priority VARCHAR(50),
-    IN p_file_path VARCHAR(255),
-    IN p_deadline DATETIME,
-    IN p_user_id INT
-)
-BEGIN
-
-    DECLARE v_task_id INT;
-
-    -- Due date cannot be before today
-    IF DATE(p_deadline) < CURDATE() THEN
-
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT =
-            'Due date cannot be before today';
-
-    END IF;
-
-
-    -- Employee can have only one task in the same project
-    IF EXISTS (
-        SELECT 1
-        FROM TaskMember tm
-        INNER JOIN Task t
-            ON t.TaskId = tm.TaskId
-        WHERE tm.UserId = p_user_id
-          AND t.ProjectId = p_project_id
-    ) THEN
-
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT =
-            'This employee already has an assigned task.';
-
-    END IF;
-
-
-    -- Insert task
-    INSERT INTO Task
-    (
-        ProjectId,
-        Title,
-        Description,
-        Status,
-        Priority,
-        FilePath,
-        Deadline
-    )
-    VALUES
-    (
-        p_project_id,
-        p_title,
-        p_description,
-        p_status,
-        p_priority,
-        p_file_path,
-        p_deadline
-    );
-
-
-    -- Get generated TaskId
-    SET v_task_id = LAST_INSERT_ID();
-
-
-    -- Assign employee to task
-    INSERT INTO TaskMember
-    (
-        TaskId,
-        UserId
-    )
-    VALUES
-    (
-        v_task_id,
-        p_user_id
-    );
-
-END $$
-
-
-DROP PROCEDURE IF EXISTS sp_get_task_projects $$
-CREATE PROCEDURE sp_get_task_projects(
-    IN p_priority VARCHAR(50)
-)
-BEGIN
-
-    SELECT
-        p.ProjectId,
-        p.ProjectName,
-        p.ClientName,
-        p.StartDate,
-        p.EndDate,
-        p.ProjectValue,
-        p.PriceType,
-        p.Priority,
-        p.Status,
-        p.ManagerName
-    FROM AllProjects p
-    WHERE
-        p_priority = 'All'
-        OR LOWER(p.Priority) = LOWER(p_priority)
-    ORDER BY p.ProjectId DESC;
-
-END $$
-
-
-DROP PROCEDURE IF EXISTS sp_get_tasks $$
-CREATE PROCEDURE sp_get_tasks(
-    IN p_priority VARCHAR(50)
-)
-BEGIN
-
-    SELECT
-        t.TaskId,
-        t.ProjectId,
-        t.Title,
-        t.Description,
-        t.Status,
-        t.Priority,
-        t.FilePath,
-        t.Deadline,
-
-        u.UserId,
-        u.FirstName,
-        u.LastName
-
-    FROM Task t
-
-    LEFT JOIN TaskMember tm
-        ON tm.TaskId = t.TaskId
-
-    LEFT JOIN `User` u
-        ON u.UserId = tm.UserId
-
-    WHERE
-        p_priority = 'All'
-        OR LOWER(t.Priority) = LOWER(p_priority)
-
-    ORDER BY
-        t.ProjectId DESC,
-        t.TaskId DESC;
-
-END $$
-
-
-DROP PROCEDURE IF EXISTS sp_get_task_page $$
 CREATE PROCEDURE sp_get_task_page(
     IN p_priority VARCHAR(50)
 )
@@ -688,32 +610,700 @@ BEGIN
 
 END $$
 
-DROP PROCEDURE IF EXISTS sp_get_projects_by_user_id $$
+DELIMITER ;
+CALL sp_get_task_page('All');
 
-CREATE PROCEDURE sp_get_projects_by_user_id(
+
+
+SELECT * FROM Task;
+
+
+DROP PROCEDURE IF EXISTS sp_get_project_employees_by_project;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_project_employees_by_project(
+    IN p_project_id INT
+)
+BEGIN
+
+    SELECT
+        u.UserId,
+        u.FirstName,
+        u.LastName,
+        u.Email
+    FROM `User` u
+    INNER JOIN ProjectsUser pu
+        ON pu.UsersUserId = u.UserId
+    WHERE pu.ProjectsProjectId = p_project_id
+      AND (u.Status IS NULL OR u.Status = 'Active')
+    ORDER BY u.FirstName, u.LastName;
+
+END $$
+
+DELIMITER ;
+
+CALL sp_get_active_projects();
+CALL sp_get_project_employees_by_project(1);
+
+SELECT *
+FROM ProjectsUser
+WHERE ProjectsProjectId = 1;
+
+SELECT *
+FROM ProjectsUser
+ORDER BY ProjectsProjectId;
+
+DROP PROCEDURE IF EXISTS sp_get_active_projects;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_active_projects()
+BEGIN
+    SELECT
+        ProjectId,
+        ProjectName
+    FROM AllProjects
+    WHERE LOWER(Status) = 'active'
+    ORDER BY ProjectName;
+END $$
+
+DELIMITER ;
+
+CALL sp_get_active_projects();
+
+DESCRIBE TaskMember;
+
+DROP PROCEDURE IF EXISTS sp_add_task;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_add_task(
+    IN p_project_id INT,
+    IN p_title VARCHAR(255),
+    IN p_description VARCHAR(1000),
+    IN p_status VARCHAR(50),
+    IN p_priority VARCHAR(50),
+    IN p_file_path VARCHAR(255),
+    IN p_deadline DATETIME,
     IN p_user_id INT
 )
 BEGIN
+
+    DECLARE v_task_id INT;
+
+    -- Due date cannot be before today
+    IF DATE(p_deadline) < CURDATE() THEN
+
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT =
+            'Due date cannot be before today';
+
+    END IF;
+
+
+    -- Employee can have only one task in the same project
+    IF EXISTS (
+        SELECT 1
+        FROM TaskMember tm
+        INNER JOIN Task t
+            ON t.TaskId = tm.TaskId
+        WHERE tm.UserId = p_user_id
+          AND t.ProjectId = p_project_id
+    ) THEN
+
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT =
+            'This employee already has an assigned task.';
+
+    END IF;
+
+
+    -- Insert task
+    INSERT INTO Task (
+        ProjectId,
+        Title,
+        Description,
+        Status,
+        Priority,
+        FilePath,
+        Deadline
+    )
+    VALUES (
+        p_project_id,
+        p_title,
+        p_description,
+        p_status,
+        p_priority,
+        p_file_path,
+        p_deadline
+    );
+
+
+    -- Get generated TaskId
+    SET v_task_id = LAST_INSERT_ID();
+
+
+    -- Assign employee to task
+    INSERT INTO TaskMember (
+        TaskId,
+        UserId
+    )
+    VALUES (
+        v_task_id,
+        p_user_id
+    );
+
+END $$
+
+DELIMITER ;
+
+SHOW PROCEDURE STATUS
+WHERE Db = DATABASE()
+AND Name = 'sp_add_task';
+select * from task;
+
+DROP PROCEDURE IF EXISTS sp_get_task_projects;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_task_projects(
+    IN p_priority VARCHAR(50)
+)
+BEGIN
+
     SELECT
         p.ProjectId,
         p.ProjectName,
         p.ClientName,
-        p.Description,
         p.StartDate,
         p.EndDate,
-        p.Priority,
         p.ProjectValue,
         p.PriceType,
-        p.FilePath,
-        p.LogoPath,
+        p.Priority,
         p.Status,
         p.ManagerName
     FROM AllProjects p
-    INNER JOIN ProjectsUser pu
-        ON p.ProjectId = pu.ProjectsProjectId
-    WHERE pu.UsersUserId = p_user_id
+    WHERE
+        p_priority = 'All'
+        OR LOWER(p.Priority) = LOWER(p_priority)
     ORDER BY p.ProjectId DESC;
+
 END $$
 
+DELIMITER ;
+
+
+
+SELECT * FROM ProjectsUser
+ORDER BY ProjectsProjectId;
+
+SELECT
+    u.UserId,
+    u.FirstName,
+    u.LastName,
+    u.Email,
+    u.RoleId
+FROM `User` u
+ORDER BY u.UserId;
+
+SELECT
+    p.ProjectId,
+    p.ProjectName,
+    p.ManagerName,
+    pu.UsersUserId,
+    u.FirstName,
+    u.LastName,
+    u.RoleId
+FROM AllProjects p
+LEFT JOIN ProjectsUser pu
+    ON pu.ProjectsProjectId = p.ProjectId
+LEFT JOIN `User` u
+    ON u.UserId = pu.UsersUserId
+ORDER BY p.ProjectId DESC;
+
+select * from user;
+
+DROP PROCEDURE IF EXISTS sp_get_tasks;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_tasks(
+    IN p_priority VARCHAR(50)
+)
+BEGIN
+
+    SELECT
+        t.TaskId,
+        t.ProjectId,
+        t.Title,
+        t.Description,
+        t.Status,
+        t.Priority,
+        t.FilePath,
+        t.Deadline,
+
+        u.UserId,
+        u.FirstName,
+        u.LastName
+
+    FROM Task t
+
+    LEFT JOIN TaskMember tm
+        ON tm.TaskId = t.TaskId
+
+    LEFT JOIN `User` u
+        ON u.UserId = tm.UserId
+
+    WHERE
+        p_priority = 'All'
+        OR LOWER(t.Priority) = LOWER(p_priority)
+
+    ORDER BY
+        t.ProjectId DESC,
+        t.TaskId DESC;
+
+END $$
 
 DELIMITER ;
+
+CALL sp_get_tasks('All');
+
+DROP PROCEDURE IF EXISTS sp_get_projects_by_manager;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_projects_by_manager(
+    IN p_manager_id INT,
+    IN p_page INT,
+    IN p_page_size INT,
+    IN p_sort VARCHAR(10)
+)
+BEGIN
+
+    DECLARE v_offset INT;
+
+    SET v_offset = (p_page - 1) * p_page_size;
+
+    IF LOWER(p_sort) = 'asc' THEN
+
+        SELECT
+            p.ProjectId,
+            p.ProjectName,
+            p.ManagerName,
+            p.EndDate,
+            p.Priority,
+            p.Status,
+
+            GROUP_CONCAT(
+                CONCAT(u.FirstName, ' ', u.LastName)
+                ORDER BY u.FirstName
+                SEPARATOR ', '
+            ) AS TeamMembers
+
+        FROM AllProjects p
+
+        LEFT JOIN ProjectsUser pu
+            ON p.ProjectId = pu.ProjectsProjectId
+
+        LEFT JOIN `User` u
+            ON pu.UsersUserId = u.UserId
+
+        WHERE LOWER(TRIM(p.ManagerName)) =
+              LOWER(
+                  TRIM(
+                      (
+                          SELECT CONCAT(FirstName, ' ', LastName)
+                          FROM `User`
+                          WHERE UserId = p_manager_id
+                            AND RoleId = 8
+                      )
+                  )
+              )
+
+        GROUP BY
+            p.ProjectId,
+            p.ProjectName,
+            p.ManagerName,
+            p.EndDate,
+            p.Priority,
+            p.Status
+
+        ORDER BY p.ProjectId ASC
+
+        LIMIT v_offset, p_page_size;
+
+    ELSE
+
+        SELECT
+            p.ProjectId,
+            p.ProjectName,
+            p.ManagerName,
+            p.EndDate,
+            p.Priority,
+            p.Status,
+
+            GROUP_CONCAT(
+                CONCAT(u.FirstName, ' ', u.LastName)
+                ORDER BY u.FirstName
+                SEPARATOR ', '
+            ) AS TeamMembers
+
+        FROM AllProjects p
+
+        LEFT JOIN ProjectsUser pu
+            ON p.ProjectId = pu.ProjectsProjectId
+
+        LEFT JOIN `User` u
+            ON pu.UsersUserId = u.UserId
+
+        WHERE LOWER(TRIM(p.ManagerName)) =
+              LOWER(
+                  TRIM(
+                      (
+                          SELECT CONCAT(FirstName, ' ', LastName)
+                          FROM `User`
+                          WHERE UserId = p_manager_id
+                            AND RoleId = 8
+                      )
+                  )
+              )
+
+        GROUP BY
+            p.ProjectId,
+            p.ProjectName,
+            p.ManagerName,
+            p.EndDate,
+            p.Priority,
+            p.Status
+
+        ORDER BY p.ProjectId DESC
+
+        LIMIT v_offset, p_page_size;
+
+    END IF;
+
+END $$
+
+DELIMITER ;
+CALL sp_get_projects_by_manager(45, 1, 5, 'desc');
+
+DROP PROCEDURE IF EXISTS sp_get_project_count_by_manager;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_project_count_by_manager(
+    IN p_manager_id INT
+)
+BEGIN
+
+    SELECT COUNT(*) AS TotalProjects
+
+    FROM AllProjects p
+
+    WHERE LOWER(TRIM(p.ManagerName)) =
+          LOWER(
+              TRIM(
+                  (
+                      SELECT CONCAT(FirstName, ' ', LastName)
+                      FROM `User`
+                      WHERE UserId = p_manager_id
+                        AND RoleId = 8
+                  )
+              )
+          );
+
+END $$
+
+DELIMITER ;
+
+CALL sp_get_project_count_by_manager(45);
+
+DROP PROCEDURE IF EXISTS sp_get_projects_by_manager_for_export;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_projects_by_manager_for_export(
+    IN p_manager_id INT,
+    IN p_sort VARCHAR(10)
+)
+BEGIN
+
+    IF LOWER(p_sort) = 'asc' THEN
+
+        SELECT
+            p.ProjectId,
+            p.ProjectName,
+            p.ClientName,
+            p.Description,
+            p.StartDate,
+            p.EndDate,
+            p.Priority,
+            p.ProjectValue,
+            p.PriceType,
+            p.Status,
+            p.ManagerName,
+
+            GROUP_CONCAT(
+                CONCAT(u.FirstName, ' ', u.LastName)
+                ORDER BY u.FirstName
+                SEPARATOR ', '
+            ) AS TeamMembers
+
+        FROM AllProjects p
+
+        LEFT JOIN ProjectsUser pu
+            ON p.ProjectId = pu.ProjectsProjectId
+
+        LEFT JOIN `User` u
+            ON pu.UsersUserId = u.UserId
+
+        WHERE LOWER(TRIM(p.ManagerName)) =
+              LOWER(
+                  TRIM(
+                      (
+                          SELECT CONCAT(FirstName, ' ', LastName)
+                          FROM `User`
+                          WHERE UserId = p_manager_id
+                            AND RoleId = 8
+                      )
+                  )
+              )
+
+        GROUP BY
+            p.ProjectId,
+            p.ProjectName,
+            p.ClientName,
+            p.Description,
+            p.StartDate,
+            p.EndDate,
+            p.Priority,
+            p.ProjectValue,
+            p.PriceType,
+            p.Status,
+            p.ManagerName
+
+        ORDER BY p.ProjectId ASC;
+
+    ELSE
+
+        SELECT
+            p.ProjectId,
+            p.ProjectName,
+            p.ClientName,
+            p.Description,
+            p.StartDate,
+            p.EndDate,
+            p.Priority,
+            p.ProjectValue,
+            p.PriceType,
+            p.Status,
+            p.ManagerName,
+
+            GROUP_CONCAT(
+                CONCAT(u.FirstName, ' ', u.LastName)
+                ORDER BY u.FirstName
+                SEPARATOR ', '
+            ) AS TeamMembers
+
+        FROM AllProjects p
+
+        LEFT JOIN ProjectsUser pu
+            ON p.ProjectId = pu.ProjectsProjectId
+
+        LEFT JOIN `User` u
+            ON pu.UsersUserId = u.UserId
+
+        WHERE LOWER(TRIM(p.ManagerName)) =
+              LOWER(
+                  TRIM(
+                      (
+                          SELECT CONCAT(FirstName, ' ', LastName)
+                          FROM `User`
+                          WHERE UserId = p_manager_id
+                            AND RoleId = 8
+                      )
+                  )
+              )
+
+        GROUP BY
+            p.ProjectId,
+            p.ProjectName,
+            p.ClientName,
+            p.Description,
+            p.StartDate,
+            p.EndDate,
+            p.Priority,
+            p.ProjectValue,
+            p.PriceType,
+            p.Status,
+            p.ManagerName
+
+        ORDER BY p.ProjectId DESC;
+
+    END IF;
+
+END $$
+
+DELIMITER ;
+
+CALL sp_get_projects_by_manager_for_export(45, 'desc');
+
+DROP PROCEDURE IF EXISTS sp_get_task_projects_by_manager;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_task_projects_by_manager(
+    IN p_manager_id INT,
+    IN p_priority VARCHAR(50)
+)
+BEGIN
+
+    SELECT
+        p.ProjectId,
+        p.ProjectName,
+        p.ClientName,
+        p.ProjectValue,
+        p.Priority,
+        p.Status,
+        p.ManagerName,
+        p.StartDate,
+        p.EndDate
+
+    FROM AllProjects p
+
+    WHERE LOWER(TRIM(p.ManagerName)) =
+          LOWER(
+              TRIM(
+                  (
+                      SELECT CONCAT(FirstName, ' ', LastName)
+                      FROM `User`
+                      WHERE UserId = p_manager_id
+                        AND RoleId = 8
+                  )
+              )
+          )
+
+      AND (
+          p_priority = 'All'
+          OR LOWER(p.Priority) = LOWER(p_priority)
+      )
+
+    ORDER BY p.ProjectId DESC;
+
+END $$
+
+DELIMITER ;
+
+CALL sp_get_task_projects_by_manager(45, 'All');
+CALL sp_get_task_projects_by_manager(45, 'High');
+CALL sp_get_task_projects_by_manager(45, 'Medium');
+CALL sp_get_task_projects_by_manager(45, 'Low');
+
+DROP PROCEDURE IF EXISTS sp_get_tasks_by_manager;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_tasks_by_manager(
+    IN p_manager_id INT,
+    IN p_priority VARCHAR(50)
+)
+BEGIN
+
+    SELECT
+        t.TaskId,
+        t.ProjectId,
+        t.Title,
+        t.Description,
+        t.Status,
+        t.Priority,
+        t.FilePath,
+        t.Deadline,
+
+        u.UserId,
+        u.FirstName,
+        u.LastName
+
+    FROM Task t
+
+    INNER JOIN AllProjects p
+        ON p.ProjectId = t.ProjectId
+
+    LEFT JOIN TaskMember tm
+        ON tm.TaskId = t.TaskId
+
+    LEFT JOIN `User` u
+        ON u.UserId = tm.UserId
+
+    WHERE LOWER(TRIM(p.ManagerName)) =
+          LOWER(
+              TRIM(
+                  (
+                      SELECT CONCAT(FirstName, ' ', LastName)
+                      FROM `User`
+                      WHERE UserId = p_manager_id
+                        AND RoleId = 8
+                  )
+              )
+          )
+
+      AND (
+          p_priority = 'All'
+          OR LOWER(t.Priority) = LOWER(p_priority)
+      )
+
+    ORDER BY
+        t.ProjectId DESC,
+        t.TaskId DESC;
+
+END $$
+
+DELIMITER ;
+CALL sp_get_tasks_by_manager(45, 'All');
+CALL sp_get_tasks_by_manager(45, 'High');
+CALL sp_get_tasks_by_manager(45, 'Medium');
+CALL sp_get_tasks_by_manager(45, 'Low');
+
+DROP PROCEDURE IF EXISTS sp_get_active_projects_by_manager;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_get_active_projects_by_manager(
+    IN p_manager_id INT
+)
+BEGIN
+
+    SELECT
+        p.ProjectId,
+        p.ProjectName,
+        p.ClientName,
+        p.ProjectValue,
+        p.Priority,
+        p.Status,
+        p.ManagerName,
+        p.StartDate,
+        p.EndDate
+
+    FROM AllProjects p
+
+    WHERE p.Status = 'Active'
+
+      AND LOWER(TRIM(p.ManagerName)) =
+          LOWER(
+              TRIM(
+                  (
+                      SELECT CONCAT(FirstName, ' ', LastName)
+                      FROM `User`
+                      WHERE UserId = p_manager_id
+                        AND RoleId = 8
+                  )
+              )
+          )
+
+    ORDER BY p.ProjectId DESC;
+
+END $$
+
+DELIMITER ;
+
+CALL sp_get_active_projects_by_manager(45);

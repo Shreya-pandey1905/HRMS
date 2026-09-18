@@ -400,7 +400,7 @@
                                           <c:when test="${currentPage > 1}">
                                               <li class="page-item">
                                                   <a class="page-link"
-                                                     href="${pageContext.request.contextPath}/AdminDashboardServlet?action=projectDetails&page=${currentPage - 1}">
+                                                     href="${pageContext.request.contextPath}/AdminDashboardServlet?action=projectDetails&page=${currentPage - 1}&sort=${sort}">
                                                       Previous
                                                   </a>
                                               </li>
@@ -423,7 +423,7 @@
                                           <li class="page-item ${pageNumber == currentPage ? 'active' : ''}">
 
                                               <a class="page-link"
-                                                 href="${pageContext.request.contextPath}/AdminDashboardServlet?action=projectDetails&page=${pageNumber}">
+                                                 href="${pageContext.request.contextPath}/AdminDashboardServlet?action=projectDetails&page=${pageNumber}&sort=${sort}">
                                                   ${pageNumber}
                                               </a>
 
@@ -438,7 +438,7 @@
                                           <c:when test="${currentPage < totalPages}">
                                               <li class="page-item">
                                                   <a class="page-link"
-                                                     href="${pageContext.request.contextPath}/AdminDashboardServlet?action=projectDetails&page=${currentPage + 1}">
+                                                     href="${pageContext.request.contextPath}/AdminDashboardServlet?action=projectDetails&page=${currentPage + 1}&sort=${sort}">
                                                       Next
                                                   </a>
                                               </li>
@@ -456,6 +456,10 @@
 
                               </div>
                           </div>
+
+
+
+
 
                       </div>
                    </div>
