@@ -3,13 +3,6 @@ package models.Employees;
 
 import java.time.LocalDateTime;
 
-// Fix note: the "reports" and "main2" branches both added an "email" field
-// (plus getEmail/setEmail) to this class separately, before either saw the
-// other's change. Merging the two branches kept both copies, which stopped
-// the project from compiling ("email is already defined"). Removed the
-// duplicate field, and later - merging in "main" - restored a single
-// getEmail/setEmail pair (an earlier fix here had accidentally dropped both
-// copies of the getter/setter, not just the duplicate one).
 public class User {
 
     private int userId;
@@ -20,7 +13,7 @@ public class User {
     private String phoneNumber;
     private int roleId;
     private Integer departmentId;
-    private Integer designationtId;
+    private Integer designationId;
     private LocalDateTime dateOfJoining;
     private LocalDateTime dateOfBirth;
     private String gender;
@@ -34,8 +27,37 @@ public class User {
     private LocalDateTime modifiedAt;
     private String status;
 
+    private String roleName;
+    private String departmentName;
+    private String designationName;
 
-    
+    public User() {
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getDesignationName() {
+        return designationName;
+    }
+
+    public void setDesignationName(String designationName) {
+        this.designationName = designationName;
+    }
+
     public int getUserId() {
         return userId;
     }
@@ -43,7 +65,6 @@ public class User {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-
 
     public String getFirstName() {
         return firstName;
@@ -53,7 +74,6 @@ public class User {
         this.firstName = firstName;
     }
 
-
     public String getLastName() {
         return lastName;
     }
@@ -61,7 +81,6 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
 
     public String getEmail() {
         return email;
@@ -71,7 +90,6 @@ public class User {
         this.email = email;
     }
 
-
     public String getPasswordHash() {
         return passwordHash;
     }
@@ -79,7 +97,6 @@ public class User {
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
-
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -89,7 +106,6 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-
     public int getRoleId() {
         return roleId;
     }
@@ -97,7 +113,6 @@ public class User {
     public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
-
 
     public Integer getDepartmentId() {
         return departmentId;
@@ -107,15 +122,13 @@ public class User {
         this.departmentId = departmentId;
     }
 
-
-    public Integer getDesignationtId() {
-        return designationtId;
+    public Integer getDesignationId() {
+        return designationId;
     }
 
-    public void setDesignationtId(Integer designationtId) {
-        this.designationtId = designationtId;
+    public void setDesignationId(Integer designationId) {
+        this.designationId = designationId;
     }
-
 
     public LocalDateTime getDateOfJoining() {
         return dateOfJoining;
@@ -125,7 +138,6 @@ public class User {
         this.dateOfJoining = dateOfJoining;
     }
 
-
     public LocalDateTime getDateOfBirth() {
         return dateOfBirth;
     }
@@ -133,7 +145,6 @@ public class User {
     public void setDateOfBirth(LocalDateTime dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-
 
     public String getGender() {
         return gender;
@@ -143,7 +154,6 @@ public class User {
         this.gender = gender;
     }
 
-
     public String getAddress() {
         return address;
     }
@@ -152,7 +162,6 @@ public class User {
         this.address = address;
     }
 
-
     public String getAboutEmployee() {
         return aboutEmployee;
     }
@@ -160,7 +169,6 @@ public class User {
     public void setAboutEmployee(String aboutEmployee) {
         this.aboutEmployee = aboutEmployee;
     }
-
 
     public String getProfilePicture() {
         return profilePicture;
@@ -171,9 +179,6 @@ public class User {
     }
 
 
-
-
-
     public String getReportingManager() {
         return reportingManager;
     }
@@ -181,7 +186,6 @@ public class User {
     public void setReportingManager(String reportingManager) {
         this.reportingManager = reportingManager;
     }
-
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
@@ -191,7 +195,6 @@ public class User {
         this.createdAt = createdAt;
     }
 
-
     public String getCreatedBy() {
         return createdBy;
     }
@@ -199,7 +202,6 @@ public class User {
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
-
 
     public String getModifiedBy() {
         return modifiedBy;
@@ -209,7 +211,6 @@ public class User {
         this.modifiedBy = modifiedBy;
     }
 
-
     public LocalDateTime getModifiedAt() {
         return modifiedAt;
     }
@@ -218,7 +219,6 @@ public class User {
         this.modifiedAt = modifiedAt;
     }
 
-
     public String getStatus() {
         return status;
     }
@@ -226,5 +226,4 @@ public class User {
     public void setStatus(String status) {
         this.status = status;
     }
-
 }

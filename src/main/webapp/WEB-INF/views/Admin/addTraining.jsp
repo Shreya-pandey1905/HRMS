@@ -28,7 +28,6 @@
         <%= editMode ? "Edit Training" : "Add Training" %>
     </title>
 
-
     <link rel="stylesheet"
           href="<%= request.getContextPath() %>/assets/css/bootstrap.min.css">
 
@@ -122,7 +121,8 @@
             <div class="card-body">
 
                 <form method="post"
-                      action="${pageContext.request.contextPath}/trainings">
+                      action="${pageContext.request.contextPath}/trainings"
+                      id="trainingForm">
 
 
                     <!-- ADD / UPDATE -->
@@ -333,12 +333,17 @@
 
                             <input type="datetime-local"
                                    name="startDate"
+                                   id="startDate"
                                    class="form-control"
                                    value="<%= editMode
                                            && training.getStartDate() != null
                                            ? training.getStartDate()
                                            : "" %>"
                                    required>
+
+                            <small class="text-muted">
+                                Select the training start date and time.
+                            </small>
 
                         </div>
 
@@ -357,12 +362,17 @@
 
                             <input type="datetime-local"
                                    name="endDate"
+                                   id="endDate"
                                    class="form-control"
                                    value="<%= editMode
                                            && training.getEndDate() != null
                                            ? training.getEndDate()
                                            : "" %>"
                                    required>
+
+                            <small class="text-muted">
+                                End date and time must be after the start date and time.
+                            </small>
 
                         </div>
 
@@ -480,6 +490,66 @@
 <script src="<%= request.getContextPath() %>/assets/js/jquery-3.7.1.min.js"></script>
 
 <script src="<%= request.getContextPath() %>/assets/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/plugins/icons/feather/feather.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
+
+
+<script>
+
+    const startDate = document.getElementById("startDate");
+    const endDate = document.getElementById("endDate");
+    const trainingForm = document.getElementById("trainingForm");
+
+    function validateTrainingDates() {
+
+        if (startDate.value) {
+            endDate.min = startDate.value;
+        }
+
+        if (startDate.value && endDate.value) {
+
+            if (new Date(endDate.value) <= new Date(startDate.value)) {
+
+                endDate.setCustomValidity(
+                    "End date and time must be after the start date and time."
+                );
+
+            } else {
+
+                endDate.setCustomValidity("");
+
+            }
+
+        } else {
+
+            endDate.setCustomValidity("");
+
+        }
+    }
+
+
+    startDate.addEventListener("change", validateTrainingDates);
+
+    endDate.addEventListener("change", validateTrainingDates);
+
+    trainingForm.addEventListener("submit", function (event) {
+
+        validateTrainingDates();
+
+        if (!trainingForm.checkValidity()) {
+
+            event.preventDefault();
+
+            trainingForm.reportValidity();
+
+        }
+
+    });
+
+
+    validateTrainingDates();
+
+</script>
 
 </body>
 

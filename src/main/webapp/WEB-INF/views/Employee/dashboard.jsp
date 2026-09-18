@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ include file="../common/personal-dashboard-data.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -78,13 +79,6 @@
 
 <body>
 
-
-<c:set var="totalEmployees" value="0"/>
-<c:set var="presentToday" value="0"/>
-<c:set var="onLeave" value="0"/>
-<c:set var="pendingLeaves" value="0"/>
-
-
 <div id="global-loader">
 
     <div class="page-loader"></div>
@@ -104,7 +98,7 @@
 
             <div class="header-left">
 
-                <a href="${pageContext.request.contextPath}/admin/dashboard"
+                <a href="${pageContext.request.contextPath}/employee/dashboard"
                    class="logo">
 
                     <img src="${pageContext.request.contextPath}/assets/img/logo.svg"
@@ -113,7 +107,7 @@
                 </a>
 
 
-                <a href="${pageContext.request.contextPath}/admin/dashboard"
+                <a href="${pageContext.request.contextPath}/employee/dashboard"
                    class="dark-logo">
 
                     <img src="${pageContext.request.contextPath}/assets/img/logo-white.svg"
@@ -141,54 +135,42 @@
 
             <div class="header-user">
 
-                <div class="nav user-menu nav-list">
+                <div class="nav user-menu nav-list d-flex align-items-center w-100">
 
-                    <div class="me-auto d-flex align-items-center"
-                         id="header-search">
+                    <div id="header-search" class="d-flex align-items-center flex-grow-1">
 
-
-                        <a id="toggle_btn"
-                           href="javascript:void(0);"
-                           class="btn btn-menubar me-1">
-
+                        <a id="toggle_btn" href="javascript:void(0);" class="btn btn-menubar me-1">
                             <i class="ti ti-arrow-bar-to-left"></i>
-
                         </a>
 
-
-                        <div class="input-group input-group-flat d-inline-flex me-1">
-
-                            <span class="input-icon-addon">
-
-                                <i class="ti ti-search"></i>
-
-                            </span>
-
-
-                            <input type="text"
-                                   class="form-control"
-                                   placeholder="Search in HRMS">
-
-
-                            <span class="input-group-text">
-
-                                <kbd>CTRL + /</kbd>
-
-                            </span>
-
+                        <div class="input-group input-group-flat d-inline-flex me-1 flex-grow-1">
+                            <span class="input-icon-addon"><i class="ti ti-search"></i></span>
+                            <input type="text" class="form-control" placeholder="Search in HRMS">
+                            <span class="input-group-text"><kbd>CTRL + /</kbd></span>
                         </div>
 
-
-                        <a href="javascript:void(0);"
-                           class="btn btn-menubar">
-
+                        <a href="javascript:void(0);" class="btn btn-menubar ms-2 me-3">
                             <i class="ti ti-settings-cog"></i>
-
                         </a>
+
+                        <div class="ms-auto">
+                            <a href="${pageContext.request.contextPath}/admin/employees?action=view&id=${sessionScope.userId}" title="My Profile" class="header-avatar d-inline-flex align-items-center text-decoration-none">
+                                <img src="${pageContext.request.contextPath}/assets/img/profiles/avatar-02.jpg" alt="Profile" style="width:42px;height:42px;object-fit:cover;border-radius:50%;border:2px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,0.12);transition:transform .12s ease-in-out;">
+                            </a>
+                        </div>
 
                     </div>
 
                 </div>
+                <style>
+                    .header-avatar:hover img{ transform: scale(1.06); }
+                    .main-header{ position: relative; }
+                    #header-search .input-group .form-control{ min-width:220px; }
+                </style>
+                <style>
+                    .header-avatar:hover img{ transform: scale(1.06); }
+                    .main-header{ position: relative; }
+                </style>
 
             </div>
 
@@ -239,396 +221,10 @@
     </div>
 
 
-    <!-- ================= SIDEBAR ================= -->
-
-    <div class="sidebar" id="sidebar">
-
-
-        <div class="sidebar-logo">
-
-
-            <a href="${pageContext.request.contextPath}/admin/dashboard"
-               class="logo logo-normal">
-
-                <img src="${pageContext.request.contextPath}/assets/img/logo.svg"
-                     alt="HRMS Logo">
-
-            </a>
-
-
-            <a href="${pageContext.request.contextPath}/admin/dashboard"
-               class="logo-small">
-
-                <img src="${pageContext.request.contextPath}/assets/img/logo-small.svg"
-                     alt="HRMS Logo">
-
-            </a>
-
-
-            <a href="${pageContext.request.contextPath}/admin/dashboard"
-               class="dark-logo">
-
-                <img src="${pageContext.request.contextPath}/assets/img/logo-white.svg"
-                     alt="HRMS Logo">
-
-            </a>
-
-        </div>
-
-
-        <div class="modern-profile p-3 pb-0">
-
-            <div class="text-center rounded bg-light p-3 mb-4 user-profile">
-
-
-                <div class="avatar avatar-lg online mb-3">
-
-                    <img src="${pageContext.request.contextPath}/assets/img/profiles/avatar-02.jpg"
-                         alt="Profile"
-                         class="img-fluid rounded-circle">
-
-                </div>
-
-
-                <h6 class="fs-12 fw-normal mb-1">
-                    Admin
-                </h6>
-
-
-                <p class="fs-10 mb-0">
-                    Administrator
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- ================= SIDEBAR MENU ================= -->
-
-        <div class="sidebar-menu">
-
-            <ul>
-
-
-                <li class="menu-title">
-
-                    <span>MAIN MENU</span>
-
-                </li>
-
-
-                <!-- DASHBOARD -->
-
-                <li class="active">
-
-                    <a href="${pageContext.request.contextPath}/admin/dashboard">
-
-                        <i class="ti ti-smart-home"></i>
-
-                        <span>Employee Dashboard</span>
-
-                    </a>
-
-                </li>
-
-
-                <!-- EMPLOYEES -->
-
-                <li>
-
-                    <a href="javascript:void(0);">
-
-                        <i class="ti ti-users"></i>
-
-                        <span>Employees</span>
-
-                    </a>
-
-                </li>
-
-
-                <!-- ATTENDANCE -->
-
-                <li class="submenu">
-
-                    <a href="javascript:void(0);">
-
-                        <i class="ti ti-file-time"></i>
-
-                        <span>Attendance</span>
-
-                        <span class="menu-arrow"></span>
-
-                    </a>
-
-
-                    <ul>
-
-
-                        <li class="submenu">
-
-                            <a href="javascript:void(0);">
-
-                                <span>Leaves</span>
-
-                                <span class="menu-arrow"></span>
-
-                            </a>
-
-
-                            <ul>
-
-                                <li>
-
-                                    <a href="javascript:void(0);">
-
-                                        <span>Apply Leaves</span>
-
-                                    </a>
-
-                                </li>
-
-
-                                <li>
-
-                                    <a href="javascript:void(0);">
-
-                                        <span>Leave Details</span>
-
-                                    </a>
-
-                                </li>
-
-
-                                <li>
-
-                                    <a href="javascript:void(0);">
-
-                                        <span>Employee</span>
-
-                                    </a>
-
-                                </li>
-
-                            </ul>
-
-                        </li>
-
-
-                        <li>
-
-                            <a href="javascript:void(0);">
-
-                                <span>Attendance (Employee)</span>
-
-                            </a>
-
-                        </li>
-
-
-                        <li>
-
-                            <a href="javascript:void(0);">
-
-                                <span>Timesheet</span>
-
-                            </a>
-
-                        </li>
-
-                    </ul>
-
-                </li>
-
-
-                <!-- PAYROLL -->
-
-                <li class="submenu">
-
-                    <a href="javascript:void(0);">
-
-                        <i class="ti ti-cash"></i>
-
-                        <span>Payroll</span>
-
-                        <span class="menu-arrow"></span>
-
-                    </a>
-
-
-                    <ul>
-
-                        <li>
-
-                            <a href="javascript:void(0);">
-
-                                <span>Payslips</span>
-
-                            </a>
-
-                        </li>
-
-                    </ul>
-
-                </li>
-
-
-                <!-- MY TRAINING -->
-
-                <li>
-
-                    <a href="${pageContext.request.contextPath}/employee/trainings">
-
-                        <i class="ti ti-school"></i>
-
-                        <span>My Training</span>
-
-                    </a>
-
-                </li>
-
-
-                <!-- CALENDAR -->
-
-                <li>
-
-                    <a href="javascript:void(0);">
-
-                        <i class="ti ti-calendar-event"></i>
-
-                        <span>Calendar</span>
-
-                    </a>
-
-                </li>
-
-
-                <!-- PERFORMANCE -->
-
-                <li>
-
-                    <a href="javascript:void(0);">
-
-                        <i class="ti ti-chart-line"></i>
-
-                        <span>Performance</span>
-
-                    </a>
-
-                </li>
-
-
-                <!-- ================= DOCUMENTS ================= -->
-                <!-- ================= DOCUMENTS ================= -->
-
-                <li class="submenu active">
-
-                    <a href="javascript:void(0);">
-
-                        <i class="ti ti-file-text"></i>
-
-                        <span>Documents</span>
-
-                        <span class="menu-arrow"></span>
-
-                    </a>
-
-                    <ul>
-
-                        <!-- COMPANY LETTERS -->
-
-                        <li>
-
-                            <a href="${pageContext.request.contextPath}/company-letters">
-
-                                <span>Company Letters</span>
-
-                            </a>
-
-                        </li>
-
-
-                        <!-- MY DOCUMENTS -->
-
-                        <li>
-
-                            <a href="${pageContext.request.contextPath}/file-uploads?action=list">
-
-                                <span>My Documents</span>
-
-                            </a>
-
-                        </li>
-
-
-                        <!-- UPLOAD DOCUMENTS -->
-
-                        <li>
-
-                            <a href="${pageContext.request.contextPath}/file-uploads">
-
-                                <span>Upload Documents</span>
-
-                            </a>
-
-                        </li>
-
-                    </ul>
-
-                </li>
-
-
-                <!-- HELP & SUPPORT -->
-
-                <li>
-
-                    <a href="javascript:void(0);">
-
-                        <i class="ti ti-headset"></i>
-
-                        <span>Help &amp; Support</span>
-
-                    </a>
-
-                </li>
-
-
-                <!-- TICKETS -->
-
-                <li>
-
-                    <a href="javascript:void(0);">
-
-                        <i class="ti ti-ticket"></i>
-
-                        <span>Tickets</span>
-
-                    </a>
-
-                </li>
-
-
-                <!-- LOGOUT -->
-
-                <li class="mt-2">
-
-                    <a href="javascript:void(0);">
-
-                        <i class="ti ti-logout"></i>
-
-                        <span>Logout</span>
-
-                    </a>
-
-                </li>
-
-
-            </ul>
-
-        </div>
-
-    </div>
+    <%
+        request.setAttribute("activeMenu", "dashboard");
+    %>
+    <%@ include file="../common/employee-sidebar.jsp" %>
 
 
     <!-- ================= PAGE WRAPPER ================= -->
@@ -636,434 +232,12 @@
     <div class="page-wrapper">
 
         <div class="content">
-
-
-            <!-- BREADCRUMB -->
-
-            <div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
-
-
-                <div class="my-auto mb-2">
-
-                    <h2 class="mb-1">
-                        Employee Dashboard
-                    </h2>
-
-
-                    <nav>
-
-                        <ol class="breadcrumb mb-0">
-
-
-                            <li class="breadcrumb-item">
-
-                                <a href="${pageContext.request.contextPath}/admin/dashboard">
-
-                                    <i class="ti ti-smart-home"></i>
-
-                                </a>
-
-                            </li>
-
-
-                            <li class="breadcrumb-item active"
-                                aria-current="page">
-
-                                Dashboard
-
-                            </li>
-
-
-                        </ol>
-
-                    </nav>
-
-                </div>
-
-
-                <div class="d-flex my-xl-auto right-content align-items-center flex-wrap">
-
-
-                    <div class="input-icon mb-2 position-relative">
-
-                        <span class="input-icon-addon">
-
-                            <i class="ti ti-calendar text-gray-9"></i>
-
-                        </span>
-
-
-                        <input type="text"
-                               class="form-control date-range bookingrange"
-                               placeholder="dd/mm/yyyy - dd/mm/yyyy">
-
-                    </div>
-
-
-                    <div class="ms-2 head-icons">
-
-                        <a href="javascript:void(0);"
-                           data-bs-toggle="tooltip"
-                           data-bs-placement="top"
-                           title="Collapse"
-                           id="collapse-header">
-
-                            <i class="ti ti-chevrons-up"></i>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- WELCOME -->
-
-            <div class="welcome-wrap mb-4">
-
-
-                <div class="d-flex align-items-center justify-content-between flex-wrap">
-
-
-                    <div class="mb-3">
-
-                        <h2 class="mb-1 text-white">
-                            Welcome to HRMS
-                        </h2>
-
-
-                        <p class="text-light mb-0">
-                            Human Resource Management System
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="welcome-bg">
-
-
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-02.svg"
-                         alt=""
-                         class="welcome-bg-01">
-
-
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-03.svg"
-                         alt=""
-                         class="welcome-bg-02">
-
-
-                    <img src="${pageContext.request.contextPath}/assets/img/bg/welcome-bg-01.svg"
-                         alt=""
-                         class="welcome-bg-03">
-
-                </div>
-
-            </div>
-
-
-            <!-- HRMS SUMMARY CARDS -->
-
-            <div class="row">
-
-
-                <div class="col-xl-3 col-sm-6 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-
-                                <i class="ti ti-users fs-16"></i>
-
-                            </span>
-
-
-                            <h2 class="mb-1">
-                                ${totalEmployees}
-                            </h2>
-
-
-                            <p class="fs-13 mb-0">
-                                Total Employees
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-xl-3 col-sm-6 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-
-                                <i class="ti ti-user-check fs-16"></i>
-
-                            </span>
-
-
-                            <h2 class="mb-1">
-                                ${presentToday}
-                            </h2>
-
-
-                            <p class="fs-13 mb-0">
-                                Present Today
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-xl-3 col-sm-6 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-
-                                <i class="ti ti-calendar-off fs-16"></i>
-
-                            </span>
-
-
-                            <h2 class="mb-1">
-                                ${onLeave}
-                            </h2>
-
-
-                            <p class="fs-13 mb-0">
-                                On Leave
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-xl-3 col-sm-6 d-flex">
-
-                    <div class="card flex-fill">
-
-                        <div class="card-body">
-
-                            <span class="avatar avatar-md bg-dark mb-3">
-
-                                <i class="ti ti-clock-hour-4 fs-16"></i>
-
-                            </span>
-
-
-                            <h2 class="mb-1">
-                                ${pendingLeaves}
-                            </h2>
-
-
-                            <p class="fs-13 mb-0">
-                                Pending Leave Requests
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- DASHBOARD WIDGETS -->
-
-            <div class="row">
-
-
-                <div class="col-xxl-8 col-xl-7 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2 d-flex align-items-center justify-content-between">
-
-                            <h5 class="mb-0">
-                                Attendance Overview
-                            </h5>
-
-
-                            <button type="button"
-                                    class="btn btn-white border btn-sm"
-                                    disabled>
-
-                                Overview
-
-                            </button>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div id="attendance-overview-chart"
-                                 style="min-height:280px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-xxl-4 col-xl-5 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Employee Overview
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div id="employee-overview-chart"
-                                 style="min-height:280px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="row">
-
-
-                <div class="col-xl-6 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Leave Overview
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div id="leave-overview-chart"
-                                 style="min-height:250px;">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-xl-6 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                Recent Activity
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div class="text-center py-5 text-muted">
-
-                                <i class="ti ti-activity fs-32 mb-2 d-block"></i>
-
-
-                                <p class="mb-0">
-                                    No activity available
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- HRMS INFORMATION -->
-
-            <div class="row">
-
-
-                <div class="col-12 d-flex">
-
-                    <div class="card flex-fill">
-
-
-                        <div class="card-header pb-2">
-
-                            <h5 class="mb-0">
-                                HRMS Information
-                            </h5>
-
-                        </div>
-
-
-                        <div class="card-body">
-
-                            <div class="text-center py-4 text-muted">
-
-                                <p class="mb-0">
-                                    Information will appear here as HRMS modules are implemented.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
+            <%
+                request.setAttribute("dashTitle", "Employee Dashboard");
+                request.setAttribute("homeUrl", request.getContextPath() + "/employee/dashboard");
+            %>
+            <%@ include file="../common/personal-dashboard-content.jsp" %>
         </div>
-
 
         <!-- FOOTER -->
 
@@ -1094,8 +268,6 @@
 <script src="${pageContext.request.contextPath}/assets/js/feather.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/js/jquery.slimscroll.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/assets/plugins/apexchart/apexcharts.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/js/moment.js"></script>
 

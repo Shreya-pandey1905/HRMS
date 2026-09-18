@@ -58,9 +58,10 @@ public class DocumentServiceImpl implements DocumentService {
         addAdminDocNamesDao.add(documentName);
     }
 
+
     @Override
     public void updateAdminDocumentName(int id, String docName) {
-
+        addAdminDocNamesDao.update(id, docName);
     }
 
     @Override
@@ -229,6 +230,6 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public List<User> getAllEmployees() {
-        return employeeDao.getAll();
+        return employeeDao.getAllEmployees();
     }
 }

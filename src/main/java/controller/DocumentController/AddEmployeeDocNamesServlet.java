@@ -65,7 +65,7 @@ public class AddEmployeeDocNamesServlet extends HttpServlet {
 
 
             // DELETE EMPLOYEE DOCUMENT NAME
-            // KEEPING EXISTING FUNCTIONALITY
+
 
             if ("delete".equalsIgnoreCase(action)) {
 

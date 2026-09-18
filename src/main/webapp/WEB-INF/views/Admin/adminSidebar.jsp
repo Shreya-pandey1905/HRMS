@@ -22,6 +22,7 @@
             <img src="${pageContext.request.contextPath}/assets/img/logo-white.svg"
                  alt="HRMS Logo">
         </a>
+        <a href="${pageContext.request.contextPath}/trainers/add"></a>
 
     </div>
 
@@ -63,7 +64,7 @@
             <!-- DASHBOARD -->
             <li>
 
-                <a href="${pageContext.request.contextPath}/admin/dashboard">
+                <a href="${pageContext.request.contextPath}/Admin/dashboard">
 
                     <i class="ti ti-smart-home"></i>
 
@@ -73,19 +74,54 @@
 
             </li>
 
+      <!-- EMPLOYEES -->
+           <li class="submenu">
 
-            <!-- EMPLOYEES -->
-            <li>
+               <a href="javascript:void(0);">
+                   <i class="ti ti-users"></i>
+                   <span>Employees</span>
+                   <span class="menu-arrow"></span>
+               </a>
 
-                <a href="javascript:void(0);">
+               <ul>
 
-                    <i class="ti ti-users"></i>
+                   <li>
+                       <a href="${pageContext.request.contextPath}/admin/departments">
+                           Add Department
+                       </a>
+                   </li>
 
-                    <span>Employees</span>
+                   <li>
+                       <a href="${pageContext.request.contextPath}/admin/roles">
+                           Add Role
+                       </a>
+                   </li>
 
-                </a>
+                   <li>
+                       <a href="${pageContext.request.contextPath}/admin/designations">
+                           Add Designation
+                       </a>
+                   </li>
 
-            </li>
+                   <li>
+                       <a href="${pageContext.request.contextPath}/admin/employees">
+                           Employee List
+                       </a>
+                   </li>
+
+                 <li>    <a href="${pageContext.request.contextPath}/admin/employees?action=grid">
+                                                         Employee Grid
+                                                    </a>
+                                           </li>
+<li>
+    <a href="${pageContext.request.contextPath}/employee/details">
+        Employee Details
+    </a>
+</li>
+
+               </ul>
+
+           </li>
 
 
             <!-- ATTENDANCE -->
@@ -125,36 +161,35 @@
 
             </li>
 
+<!-- EVENTS -->
+        <li class="submenu">
 
-            <!-- EVENTS -->
-            <li class="submenu">
+            <a href="javascript:void(0);">
 
-                <a href="javascript:void(0);">
+                <i class="ti ti-calendar-event"></i>
 
-                    <i class="ti ti-calendar-event"></i>
+                <span>Events</span>
 
-                    <span>Events</span>
+                <span class="menu-arrow"></span>
 
-                    <span class="menu-arrow"></span>
-
-                </a>
+            </a>
 
                 <ul>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/admin/events">
                             <span>Add Event</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/admin/event-types">
                             <span>Add Master Event</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/admin/events/list">
                             <span>Event List</span>
                         </a>
                     </li>
@@ -213,8 +248,7 @@
 
             </li>
 
-
-            <!-- TRAINING -->
+    <!-- TRAINING -->
             <li class="submenu">
 
                 <a href="javascript:void(0);">
@@ -349,7 +383,6 @@
 
             </li>
 
-
             <!-- PERFORMANCE & GOAL -->
             <li>
 
@@ -365,43 +398,37 @@
 
 
             <!-- PROJECTS -->
-            <li class="submenu">
+                            <li class="submenu">
 
-                <a href="javascript:void(0);">
+                                <a href="javascript:void(0);">
+                                    <i class="ti ti-briefcase"></i>
+                                    <span>Projects</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
 
-                    <i class="ti ti-briefcase"></i>
+                                <ul>
 
-                    <span>Projects</span>
+                                    <li>
+                                       <a href="${pageContext.request.contextPath}/AdminDashboardServlet?action=projectDetails">
+                                           <span>Project</span>
+                                       </a>
+                                    </li>
 
-                    <span class="menu-arrow"></span>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/AdminDashboardServlet?action=taskDetails">
+                                            <span>Tasks</span>
+                                        </a>
+                                    </li>
 
-                </a>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <span>Task Board</span>
+                                        </a>
+                                    </li>
 
-                <ul>
+                                </ul>
 
-                    <li>
-                        <a href="javascript:void(0);">
-                            <span>Project</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="javascript:void(0);">
-                            <span>Tasks</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="javascript:void(0);">
-                            <span>Task Board</span>
-                        </a>
-                    </li>
-
-                </ul>
-
-            </li>
-
-
+                            </li>
             <!-- REPORTS -->
             <li class="submenu">
 
@@ -465,87 +492,89 @@
 
 
             <!-- PROMOTIONS -->
-            <li>
 
-                <a href="javascript:void(0);">
+                        <li>
 
-                    <i class="ti ti-trending-up"></i>
+                            <a href="${pageContext.request.contextPath}/promotion">
+                                <i class="ti ti-trending-up"></i>
+                                <span>Promotions</span>
+                            </a>
 
-                    <span>Promotions</span>
-
-                </a>
-
-            </li>
+                        </li>
 
 
-            <!-- RESIGNATION -->
-            <li>
+                        <!-- RESIGNATION -->
 
-                <a href="javascript:void(0);">
+                        <li>
 
-                    <i class="ti ti-logout-2"></i>
+                            <a href="${pageContext.request.contextPath}/resignation">
 
-                    <span>Resignation</span>
+                                <i class="ti ti-logout-2"></i>
 
-                </a>
+                                <span>Resignation</span>
 
-            </li>
+                            </a>
 
-
-            <!-- TERMINATION -->
-            <li>
-
-                <a href="javascript:void(0);">
-
-                    <i class="ti ti-user-x"></i>
-
-                    <span>Termination</span>
-
-                </a>
-
-            </li>
+                        </li>
 
 
-            <!-- HELP & SUPPORT -->
-            <li>
+                        <!-- TERMINATION -->
 
-                <a href="javascript:void(0);">
+                        <li>
 
-                    <i class="ti ti-headset"></i>
-
-                    <span>Help &amp; Supports</span>
-
-                </a>
-
-            </li>
+                            <a href="${pageContext.request.contextPath}/termination">
 
 
-            <!-- TICKETS -->
-            <li>
+                                <i class="ti ti-user-x"></i>
 
-                <a href="javascript:void(0);">
+                                <span>Termination</span>
 
-                    <i class="ti ti-ticket"></i>
+                            </a>
 
-                    <span>Tickets</span>
-
-                </a>
-
-            </li>
+                        </li>
 
 
-            <!-- LOGOUT -->
-            <li class="mt-2">
+                        <!-- HELP & SUPPORT -->
 
-                <a href="javascript:void(0);">
+                        <li>
 
-                    <i class="ti ti-logout"></i>
+                            <a href="javascript:void(0);">
 
-                    <span>Logout</span>
+                                <i class="ti ti-headset"></i>
 
-                </a>
+                                <span>Help &amp; Supports</span>
 
-            </li>
+                            </a>
+
+                        </li>
+
+
+
+
+                    <!-- TICKETS -->
+
+                        <li>
+
+                            <a href="${pageContext.request.contextPath}/tickets">
+
+                                <i class="ti ti-ticket"></i>
+
+                                <span>Tickets</span>
+
+                            </a>
+
+                        </li>
+
+
+                            <!-- LOGOUT -->
+                            <li class="mt-2">
+
+                            <a href="${pageContext.request.contextPath}/logout">
+                                <i class="ti ti-logout"></i>
+                                <span>Logout</span>
+                            </a>
+
+                            </li>
 
         </ul>
 

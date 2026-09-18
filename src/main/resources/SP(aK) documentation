@@ -119,6 +119,24 @@ BEGIN
     VALUES (p_email, p_docName, p_docFile);
 END //
 
+CREATE PROCEDURE GetAllAdminDocuments()
+BEGIN
+    SELECT
+        a.AdminDocId,
+        a.Email,
+        a.DocName,
+        a.DocFile,
+        CONCAT(
+            u.FirstName,
+            ' ',
+            u.LastName
+        ) AS EmployeeName
+    FROM admindocuments a
+    LEFT JOIN user u
+        ON a.Email = u.Email
+    ORDER BY a.AdminDocId DESC;
+END //
+
 CREATE PROCEDURE DeleteAdminDocument(IN p_adminDocId INT)
 BEGIN
     DELETE FROM AdminDocuments
@@ -630,5 +648,38 @@ BEGIN
     ORDER BY p.StartDate DESC;
 
 END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS GetEmployeeDocumentAssignments $$
+
+CREATE PROCEDURE GetEmployeeDocumentAssignments()
+BEGIN
+    SELECT
+        a.AssignmentId,
+        a.UserId,
+        a.DocumentId,
+        CONCAT(u.FirstName, ' ', u.LastName) AS EmployeeName,
+        d.DocName AS DocumentName
+    FROM employee_document_assignments a
+    LEFT JOIN `User` u
+        ON a.UserId = u.UserId
+    LEFT JOIN addemployeedocnames d
+        ON a.DocumentId = d.Id
+    ORDER BY a.AssignmentId DESC;
+END $$
+
+DELIMITER ;
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS DeleteAdminDocName $$
+
+CREATE PROCEDURE DeleteAdminDocName(IN p_id INT)
+BEGIN
+    DELETE FROM addadmindocnames
+    WHERE Id = p_id;
+END $$
 
 DELIMITER ;

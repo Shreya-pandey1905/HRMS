@@ -154,4 +154,61 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDao.getActiveProjects();
     }
 
+    @Override
+    public List<AllProjects> getProjectsByManager(
+            int managerId,
+            int page,
+            int pageSize,
+            String sort
+    ) throws Exception {
+
+        return projectDao.getProjectsByManager(
+                managerId,
+                page,
+                pageSize,
+                sort
+        );
+    }
+
+    @Override
+    public int getProjectCountByManager(int managerId) throws Exception {
+
+        return projectDao.getProjectCountByManager(managerId);
+    }
+
+    @Override
+    public List<AllProjects> getProjectsByManagerForExport(
+            int managerId,
+            String sort
+    ) throws Exception {
+
+        return projectDao.getProjectsByManagerForExport(
+                managerId,
+                sort
+        );
+    }
+
+    @Override
+    public List<AllProjects> getTaskProjectsByManager(
+            int managerId,
+            String priority
+    ) throws Exception {
+
+        return projectDao.getTaskProjectsByManager(
+                managerId,
+                priority
+        );
+    }
+
+    @Override
+    public List<AllProjects> getActiveProjectsByManager(
+            int managerId
+    ) throws Exception {
+
+        return projectDao.getActiveProjectsByManager(
+                managerId
+        );
+    }
+
+
 }
