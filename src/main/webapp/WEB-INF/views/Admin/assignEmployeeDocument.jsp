@@ -201,7 +201,31 @@
 <script src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/plugins/icons/feather/feather.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
 
+    var menus = document.querySelectorAll(".sidebar-menu > ul > li.submenu > a");
+
+    menus.forEach(function (menu) {
+
+        menu.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+            var submenu = this.parentElement.querySelector(":scope > ul");
+
+            if (submenu.style.display === "block") {
+                submenu.style.display = "none";
+            } else {
+                submenu.style.display = "block";
+            }
+
+        });
+
+    });
+
+});
+</script>
 </body>
 
 </html>
