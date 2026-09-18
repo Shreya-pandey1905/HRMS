@@ -24,8 +24,8 @@
 
 <div class="main-wrapper">
 
-    <%@ include file="adminHeader.jsp" %>
-    <%@ include file="../common/employee-sidebar.jsp" %>
+    <jsp:include page="/WEB-INF/views/Admin/adminHeader.jsp" />
+    <jsp:include page="/WEB-INF/views/common/employee-sidebar.jsp" />
 
     <div class="page-wrapper">
 

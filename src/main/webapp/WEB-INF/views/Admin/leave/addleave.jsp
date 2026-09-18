@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <%@ include file="../admin-sidebar.jspf" %>
+    <%@ include file="../adminSidebar.jsp" %>
 
     <div class="page-wrapper">
         <div class="content">

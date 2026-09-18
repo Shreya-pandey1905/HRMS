@@ -30,11 +30,10 @@
 
 <body>
 
-    <%@ include file="adminHeader.jsp" %>
-
-    <%@ include file="adminSidebar.jsp" %>
-
 <div class="main-wrapper">
+
+    <%@ include file="adminHeader.jsp" %>
+    <%@ include file="adminSidebar.jsp" %>
 
     <div class="page-wrapper">
 

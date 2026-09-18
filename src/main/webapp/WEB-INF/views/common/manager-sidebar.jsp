@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="sidebar" id="sidebar">
 
@@ -117,8 +117,7 @@
                         <ul>
 
                             <li>
-                                <a href="javascript:void(0);">
-                                    <span>Leave Approval</span>
+                                <a href="<%= request.getContextPath() %>/manager/leave"><span>Leave Approval</span>
                                 </a>
                             </li>
 

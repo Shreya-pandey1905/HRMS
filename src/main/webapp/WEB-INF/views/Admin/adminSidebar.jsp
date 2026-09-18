@@ -1,5 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ page language="java" %>
 <div class="sidebar" id="sidebar">
 
     <!-- SIDEBAR LOGO -->
@@ -123,29 +122,66 @@
 
            </li>
 
+           <!-- ATTENDANCE -->
+           <li class="submenu">
+               <a href="javascript:void(0);">
+                   <i class="ti ti-calendar-check"></i>
+                   <span>Attendance</span>
+                   <span class="menu-arrow"></span>
+               </a>
 
-            <!-- ATTENDANCE -->
-                <li class="submenu">
-                            <a href="javascript:void(0);">
-                                <i class="ti ti-calendar-check"></i><span>Attendance</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul>
-                                <li class="submenu">
-                                    <a href="javascript:void(0);">
-                                        <span>Leaves</span><span class="menu-arrow"></span>
-                                    </a>
-                                    <ul>
-                                        <li><a href="${pageContext.request.contextPath}/admin/leave/add"><span>Add Leave</span></a></li>
-                                        <li><a href="${pageContext.request.contextPath}/admin/leave/type"><span>Leave Type</span></a></li>
-                                        <li><a href="${pageContext.request.contextPath}/admin/leave/settings"><span>Leave Setting</span></a></li>
-                                        <li><a href="${pageContext.request.contextPath}/admin/leave/department-details"><span>Department Details</span></a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="${pageContext.request.contextPath}/adminAttendance"><span>Attendance (Admin)</span></a></li>
-                                <li><a href="javascript:void(0);"><span>Timesheet</span></a></li>
-                            </ul>
-                        </li>
+               <ul>
+                   <!-- LEAVES -->
+                   <li class="submenu">
+                       <a href="javascript:void(0);">
+                           <span>Leaves</span>
+                           <span class="menu-arrow"></span>
+                       </a>
+
+                       <ul>
+                           <li>
+                               <a href="${pageContext.request.contextPath}/admin/leave/add">
+                                   <span>Add Leave</span>
+                               </a>
+                           </li>
+
+                           <li>
+                               <a href="${pageContext.request.contextPath}/admin/leave/type">
+                                   <span>Leave Type</span>
+                               </a>
+                           </li>
+
+                           <li>
+                               <a href="${pageContext.request.contextPath}/admin/leave/settings">
+                                   <span>Leave Setting</span>
+                               </a>
+                           </li>
+
+                           <li>
+                               <a href="${pageContext.request.contextPath}/admin/leave/department-details">
+                                   <span>Department Details</span>
+                               </a>
+                           </li>
+                       </ul>
+                   </li>
+
+                   <!-- ATTENDANCE ADMIN -->
+                   <li>
+                       <a href="${pageContext.request.contextPath}/adminAttendance">
+                           <span>Attendance (Admin)</span>
+                       </a>
+                   </li>
+
+                   <!-- TIMESHEET -->
+                   <li>
+                       <a href="javascript:void(0);">
+                           <span>Timesheet</span>
+                       </a>
+                   </li>
+               </ul>
+           </li>
+
+
                         <!-- EVENTS -->
         <li class="submenu">
 

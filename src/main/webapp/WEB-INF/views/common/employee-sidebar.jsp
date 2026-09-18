@@ -135,9 +135,7 @@
 
                             <li>
 
-                                <a href="javascript:void(0);">
-
-                                    <span>Apply Leaves</span>
+                                <a href="<%= request.getContextPath() %>/employee/leave"><span>Apply Leaves</span>
 
                                 </a>
 
@@ -172,9 +170,7 @@
 
                     <li>
 
-                        <a href="javascript:void(0);">
-
-                            <span>Attendance (Employee)</span>
+                        <a href="<%= request.getContextPath() %>/attendance"><span>Attendance (Employee)</span>
 
                         </a>
 
@@ -247,11 +243,7 @@
 
             <li>
 
-                <a href="javascript:void(0);">
-
-                    <i class="ti ti-calendar-event"></i>
-
-                    <span>Calendar</span>
+                <a href="<%= request.getContextPath() %>/employee/events"><i class="ti ti-calendar-event"></i><span>Calendar</span>
 
                 </a>
 

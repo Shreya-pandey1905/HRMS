@@ -232,7 +232,7 @@
 
         <div class="content">
             <%
-                request.setAttribute("dashTitle", "Employee Dashboard");
+                request.setAttribute("dashTitle", "Manager Dashboard");
                 request.setAttribute("homeUrl", request.getContextPath() + "/ManagerDashboardServlet?action=dashboard");
             %>
             <%@ include file="../common/personal-dashboard-content.jsp" %>
