@@ -6,11 +6,6 @@ import util.DBConfig;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import models.Projects.AllProjects;
-
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

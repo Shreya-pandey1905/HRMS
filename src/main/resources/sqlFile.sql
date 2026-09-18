@@ -1,7 +1,7 @@
 
 
 CREATE DATABASE IF NOT EXISTS `Pulse360Db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `Pulse360Db`;
+USE `Pulse360Db`; 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
 
@@ -1035,33 +1035,9 @@ ALTER TABLE `User` ADD CONSTRAINT `FK_User_Role_RoleId1` FOREIGN KEY (`RoleId1`)
 SET FOREIGN_KEY_CHECKS=1;
 
 
-show tables;
-
-select  * from user;
-select  * from Departments;
-select  * from designations;
 
 
-desc user;
 
-delimiter //
-create PROCEDURE GetUserByEmail(IN p_email VARCHAR(255))
-begin
-    SELECT UserId, Email, PasswordHash, RoleId, Status
-    FROM `User`
-    WHERE Email = p_email;
-end //
-delimiter ;
-
-delimiter //
-create PROCEDURE GetRoleById(IN p_roleId INT)
-begin
-    SELECT RoleId, RoleName, Status
-    FROM `Role`
-    WHERE RoleId = p_roleId;
-end //
-
-delimiter ;
 
 INSERT INTO `User`(
     `FirstName`,
@@ -1241,3 +1217,82 @@ VALUES
     NULL,
     'Active'
 );
+
+
+
+INSERT INTO `User`(
+    `FirstName`,
+    `LastName`,
+    `Email`,
+    `PasswordHash`,
+    `PhoneNumber`,
+    `RoleId`,
+    `DepartmentId`,
+    `DesignationtId`,
+    `DateOfJoining`,
+    `DateOfBirth`,
+    `Gender`,
+    `Address`,
+    `AboutEmployee`,
+    `ProfilePicture`,
+    `RoleId1`,
+    `ReportingManager`,
+    `CreatedAt`,
+    `CreatedBy`,
+    `ModifiedBy`,
+    `ModifiedAt`,
+    `Status`
+)
+VALUES
+
+-- =========================
+-- ADMIN - RoleId 3
+-- =========================
+
+(  'Shreya',
+    'Pandey',
+    'spprac82@gmail.com',
+    'f59dbd5831cd7796fc2bb037967cb32bbcdc7bd1805d055936559975fe6c8d6e',
+    '9876500001',
+    3,
+    25,
+    12,
+    '2022-01-10 09:00:00',
+    '1985-04-15 00:00:00',
+    'Male',
+    'Nashik, Maharashtra',
+    'System administrator responsible for managing the organization and users.',
+    'default-profile.jpg',
+    12,
+    25,
+    NOW(),
+    'system',
+    NULL,
+    NULL,
+    'Active'
+);
+
+
+
+
+show tables;
+
+desc user;
+select  * from user;
+select  * from role;
+desc designations;
+
+select  * from EmployeeFamilyDetails;
+select  * from EmployeeBankDetails;
+select  * from  EducationDetails;
+
+
+select  * from departments;
+
+
+select version();
+
+ALTER TABLE `designations`
+CHANGE COLUMN `DesignationtId` `DesignationId` INT NULL;
+desc user;
+

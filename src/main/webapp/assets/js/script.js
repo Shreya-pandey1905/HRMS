@@ -60,10 +60,10 @@ Template Name: Smarthr - Bootstrap Admin Template
 		}
 	}
 
-	// Datatable
-	if($('.datatable').length > 0) {
+// Datatable
+	if ($.fn.DataTable && $('.datatable').length > 0) {
 		$('.datatable').DataTable({
-			"bFilter": true, 
+			"bFilter": true,
 			"ordering": true,
 			"info": true,
 			"language": {
@@ -75,10 +75,9 @@ Template Name: Smarthr - Bootstrap Admin Template
 					next: '<i class="ti ti-chevron-right"></i>',
 					previous: '<i class="ti ti-chevron-left"></i> '
 				},
-			 }
+			}
 		});
-	}	
-
+	}
 	// Loader
 	setTimeout(function () {
 		$('#global-loader');

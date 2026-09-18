@@ -9,7 +9,18 @@ public class Users {
         private int roleId;
         private String status;
 
-        public int getUserId() {
+    public String firstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    private String firstName;
+
+
+    public int getUserId() {
             return userId;
         }
 
