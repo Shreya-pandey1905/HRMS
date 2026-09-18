@@ -123,15 +123,13 @@
 
                     <div class="row justify-content-center align-items-center vh-100 overflow-auto flex-wrap">
 
-                        <div class="col-md-7 mx-auto vh-100">
-
+<div class="col-md-7 mx-auto">
                             <!-- Login Form -->
                             <form action="${pageContext.request.contextPath}/login"
                                   method="post"
                                   class="vh-100">
 
-                                <div class="vh-100 d-flex flex-column justify-content-between p-4 pb-0">
-
+<div class="d-flex flex-column justify-content-center p-4" style="min-height: 100vh;">
                                     <!-- Logo -->
                                     <div class="mx-auto mb-5 text-center">
 
@@ -281,47 +279,21 @@
 
                                             <div class="d-flex align-items-center justify-content-center flex-wrap">
 
-                                                <!-- Facebook -->
-                                                <div class="text-center me-2 flex-fill">
+                                            <!-- Google -->
+                                            <div class="text-center me-2 flex-fill">
 
-                                                    <a href="javascript:void(0);"
-                                                       class="br-10 p-2 btn btn-info d-flex align-items-center justify-content-center">
+                                                <a href="${pageContext.request.contextPath}/oauth/login"
+                                                   class="br-10 p-2 btn btn-outline-light border d-flex align-items-center justify-content-center">
 
-                                                        <img class="img-fluid m-1"
-                                                             src="${pageContext.request.contextPath}/assets/img/icons/facebook-logo.svg"
-                                                             alt="Facebook">
+                                                    <img class="img-fluid m-1"
+                                                         src="${pageContext.request.contextPath}/assets/img/icons/google-logo.svg"
+                                                         alt="Google">
 
-                                                    </a>
+                                                </a>
 
+                                            </div>
                                                 </div>
 
-                                                <!-- Google -->
-                                                <div class="text-center me-2 flex-fill">
-
-                                                    <a href="javascript:void(0);"
-                                                       class="br-10 p-2 btn btn-outline-light border d-flex align-items-center justify-content-center">
-
-                                                        <img class="img-fluid m-1"
-                                                             src="${pageContext.request.contextPath}/assets/img/icons/google-logo.svg"
-                                                             alt="Google">
-
-                                                    </a>
-
-                                                </div>
-
-                                                <!-- Apple -->
-                                                <div class="text-center flex-fill">
-
-                                                    <a href="javascript:void(0);"
-                                                       class="bg-dark br-10 p-2 btn btn-dark d-flex align-items-center justify-content-center">
-
-                                                        <img class="img-fluid m-1"
-                                                             src="${pageContext.request.contextPath}/assets/img/icons/apple-logo.svg"
-                                                             alt="Apple">
-
-                                                    </a>
-
-                                                </div>
 
                                             </div>
 

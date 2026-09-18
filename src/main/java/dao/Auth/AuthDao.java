@@ -1,9 +1,12 @@
 package dao.Auth;
 
+
 import models.AuthUser.Users;
 import util.DBConfig;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
 
 public class AuthDao {
 
@@ -19,6 +22,7 @@ public class AuthDao {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 authUser = new Users();
+
                 authUser.setUserId(rs.getInt("UserId"));
                 authUser.setEmail(rs.getString("Email"));
                 authUser.setPasswordHash(rs.getString("PasswordHash"));
@@ -27,9 +31,9 @@ public class AuthDao {
             }
 
         } catch (Exception e) {
-            throw new RuntimeException("Unable to fetch user", e);
-        }
-
+        e.printStackTrace();
+        throw new RuntimeException("Unable to fetch user", e);
+    }
         return authUser;
     }
 }

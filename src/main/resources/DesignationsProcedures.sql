@@ -2,6 +2,7 @@
 
 DELIMITER //
 
+DROP PROCEDURE IF EXISTS GetAllDesignations //
 CREATE PROCEDURE GetAllDesignations()
 BEGIN
     SELECT
@@ -18,10 +19,8 @@ BEGIN
     ORDER BY DesignationId DESC;
 END //
 
-DELIMITER ;
 
-DELIMITER //
-
+DROP PROCEDURE IF EXISTS GetDesignationById //
 CREATE PROCEDURE GetDesignationById(
     IN p_DesignationId INT
 )
@@ -40,11 +39,9 @@ BEGIN
     WHERE DesignationId = p_DesignationId;
 END //
 
-DELIMITER ;
 
-DELIMITER //
-
-CREATE  PROCEDURE AddDesignation(
+DROP PROCEDURE IF EXISTS AddDesignation //
+CREATE PROCEDURE AddDesignation(
     IN p_DepartmentId INT,
     IN p_Name LONGTEXT,
     IN p_NoOfEmployee INT,
@@ -52,7 +49,6 @@ CREATE  PROCEDURE AddDesignation(
     IN p_CreatedBy VARCHAR(255)
 )
 BEGIN
-
     INSERT INTO Designations
     (
         DepartmentId,
@@ -71,14 +67,11 @@ BEGIN
         NOW(),
         p_CreatedBy
     );
-
 END //
 
-DELIMITER ;
 
-DELIMITER //
-
-CREATE  PROCEDURE UpdateDesignation(
+DROP PROCEDURE IF EXISTS UpdateDesignation //
+CREATE PROCEDURE UpdateDesignation(
     IN p_DesignationId INT,
     IN p_DepartmentId INT,
     IN p_Name LONGTEXT,
@@ -87,7 +80,6 @@ CREATE  PROCEDURE UpdateDesignation(
     IN p_ModifiedBy VARCHAR(255)
 )
 BEGIN
-
     UPDATE Designations
     SET
         DepartmentId = p_DepartmentId,
@@ -97,21 +89,16 @@ BEGIN
         ModifiedBy = p_ModifiedBy,
         ModifiedAt = NOW()
     WHERE DesignationId = p_DesignationId;
-
 END //
 
-DELIMITER ;
 
-DELIMITER //
-
+DROP PROCEDURE IF EXISTS DeleteDesignation //
 CREATE PROCEDURE DeleteDesignation(
     IN p_DesignationId INT
 )
 BEGIN
-
     DELETE FROM Designations
     WHERE DesignationId = p_DesignationId;
-
 END //
 
 DELIMITER ;

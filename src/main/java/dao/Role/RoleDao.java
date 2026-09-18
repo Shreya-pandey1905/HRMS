@@ -6,6 +6,7 @@ import util.DBConfig;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,8 +131,27 @@ public class RoleDao {
     }
 
 
-    public boolean deleteRole(int roleId) {
+//    public boolean deleteRole(int roleId) {
+//
+//        String sql = "{call DeleteRole(?)}";
+//
+//        try (Connection connection = DBConfig.getConnection();
+//             CallableStatement statement = connection.prepareCall(sql)) {
+//
+//            statement.setInt(1, roleId);
+//
+//            int result = statement.executeUpdate();
+//
+//            return result > 0;
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return false;
+//    }
 
+    public boolean deleteRole(int roleId) {
         String sql = "{call DeleteRole(?)}";
 
         try (Connection connection = DBConfig.getConnection();
@@ -140,9 +160,10 @@ public class RoleDao {
             statement.setInt(1, roleId);
 
             int result = statement.executeUpdate();
-
             return result > 0;
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }

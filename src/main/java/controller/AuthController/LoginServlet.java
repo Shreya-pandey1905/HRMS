@@ -3,7 +3,10 @@ package controller.AuthController;
 import dao.Role.RoleDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import models.AuthUser.Users;
 import models.Employees.Role;
 import service.Auth.LoginService;
@@ -29,25 +32,27 @@ public class LoginServlet extends HttpServlet {
 
             Role role = roleDao.getRoleById(user.getRoleId());
 
+            if (role == null) {
+                throw new RuntimeException("Invalid user role");
+            }
+
             HttpSession session = request.getSession();
 
             session.setAttribute("userId", user.getUserId());
             session.setAttribute("email", user.getEmail());
             session.setAttribute("roleId", user.getRoleId());
             session.setAttribute("roleName", role.getRoleName());
-
+            session.setAttribute("firstName", user.firstName());
             if (role == null) {
                 throw new RuntimeException("Invalid user role");
             }
             String roleName = role.getRoleName();
             if ("Admin".equalsIgnoreCase(roleName)) {
-                request.getRequestDispatcher("/WEB-INF/views/Admin/dashboard.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/AdminDashboardServlet?action=dashboard");
             } else if ("Employee".equalsIgnoreCase(roleName)) {
-                request.getRequestDispatcher("/WEB-INF/views/Employee/dashboard.jsp").forward(request, response);
-
+                response.sendRedirect(request.getContextPath() + "/employee/dashboard");
             } else if ("Manager".equalsIgnoreCase(roleName)) {
-                request.getRequestDispatcher("/WEB-INF/views/Manager/dashboard.jsp").forward(request, response);
-
+                response.sendRedirect(request.getContextPath() + "/ManagerDashboardServlet?action=dashboard");
             } else {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid role");
             }

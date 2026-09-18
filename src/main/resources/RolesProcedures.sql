@@ -26,27 +26,6 @@ end //
 
 delimiter ;
 
-
-    --     DELIMITER //        attendance module for testing perpose
---
--- DROP PROCEDURE IF EXISTS GetRoleById//
---
--- CREATE PROCEDURE GetRoleById(IN p_roleId INT)
--- BEGIN
--- SELECT
---     RoleId,
---     RoleName,
---     Status,
---     CreatedAt,
---     CreatedBy,
---     ModifiedBy,
---     ModifiedAt
--- FROM `Role`
--- WHERE RoleId = p_roleId;
--- END //
---
--- DELIMITER ;
-
 DELIMITER //
 CREATE PROCEDURE AddRole(
     IN p_RoleName LONGTEXT,
@@ -90,14 +69,26 @@ BEGIN
 END //
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS DeleteRole;
+
 DELIMITER //
+
 CREATE PROCEDURE DeleteRole(
     IN p_RoleId INT
 )
 BEGIN
-    DELETE FROM Role
-    WHERE RoleId = p_RoleId;
+    IF EXISTS (
+        SELECT 1
+        FROM user
+        WHERE RoleId = p_RoleId
+           OR RoleId1 = p_RoleId
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Role is being used by employees and cannot be deleted';
+    ELSE
+        DELETE FROM role
+        WHERE RoleId = p_RoleId;
+    END IF;
 END //
+
 DELIMITER ;
-
-

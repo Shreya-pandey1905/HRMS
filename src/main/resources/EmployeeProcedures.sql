@@ -1,5 +1,8 @@
+-- Employee Procedures
+
 DELIMITER $$
 
+DROP PROCEDURE IF EXISTS AddEmployee $$
 CREATE PROCEDURE AddEmployee(
     IN p_FirstName LONGTEXT,
     IN p_LastName LONGTEXT,
@@ -60,9 +63,10 @@ BEGIN
         p_CreatedBy,
         p_Status
     );
-END$$
+END $$
 
 
+DROP PROCEDURE IF EXISTS GetEmployeeById $$
 CREATE PROCEDURE GetEmployeeById(
     IN p_UserId INT
 )
@@ -70,9 +74,10 @@ BEGIN
     SELECT *
     FROM `User`
     WHERE UserId = p_UserId;
-END$$
+END $$
 
 
+DROP PROCEDURE IF EXISTS UpdateEmployee $$
 CREATE PROCEDURE UpdateEmployee(
     IN p_UserId INT,
     IN p_FirstName LONGTEXT,
@@ -113,9 +118,10 @@ BEGIN
         ModifiedAt = NOW(),
         Status = p_Status
     WHERE UserId = p_UserId;
-END$$
+END $$
 
 
+DROP PROCEDURE IF EXISTS GetAllEmployees $$
 CREATE PROCEDURE GetAllEmployees()
 BEGIN
     SELECT
@@ -151,19 +157,21 @@ BEGIN
     LEFT JOIN Designations des
         ON u.DesignationId = des.DesignationId
     ORDER BY u.UserId DESC;
-END$$
+END $$
 
 
-CREATE  PROCEDURE DeleteEmployee(
+DROP PROCEDURE IF EXISTS DeleteEmployee $$
+CREATE PROCEDURE DeleteEmployee(
     IN p_UserId INT
 )
 BEGIN
     DELETE FROM `User`
     WHERE UserId = p_UserId;
-END$$
+END $$
 
 
-CREATE  PROCEDURE GetEmployeeManagers()
+DROP PROCEDURE IF EXISTS GetEmployeeManagers $$
+CREATE PROCEDURE GetEmployeeManagers()
 BEGIN
     SELECT
         UserId,
@@ -172,14 +180,10 @@ BEGIN
     FROM `User`
     WHERE Status = 'Active'
     ORDER BY FirstName;
-END$$
+END $$
 
-DELIMITER ;
 
-DROP PROCEDURE IF EXISTS GetAllRoles;
-
-DELIMITER $$
-
+DROP PROCEDURE IF EXISTS GetAllActiveRoles $$
 CREATE PROCEDURE GetAllActiveRoles()
 BEGIN
     SELECT
@@ -188,13 +192,10 @@ BEGIN
     FROM `Role`
     WHERE Status = 'Active'
     ORDER BY RoleName;
-END$$
-
-DELIMITER ;
+END $$
 
 
-DELIMITER $$
-
+DROP PROCEDURE IF EXISTS GetAllActiveDepartments $$
 CREATE PROCEDURE GetAllActiveDepartments()
 BEGIN
     SELECT
@@ -203,12 +204,10 @@ BEGIN
     FROM Departments
     WHERE Status = 'Active'
     ORDER BY Name;
-END$$
+END $$
 
-DELIMITER ;
 
-DELIMITER $$
-
+DROP PROCEDURE IF EXISTS GetAllActiveDesignations $$
 CREATE PROCEDURE GetAllActiveDesignations()
 BEGIN
     SELECT
@@ -218,9 +217,30 @@ BEGIN
     FROM Designations
     WHERE Status = 'Active'
     ORDER BY Name;
-END$$
+END $$
+
+
+DROP PROCEDURE IF EXISTS GetUserByEmail $$
+CREATE PROCEDURE GetUserByEmail(
+    IN p_Email LONGTEXT
+)
+BEGIN
+    SELECT
+        UserId,
+        Email,
+        PasswordHash,
+        RoleId,
+        Status
+    FROM `User`
+    WHERE Email = p_Email;
+END $$
 
 DELIMITER ;
 
-SELECT DepartmentId, Name, Status
+
+-- Test Query
+SELECT
+    DepartmentId,
+    Name,
+    Status
 FROM Departments;

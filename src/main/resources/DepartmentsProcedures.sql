@@ -1,8 +1,8 @@
-
--- Departments Procedure
+-- Departments Procedures
 
 DELIMITER //
 
+DROP PROCEDURE IF EXISTS AddDepartment //
 CREATE PROCEDURE AddDepartment(
     IN p_name LONGTEXT,
     IN p_status LONGTEXT,
@@ -15,6 +15,8 @@ BEGIN
         (p_name, 0, p_status, NOW(), p_createdby);
 END //
 
+
+DROP PROCEDURE IF EXISTS GetAllDepartments //
 CREATE PROCEDURE GetAllDepartments()
 BEGIN
     SELECT departmentid,
@@ -29,6 +31,8 @@ BEGIN
     ORDER BY departmentid DESC;
 END //
 
+
+DROP PROCEDURE IF EXISTS GetDepartmentById //
 CREATE PROCEDURE GetDepartmentById(
     IN p_departmentid INT
 )
@@ -45,6 +49,8 @@ BEGIN
     WHERE departmentid = p_departmentid;
 END //
 
+
+DROP PROCEDURE IF EXISTS UpdateDepartment //
 CREATE PROCEDURE UpdateDepartment(
     IN p_departmentid INT,
     IN p_name LONGTEXT,
@@ -60,6 +66,8 @@ BEGIN
     WHERE departmentid = p_departmentid;
 END //
 
+
+DROP PROCEDURE IF EXISTS DeleteDepartment //
 CREATE PROCEDURE DeleteDepartment(
     IN p_departmentid INT
 )
@@ -69,5 +77,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-
