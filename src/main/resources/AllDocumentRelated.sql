@@ -12,7 +12,7 @@ CREATE PROCEDURE GetUserByEmail(IN p_email VARCHAR(255))
 BEGIN
     SELECT UserId, Email, PasswordHash, RoleId, Status
     FROM `User`
-    WHERE Email = p_email;
+    WHERE Email = p_email COLLATE utf8mb4_unicode_ci;
 END //
 
 DELIMITER ;
