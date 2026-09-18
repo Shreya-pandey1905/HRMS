@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/main/resources/ManagerLeaveProcedures.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/DepartmentsProcedures.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/DesignationsProcedures.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/EmployeeProcedures.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/Employees.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/ManagerLeaveProcedures.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/ProjectsModuleProcedures.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/Promotion.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/Resignation.sql" dialect="GenericSQL" />

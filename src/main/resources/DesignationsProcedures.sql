@@ -5,18 +5,18 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS GetAllDesignations //
 CREATE PROCEDURE GetAllDesignations()
 BEGIN
-    SELECT
-        DesignationId,
-        DepartmentId,
-        Name,
-        NoOfEmployee,
-        status,
-        CreatedAt,
-        CreatedBy,
-        ModifiedBy,
-        ModifiedAt
-    FROM Designations
-    ORDER BY DesignationId DESC;
+SELECT
+    DesignationId,
+    DepartmentId,
+    Name,
+    NoOfEmployee,
+    status,
+    CreatedAt,
+    CreatedBy,
+    ModifiedBy,
+    ModifiedAt
+FROM Designations
+ORDER BY DesignationId DESC;
 END //
 
 
@@ -25,18 +25,18 @@ CREATE PROCEDURE GetDesignationById(
     IN p_DesignationId INT
 )
 BEGIN
-    SELECT
-        DesignationId,
-        DepartmentId,
-        Name,
-        NoOfEmployee,
-        status,
-        CreatedAt,
-        CreatedBy,
-        ModifiedBy,
-        ModifiedAt
-    FROM Designations
-    WHERE DesignationId = p_DesignationId;
+SELECT
+    DesignationId,
+    DepartmentId,
+    Name,
+    NoOfEmployee,
+    status,
+    CreatedAt,
+    CreatedBy,
+    ModifiedBy,
+    ModifiedAt
+FROM Designations
+WHERE DesignationId = p_DesignationId;
 END //
 
 
@@ -49,16 +49,16 @@ CREATE PROCEDURE AddDesignation(
     IN p_CreatedBy VARCHAR(255)
 )
 BEGIN
-    INSERT INTO Designations
-    (
-        DepartmentId,
-        Name,
-        NoOfEmployee,
-        status,
-        CreatedAt,
-        CreatedBy
-    )
-    VALUES
+INSERT INTO Designations
+(
+    DepartmentId,
+    Name,
+    NoOfEmployee,
+    status,
+    CreatedAt,
+    CreatedBy
+)
+VALUES
     (
         p_DepartmentId,
         p_Name,
@@ -80,15 +80,15 @@ CREATE PROCEDURE UpdateDesignation(
     IN p_ModifiedBy VARCHAR(255)
 )
 BEGIN
-    UPDATE Designations
-    SET
-        DepartmentId = p_DepartmentId,
-        Name = p_Name,
-        NoOfEmployee = p_NoOfEmployee,
-        status = p_Status,
-        ModifiedBy = p_ModifiedBy,
-        ModifiedAt = NOW()
-    WHERE DesignationId = p_DesignationId;
+UPDATE Designations
+SET
+    DepartmentId = p_DepartmentId,
+    Name = p_Name,
+    NoOfEmployee = p_NoOfEmployee,
+    status = p_Status,
+    ModifiedBy = p_ModifiedBy,
+    ModifiedAt = NOW()
+WHERE DesignationId = p_DesignationId;
 END //
 
 
@@ -97,8 +97,53 @@ CREATE PROCEDURE DeleteDesignation(
     IN p_DesignationId INT
 )
 BEGIN
-    DELETE FROM Designations
-    WHERE DesignationId = p_DesignationId;
+DELETE FROM Designations
+WHERE DesignationId = p_DesignationId;
+END //
+
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS DeleteDesignation;
+
+DELIMITER //
+
+CREATE PROCEDURE DeleteDesignation(
+    IN p_DesignationId INT
+)
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM deduction
+        WHERE DesignationId = p_DesignationId
+    )
+    OR EXISTS (
+        SELECT 1
+        FROM earning
+        WHERE DesignationId = p_DesignationId
+    )
+    OR EXISTS (
+        SELECT 1
+        FROM performanceappriasal
+        WHERE DesignationId = p_DesignationId
+    )
+    OR EXISTS (
+        SELECT 1
+        FROM performanceindicators
+        WHERE DesignationId = p_DesignationId
+    )
+    OR EXISTS (
+        SELECT 1
+        FROM user
+        WHERE DesignationId = p_DesignationId
+    )
+    THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Designation is being used and cannot be deleted';
+ELSE
+DELETE FROM designations
+WHERE DesignationId = p_DesignationId;
+END IF;
 END //
 
 DELIMITER ;

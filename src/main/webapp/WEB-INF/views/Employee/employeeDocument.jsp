@@ -25,7 +25,7 @@
 <div class="main-wrapper">
 
     <%@ include file="adminHeader.jsp" %>
-    <%@ include file="adminSidebar.jsp" %>
+    <%@ include file="../common/employee-sidebar.jsp" %>
 
     <div class="page-wrapper">
 
