@@ -683,3 +683,62 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+-- Payslip Report, Task Report, Daily Report stored procedures.
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS GetPayslipReport $$
+
+CREATE PROCEDURE GetPayslipReport()
+BEGIN
+    SELECT
+        p.PayslipId,
+        CONCAT(u.FirstName, ' ', u.LastName) AS EmployeeName,
+        s.NetSalary AS PaidAmount,
+        p.Month AS PaidMonth,
+        p.Year AS PaidYear
+    FROM Payslips p
+    INNER JOIN `User` u
+        ON p.UserId = u.UserId
+    LEFT JOIN EmployeeSalaries s
+        ON p.UserId = s.UserId
+    ORDER BY p.GeneratedOn DESC;
+END $$
+
+DROP PROCEDURE IF EXISTS GetTaskReport $$
+
+CREATE PROCEDURE GetTaskReport()
+BEGIN
+    SELECT
+        t.TaskId,
+        t.Title AS TaskName,
+        pr.ProjectName,
+        t.Deadline,
+        t.Priority,
+        t.Status
+    FROM Task t
+    INNER JOIN AllProjects pr
+        ON t.ProjectId = pr.ProjectId
+    ORDER BY t.Deadline DESC;
+END $$
+
+DROP PROCEDURE IF EXISTS GetDailyReport $$
+
+CREATE PROCEDURE GetDailyReport()
+BEGIN
+    SELECT
+        a.AttendanceId,
+        CONCAT(u.FirstName, ' ', u.LastName) AS EmployeeName,
+        a.Date,
+        d.Name AS DepartmentName,
+        a.Status
+    FROM Attendance a
+    INNER JOIN `User` u
+        ON a.UserId = u.UserId
+    LEFT JOIN Departments d
+        ON u.DepartmentId = d.DepartmentId
+    WHERE a.Date = (SELECT MAX(Date) FROM Attendance)
+    ORDER BY u.FirstName;
+END $$
+
+DELIMITER ;

@@ -469,19 +469,19 @@
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/payslip-report">
                             <span>Payslip Report</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/task-report">
                             <span>Task Report</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="${pageContext.request.contextPath}/daily-report">
                             <span>Daily Report</span>
                         </a>
                     </li>
