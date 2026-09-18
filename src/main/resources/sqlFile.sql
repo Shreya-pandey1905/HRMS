@@ -1319,7 +1319,7 @@ select  * from departments;
 
 select version();
 
-ALTER TABLE `designations`
+ALTER TABLE `User`
 CHANGE COLUMN `DesignationtId` `DesignationId` INT NULL;
 desc user;
 
